@@ -23,7 +23,11 @@ An empty platform is never watched. That single condition is the only code in th
 
 Needs Anomaly. Without it the mod loads and adds nothing.
 
-No save data of its own.</description>
+No save data of its own.
+
+Source: https://github.com/vbardales/Rimworld-Entity-Gazing
+
+This mod is MIT licensed.</description>
   <modDependencies>
     <li>
       <packageId>Ludeon.RimWorld.Anomaly</packageId>
