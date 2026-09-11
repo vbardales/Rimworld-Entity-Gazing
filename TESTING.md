@@ -12,9 +12,9 @@ It is not shipped: it lives beside `Mod/`, never inside it, so Steam never recei
 - The log to read afterwards, and to attach to any report:
   `C:\Users\nelim\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Player.log`
 - Materials and subjects: a **holding platform** costs steel and needs research in a normal game.
-  Debug actions → Spawn thing → `HoldingPlatform`, and Debug actions → Spawn pawn → an entity such
-  as `Nociosphere`, `Fleshbeast` or `Shambler`. An entity has to be **downed** before it can be
-  tethered.
+  Debug actions → Spawn thing → `HoldingPlatform` and `HoldingSpot`, and Debug actions → Spawn pawn
+  → an entity such as `Nociosphere`, `Fleshbeast` or `Shambler`. An entity has to be **downed**
+  before it can be tethered. Both holders are covered by the mod and scenario 13 compares them.
 - Colonists with recreation already low, and a schedule block set to Recreation. Debug actions →
   Needs → set recreation to zero is faster than waiting.
 
@@ -215,38 +215,40 @@ resumes or picks a new job. Nothing in the log about a missing class or an unres
 **Pass:** the save opens. The recreation type disappears from the colony, which is expected and
 harmless; there is no orphaned component to complain about.
 
----
+## 13. The holding spot works too, and is a poorer show
 
-## The two known gaps, and how to see them
+`HoldingSpot`, the floor marker you use before you can build a platform, carries the same
+`CompProperties_EntityHolderPlatform` and the same `Building_HoldingPlatform` class. The mod covers
+both.
 
-These are not bugs to report, they are decisions not yet taken. Both are written down in the README.
+1. Build a holding spot, no platform anywhere, tether an entity to it.
+2. Colonists with recreation low.
 
-### A. The holding spot is not covered
+**Pass:** they go and watch it, exactly as they would a platform. The watch area is drawn when the
+spot is selected in the build menu.
 
-`HoldingSpot`, the early-game version, carries the **same** `CompProperties_EntityHolderPlatform`
-and the same `Building_HoldingPlatform` class as the platform. It would work identically. The mod
-does not wire it up.
+3. Compare the recreation gained here with the same gaze at a platform.
 
-1. Build a holding spot, tether an entity to it, colonists with recreation low, no platform
-   anywhere.
+**Pass:** the spot gives noticeably less. Its `JoyGainFactor` is **0.8** against the platform's
+**1**, following the game's own description of it — *not as good as a steel holding platform, but a
+lot better than nothing*. An entity roped to the floor is a poorer show than one clamped to a frame.
 
-**Expected, today:** nobody watches. The spot is not a recreation source.
+**This scenario also guards the patch's one real trap,** which is inverted between the two defs. The
+spot already has a `<building>` node where the platform has none, so its settings are added *inside*
+it while the platform's are created at the root. Get that backwards and the spot ends up with two
+`<building>` nodes, the game reads one, and the spot keeps its original settings while silently
+gaining none of the new ones. Worth a look in Debug → Def lookup: the spot's `building` block must
+still carry `sowTag` and `artificialForMeditationPurposes` **alongside** the new `joyKind`.
 
-If that is judged wrong, the fix is one `li` more in the giver's `thingDefs` and a second patch —
-and that patch has to add **into** `HoldingSpot`'s existing `<building>` node rather than create
-one, which is the opposite of what the platform's patch does.
+## 14. Watchers stay in the room
 
-### B. Watchers are not required to be in the same room
+`watchBuildingInSameRoom` is set on both holders, as all five vanilla watch buildings set it. This
+is not cosmetic: it is what keeps the audience inside the pain field.
 
-All five vanilla watch buildings — both televisions, the megascreen, the horseshoes pin, the
-hoopstone ring — set `watchBuildingInSameRoom`. This mod's patch does not.
+1. Put a holder in a sealed containment room with an entity on it.
+2. Colonists outside, in an adjacent room, within six cells of it through the wall.
 
-1. Put the platform in a sealed containment room with an entity on it.
-2. Colonists outside, in an adjacent room, within six cells of the platform through the wall.
-
-**What to watch for:** does a colonist stand on the far side of a wall and gaze? If so, two things
-follow. They are watching through solid stone, which reads badly. And they are **out of the pain
-field**, which quietly removes the price the mod is built around — the whole design rests on the
-audience standing too close.
-
-If that happens, the fix is one line in the patch's `<building>` block.
+**Pass:** nobody watches from out there. Watching happens inside the room or not at all.
+**Fail:** a colonist stands on the far side of a wall and gazes. They would be watching through
+solid stone, and — worse for the design — standing clear of the pain field that is the whole price
+of the show.

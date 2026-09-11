@@ -55,8 +55,12 @@
     <!-- `desireSit` false: you do not pull up a chair in front of a cage of horrors, you stay on
          your feet, ready to leave. -->
     <desireSit>false</desireSit>
+    <!-- Both of Anomaly's entity holders. The floor spot carries the same comp and the same
+         `Building_HoldingPlatform` class as the steel platform, so it watches identically; the
+         patch gives it a lower `JoyGainFactor`, which is the only difference. -->
     <thingDefs>
       <li>HoldingPlatform</li>
+      <li>HoldingSpot</li>
     </thingDefs>
     <jobDef>EG_WatchEntity</jobDef>
     <joyKind>EG_EntityGazing</joyKind>

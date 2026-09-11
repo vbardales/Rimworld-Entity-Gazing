@@ -70,29 +70,32 @@ contemplate empty platforms, which is to say a steel frame with chains hanging o
 code, so the class exists even without the DLC and no reflection is needed. The defs carry
 `MayRequire` instead.
 
-## Two known gaps
+## Both holders, and the trap that comes with them
 
-Decisions not yet taken rather than faults, and both are easy to close.
+Anomaly ships two entity holders, and the mod covers both: the steel **holding platform**, and the
+**holding spot**, the floor marker you use before you can build one. They share a comp and a class,
+so they watch identically. The spot gives less — a `JoyGainFactor` of 0.8 against the platform's 1,
+following the game's own line that it is *not as good as a steel holding platform, but a lot better
+than nothing*.
 
-**The holding spot is not covered.** The mod patches the holding platform only. `HoldingSpot`, the
-early-game version, carries the same `CompProperties_EntityHolderPlatform` and the same
-`Building_HoldingPlatform` class, so it would work identically. Adding it means one more `li` in the
-giver's `thingDefs` and a second patch — which has to add *into* that def's existing `<building>`
-node rather than create one, the opposite of what the platform's patch does.
+Patching the two is not symmetrical, and that is the one real trap in the file. `HoldingPlatform`
+has a `statBases` and **no** `building` node; `HoldingSpot` has both. So the platform's building
+settings are created at the root and the spot's are added inside the node it already has. Do it the
+other way round and you get two sibling nodes, of which the game reads one — silently, with a holder
+that looks perfectly normal until someone tries to use it.
 
-**Watchers are not required to be in the same room.** All five vanilla watch buildings set
-`watchBuildingInSameRoom`; this patch does not. A colonist may therefore be able to stand on the far
-side of a containment wall and gaze through it — and, standing there, stay clear of the pain field
-that the whole design rests on. One line in the patch closes it, once it has been seen happening.
+Watchers are held to the same room, as on all five vanilla watch buildings. That one is not
+cosmetic either: without it a colonist can stand behind the containment wall and stay clear of the
+pain field the whole design rests on.
 
 ## Not yet tested in a running colony
 
 Nothing here has been watched happening in game. The mod builds, the defs and the patch are what
 this page describes, and that is the whole of what has been verified.
 
-[TESTING.md](TESTING.md) holds the twelve scenarios that have to be watched in a running colony —
+[TESTING.md](TESTING.md) holds the fourteen scenarios that have to be watched in a running colony —
 the gaze itself, the empty platform nobody looks at, the pain field that is the price of the show —
-with what counts as a pass for each, and a way to see both gaps above.
+with what counts as a pass for each.
 
 ## Languages
 

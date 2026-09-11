@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- Making the two entity holders watchable.
+
+       Anomaly ships two defs carrying `CompProperties_EntityHolderPlatform`, and both inherit
+       `Building_HoldingPlatform` from `HoldingPlatformBase`: `HoldingPlatform`, the steel one, and
+       `HoldingSpot`, the floor marker you use before you can build one. They behave the same way
+       for our purposes, so both are patched.
+
+       The `joyKind` on a building is only a LABEL - it is the `JoyGiverDef` that makes the thing
+       usable. But both are needed: without `joyKind` the holder does not show up as a recreation
+       source in the interface, and without `watchBuildingStandDistanceRange`,
+       `WatchBuildingUtility.CalculateWatchCells` finds no cell to stand in and the job fails
+       silently.
+
+       THE TRAP, AND IT IS INVERTED BETWEEN THE TWO DEFS. Adding a second sibling of a node that
+       already exists creates two of them, and the game reads only one; creating a node that does
+       not exist is fine, since named nodes merge by child name on inheritance (unlike lists of
+       `<li>`, which replace). So which operation is correct depends on the def, and the two defs
+       disagree:
+
+         def               statBases   building   placeWorkers
+         HoldingPlatform   exists      ABSENT     absent
+         HoldingSpot       exists      EXISTS     absent
+
+       Hence `HoldingPlatform` gets its `<building>` created at the root, and `HoldingSpot` gets
+       its own added INSIDE the one it already has. Swapping the two is the same mistake in either
+       direction, and it is silent: a holder with a duplicated `<statBases>` or a replaced
+       `<building>` looks perfectly normal until someone tries to use it.
+
+       `<placeWorkers>` is absent from both defs and from every one of their parents - checked up
+       the chain through `HoldingPlatformBase`, `FurnitureBase` and `BuildingBase` - so creating it
+       at the root overwrites nothing on either. It draws the watch area at build time, without
+       which the distance range would be invisible to the player.
+
+       `watchBuildingInSameRoom` is what all five vanilla watch buildings set, and it is not
+       cosmetic here: without it a colonist can stand on the far side of a containment wall, watch
+       through solid stone, and stay clear of the pain field that is the whole price of the show. -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="HoldingPlatform"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingPlatform"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>1</JoyGainFactor>
+          </value>
+        </li>
+
+        <!-- `<building>` is absent from this def: created at the root. -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingPlatform"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <building>
+              <joyKind>EG_EntityGazing</joyKind>
+              <!-- Short on purpose: a nociosphere applies `PainField` within a radius of 5.9. Part
+                   of the audience will therefore be standing in its pain field, which is the price
+                   of the show - and it comes out of a vanilla mechanic, not a line of our own
+                   code. -->
+              <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+              <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+              <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+            </building>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="HoldingSpot"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- Lower than the platform's 1, and the game's own description is the reason: "Not as
+             good as a steel holding platform, but a lot better than nothing." An entity roped to
+             the floor is a poorer show than one clamped to a frame. -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingSpot"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>0.8</JoyGainFactor>
+          </value>
+        </li>
+
+        <!-- `<building>` EXISTS on this def, unlike the platform's: added inside it. -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingSpot"]/building</xpath>
+          <value>
+            <joyKind>EG_EntityGazing</joyKind>
+            <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+            <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+            <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingSpot"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>
