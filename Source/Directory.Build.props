@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Les intermediaires sortent du dossier du mod : l'uploader Workshop envoie la racine
+         entiere sans exclusion possible. Doit rester dans un Directory.Build.props, la
+         restauration NuGet lit cette propriete avant le csproj. -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\.build\obj\EntityGazing\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\..\.build\bin\EntityGazing\</BaseOutputPath>
+  </PropertyGroup>
+
+</Project>

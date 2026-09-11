@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- Rendre la plateforme de retention observable.
+
+       Le `joyKind` sur un batiment n'est qu'une ETIQUETTE - c'est le `JoyGiverDef` qui rend la
+       chose utilisable. Mais il faut les deux : sans `joyKind`, la plateforme n'apparait pas
+       comme source de loisir dans l'interface, et sans `watchBuildingStandDistanceRange`,
+       `WatchBuildingUtility.CalculateWatchCells` ne trouve aucune case ou se placer et le travail
+       echoue silencieusement.
+
+       ATTENTION AUX DEUX XPATH DIFFERENTS, et c'est la seule subtilite du fichier :
+       `HoldingPlatform` possede deja un `<statBases>` - y ajouter un second par la racine
+       creerait deux noeuds freres, et le jeu n'en lirait qu'un. On ajoute donc DANS le noeud
+       existant. Le `<building>`, lui, n'existe pas sur cette def : on le cree a la racine, et
+       l'heritage fusionnera avec celui du parent puisque `<building>` se fusionne par nom
+       d'enfant (contrairement aux listes de `<li>`, qui se remplacent).
+
+       `<placeWorkers>` est absent de la def et d'aucun de ses parents : le creer n'ecrase donc
+       rien. Il sert a afficher la zone d'observation a la construction, sans quoi la fourchette
+       de distance serait invisible au joueur. -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="HoldingPlatform"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingPlatform"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>1</JoyGainFactor>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HoldingPlatform"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <building>
+              <joyKind>EG_EntityGazing</joyKind>
+              <!-- Court exprès : la nociosphere applique `PainField` dans un rayon de 5,9. Une
+                   partie des spectateurs se tiendra donc dans son champ de douleur, ce qui est
+                   le prix du spectacle - et il sort d'un mecanisme vanilla, pas d'une ligne de
+                   code a nous. -->
+              <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+              <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+            </building>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

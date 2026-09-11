@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Entity Gazing</name>
+  <author>nelim</author>
+  <packageId>nelim.entitygazing</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>Colonists can go and look at the horrors you keep chained up, as recreation.
+
+The Anomaly DLC contains no recreation content at all - not one recreation type, not one giver, nothing. You capture entities, bolt them to a holding platform in the middle of your base, study them for knowledge, and then nobody ever looks at them again. This adds the obvious missing thing: watching them, the way a colonist watches a television.
+
+WHY IT IS WORTH A MOD
+
+The base game has ten recreation types and only four of them come from a building. Expectations ask for up to six different types, and tolerance is counted per type, not per building - a colonist who has played chess all week is just as tired of poker. An eleventh type is therefore worth far more than a tenth building of a type you already had. This one costs nothing extra: the platform was already built for study.
+
+THE VIEWING DISTANCE IS THE REAL SETTING
+
+Watchers stand two to six cells away, which is deliberately close. A nociosphere projects a pain field out to 5.9 cells, so a good share of the audience will be standing inside it. That is the price of the show, and it comes out of an existing vanilla mechanic rather than a line of code - it varies by entity, and a fleshbeast hurts nobody. Widening the range in the def makes the activity harmless.
+
+An empty platform is never watched. That single condition is the only code in this mod; everything else - walking there, facing it, accumulating recreation - is the base game's own television logic.
+
+Needs Anomaly. Without it the mod loads and adds nothing.
+
+No save data of its own.</description>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Anomaly</packageId>
+      <displayName>Anomaly</displayName>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+  </loadAfter>
+</ModMetaData>

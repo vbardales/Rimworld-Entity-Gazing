@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>EntityGazing</RootNamespace>
+    <AssemblyName>EntityGazing</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\Mod\Assemblies\</OutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Ni Harmony ni Publicizer : une seule classe derivee, aucun patch. Sans publiciseur les
+         membres `protected` du jeu le restent, ce qui evite le CS0507 de Firework Stand. -->
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*-*" />
+  </ItemGroup>
+
+</Project>
