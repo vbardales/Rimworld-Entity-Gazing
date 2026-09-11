@@ -1,0 +1,252 @@
+# Entity Gazing — in-game test scenarios
+
+Nothing in this mod has ever been watched happening in a colony. This file is the list of what has
+to be seen, and what counts as a pass for each.
+
+It is not shipped: it lives beside `Mod/`, never inside it, so Steam never receives it.
+
+## Before starting
+
+- RimWorld 1.6 with the **Anomaly** DLC. Development mode on, so that silent failures become red
+  text.
+- The log to read afterwards, and to attach to any report:
+  `C:\Users\nelim\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Player.log`
+- Materials and subjects: a **holding platform** costs steel and needs research in a normal game.
+  Debug actions → Spawn thing → `HoldingPlatform`, and Debug actions → Spawn pawn → an entity such
+  as `Nociosphere`, `Fleshbeast` or `Shambler`. An entity has to be **downed** before it can be
+  tethered.
+- Colonists with recreation already low, and a schedule block set to Recreation. Debug actions →
+  Needs → set recreation to zero is faster than waiting.
+
+Useful conversions: 60 ticks is one second at normal speed, 2500 ticks is one in-game hour. A full
+gaze is **4000 ticks**, so about an hour and a half of game time.
+
+The numbers this file leans on, all read out of the defs: watch distance **2 to 6** cells in a rect
+**5** wide, **5** participants at most, `JoyGainFactor` **1**, base chance **2**, sight required,
+no chair wanted.
+
+---
+
+## 1. It loads, with and without the DLC
+
+Everything else depends on this. All three defs carry `MayRequire="Ludeon.RimWorld.Anomaly"` and
+the patch is wrapped in a `PatchOperationConditional`, so the mod is supposed to be inert rather
+than broken when the DLC is off.
+
+1. Start the game with the mod active and **Anomaly disabled**.
+2. Read the log.
+
+**Pass:** no red line, no `Could not resolve cross-reference`, no failed patch. The assembly still
+loads — it always does, and that is by design — but nothing of the mod appears in game.
+**Fail:** any error naming `EG_`, `HoldingPlatform`, or `EntityGazing.JoyGiver_WatchEntity`.
+
+3. Enable Anomaly, restart, read the log again.
+
+**Pass:** still clean, and the three defs exist. Check with Debug actions → **Def lookup**, or the
+debug inspector: `EG_EntityGazing`, `EG_WatchEntity` (the job) and `EG_WatchEntity` (the giver).
+
+A failed `PatchOperationAdd` is the likely fault here and it is **loud** — the game names the file
+and the xpath. A silently wrong one is the next test.
+
+## 2. The patch landed where it was aimed
+
+This is the scenario for the one real subtlety in the XML. `HoldingPlatform` already has a
+`<statBases>`, so the patch adds *inside* it; `<building>` does not exist on the def, so the patch
+creates it at the root and relies on inheritance merging it with the parent's.
+
+1. Build or spawn a holding platform.
+2. Debug inspector on it, or Debug actions → Def lookup → `HoldingPlatform`.
+
+**Pass, and check all four:**
+
+- `JoyGainFactor` is **1**, and the platform's other stats are **still there**. If the patch had
+  created a second `<statBases>` sibling, the game would read only one and the platform would have
+  lost its original stats — that is the failure this test exists for.
+- `building.joyKind` is `EG_EntityGazing`.
+- `building.watchBuildingStandDistanceRange` is `2~6`.
+- **The rest of the `<building>` block survived.** The holding platform inherits building settings
+  from `HoldingPlatformBase`; if the new node replaced rather than merged, they are gone. This is
+  the other half of the same risk and it is easy to miss, because a platform with a broken
+  `<building>` block still looks normal until you try to tether something to it.
+
+3. Select the platform in the build menu, before placing it.
+
+**Pass:** the watch area is drawn on the ground — that is `PlaceWorker_WatchArea`, added by the
+same patch. If no area is drawn, the place worker did not land.
+
+## 3. An occupied platform becomes a recreation source
+
+1. Spawn an entity, down it, have it tethered to the platform.
+2. Select the platform.
+
+**Pass:** the inspect pane names it as a source of recreation, and the recreation type reads
+**entity gazing**. In French, `contemplation d'entité`.
+
+3. Open a colonist's Needs tab, Recreation, and hover the list of types.
+
+**Pass:** entity gazing is among the types the colony can offer. This is the whole point of the
+mod, so if it is absent here, stop and read the log.
+
+## 4. A colonist goes and watches, on their own
+
+The one behaviour everything else supports.
+
+1. A colonist with recreation low, a schedule block on Recreation, an occupied platform in reach.
+2. Let it run. Do not force the job.
+
+**Pass:** the colonist walks to the platform, stops **two to six cells away**, faces it, and the
+job description reads *watching the contained entity* (French: *observe l'entité captive*).
+Recreation rises. The bar's tooltip credits **entity gazing**.
+**Fail, and each means something different:**
+
+- Never goes → the giver is not being picked. Check `baseChance`, the schedule, and whether the
+  platform is reachable and in a socially proper room (see scenario 9).
+- Goes and stands on the platform's own cell, or ten cells away → the distance range did not land;
+  go back to scenario 2.
+- Goes and the job ends instantly → `JobDriver_WatchBuilding` is failing its own checks. The log
+  usually says why.
+
+3. Let the job run to the end rather than interrupting it.
+
+**Pass:** it lasts about 4000 ticks, an hour and a half of game time, unless something interrupts.
+
+## 5. An empty platform is never watched
+
+**This is the only thing the mod's code does.** `JoyGiver_WatchEntity` exists for this single
+condition and nothing else; if this test fails, the assembly is not being used at all.
+
+1. Leave a holding platform built and **empty**.
+2. Colonists with recreation at zero, Recreation scheduled, nothing else on offer.
+3. Let it run for a full day.
+
+**Pass:** nobody ever walks over to stare at an empty steel frame. The platform does not appear as
+an available recreation source while it is empty.
+**Fail:** a colonist gazes at nothing. That means the vanilla `JoyGiver_WatchBuilding` is running
+instead of the mod's subclass — check that `giverClass` reads `EntityGazing.JoyGiver_WatchEntity`
+and that the assembly loaded.
+
+## 6. A dead entity is not a show
+
+The same condition, second half: `held != null && !held.Dead`.
+
+1. An occupied platform, a colonist mid-gaze.
+2. Kill the entity while it is still tethered. Debug actions → Kill, or damage it.
+
+**Pass:** the corpse on the platform stops being a recreation source. No new colonist starts a
+gaze. The one already watching may finish their job — the check runs when the job is chosen, not
+every tick — but nobody starts a new one.
+
+## 7. The pain field is the price of the show
+
+The design claim of the whole mod, and it is meant to come out of vanilla rather than out of this
+mod's code.
+
+1. Tether a **nociosphere** specifically. It carries a `CompProperties_CauseHediff_AoE` applying
+   `PainField` out to **5.9** cells.
+2. Let several colonists gaze, standing at their various distances.
+
+**Pass:** the watchers standing inside 5.9 cells pick up the `PainField` hediff and hurt; the ones
+at the far end of the range may not. Recreation still rises — pain is the cost, not a veto.
+
+3. Repeat with a **fleshbeast**, which has no such comp.
+
+**Pass:** nobody hurts. The price varies by entity, on its own, with no code of ours. That is the
+point: it is a vanilla mechanic being used, not simulated.
+
+If you decide the cost is too harsh, the fix is one number — widen
+`watchBuildingStandDistanceRange` in the patch past 5.9 and the audience stands clear.
+
+## 8. Several watchers, and no chairs
+
+1. Five or more colonists free at once, one occupied platform, recreation low all round.
+
+**Pass:** up to **five** watch at the same time (`joyMaxParticipants`), spread across the watch
+area, all facing the platform. A sixth does something else.
+
+**Pass, and check it explicitly:** nobody drags a chair over. `desireSit` is false, deliberately —
+you do not pull up a seat in front of a cage of horrors. A colonist sitting down here means the
+giver being used is not the one this mod declares.
+
+## 9. The room has to be proper
+
+The patch sets `socialPropernessMatters`, the same flag the vanilla televisions carry.
+
+1. Put a holding platform inside a **prison** room, with an entity on it.
+2. A free colonist with recreation low, nothing else on offer.
+
+**Pass:** the free colonist does not go. Prisoners in that room might.
+
+This is worth watching rather than assuming, because containment rooms and prison rooms are easy to
+confuse in a real base, and a platform in the wrong sort of room simply produces a recreation
+source nobody ever uses — with no error anywhere.
+
+## 10. Sight is required
+
+1. A colonist blinded, or with both eyes destroyed. Debug actions → damage, or spawn one.
+2. Recreation low, an occupied platform available, nothing else on offer.
+
+**Pass:** they never go. `requiredCapacities` is `Sight` alone, and this activity is nothing but
+looking.
+
+**Pass, second half:** a colonist with **no hands** goes anyway. Hands are not required and must not
+be — you very much do not touch.
+
+## 11. On the way past
+
+`allowOpportunisticPrefix` is true, so the job may be taken as a detour rather than as a decision.
+
+1. A colonist with a long walk that passes near an occupied platform, recreation somewhat low but
+   not desperate.
+
+**Pass:** they sometimes stop and watch on the way, then carry on. This is a *sometimes*, not an
+*always*; it is not a fail unless it never happens across a long session.
+
+## 12. Save, quit, reload
+
+The mod claims no save data of its own.
+
+1. Mid-gaze, save. Quit to the menu. Reload.
+
+**Pass:** the colony loads with no error naming `EG_` or `EntityGazing`, and the colonist either
+resumes or picks a new job. Nothing in the log about a missing class or an unresolved reference.
+
+2. With the same save, **disable the mod** and load it again.
+
+**Pass:** the save opens. The recreation type disappears from the colony, which is expected and
+harmless; there is no orphaned component to complain about.
+
+---
+
+## The two known gaps, and how to see them
+
+These are not bugs to report, they are decisions not yet taken. Both are written down in the README.
+
+### A. The holding spot is not covered
+
+`HoldingSpot`, the early-game version, carries the **same** `CompProperties_EntityHolderPlatform`
+and the same `Building_HoldingPlatform` class as the platform. It would work identically. The mod
+does not wire it up.
+
+1. Build a holding spot, tether an entity to it, colonists with recreation low, no platform
+   anywhere.
+
+**Expected, today:** nobody watches. The spot is not a recreation source.
+
+If that is judged wrong, the fix is one `li` more in the giver's `thingDefs` and a second patch —
+and that patch has to add **into** `HoldingSpot`'s existing `<building>` node rather than create
+one, which is the opposite of what the platform's patch does.
+
+### B. Watchers are not required to be in the same room
+
+All five vanilla watch buildings — both televisions, the megascreen, the horseshoes pin, the
+hoopstone ring — set `watchBuildingInSameRoom`. This mod's patch does not.
+
+1. Put the platform in a sealed containment room with an entity on it.
+2. Colonists outside, in an adjacent room, within six cells of the platform through the wall.
+
+**What to watch for:** does a colonist stand on the far side of a wall and gaze? If so, two things
+follow. They are watching through solid stone, which reads badly. And they are **out of the pain
+field**, which quietly removes the price the mod is built around — the whole design rests on the
+audience standing too close.
+
+If that happens, the fix is one line in the patch's `<building>` block.

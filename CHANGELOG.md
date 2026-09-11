@@ -30,5 +30,7 @@ colony.
   the audience stands inside it. The price of the show comes out of a vanilla mechanic, not a line
   of this mod's code, and it varies by entity.
 - No thought is granted, deliberately.
-- `HoldingSpot` is not covered, though it carries the same comp and class. See the known gap in the
-  README.
+- `HoldingSpot` is not covered, though it carries the same comp and class.
+- `watchBuildingInSameRoom` is not set, where all five vanilla watch buildings set it. A watcher may
+  therefore be able to stand outside the containment room, through a wall — and out of the pain
+  field. Both gaps are written up in the README and have a scenario in `TESTING.md`.
