@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!-- Regarder l'entite qu'on garde en cage, en loisir.
+  <!-- Watching the entity you keep caged, as recreation.
 
-       LE CONSTAT DE DEPART : le DLC Anomaly ne contient **aucun** contenu de loisir. Pas un
-       `joyKind`, pas un `JoyGiverDef`, pas un `JoyKindDef` dans tout le DLC - verifie par
-       balayage. On capture des horreurs, on les sangle sur une plateforme au milieu de la base,
-       on les etudie... et personne ne les regarde jamais. C'est le trou que ce mod comble.
+       THE STARTING OBSERVATION: the Anomaly DLC contains **no** recreation content at all. Not a
+       `joyKind`, not a `JoyGiverDef`, not a `JoyKindDef` anywhere in the DLC - checked by a full
+       sweep. You capture horrors, you bolt them to a platform in the middle of the base, you
+       study them... and nobody ever looks at them again. That is the hole this mod fills.
 
-       LE TYPE EST NEUF, ET C'EST L'INTERET. Le jeu de base n'offre que dix types de loisir dont
-       quatre issus d'un batiment ; les attentes en reclament jusqu'a six differents et la
-       tolerance se compte par type. Un onzieme vaut donc bien plus qu'un dixieme batiment sur un
-       type deja servi - et celui-ci ne coute rien de plus qu'une plateforme qu'on avait deja
-       construite pour l'etude.
+       THE TYPE IS NEW, AND THAT IS THE POINT. The base game offers only ten recreation types, four
+       of which come from a building; expectations ask for up to six different ones and tolerance
+       is counted per type. An eleventh is therefore worth far more than a tenth building on a type
+       already served - and this one costs nothing beyond a platform that was already built for
+       study.
 
-       LA DISTANCE D'OBSERVATION EST LE VRAI REGLAGE, et elle est volontairement courte : 2 a 6
-       cases. La nociosphere porte un `CompProperties_CauseHediff_AoE` qui applique `PainField`
-       dans un rayon de 5,9. Autrement dit, une bonne partie des spectateurs se tiendra DANS son
-       champ de douleur. Ce n'est pas un oubli : le prix du spectacle sort d'un mecanisme vanilla
-       existant, sans une ligne de code, et il varie selon l'entite - un ver de chair ne fait
-       souffrir personne. Rallonger la fourchette suffit a rendre l'activite inoffensive.
+       THE VIEWING DISTANCE IS THE REAL SETTING, and it is deliberately short: 2 to 6 cells. A
+       nociosphere carries a `CompProperties_CauseHediff_AoE` that applies `PainField` within a
+       radius of 5.9. In other words, a good share of the audience will be standing INSIDE its pain
+       field. That is not an oversight: the price of the show comes out of an existing vanilla
+       mechanic, without a line of code, and it varies by entity - a fleshbeast hurts nobody.
+       Widening the range is enough to make the activity harmless.
 
-       AUCUNE PENSEE N'EST ACCORDEE. Elle serait a double tranchant : positive, elle recompenserait
-       de contempler une abomination ; negative, elle transformerait une source de loisir en
-       source de malus. La joie gagnee est deja la recompense, et le champ de douleur deja le prix.
-       C'est une ligne a ajouter si l'envie vient.
+       NO THOUGHT IS GRANTED. It would cut both ways: a positive one would reward contemplating an
+       abomination; a negative one would turn a source of recreation into a source of malus. The
+       joy gained is already the reward, and the pain field already the price. It is one line to
+       add if the wish comes.
 
-       `MayRequire` PLUTOT QU'UN PATCH GARDE : la regle du depot vise les mods du Workshop et leur
-       suffixe `_steam`, qui echappe a `MayRequire`. Anomaly est un DLC, son packageId est fixe, et
-       c'est ainsi que le jeu de base s'y prend lui-meme. -->
+       `MayRequire` RATHER THAN A GUARDED PATCH: the repository rule targets Workshop mods and
+       their `_steam` suffix, which escapes `MayRequire`. Anomaly is a DLC, its packageId is fixed,
+       and this is how the base game goes about it itself. -->
 
   <JoyKindDef MayRequire="Ludeon.RimWorld.Anomaly">
     <defName>EG_EntityGazing</defName>
@@ -37,9 +37,9 @@
 
   <JobDef MayRequire="Ludeon.RimWorld.Anomaly">
     <defName>EG_WatchEntity</defName>
-    <!-- Le pilote vanilla, sans derivation : une plateforme de retention EST un `Building`, il
-         n'y a donc rien a retyper - a la difference de l'arbre anima, qui est une `Plant` et
-         faisait exploser le cast de `JobDriver_SitFacingBuilding`. -->
+    <!-- The vanilla driver, underived: a holding platform IS a `Building`, so there is nothing to
+         retype - unlike the anima tree, which is a `Plant` and blew up the cast in
+         `JobDriver_SitFacingBuilding`. -->
     <driverClass>JobDriver_WatchBuilding</driverClass>
     <reportString>watching the contained entity.</reportString>
     <joyDuration>4000</joyDuration>
@@ -52,16 +52,16 @@
     <defName>EG_WatchEntity</defName>
     <giverClass>EntityGazing.JoyGiver_WatchEntity</giverClass>
     <baseChance>2</baseChance>
-    <!-- `desireSit` a false : on ne tire pas une chaise devant une cage a horreurs, on reste
-         debout, pret a partir. -->
+    <!-- `desireSit` false: you do not pull up a chair in front of a cage of horrors, you stay on
+         your feet, ready to leave. -->
     <desireSit>false</desireSit>
     <thingDefs>
       <li>HoldingPlatform</li>
     </thingDefs>
     <jobDef>EG_WatchEntity</jobDef>
     <joyKind>EG_EntityGazing</joyKind>
-    <!-- La vue seule. Un aveugle n'a rien a faire la, et les mains ne servent a rien : on ne
-         touche surtout pas. -->
+    <!-- Sight alone. A blind colonist has no business here, and hands are of no use: you very
+         much do not touch. -->
     <requiredCapacities>
       <li>Sight</li>
     </requiredCapacities>

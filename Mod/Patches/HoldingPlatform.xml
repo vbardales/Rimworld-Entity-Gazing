@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
-  <!-- Rendre la plateforme de retention observable.
+  <!-- Making the holding platform watchable.
 
-       Le `joyKind` sur un batiment n'est qu'une ETIQUETTE - c'est le `JoyGiverDef` qui rend la
-       chose utilisable. Mais il faut les deux : sans `joyKind`, la plateforme n'apparait pas
-       comme source de loisir dans l'interface, et sans `watchBuildingStandDistanceRange`,
-       `WatchBuildingUtility.CalculateWatchCells` ne trouve aucune case ou se placer et le travail
-       echoue silencieusement.
+       The `joyKind` on a building is only a LABEL - it is the `JoyGiverDef` that makes the thing
+       usable. But both are needed: without `joyKind` the platform does not show up as a recreation
+       source in the interface, and without `watchBuildingStandDistanceRange`,
+       `WatchBuildingUtility.CalculateWatchCells` finds no cell to stand in and the job fails
+       silently.
 
-       ATTENTION AUX DEUX XPATH DIFFERENTS, et c'est la seule subtilite du fichier :
-       `HoldingPlatform` possede deja un `<statBases>` - y ajouter un second par la racine
-       creerait deux noeuds freres, et le jeu n'en lirait qu'un. On ajoute donc DANS le noeud
-       existant. Le `<building>`, lui, n'existe pas sur cette def : on le cree a la racine, et
-       l'heritage fusionnera avec celui du parent puisque `<building>` se fusionne par nom
-       d'enfant (contrairement aux listes de `<li>`, qui se remplacent).
+       MIND THE TWO DIFFERENT XPATHS, and this is the only subtlety in the file:
+       `HoldingPlatform` already has a `<statBases>` - adding a second one at the root would create
+       two sibling nodes, and the game would read only one. So we add INSIDE the existing node. The
+       `<building>`, on the other hand, does not exist on this def: we create it at the root, and
+       inheritance will merge it with the parent's, since `<building>` merges by child name
+       (unlike lists of `<li>`, which replace).
 
-       `<placeWorkers>` est absent de la def et d'aucun de ses parents : le creer n'ecrase donc
-       rien. Il sert a afficher la zone d'observation a la construction, sans quoi la fourchette
-       de distance serait invisible au joueur. -->
+       `<placeWorkers>` is absent from the def and from every one of its parents: creating it
+       therefore overwrites nothing. It draws the watch area at build time, without which the
+       distance range would be invisible to the player. -->
 
   <Operation Class="PatchOperationConditional">
     <xpath>Defs/ThingDef[defName="HoldingPlatform"]</xpath>
@@ -38,10 +38,10 @@
             <socialPropernessMatters>true</socialPropernessMatters>
             <building>
               <joyKind>EG_EntityGazing</joyKind>
-              <!-- Court exprès : la nociosphere applique `PainField` dans un rayon de 5,9. Une
-                   partie des spectateurs se tiendra donc dans son champ de douleur, ce qui est
-                   le prix du spectacle - et il sort d'un mecanisme vanilla, pas d'une ligne de
-                   code a nous. -->
+              <!-- Short on purpose: a nociosphere applies `PainField` within a radius of 5.9. Part
+                   of the audience will therefore be standing in its pain field, which is the price
+                   of the show - and it comes out of a vanilla mechanic, not a line of our own
+                   code. -->
               <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
               <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
             </building>

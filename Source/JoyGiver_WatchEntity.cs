@@ -4,19 +4,19 @@ using Verse;
 namespace EntityGazing
 {
     /// <summary>
-    /// Le fournisseur « regarder un batiment » du jeu de base, plus une seule condition : la
-    /// plateforme doit reellement retenir quelque chose.
+    /// The base game's "watch a building" giver, plus a single condition: the platform must
+    /// actually be holding something.
     ///
-    /// C'EST TOUT CE QUE CE MOD CONTIENT COMME CODE, et cette classe existe uniquement pour cette
-    /// condition. Sans elle, il suffirait de declarer `HoldingPlatform` dans les `thingDefs` d'un
-    /// `JoyGiverDef` vanilla - mais les colons iraient alors contempler des plateformes VIDES,
-    /// c'est-a-dire un portique d'acier avec des chaines qui pendent. Le reste du trajet, de
-    /// l'orientation et du gain de joie est integralement du jeu de base
-    /// (`JoyGiver_WatchBuilding` et `JobDriver_WatchBuilding`), comme pour un televiseur.
+    /// THIS IS EVERY LINE OF CODE THE MOD CONTAINS, and the class exists for that condition alone.
+    /// Without it, naming <c>HoldingPlatform</c> in the <c>thingDefs</c> of a vanilla
+    /// <c>JoyGiverDef</c> would be enough - but colonists would then go and contemplate EMPTY
+    /// platforms, which is to say a steel frame with chains hanging off it. The walk, the facing
+    /// and the joy gain are all the base game's own (<c>JoyGiver_WatchBuilding</c> and
+    /// <c>JobDriver_WatchBuilding</c>), exactly as for a television.
     ///
-    /// `CompEntityHolderPlatform` appartient au DLC Anomaly mais vit dans `Assembly-CSharp` comme
-    /// tout le code des extensions : la classe existe meme sans le DLC, seules ses defs manquent.
-    /// Aucune reflexion n'est donc necessaire, et l'assemblage se charge dans tous les cas.
+    /// <c>CompEntityHolderPlatform</c> belongs to the Anomaly DLC but lives in
+    /// <c>Assembly-CSharp</c> like all expansion code: the class exists even without the DLC, only
+    /// its defs are missing. No reflection is needed, and the assembly loads either way.
     /// </summary>
     public class JoyGiver_WatchEntity : JoyGiver_WatchBuilding
     {
@@ -29,8 +29,7 @@ namespace EntityGazing
 
             var held = (t as ThingWithComps)?.GetComp<CompEntityHolderPlatform>()?.HeldPawn;
 
-            // Un cadavre sangle sur une plateforme n'est plus un spectacle, c'est un probleme
-            // d'hygiene.
+            // A corpse strapped to a platform is no longer a show, it is a hygiene problem.
             return held != null && !held.Dead;
         }
     }
