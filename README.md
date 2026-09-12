@@ -120,7 +120,7 @@ RimWorld release that moves one of those is reported instead of quietly ageing t
 powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
 ```
 
-A green suite proves nothing on its own, so a third script breaks the mod on purpose — 33 mutations
+A green suite proves nothing on its own, so a third script breaks the mod on purpose — 34 mutations
 on a copy, each aimed at one test. Every one of them has been watched turning its test red. Which
 tests that leaves unproven, and why, is written at the foot of each suite rather than left to
 assumption.

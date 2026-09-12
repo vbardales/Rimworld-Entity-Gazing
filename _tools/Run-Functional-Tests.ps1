@@ -55,6 +55,10 @@ function Test-That([string]$name, [scriptblock]$body) {
 }
 function Note([string]$text) { Write-Host ("        " + $text) -ForegroundColor DarkGray }
 
+# Always with -Encoding UTF8: Windows PowerShell 5.1 reads a BOM-less file through the system code
+# page, and a test looking for a word finds mojibake instead.
+function Read-Text([string]$p) { Get-Content $p -Raw -Encoding UTF8 }
+
 # ---------------------------------------------------------------------------------------------
 # The game, by reflection
 # ---------------------------------------------------------------------------------------------
@@ -170,6 +174,59 @@ Test-That "the occupancy check still has something to read" {
 # and loads with Anomaly off. If it ever moved into a DLC assembly of its own, this breaks.
 Test-That "that comp is in Assembly-CSharp, so the assembly loads without the DLC" {
     $TypeIndex['CompEntityHolderPlatform'].Assembly.GetName().Name -eq 'Assembly-CSharp'
+}
+
+# A trap that killed half of two other mods in this repository, found on Fieldwork Companions and
+# Contented Livestock. Krafs.Publicizer grants access to the game's non-public members with an
+# [assembly: IgnoresAccessChecksTo] that the SDK writes into the generated AssemblyInfo - and
+# <GenerateAssemblyInfo>false</GenerateAssemblyInfo>, which this csproj carries, deletes that file.
+# The attribute TYPE stays embedded, the grant is never applied, the build is clean, and the CLR
+# throws FieldAccessException or MethodAccessException at the first real access, behind a startup
+# that says nothing.
+#
+# This mod is not exposed, and the proof is a compile rather than an argument: its source builds
+# against the game's REAL Assembly-CSharp, where protected stays protected. A member it could not
+# legally touch would be a compile error here, not a silent failure in play. That is the same test
+# as "drop the publicizer and rebuild", gone one step further - there is no publicizer to drop.
+Test-That "the source compiles against the un-publicized game assembly" {
+    if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { Note 'dotnet not on PATH'; return 'skip' }
+    $probe = Join-Path ([System.IO.Path]::GetTempPath()) ('eg-access-' + [guid]::NewGuid().ToString('N').Substring(0,8))
+    New-Item -ItemType Directory $probe | Out-Null
+    try {
+        Copy-Item (Join-Path $ModRoot 'Source\*.cs') $probe
+        @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType><TargetFramework>net48</TargetFramework>
+    <AssemblyName>EgAccessProbe</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp"><HintPath>$Managed\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$Managed\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$Managed\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
+"@ | Set-Content (Join-Path $probe 'Probe.csproj') -Encoding UTF8
+        $out = & dotnet build (Join-Path $probe 'Probe.csproj') -c Release -v q --nologo 2>&1 | Out-String
+        $errors = @([regex]::Matches($out, '(?m)error CS\d+.*$') | ForEach-Object { $_.Value })
+        if ($errors) { Note ($errors | Select-Object -First 3) }
+        # CS0122 is the one that matters - "inaccessible due to its protection level".
+        $errors.Count -eq 0
+    } finally { Remove-Item $probe -Recurse -Force -ErrorAction SilentlyContinue }
+}
+
+# Belt and braces on the same fault, and the check that does NOT lie: read the attribute through
+# reflection. Grepping the DLL for the string finds the type name whether the grant was applied or
+# not, which is exactly the shape of the trap.
+Test-That "no access grant is claimed that the build could not have applied" {
+    $data = [System.Reflection.Assembly]::LoadFrom($modDll).GetCustomAttributesData()
+    $grant = @($data | Where-Object { $_.AttributeType.Name -eq 'IgnoresAccessChecksToAttribute' })
+    $publicized = (Read-Text (Join-Path $ModRoot 'Source\EntityGazing.csproj')) -match '<Publicize\b'
+    Note ("publicizer declared: {0}; access grant present: {1}" -f $publicized, ($grant.Count -gt 0))
+    # Either both or neither. A publicizer with no grant is the silent failure; a grant with no
+    # publicizer is harmless but means the csproj changed under the test.
+    $publicized -eq ($grant.Count -gt 0)
 }
 
 # ---------------------------------------------------------------------------------------------
@@ -531,18 +588,26 @@ if ($script:fail) { exit 1 }
 # ---------------------------------------------------------------------------------------------
 # What has been seen to fail
 #
-# Fourteen of the thirty-three tests here have been watched turning red, driven by
-# Run-Mutations.ps1 beside this file: 2, 3, 8, 9, 21, 22, 23, 24, 25, 27, 30, 31, 32, 33.
+# Fifteen of the thirty-five tests here have been watched turning red, driven by Run-Mutations.ps1
+# beside this file: 2, 3, 8, 10, 11, 23, 24, 25, 26, 27, 29, 32, 33, 34, 35.
 #
-# The other nineteen have not, and most of them cannot be. Tests 4 to 7, 10 to 20, 28 and 29 ask
+# The other twenty have not, and most of them cannot be. Tests 4 to 6, 9, 12 to 22, 30 and 31 ask
 # questions about Assembly-CSharp itself - does this field still exist, does this class still read
 # it - and no mutation of a copy of the mod reaches them. Reddening those means editing the
 # question rather than the answer: rename the field or the class this file asks for, and watch each
 # one name what it can no longer find. That is a weaker claim than a real mutation and is worth
 # saying plainly rather than leaving a reader to assume otherwise.
 #
-# Test 1 is the harness guard, and test 26 would need a patch that REPLACES the holding spot's
+# Test 1 is the harness guard, and test 28 would need a patch that REPLACES the holding spot's
 # building node rather than duplicating it, which no plausible edit of this file produces.
+#
+# Test 7 is the odd one out and worth naming. To redden it, a mutation would have to compile
+# against Krafs.Rimworld.Ref and fail against the real Assembly-CSharp - which, with no publicizer
+# in the csproj, nothing does: the reference package keeps the game's own accessibility, so an
+# illegal access is a compile error on both sides and the mutated assembly is never built at all.
+# The test still earns its place. It is the standing proof that this mod takes nothing from the
+# game it is not allowed to take, and it is what would speak first if a publicizer were ever added
+# here - which test 8, and only test 8, would then catch.
 #
 # One thing the campaign changed rather than confirmed: the reverse sweep originally looked for
 # ldfld alone, and reported watchBuildingStandDistanceRange - an IntRange, so a struct - as read by

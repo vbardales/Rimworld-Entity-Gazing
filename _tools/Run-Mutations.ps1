@@ -8,7 +8,7 @@
   COPY of the mod - never to the real files - and the suite is run against that copy; the mutation
   passes if the test it is aimed at turns red.
 
-  Three things learned writing it, all of them traps rather than preferences:
+  Four things learned writing it, all of them traps rather than preferences:
 
     - the suite runs in a CHILD process. Write-Host bypasses the pipeline in-process, so the parent
       would capture nothing and read every mutation as a miss; and Assembly.LoadFrom keeps the
@@ -19,6 +19,10 @@
       fault. JoyGiver_InteractBuildingSitAdjacent is the concrete cousin that does compile.
     - -creplace everywhere. PowerShell's -replace is case-insensitive, and on XML that means a
       mutation aimed at one element quietly eats a differently-cased sibling.
+    - a campaign that runs NOTHING used to report that every mutation woke its test. `powershell
+      -File` cannot pass an array, so two -Only names arrive as one string, match nothing, and the
+      loop body never runs. Both an unknown name and an empty run are now hard failures - a script
+      whose whole job is catching vacuous success had exactly that bug.
 
   Collateral damage is expected and is not a fault: deleting a translation file also trips the
   harness guard, which is the guard doing its job.
@@ -68,24 +72,40 @@ $mutations = @(
 
   @{ n='derives from the wrong base'; suite='func'; expect='2'; do={ (Get-Content "$Work\Source\JoyGiver_WatchEntity.cs" -Raw -Encoding UTF8) -creplace ': JoyGiver_WatchBuilding',': JoyGiver_InteractBuildingSitAdjacent' | Set-Content "$Work\Source\JoyGiver_WatchEntity.cs" -Encoding UTF8; & dotnet build "$Work\Source\EntityGazing.csproj" -c Release -v q --nologo | Out-Null } }
   @{ n='new instead of override';  suite='func'; expect='3';  do={ (Get-Content "$Work\Source\JoyGiver_WatchEntity.cs" -Raw -Encoding UTF8) -creplace 'protected override bool CanInteractWith','protected new bool CanInteractWith' -creplace 'if \(!base.CanInteractWith\(pawn, t, inBed\)\)','if (!true)' | Set-Content "$Work\Source\JoyGiver_WatchEntity.cs" -Encoding UTF8; & dotnet build "$Work\Source\EntityGazing.csproj" -c Release -v q --nologo | Out-Null } }
-  @{ n='driverClass wrong family'; suite='func'; expect='8';  do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '<driverClass>JobDriver_WatchBuilding</driverClass>','<driverClass>JoyGiver_WatchBuilding</driverClass>' | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
-  @{ n='job joyKind mismatched';   suite='func'; expect='9';  do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '<joyKind>EG_EntityGazing</joyKind>\s*<allowOpportunisticPrefix>',"<joyKind>Television</joyKind>`n    <allowOpportunisticPrefix>" | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
-  @{ n='xpath that matches nothing';suite='func';expect='21'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace ([regex]::Escape('"HoldingPlatform"]/statBases')), '"HoldingPlatform"]/statBasez' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
-  @{ n='patch reversed on the spot';suite='func';expect='24'; do={
+  # Arms the trap this repository has been bitten by twice: a publicizer declared while
+  # GenerateAssemblyInfo is off, so the access grant is never written into the assembly.
+  @{ n='publicizer without a grant'; suite='func'; expect='8';  do={ $f = Join-Path $Work 'Source\EntityGazing.csproj'; (Get-Content $f -Raw -Encoding UTF8) -creplace '(<PackageReference Include="Krafs.Rimworld.Ref"[^>]*/>)', ('$1' + [char]10 + '    <Publicize Include="Assembly-CSharp" />') | Set-Content $f -Encoding UTF8 } }
+  @{ n='driverClass wrong family'; suite='func'; expect='10';  do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '<driverClass>JobDriver_WatchBuilding</driverClass>','<driverClass>JoyGiver_WatchBuilding</driverClass>' | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
+  @{ n='job joyKind mismatched';   suite='func'; expect='11';  do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '<joyKind>EG_EntityGazing</joyKind>\s*<allowOpportunisticPrefix>',"<joyKind>Television</joyKind>`n    <allowOpportunisticPrefix>" | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
+  @{ n='xpath that matches nothing';suite='func';expect='23'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace ([regex]::Escape('"HoldingPlatform"]/statBases')), '"HoldingPlatform"]/statBasez' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
+  @{ n='patch reversed on the spot';suite='func';expect='26'; do={
       $p = "$Work\Mod\Patches\HoldingPlatforms.xml"
       $t = Get-Content $p -Raw -Encoding UTF8
       $t = $t -creplace '(?s)(<xpath>Defs/ThingDef\[defName="HoldingSpot"\]/building</xpath>\s*<value>)(.*?)(</value>)', '<xpath>Defs/ThingDef[defName="HoldingSpot"]</xpath><value><building>$2</building>$3'
       Set-Content $p -Value $t -Encoding UTF8 } }
-  @{ n='place worker typo';        suite='func'; expect='27'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace 'PlaceWorker_WatchArea','PlaceWorker_WatchAreaz' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
-  @{ n='watchers out of the field';suite='func'; expect='30'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace '2~6','7~9' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
-  @{ n='spot dropped from giver';  suite='func'; expect='31'; do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '\s*<li>HoldingSpot</li>','' | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
-  @{ n='joyDuration out of range'; suite='func'; expect='32'; do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '<joyDuration>4000</joyDuration>','<joyDuration>40000</joyDuration>' | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
-  @{ n='same-room dropped';        suite='func'; expect='33'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace '<watchBuildingInSameRoom>true</watchBuildingInSameRoom>','' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
+  @{ n='place worker typo';        suite='func'; expect='29'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace 'PlaceWorker_WatchArea','PlaceWorker_WatchAreaz' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
+  @{ n='watchers out of the field';suite='func'; expect='32'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace '2~6','7~9' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
+  @{ n='spot dropped from giver';  suite='func'; expect='33'; do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '\s*<li>HoldingSpot</li>','' | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
+  @{ n='joyDuration out of range'; suite='func'; expect='34'; do={ (Get-Content "$Work\Mod\Defs\EntityGazing.xml" -Raw -Encoding UTF8) -creplace '<joyDuration>4000</joyDuration>','<joyDuration>40000</joyDuration>' | Set-Content "$Work\Mod\Defs\EntityGazing.xml" -Encoding UTF8 } }
+  @{ n='same-room dropped';        suite='func'; expect='35'; do={ (Get-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Raw -Encoding UTF8) -creplace '<watchBuildingInSameRoom>true</watchBuildingInSameRoom>','' | Set-Content "$Work\Mod\Patches\HoldingPlatforms.xml" -Encoding UTF8 } }
 )
 
 $missed = 0
+$ran    = 0
+# -Only that matches nothing must be loud. Passed through `powershell -File`, an array arrives as a
+# single string and silently selects no mutation - and a campaign that ran nothing then reports
+# that every mutation woke its test, which is the exact failure this whole script exists to catch.
+if ($Only.Count) {
+    $unknown = @($Only | Where-Object { $n = $_; -not ($mutations | Where-Object { $_.n -eq $n }) })
+    if ($unknown.Count) {
+        Write-Host ("  no such mutation: " + ($unknown -join " | ")) -ForegroundColor Red
+        Write-Host "  (use -Command rather than -File when passing more than one name)" -ForegroundColor DarkGray
+        exit 1
+    }
+}
 foreach ($m in $mutations) {
     if ($Only.Count -and ($Only -notcontains $m.n)) { continue }
+    $ran++
 
     if (Test-Path $Work) { Remove-Item $Work -Recurse -Force -ErrorAction SilentlyContinue }
     Copy-Item $Src $Work -Recurse -Force
@@ -109,5 +129,6 @@ foreach ($m in $mutations) {
 
 if (Test-Path $Work) { Remove-Item $Work -Recurse -Force -ErrorAction SilentlyContinue }
 Write-Host ""
-if ($missed) { Write-Host "  $missed mutation(s) went unnoticed" -ForegroundColor Red; exit 1 }
-Write-Host "  every mutation woke its test" -ForegroundColor Green
+if ($ran -eq 0)  { Write-Host "  no mutation ran" -ForegroundColor Red; exit 1 }
+if ($missed) { Write-Host "  $missed of $ran mutation(s) went unnoticed" -ForegroundColor Red; exit 1 }
+Write-Host "  all $ran mutations woke their test" -ForegroundColor Green
