@@ -1,20 +1,21 @@
 ---
-mod:        Entity Gazing
-packageId:  nelim.entitygazing
-repo:       Rimworld-Entity-Gazing
-visibility: public
-detached:   yes
-stage:      done
-licence:    original
-licence_at: MIT, LICENSE at the root; no ATTRIBUTION, nothing is reused
-showcase:   complete
+mod:          Entity Gazing
+packageId:    nelim.entitygazing
+repo:         Rimworld-Entity-Gazing
+visibility:   public
+detached:     yes
+stage:        done
+licence:      original
+licence_at:   MIT, LICENSE at the root; no ATTRIBUTION, nothing is reused
+dependencies: declared
+showcase:     complete
 tested_on:
 workshop:
 remaining:
   - unverified: never seen running in a colony; the fourteen scenarios of TESTING.md, none played
   - unverified: never uploaded to the Workshop, so the showcase has never been seen in place
-session:    local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
-updated:    2026-09-12, mod session
+session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
+updated:      2026-09-12, mod session
 ---
 
 # Entity Gazing — status
@@ -47,5 +48,12 @@ against the disk rather than inferred. What each one says today:
 `remaining` takes three kinds of line: `feature` for something missing from a first release,
 `defect` for a known fault left unfixed, `unverified` for what could not be checked.
 
-`licence` vocabulary: `open` an explicit licence, `silent` no licence and a dead source, `alive` no
-licence but a living source, `forbidden` a written refusal, `original` nothing reused.
+`licence` vocabulary: `open` an explicit licence, `silent` no licence and a dead source,
+`alive` no licence but a living source, `forbidden` a written refusal, `original` owing nothing
+to anyone — not a name, not an idea traceable to one mod, not a value derived from its assets.
+
+- **`dependencies`** — `declared` when every mod this one needs is named in the About's
+  `modDependencies`, `to check` when a non-vanilla `loadAfter` suggests a dependency that is not
+  declared, `none` when the mod needs nothing. An undeclared dependency is not cosmetic: on
+  2026-09-11 Reequilibrage animaux took 47 vanilla animals down with it, Muffalo included, because
+  the class it injects belongs to a mod that was not declared and not loaded.
