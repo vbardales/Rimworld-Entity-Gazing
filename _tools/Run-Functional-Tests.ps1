@@ -180,9 +180,16 @@ Test-That "that comp is in Assembly-CSharp, so the assembly loads without the DL
 # Contented Livestock. Krafs.Publicizer grants access to the game's non-public members with an
 # [assembly: IgnoresAccessChecksTo] that the SDK writes into the generated AssemblyInfo - and
 # <GenerateAssemblyInfo>false</GenerateAssemblyInfo>, which this csproj carries, deletes that file.
-# The attribute TYPE stays embedded, the grant is never applied, the build is clean, and the CLR
-# throws FieldAccessException or MethodAccessException at the first real access, behind a startup
-# that says nothing.
+# The attribute TYPE stays embedded, the grant is never applied, and the build is clean. The desktop
+# CLR then throws FieldAccessException or MethodAccessException at the first real access, behind a
+# startup that says nothing.
+#
+# How bad that is in play is NOT settled, and the honest version belongs here rather than a scarier
+# one. On 2026-09-12 Architect Studio watched a non-public access work in a running colony, so the
+# game's Mono may not enforce the check at all - while everything measured out of game, this test
+# included, runs on the desktop CLR. So read a failure here as "this mod reaches for something it
+# was not granted", which is true and worth fixing, and not as "this mod is broken in play", which
+# nobody has shown.
 #
 # This mod is not exposed, and the proof is a compile rather than an argument: its source builds
 # against the game's REAL Assembly-CSharp, where protected stays protected. A member it could not
