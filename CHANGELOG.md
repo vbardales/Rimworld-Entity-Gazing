@@ -24,6 +24,14 @@ colony.
   empty platforms.
 - French translation.
 
+- **A test suite**, in `_tools/`. Nothing a player sees changes. Two scripts, neither of which
+  starts the game: one on the shape of the mod, one on whether the base game still does what the mod
+  hands it to do. They read the installed game's own data and assembly, so they check what the mod
+  assumes rather than what its prose claims.
+- **A mutation campaign**, `_tools/Run-Mutations.ps1`, which breaks the mod on purpose on a copy and
+  checks that the right test turns red. Every mutation has been watched doing so; the tests that
+  cannot be reddened that way are named at the foot of each suite instead of being passed over.
+
 ### Notes
 
 - The walk, the facing and the joy gain are the base game's own television pair,

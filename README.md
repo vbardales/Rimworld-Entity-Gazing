@@ -88,14 +88,50 @@ Watchers are held to the same room, as on all five vanilla watch buildings. That
 cosmetic either: without it a colonist can stand behind the containment wall and stay clear of the
 pain field the whole design rests on.
 
+## Tests
+
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
+```
+
+Two suites, no RimWorld launched, well under a minute for both. They read the installed game — its
+`Data` folder and its `Assembly-CSharp` — so they check what this mod assumes rather than what this
+page claims.
+
+The first is about form: 23 form tests covering well-formed XML, every element still a field on its
+1.6 class, translation keys that name a real def and a real field, packaging, and the documents
+against the defs. The last group is the one that keeps this page honest — every number quoted here
+and in the changelog is read back out of the XML, so changing a value and not the prose turns the
+suite red.
+
+The second is about behaviour, because this mod owns almost none of its own. It checks that the one
+override still takes the base class's vtable slot rather than a new one, which is the difference
+between the mod working and colonists gazing at empty platforms with no error anywhere. It runs the
+game's own patch engine on the shipped patch file against the real Anomaly defs, and reads the
+result. And it scans every method body in the game to find who reads each setting these defs write
+— the fault nothing else catches, a setting no code on its path ever reads.
+
+The numbers in this file are recomputed at every run: Anomaly shipping no recreation content, ten
+recreation types in Core with five from a building, the nociosphere's pain field at 5.9 cells. A
+RimWorld release that moves one of those is reported instead of quietly ageing the page.
+
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
+```
+
+A green suite proves nothing on its own, so a third script breaks the mod on purpose — 33 mutations
+on a copy, each aimed at one test. Every one of them has been watched turning its test red. Which
+tests that leaves unproven, and why, is written at the foot of each suite rather than left to
+assumption.
+
 ## Not yet tested in a running colony
 
-Nothing here has been watched happening in game. The mod builds, the defs and the patch are what
-this page describes, and that is the whole of what has been verified.
+Nothing above plays. The mod has never been watched running in a colony.
 
-[TESTING.md](TESTING.md) holds the fourteen scenarios that have to be watched in a running colony —
-the gaze itself, the empty platform nobody looks at, the pain field that is the price of the show —
-with what counts as a pass for each.
+[TESTING.md](TESTING.md) holds the fourteen scenarios that have to be watched there — the gaze
+itself, the empty platform nobody looks at, the pain field that is the price of the show — with what
+counts as a pass for each.
 
 ## Languages
 

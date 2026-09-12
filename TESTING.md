@@ -3,6 +3,11 @@
 Nothing in this mod has ever been watched happening in a colony. This file is the list of what has
 to be seen, and what counts as a pass for each.
 
+Two test suites run beside it, in `_tools/`, and neither of them starts the game. They check that
+the defs are well formed, that the game still has every field and class they name, that the one
+override still takes the slot it means to, and that the patch lands where it aims. None of that is
+a single tick of play, which is what this file is for.
+
 It is not shipped: it lives beside `Mod/`, never inside it, so Steam never receives it.
 
 ## Before starting
