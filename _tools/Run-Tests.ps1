@@ -334,6 +334,7 @@ Test-That "the About says what the repository says" {
     ($m.name -ceq 'Entity Gazing') -and
     ($m.packageId -ceq 'nelim.entitygazing') -and
     ($m.url -ceq 'https://github.com/vbardales/Rimworld-Entity-Gazing') -and
+    ($m.description.Contains('https://github.com/vbardales/Rimworld-Entity-Gazing')) -and
     ($m.supportedVersions.li -contains '1.6') -and
     ($about.SelectSingleNode('//modDependencies/li/packageId').InnerText -ceq 'Ludeon.RimWorld.Anomaly')
 }
