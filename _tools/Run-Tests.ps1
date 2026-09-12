@@ -389,7 +389,11 @@ Test-That "LICENSE is MIT and the README points at it" {
 Test-That "the documents and the code comments are in English" {
     $words = '\b(le|la|les|une|des|est|sont|pour|dans|avec|qui|que|pas|sans|donc|cette|nous|vous)\b'
     $bad = @()
-    foreach ($f in @('README.md','CHANGELOG.md','TESTING.md') | ForEach-Object { Join-Path $ModRoot $_ }) {
+    # STATUS.md is in the list on purpose. A repository-wide sweep rewrites that file from outside
+    # this session, and one of its passes translated the keys but left the prose French - a card
+    # half in each language, which shows far less than an emptied one. This is what catches the
+    # next half-pass.
+    foreach ($f in @('README.md','CHANGELOG.md','TESTING.md','STATUS.md') | ForEach-Object { Join-Path $ModRoot $_ }) {
         if ((Read-Text $f) -match $words) { $bad += (Split-Path $f -Leaf) }
     }
     foreach ($f in @(Get-ChildItem (Join-Path $ModRoot 'Source') -Recurse -Include *.cs,*.csproj) + $xmlFiles) {
