@@ -1,4 +1,7 @@
 ---
+localization: complete
+translation_en: complete
+translation_fr: complete
 mod:          Entity Gazing
 packageId:    nelim.entitygazing
 repo:         Rimworld-Entity-Gazing
@@ -14,6 +17,8 @@ showcase:     complete
 tested_on:
 workshop:
 remaining:
+  - unverified: French load without Anomaly; shared DefInjected checker flags two MayRequire translation-gating notices
+  - unverified: English and French in-game display checks in TESTING.md scenarios 3 and 4, including both holders and opportunistic job reports
   - unverified: all fourteen manual scenarios in TESTING.md await execution in a running colony
   - unverified: Workshop upload and in-place showcase have not been verified
 session:      Codex, maintainer of this standalone local repository
@@ -75,6 +80,12 @@ provenance. Neither `silent` nor `forbidden` applies to the evidence here.
 
 ## Maintenance rules
 
+Translation validation is required before `preTest`, including for this historical `done`
+stage. After changes to text, UI code, Defs, patches or language resources, reset the affected
+`localization`, `translation_en` and `translation_fr` fields to `unchecked` and repeat the
+inventory and resource checks below. `complete` means ready for `preTest`; in-game translation
+validation remains a separate requirement tracked in `remaining`.
+
 After a mod change, run both suites and update this card with results and remaining defects.
 After actual colony testing, record version/date and scenario results in `TESTING.md`, fill
 `tested_on` here, and only then advance to `tested` when appropriate. After Workshop publication,
@@ -82,6 +93,57 @@ record the item ID and verification result. Never turn an unexecuted check into 
 
 `remaining` uses `feature` for missing functionality, `defect` for a known issue, and `unverified`
 for checks still awaiting evidence.
+
+## Translation audit — 2026-09-13
+
+Applied the parent workspace's `PUBLISHING.md` translation gate and `TRANSLATIONS.md`
+protocol to revision `24e5b6896d3c7339d31bf3839088b590c0340716`. Reviewed all shipped
+Defs, both conditional holder patches, both French resources and the entire
+`Source/JoyGiver_WatchEntity.cs`. There are no LoadFolders, version-specific content,
+custom settings, generated language resources or optional third-party integrations.
+
+| Def type and path | English source | French DefInjected value |
+|---|---|---|
+| JoyKindDef: `EG_EntityGazing.label` | entity gazing | contemplation d'entité |
+| JobDef: `EG_WatchEntity.reportString` | watching the contained entity. | observe l'entité captive. |
+
+English is supplied by `Mod/Defs/EntityGazing.xml`; an English DefInjected copy is
+unnecessary. French resources are `Mod/Languages/French/DefInjected/` followed by
+`JoyKindDef/EntityGazing.xml` and `JobDef/EntityGazing.xml`. Both entries are nonempty,
+unique within their Def type and match the source meaning. Accents and punctuation are
+preserved. Neither text contains parameters, grammar tokens, rich-text tags or line breaks.
+No missing translation or placeholder was found.
+
+The C# override only checks holder occupancy and delegates to vanilla; it emits no UI text
+and constructs no translation keys. The patches add numeric settings, flags, class and Def
+references, including the inventoried joy kind, without introducing further text. Vanilla
+renders the recreation UI and optional opportunistic report prefix; the mod explicitly
+reuses no dependency Keyed keys. Their runtime composition is included in the pending
+language checks. IDs, class names, XML comments, About metadata and repository documentation
+are outside the in-game text inventory, as prescribed by the protocol.
+
+Validation commands run from this repository:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-DefInjected.ps1 -TransMod ./Mod
+```
+
+The form suite passed 23/23 checks, including XML validity, French target fields and
+coverage of the Defs' translatable fields reflected from the installed game. The functional
+suite passed 35/35 checks. Manual source/resource review above supplements these suites
+with text inventory, duplicate/nonempty checks and meaning review.
+The shared DefInjected checker indexed 11,588 Defs and checked both keys with zero errors
+and no unresolved targets. It also emitted two `MayRequire` notices: the target Defs require
+Anomaly while the French files are in the common language folder. This is a conditional-load
+verification item, not an injection-path error; the no-Anomaly load scenario must also check
+the French translation log for missing-target warnings.
+
+No translation resource or gameplay change was required. English and French display in a
+running colony remains unverified; `TESTING.md` scenarios 3 and 4 now specify both languages,
+both holders, opportunistic reports, raw keys, fallback, accents and clipping. The historical
+`done` stage is preserved and does not certify those runtime checks.
 
 ## Preview overlay — 2026-09-13
 

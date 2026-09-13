@@ -94,6 +94,14 @@ mod, so if it is absent here, stop and read the log.
 
 ## 4. A colonist goes and watches, on their own
 
+Translation validation: repeat scenarios 3 and 4 in English and French, with Anomaly
+enabled, for both the holding platform and holding spot. Check the recreation source,
+Needs tooltip and active job report against the text inventory in STATUS.md. Also observe
+an opportunistically started job, since its report allows the vanilla opportunistic prefix.
+Fail on raw keys, English fallback in French, broken accents, malformed prefixes or clipping.
+Record game version, date, language, holder and results. These language checks have not yet
+been executed in a running colony.
+
 The one behaviour everything else supports.
 
 1. A colonist with recreation low, a schedule block on Recreation, an occupied platform in reach.
