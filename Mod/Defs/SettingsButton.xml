@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <MainButtonDef>
+    <defName>EG_Settings</defName>
+    <label>Entity Gazing</label>
+    <description>Configure entity gazing distances.</description>
+    <workerClass>EntityGazing.MainButtonWorker_EntityGazingSettings</workerClass>
+    <buttonVisible>false</buttonVisible>
+    <validWithoutMap>true</validWithoutMap>
+    <order>999</order>
+  </MainButtonDef>
+</Defs>

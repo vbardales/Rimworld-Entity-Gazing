@@ -7,7 +7,7 @@ namespace EntityGazing
     /// The base game's "watch a building" giver, plus a single condition: the platform must
     /// actually be holding something.
     ///
-    /// THIS IS EVERY LINE OF CODE THE MOD CONTAINS, and the class exists for that condition alone.
+    /// This gameplay class adds only the occupancy condition; configuration lives in EntityGazingMod.
     /// Without it, naming <c>HoldingPlatform</c> in the <c>thingDefs</c> of a vanilla
     /// <c>JoyGiverDef</c> would be enough - but colonists would then go and contemplate EMPTY
     /// platforms, which is to say a steel frame with chains hanging off it. The walk, the facing

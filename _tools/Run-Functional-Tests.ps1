@@ -219,8 +219,15 @@ Test-That "the source compiles against the un-publicized game assembly" {
         $errors = @([regex]::Matches($out, '(?m)error CS\d+.*$') | ForEach-Object { $_.Value })
         if ($errors) { Note ($errors | Select-Object -First 3) }
         # CS0122 is the one that matters - "inaccessible due to its protection level".
-        $errors.Count -eq 0
-    } finally { Remove-Item $probe -Recurse -Force -ErrorAction SilentlyContinue }
+        if ($LASTEXITCODE -ne 0) { Note $out }
+        ($LASTEXITCODE -eq 0) -and ($errors.Count -eq 0)
+    } finally {
+        $resolvedProbe = [IO.Path]::GetFullPath($probe)
+        $temporaryRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd('\') + '\'
+        if (-not $resolvedProbe.StartsWith($temporaryRoot, [StringComparison]::OrdinalIgnoreCase) -or
+            (Split-Path $resolvedProbe -Leaf) -notmatch '^eg-access-[a-f0-9]{8}$') { throw 'Unsafe probe cleanup path' }
+        Remove-Item -LiteralPath $resolvedProbe -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
 
 # Belt and braces on the same fault, and the check that does NOT lie: read the attribute through

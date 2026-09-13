@@ -34,7 +34,7 @@ no chair wanted.
 
 ## 1. It loads, with and without the DLC
 
-Everything else depends on this. All three defs carry `MayRequire="Ludeon.RimWorld.Anomaly"` and
+Everything else depends on this. All three gameplay defs carry `MayRequire="Ludeon.RimWorld.Anomaly"` and
 the patch is wrapped in a `PatchOperationConditional`, so the mod is supposed to be inert rather
 than broken when the DLC is off.
 
@@ -125,7 +125,7 @@ Recreation rises. The bar's tooltip credits **entity gazing**.
 
 ## 5. An empty platform is never watched
 
-**This is the only thing the mod's code does.** `JoyGiver_WatchEntity` exists for this single
+**This is the gameplay giver's occupancy condition.** `JoyGiver_WatchEntity` exists for this single
 condition and nothing else; if this test fails, the assembly is not being used at all.
 
 1. Leave a holding platform built and **empty**.
@@ -166,8 +166,7 @@ at the far end of the range may not. Recreation still rises — pain is the cost
 **Pass:** nobody hurts. The price varies by entity, on its own, with no code of ours. That is the
 point: it is a vanilla mechanic being used, not simulated.
 
-If you decide the cost is too harsh, the fix is one number — widen
-`watchBuildingStandDistanceRange` in the patch past 5.9 and the audience stands clear.
+If you decide the cost is too harsh, use Mod options -> Entity Gazing to set a minimum distance above 5.9 cells.
 
 ## 8. Several watchers, and no chairs
 
@@ -216,7 +215,7 @@ be — you very much do not touch.
 
 ## 12. Save, quit, reload
 
-The mod claims no save data of its own.
+The mod adds no colony save data. Global viewing-distance settings are stored separately.
 
 1. Mid-gaze, save. Quit to the menu. Reload.
 
@@ -265,3 +264,40 @@ is not cosmetic: it is what keeps the audience inside the pain field.
 **Fail:** a colonist stands on the far side of a wall and gazes. They would be watching through
 solid stone, and — worse for the design — standing clear of the pain field that is the whole price
 of the show.
+
+## 15. Settings, bounds, defaults and persistence
+
+Preconditions: RimWorld 1.6 with Anomaly and Entity Gazing; no customization mod. Start
+with a fresh mod configuration, then repeat with an existing colony save. Reset to default
+settings before running the earlier gameplay scenarios. Repeat this scenario in EN and FR.
+
+1. Open Mod options -> Entity Gazing. Expect minimum 2 and maximum 6, readable labels/help,
+   correct accents and no raw keys, fallback, clipping or errors in Player.log.
+2. Move each slider to both ends. Expect integer values between 1 and 20, always min <= max.
+   There is no text entry, so empty or nonnumeric input is not applicable.
+3. Set 8 to 12, close the dialog, and start new watching jobs at both holder types in a
+   sufficiently large room. Expect new viewing positions within 8 to 12 cells. Current jobs
+   may finish at their old positions. The nociosphere's 5.9-cell field should not reach them.
+4. Reopen settings, restart the game and reload the save. Expect 8 to 12 retained. Start a new
+   colony and expect the same global values. Observe new jobs and check logs again.
+5. Restore defaults. Expect both controls and both holder ranges to return to 2 to 6.
+6. Disable Anomaly and restart. Open and save settings without exceptions; no activity exists.
+
+Record game version, language, new/existing save, observed ranges, log path and outcome.
+Not executed in game yet.
+
+## 16. Optional MainButtons shortcut
+
+Preconditions: default configuration, then RIMMSQOL or another compatible button editor.
+Record the exact editor version; repeat the checks in EN and FR.
+
+1. Without an editor, expect no visible or greyed-out Entity Gazing main button. The ordinary
+   Mod options entry must still work.
+2. With the editor, find EG_Settings and reveal it. Click it: expect the same native settings
+   window and values as Mod options. Change to 7 to 10 and close; reopen through Mod options
+   and expect 7 to 10. Reverse the route and verify shared values and persistence after restart.
+3. Hide the shortcut through the editor, restart, and expect it to stay hidden. Remove the
+   editor and verify Mod options still works. Restore 2 to 6 before gameplay regressions.
+4. Check labels, help, accents, clipping and Player.log throughout. Expect no errors.
+
+Not executed in game; no third-party integration version is certified yet.

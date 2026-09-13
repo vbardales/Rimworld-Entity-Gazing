@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Neither Harmony nor a publicizer: one derived class, no patch. Without a publicizer the
+    <!-- Neither Harmony nor a publicizer: native settings and a derived giver, no Harmony patch. Without a publicizer the
          game's `protected` members stay protected, which avoids the CS0507 of Firework Stand. -->
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*-*" />
   </ItemGroup>

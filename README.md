@@ -3,7 +3,7 @@
 A RimWorld mod that lets colonists go and look at the horrors you keep chained up, as recreation —
 and, with it, a recreation type the base game does not have.
 
-Needs the Anomaly DLC. Without it the mod loads and adds nothing.
+Needs the Anomaly DLC. Without it the mod loads but adds no recreation activity.
 
 ## Why it is worth a mod
 
@@ -34,8 +34,7 @@ Watchers stand two to six cells away, which is deliberately close. A nociosphere
 audience will be standing inside it.
 
 That is the price of the show, and it comes out of an existing vanilla mechanic rather than a line
-of code. It varies by entity on its own — a fleshbeast hurts nobody. Widening
-`watchBuildingStandDistanceRange` in the patch makes the activity harmless.
+of code. It varies by entity on its own — a fleshbeast hurts nobody. Use Mod options -> Entity Gazing to change the minimum and maximum distance without editing XML.
 
 No thought is granted, deliberately. A positive one would reward contemplating an abomination; a
 negative one would turn a source of recreation into a source of malus. The joy gained is already
@@ -50,7 +49,7 @@ the reward and the pain field already the price.
 | **Watched from** | 2 to 6 cells, in a rect 5 wide |
 | **Chair** | Not needed |
 | **Capacity required** | Sight |
-| **Save data** | None of its own |
+| **Save data** | No colony data; global settings file |
 
 ## How it works
 
@@ -61,7 +60,7 @@ They apply here because a holding platform is a `Building`. That is not a given:
 drivers raises an `InvalidCastException` on a `Plant`, which is why an anima tree cannot be wired up
 this way.
 
-One class, `JoyGiver_WatchEntity`, is the mod's entire assembly. It adds a single condition to the
+The gameplay class, `JoyGiver_WatchEntity`, adds a single condition to the
 vanilla giver: the platform must actually be holding a living pawn. Without it, naming
 `HoldingPlatform` in a vanilla `JoyGiverDef` would be enough — but colonists would then go and
 contemplate empty platforms, which is to say a steel frame with chains hanging off it.
@@ -121,7 +120,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
 ```
 
 A green suite proves nothing on its own, so a third script breaks the mod on purpose — 34 mutations
-on a copy, each aimed at one test. Every one of them has been watched turning its test red. Which
+on a copy, each aimed at one test. The earlier campaign recorded every mutation turning its test red; it has not been rerun after the settings and packaging-test changes. Which
 tests that leaves unproven, and why, is written at the foot of each suite rather than left to
 assumption.
 
@@ -129,7 +128,7 @@ assumption.
 
 Nothing above plays. The mod has never been watched running in a colony.
 
-[TESTING.md](TESTING.md) holds the fourteen scenarios that have to be watched there — the gaze
+[TESTING.md](TESTING.md) holds the sixteen scenarios that have to be watched there — the gaze
 itself, the empty platform nobody looks at, the pain field that is the price of the show — with what
 counts as a pass for each.
 
@@ -139,9 +138,9 @@ English and French.
 
 ## Credits
 
-Written with Claude Code (Anthropic), under human direction and review.
+Written with Claude Code (Anthropic) and Codex (OpenAI), under human direction and review. See [ATTRIBUTION.md](ATTRIBUTION.md) for provenance and artwork credits.
 
-Thanks to Ludeon Studios, whose television carries every bit of this mod's behaviour.
+Thanks to Ludeon Studios, whose television logic supplies the watching activity.
 
 ## If I go quiet
 
@@ -151,3 +150,19 @@ any other of my mods, including publishing a continuation of it. All credit must
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
+
+## Mod options
+
+Open **Mod options -> Entity Gazing**. Set minimum and maximum viewing distances with
+integer sliders (1 to 20 cells; maximum cannot be below minimum). Restore defaults returns
+both holders to 2 to 6 cells. Changes apply immediately to new viewing positions on both
+holders; current watchers may finish where they stand. Values are global across saves,
+loaded at startup and saved when the settings window closes. The activity needs Anomaly.
+
+A native MainButtons entry, `EG_Settings`, is hidden by default. Compatible customization
+tools can reveal it; it opens the same native settings dialog and is optional. No third-party
+mod is required. Interactive RIMMSQOL compatibility has not yet been tested.
+
+Run `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps1`
+for settings bounds, application, reset, primitive Scribe persistence and EN/FR coverage checks.
+These desktop checks do not certify the game's window lifecycle or a colony session.

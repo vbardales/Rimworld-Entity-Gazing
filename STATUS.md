@@ -10,6 +10,7 @@ local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
 stage:        done
+settings_audit: complete
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
 dependencies: declared
@@ -17,15 +18,201 @@ showcase:     complete
 tested_on:
 workshop:
 remaining:
+  - unverified: settings window lifecycle, actual colony effects, restart persistence and optional RIMMSQOL shortcut in English and French; scenarios 15 and 16
   - unverified: French load without Anomaly; shared DefInjected checker flags two MayRequire translation-gating notices
   - unverified: English and French in-game display checks in TESTING.md scenarios 3 and 4, including both holders and opportunistic job reports
-  - unverified: all fourteen manual scenarios in TESTING.md await execution in a running colony
+  - unverified: all sixteen manual scenarios in TESTING.md await execution in a running colony
   - unverified: Workshop upload and in-place showcase have not been verified
 session:      Codex, maintainer of this standalone local repository
 updated:      2026-09-13
 ---
 
 # Entity Gazing — status
+
+## Audit fixes — 2026-09-13
+
+This is the current record and supersedes the earlier audit findings below. Historical
+results and the earlier downgrade are retained for traceability. Work is based on
+`0a5123f49c308b08d9e7323a0b451bc7276994f5`, plus the previous uncommitted STATUS audit.
+The fixes are local and uncommitted; no publication or push was performed.
+
+- Added English ATTRIBUTION.md and matching distributed copy, plus Mod/LICENSE copied
+  from the existing MIT notice. Preserved the original provenance category and named the
+  game, build-only reference package, AI artwork and development assistance separately.
+- Corrected the final About source link to the required Steam format and the stale
+  four-types comment to five. Updated README, About and CHANGELOG for configurable distance.
+- Added EntityGazingSettings and EntityGazingMod, with integer distance sliders from 1 to
+  20 cells, minimum <= maximum, defaults 2/6 and a reset action. Normalization also handles
+  out-of-range persisted values. Values apply globally to both holder Defs after loading
+  and after edits. Native ModSettings/Scribe saves them on closing the settings dialog.
+  Existing watchers may finish at their previous positions; subsequent position selection
+  uses the changed range. Missing holder Defs are safe when Anomaly is disabled.
+- Added EG_Settings MainButtonDef with native buttonVisible=false, no visibility override
+  and no new dependency. Its worker opens RimWorld.Dialog_ModSettings with the same
+  EntityGazingMod instance used by the ordinary Mod options route. Inspected the installed
+  1.6.4871 rev590 implementations of MainButtonDef, MainButtonWorker, Mod and
+  Dialog_ModSettings: visibility reads buttonVisible, and dialog close calls WriteSettings.
+  No RIMMSQOL or other editor version has been interactively tested.
+- Added five Keyed settings texts in English and French, with matching numeric placeholders
+  on the two distance labels. The shortcut label and description use native English Def
+  values and French DefInjected entries. The original two translated gameplay fields remain.
+  Reviewed the full new source and all nine XML files: no additional owned UI text or
+  dynamically constructed translation key exists. Names, serialization keys and Def IDs
+  are not UI text. Input is slider-only; empty/nonnumeric typed input is not applicable.
+- Added manual scenarios 15/16 for settings, actual colony effects, restart/global persistence,
+  new/existing saves, DLC off, FR/EN layout and optional button editors. All sixteen scenarios
+  remain unexecuted in game. Neither source inspection nor desktop tests certify that runtime.
+
+Verification commands for this working tree:
+
+```powershell
+dotnet build Source/EntityGazing.csproj --no-restore -c Release
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-DefInjected.ps1 -TransMod ./Mod
+```
+
+Build succeeded with zero warnings/errors and updated the distributed DLL. Its SHA256 is
+`28406083AFC7EC8FE0C90273357BF29E822FAF4F79023AF208E3207E06BF97FC`.
+Settings checks execute normalization, reset and ApplyTo against actual game field types,
+using holder fixtures without Unity-dependent constructors. They save and read primitive
+values with native Scribe, including missing and out-of-range stored fields. Full Scribe
+FinalizeLoading invokes Unity and cannot run in the desktop harness; the harness explicitly
+ends LoadingVars with ForceStop instead. There are no cross references or post-load callbacks
+in this settings class. Game restart/window lifecycle verification remains in scenario 15.
+
+The general suite now includes the shortcut Def in field/translation checks and verifies
+distributed licence/provenance copies and the exact source-link suffix. The real-assembly
+compilation probe now checks the process exit code as well as compiler errors, so an SDK
+failure cannot silently pass. Historical mutation results apply to their old test versions;
+the mutation campaign has not been rerun or extended to certify these new checks.
+
+Final result: **dansMonoRepo -> done**, with settings_audit and EN/FR localization complete.
+All cumulative gates through done are now satisfied for this local distributed build;
+`tested` remains unverified. Executed results: **23 form/XML + 35 technical functional +
+18 settings checks = 76 passed, zero failed**. The shared DefInjected checker indexed
+11589 Defs, checked four paths and reported zero errors, with the same two MayRequire
+notices on the original gameplay translations. Those notices remain a DLC-off runtime
+check, not a demonstrated defect. No new notice concerns the settings translations.
+`git diff --check` also passed. The only next workflow transition is done -> tested:
+execute and record the sixteen colony scenarios, including FR/EN, new/existing saves,
+options, logs and the optional shortcut. Workshop publication is not required for it.
+The options gate uses the user's explicit override: source and applicable automated checks
+are sufficient here; interactive checks belong to tested. No new image or dependency is
+needed. Earlier directly inspected image and GitHub validations remain independent and
+unchanged. Remaining runtime checks are unverified, not known defects.
+
+## Ordered workflow audit — 2026-09-13
+
+This section supersedes historical stage conclusions below, without deleting their results.
+**Previous stage: done. Retained stage: dansMonoRepo.** Stage values use the literal
+names in the requested workflow, not letter codes. `dansMonoRepo` is the baseline before
+the first fully satisfied gate; it does **not** mean the repository has physically returned
+to a monorepo. `detached: yes` remains true. No relocation or monorepo remote is required.
+
+Scope: standalone Git root `C:\Users\nelim\Documents\rimworld\EntityGazing`, distributed
+folder `Mod/`. Read parent `AGENTS.md`, `PUBLISHING.md`, `STYLE_RIMWORLD.md`,
+`MOD_SETTINGS.md` and `TRANSLATIONS.md`; the user's audit criteria take precedence,
+including source/automated verification for options and game checks only for tested.
+
+Started on `24e5b6896d3c7339d31bf3839088b590c0340716`, with existing local edits in
+STATUS.md and TESTING.md. During the audit HEAD advanced externally to
+`0a5123f49c308b08d9e7323a0b451bc7276994f5`; the intervening diff contains only those
+two documentation files. Source, tests and distributed artifacts are unchanged, so their
+checks remain applicable. This audit edits only STATUS.md and creates ignored build
+verification output under `.build/audit/`. Existing scenarios and historical results are
+preserved. No commit, push, publication, feature implementation or image generation performed.
+
+| Transition | Direct result, independent of earlier blockers |
+|---|---|
+| dansMonoRepo -> horsMonoRepo | **Defect found.** Root ATTRIBUTION.md and distributed Mod/LICENSE are absent. Standalone Git, initialized STATUS/README/CHANGELOG/root MIT LICENSE, coherent naming, origin and public GitHub repository are verified. |
+| horsMonoRepo -> ModIcon generated | Build and delivered DLL currency **validated**; PNG icon **validated**, 128 x 128, 21365 bytes. Existing gameplay implementation builds and passes its suites; later settings work is separately identified below. |
+| ModIcon generated -> Preview generated | **Validated independently:** shipped PNG 896 x 504, 551129 bytes, below 1 MB; direct image inspection performed. |
+| Preview generated -> preOptions | English description and unadorned original-public name **validated**; title has no affix or linking word to reduce. Warm secondary and cool cyan accent in the palette are distinct; secondary has no applicable text here. **Defect found** against PUBLISHING.md: raw Source URL instead of the final Steam-formatted source link. |
+| preOptions -> options | **Defect found; settings_audit: partial.** See inventory below. No in-game test is demanded for this gate. |
+| options -> l10n | Existing text inventory and EN/FR resources **validated independently**. Complete translation fields refer to the current two texts, not passage through the blocked settings gate or future settings text. |
+| l10n -> preTest | Existing dependencies **validated independently**: Anomaly required, Core/Anomaly loadAfter, 1.6 declared, native game references used, guarded Defs and conditional holder patches coherent. No LoadFolders or optional third-party integration. Krafs.Rimworld.Ref is build-time only; Harmony is not used. |
+| preTest -> done | Existing test/scenario criteria **validated independently**: 14 written manual scenarios and both automated suites executed successfully, including XML checks. Earlier cumulative blockers prevent done. |
+| done -> tested | **Not verified.** No colony scenarios, game logs, FR/EN UI, new-game or existing-save validation executed in this audit. TESTING.md explicitly records the absence of in-game runs. |
+
+GitHub read-only checks: `gh repo view vbardales/Rimworld-Entity-Gazing --json visibility,name,url`
+returned PUBLIC and the expected repository; `git ls-remote origin HEAD` returned
+`0a5123f49c308b08d9e7323a0b451bc7276994f5`. Initial sandbox access failed; both checks
+succeeded on an approved retry. Visibility and at least one pushed commit are established.
+The existing `original` classification is consistent with the inspected local subclass and
+original-art records; no reused third-party mod implementation was found. This is a source
+inventory, not a claim of exhaustive external provenance research. ATTRIBUTION.md must
+record that provenance explicitly; do not invent a licence for RimWorld or third-party work.
+
+### Executed checks and artifact evidence
+
+- `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1`:
+  **23 passed, 0 failed**, including all five XML files, reflected fields, references,
+  French paths/coverage and image dimensions. Its packaging checks do not check for the
+  missing distributed licence or ATTRIBUTION: a green suite does not override those findings.
+- `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1`:
+  **35 passed, 0 failed**, using installed RimWorld **1.6.4871 rev590**. Actual patch-engine
+  application to both holders, reflection/IL readers and source compilation succeeded.
+  These are technical integration tests outside a colony; no RIMMSQOL integration was tested.
+- `powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-DefInjected.ps1 -TransMod ./Mod`:
+  **11588 Defs indexed, 2 keys checked, 0 errors**, plus two MayRequire notices. No unresolved
+  path found. French loading without Anomaly remains a runtime verification, not a proven
+  translation defect. English comes from the two native Def fields; French values are complete,
+  meaningful and nonempty. Neither has parameters, tags or grammar tokens. The entire C#
+  class adds no UI strings; patches add only values and references, not further owned text.
+- `dotnet build Source/EntityGazing.csproj --no-restore -c Release -t:Rebuild
+  -p:OutputPath=C:\Users\nelim\Documents\rimworld\EntityGazing\.build\audit\`:
+  **succeeded, 0 warnings, 0 errors**, after approved retry for SDK-directory access.
+  Rebuilt and shipped DLL SHA256 both equal
+  `26E734F3CE8C293885B2026C363A89D4FF3E9F847A726CEDC4A09775A46540B1`.
+  The distributed DLL was not overwritten. The initial environment access error is not a code defect.
+- Directly viewed shipped Preview and ModIcon, plus `Art/preview-268.png`. Preview title,
+  version and subject remain identifiable, with no clipping or overlap. No concrete camera
+  concern found; no historical camera-comparison record is required. Read palette, HTML and
+  existing QA JSON; historical contrast/font measurements below were not remeasured.
+- Mutation campaign not rerun: historical results remain historical. No change to tested
+  implementation requires a new mutation campaign for this audit.
+
+### Settings audit
+
+Inspected the full C# source, project, Defs, patches and distributed file inventory. There is
+no Verse.Mod settings entry, ModSettings persistence, settings window, MainButtonDef or
+MainTabWindow. Therefore neither a settings page nor a shortcut exists; no UI default,
+input bound, apply-time, persistence or integration test can currently be executed.
+
+Concrete useful option: the viewing distance, currently `2~6` on both holders. README and
+About explicitly call it the real setting and explain editing the Def to change exposure
+to the nociosphere's 5.9-cell pain field. TESTING.md scenario 7 also suggests changing XML
+if the cost is too harsh. This is an identified player customization use, not merely an
+arbitrary constant to expose. The current XML-only route fails the requested access contract.
+The deliberate close-distance default should be preserved by any later settings work.
+
+Other inspected constants (duration 4000, maximum participants 5, chance 2, stand width 5,
+joy factors 1/0.8, sight and same-room constraints) implement the fixed recreation design.
+No independent need to expose every one of these is established; no extra option is demanded.
+The absence of a shortcut is correct only for a justified no-settings mod, which this documented
+distance customization does not establish. `not_applicable` would therefore be unsupported.
+
+Future passage of options requires the useful setting through Mod options, a hidden-by-default
+optional MainButtons route to the same configuration, and applicable automated checks for
+defaults, bounds, effects and persistence. Interactive FR/EN and customization-mod checks
+belong to tested under the user's overriding rule; none is claimed here. Any newly added
+UI text must invalidate and repeat the relevant translation checks.
+
+### Next transition and nonblocking observations
+
+Strictly to reach **horsMonoRepo**: initialize English ATTRIBUTION.md with actual provenance
+and credits, and include the existing MIT notice as Mod/LICENSE; verify those files and any
+applicable duplicate attribution copies. Repository creation, relocation, remote restoration,
+new images, Workshop upload and in-game execution are not required for that transition.
+The later settings and description defects remain separately tracked, not prerequisites
+invented for the first gate.
+
+Optional maintenance: the introductory comment in Mod/Defs/EntityGazing.xml still says four
+building-based recreation types while the installed-game check finds five. It is an English
+source comment, not player-facing translation text. No gameplay correction follows from it.
+Workshop publication is outside this audit's stage chain and is not a blocker for tested.
 
 Codex maintains this file for this mod and updates it after changes, checks and reported in-game
 results. It stays at the repository root, outside the published `Mod/` directory.

@@ -93,7 +93,7 @@ Write-Host " Harness" -ForegroundColor Cyan
 
 Test-That "the game, the mod and its documents are all there" {
     Note ("{0} game types, {1} mod types, {2} xml files" -f $gameTypes.Count, $modTypes.Count, $xmlFiles.Count)
-    ($gameTypes.Count -gt 10000) -and ($modTypes.Count -ge 1) -and ($xmlFiles.Count -eq 5) -and
+    ($gameTypes.Count -gt 10000) -and ($modTypes.Count -ge 1) -and ($xmlFiles.Count -eq 9) -and
     ($readme.Length -gt 500) -and ($changes.Length -gt 300) -and ($testing.Length -gt 1000)
 }
 
@@ -123,6 +123,8 @@ if ($script:fail -gt $failuresBefore) {
 }
 
 $defsXml  = New-Object System.Xml.XmlDocument; $defsXml.Load((Join-Path $Mod 'Defs\EntityGazing.xml'))
+$buttonXml = New-Object System.Xml.XmlDocument; $buttonXml.Load((Join-Path $Mod 'Defs\SettingsButton.xml'))
+foreach ($node in $buttonXml.SelectNodes('/Defs/*')) { [void]$defsXml.DocumentElement.AppendChild($defsXml.ImportNode($node, $true)) }
 $patchXml = New-Object System.Xml.XmlDocument; $patchXml.Load((Join-Path $Mod 'Patches\HoldingPlatforms.xml'))
 $about    = New-Object System.Xml.XmlDocument; $about.Load((Join-Path $Mod 'About\About.xml'))
 
@@ -239,7 +241,7 @@ Test-That "every def the mod references exists" {
 # MayRequire is what makes the mod inert rather than broken with Anomaly off, and it has to be on
 # every def, not most of them. The patch gets the same guarantee from PatchOperationConditional.
 Test-That "all three defs carry MayRequire, and the patch is conditional" {
-    $defs = @($defsXml.SelectNodes('/Defs/*'))
+    $defs = @($defsXml.SelectNodes('/Defs/*[not(self::MainButtonDef)]'))
     $guarded = @($defs | Where-Object { $_.GetAttribute('MayRequire') -ceq 'Ludeon.RimWorld.Anomaly' })
     $conds = @($patchXml.SelectNodes('/Patch/Operation[@Class="PatchOperationConditional"]'))
     Note ("{0} of {1} defs guarded; {2} of {3} operations conditional" -f $guarded.Count, $defs.Count, $conds.Count, $patchXml.SelectNodes('/Patch/Operation').Count)
@@ -348,7 +350,8 @@ Test-That "the displayed name carries no version and no suffix" {
 
 Test-That "nothing that should not ship is inside Mod/" {
     $junk = @(Get-ChildItem $Mod -Recurse -File | Where-Object {
-        $_.Extension -in '.ps1','.pdb','.md','.lnk' -or $_.FullName -match '\\(obj|bin)\\'
+        $_.Extension -in '.ps1','.pdb','.lnk' -or $_.FullName -match '\\(obj|bin)\\' -or
+        ($_.Extension -eq '.md' -and $_.FullName -ne (Join-Path $Mod 'ATTRIBUTION.md'))
     })
     if ($junk) { Note (($junk | ForEach-Object { $_.Name }) -join ', ') }
     $junk.Count -eq 0
