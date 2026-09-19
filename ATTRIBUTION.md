@@ -1,6 +1,6 @@
 # Attribution and provenance
 
-Entity Gazing is an original mod by nelim, released under the MIT licence in LICENSE.
+Entity Gazing is an original mod by Nelim, released under the MIT licence in LICENSE.
 No third-party mod source code or assets are incorporated in this repository.
 
 The gameplay subclass extends RimWorld's existing watch-building recreation logic.
