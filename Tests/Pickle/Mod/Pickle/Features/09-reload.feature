@@ -13,7 +13,7 @@ Feature: nothing of this mod is lost across a reload
     Given the save "test-colony" is loaded
     And I close all dialogs
     And Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     Then Entity Gazing this map offers the entity gazing recreation type
     When the save "test-colony" is loaded
     And I close all dialogs

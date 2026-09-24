@@ -25,7 +25,7 @@ Feature: the settings window, and what it changes in play
   # A changed range has to move where the game actually puts watchers, not only what the def says.
   Scenario: the game computes watch cells from a changed range
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     When Entity Gazing sets the distances to 4 and 9
     Then Entity Gazing the watch cells lie 4 to 9 cells from the holder
     And no errors were logged

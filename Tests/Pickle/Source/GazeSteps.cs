@@ -30,6 +30,11 @@ namespace EntityGazing.PickleSteps
             ctx.Set(new Driver.SpawnedHolder { Thing = building });
         }
 
+        /// <summary>
+        /// The entity is generated and put straight into the holder, never spawned on the map
+        /// first. Spawning it and then transferring raised "Can't transfer items to or from Maps
+        /// directly": a map is not a container you can move a thing out of by that call.
+        /// </summary>
         [Given("Entity Gazing tethers a downed {string} to it")]
         public void Tether(PickleContext ctx, string kindName)
         {
@@ -37,12 +42,11 @@ namespace EntityGazing.PickleSteps
             ctx.Require(kind != null, $"no PawnKindDef named '{kindName}'");
             var entity = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, null,
                 forceGenerateNewPawn: true));
-            GenSpawn.Spawn(entity, Driver.FreeCell(ctx), Driver.Map(ctx));
             // forceDowned is the 1.6 field; forceIncap is gone. A tethered entity has to be down.
             entity.health.forceDowned = true;
 
             var holder = Driver.Holder(ctx);
-            var accepted = holder.Container.TryAddOrTransfer(entity, canMergeWithExistingStacks: false);
+            var accepted = holder.Container.TryAdd(entity, canMergeWithExistingStacks: false);
             ctx.Require(accepted, $"the holder refused to accept '{kindName}'");
             ctx.Assert(holder.HeldPawn != null, "the holder accepted the entity but holds nothing");
         }
@@ -167,11 +171,22 @@ namespace EntityGazing.PickleSteps
                 $"watch cells span {nearest:0.##} to {furthest:0.##} cells, outside {low} to {high}");
         }
 
+        /// <summary>
+        /// A holder left standing outlives the scenario and changes what the next one measures.
+        ///
+        /// The try/catch is not decoration. ctx.Get throws when the scenario never stored a holder,
+        /// and a teardown hook that throws fails the scenario it was cleaning up after. The first
+        /// run of this suite lost ten scenarios to exactly that - every one of them a scenario that
+        /// spawns nothing, all reported as "Exception has been thrown by the target of an
+        /// invocation", with nothing in the message to say which step or hook was at fault.
+        /// </summary>
         [AfterScenario]
         public void Cleanup(PickleContext ctx)
         {
-            // A holder left tethered outlives the scenario and changes what the next one measures.
-            var holder = ctx.Get<Driver.SpawnedHolder>()?.Thing;
+            Driver.SpawnedHolder stored;
+            try { stored = ctx.Get<Driver.SpawnedHolder>(); }
+            catch { return; }
+            var holder = stored?.Thing;
             if (holder != null && holder.Spawned) holder.Destroy(DestroyMode.Vanish);
         }
     }

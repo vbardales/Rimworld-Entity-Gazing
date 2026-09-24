@@ -27,7 +27,7 @@ Feature: the mod's own texts in the language this pass runs
 
   Scenario: a colonist mid-gaze is captured for review in this language
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Watcher" with no recreation
     When Entity Gazing asks the giver for a job for "Watcher"
     And Entity Gazing "Watcher" starts the offered job

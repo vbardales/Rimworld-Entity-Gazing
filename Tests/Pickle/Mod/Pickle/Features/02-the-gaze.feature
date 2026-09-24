@@ -14,19 +14,19 @@ Feature: a colonist gazes at an occupied holding platform
 
   Scenario: an occupied platform is offered as entity gazing
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     Then Entity Gazing this map offers the entity gazing recreation type
 
   Scenario: the giver sends a colonist to an occupied platform
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Watcher" with no recreation
     When Entity Gazing asks the giver for a job for "Watcher"
     Then Entity Gazing the giver offers a gazing job
 
   Scenario: the watcher stands in the patched range and gains that recreation
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Watcher" with no recreation
     When Entity Gazing asks the giver for a job for "Watcher"
     And Entity Gazing "Watcher" starts the offered job
@@ -40,5 +40,5 @@ Feature: a colonist gazes at an occupied holding platform
   # standing cells from it, which is a different claim and the one that matters in play.
   Scenario: the game computes watch cells from the patched range
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     Then Entity Gazing the watch cells lie 2 to 6 cells from the holder

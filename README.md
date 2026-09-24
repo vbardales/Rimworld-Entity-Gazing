@@ -98,7 +98,7 @@ Two suites, no RimWorld launched, well under a minute for both. They read the in
 `Data` folder and its `Assembly-CSharp` — so they check what this mod assumes rather than what this
 page claims.
 
-The first is about form: 23 form tests covering well-formed XML, every element still a field on its
+The first is about form: 24 form tests covering well-formed XML, every element still a field on its
 1.6 class, translation keys that name a real def and a real field, packaging, and the documents
 against the defs. The last group is the one that keeps this page honest — every number quoted here
 and in the changelog is read back out of the XML, so changing a value and not the prose turns the
@@ -119,7 +119,7 @@ RimWorld release that moves one of those is reported instead of quietly ageing t
 powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
 ```
 
-A green suite proves nothing on its own, so a third script breaks the mod on purpose — 34 mutations
+A green suite proves nothing on its own, so a third script breaks the mod on purpose — 35 mutations
 on a copy, each aimed at one test. The earlier campaign recorded every mutation turning its test red; it has not been rerun after the settings and packaging-test changes. Which
 tests that leaves unproven, and why, is written at the foot of each suite rather than left to
 assumption.

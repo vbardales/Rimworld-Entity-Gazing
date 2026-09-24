@@ -5,7 +5,7 @@ Feature: the pain field is the price of the show
   # out-of-game suite compares the two numbers. Only a running game shows the hediff actually
   # arriving on a colonist who came to look.
   #
-  # The contrast scenario matters as much: a fleshbeast carries no such comp, so the same setup
+  # The contrast scenario matters as much: a fingerspike carries no such comp, so the same setup
   # hurts nobody. That is the price varying by entity, with no line of the mod's code involved.
 
   Background:
@@ -22,9 +22,9 @@ Feature: the pain field is the price of the show
     Then Entity Gazing "Watcher" stands 2 to 6 cells from the holder
     And Entity Gazing "Watcher" carries the hediff "PainField"
 
-  Scenario: the same gaze at a fleshbeast hurts nobody
+  Scenario: the same gaze at a fingerspike hurts nobody
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Watcher" with no recreation
     When Entity Gazing asks the giver for a job for "Watcher"
     And Entity Gazing "Watcher" starts the offered job

@@ -16,7 +16,7 @@ Feature: an empty or dead holder is not a show
 
   Scenario: a corpse on the platform stops being a show
     Given Entity Gazing spawns a "HoldingPlatform"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Watcher" with no recreation
     When Entity Gazing asks the giver for a job for "Watcher"
     Then Entity Gazing the giver offers a gazing job

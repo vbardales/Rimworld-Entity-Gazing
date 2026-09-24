@@ -12,7 +12,7 @@ Feature: the holding spot is watched too, and is a poorer show
 
   Scenario: an occupied holding spot is offered as entity gazing
     Given Entity Gazing spawns a "HoldingSpot"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Watcher" with no recreation
     When Entity Gazing asks the giver for a job for "Watcher"
     Then Entity Gazing the giver offers a gazing job
@@ -20,6 +20,6 @@ Feature: the holding spot is watched too, and is a poorer show
 
   Scenario: the spot computes watch cells from the same range as the platform
     Given Entity Gazing spawns a "HoldingSpot"
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     Then Entity Gazing the watch cells lie 2 to 6 cells from the holder
     And no errors were logged

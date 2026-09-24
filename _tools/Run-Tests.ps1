@@ -451,6 +451,44 @@ Test-That "the README's test counts match the files" {
     ($readme -match "\b$form form tests\b") -and ($readme -match "\b$muts mutations\b")
 }
 
+# Every def name the Pickle features quote, checked here rather than discovered in a run.
+#
+# The first run of that suite spent ten minutes and 1.2 GB of report to tell me that no PawnKindDef
+# is called "Fleshbeast" - the fleshbeasts are Fingerspike, Toughspike, Trispike and Dreadmeld.
+# Eleven scenarios died of one invented name. A queued run costs a machine nobody else can use;
+# this costs a second, and it is the kind of mistake that only ever happens in a string.
+Test-That "every def the Pickle features name exists in the game" {
+    $featureDir = Join-Path $ModRoot 'Tests\Pickle\Mod\Pickle\Features'
+    if (-not (Test-Path $featureDir)) { Note 'no Pickle features yet'; return 'skip' }
+    $text = (Get-ChildItem $featureDir -Filter *.feature | ForEach-Object { Read-Text $_.FullName }) -join "`n"
+
+    # Each pattern pairs the step phrase with the def type the step looks the name up in.
+    $wanted = @{}
+    foreach ($m in [regex]::Matches($text, 'tethers a downed "([^"]+)"'))  { $wanted[$m.Groups[1].Value] = 'PawnKindDef' }
+    foreach ($m in [regex]::Matches($text, 'spawns a "([^"]+)"'))          { $wanted[$m.Groups[1].Value] = 'ThingDef' }
+    foreach ($m in [regex]::Matches($text, 'carries the hediff "([^"]+)"')) { $wanted[$m.Groups[1].Value] = 'HediffDef' }
+
+    $known = @{}
+    foreach ($d in Get-ChildItem 'C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Data' -Directory) {
+        $p = Join-Path $d.FullName 'Defs'
+        if (-not (Test-Path $p)) { continue }
+        foreach ($f in Get-ChildItem $p -Recurse -Filter *.xml) {
+            $raw = Read-Text $f.FullName
+            foreach ($type in @('PawnKindDef','ThingDef','HediffDef')) {
+                if ($raw -notmatch "<$type") { continue }
+                $x = New-Object System.Xml.XmlDocument
+                try { $x.Load($f.FullName) } catch { continue }
+                foreach ($n in $x.SelectNodes("//$type/defName")) { $known["$type/$($n.InnerText)"] = $true }
+            }
+        }
+    }
+    $missing = @($wanted.Keys | Where-Object { -not $known.ContainsKey($wanted[$_] + '/' + $_) } |
+        ForEach-Object { "$_ ($($wanted[$_]))" })
+    Note ("{0} names quoted, {1} game defs indexed" -f $wanted.Count, $known.Count)
+    if ($missing) { Note ("named but absent: " + ($missing -join ', ')) }
+    ($wanted.Count -ge 3) -and ($missing.Count -eq 0)
+}
+
 Test-That "the documents name the patch file that actually exists" {
     # XML files this mod does not own and never will. The documents discuss test reports and the
     # game's own files, and every one of those would read as a mod file named but missing - which
