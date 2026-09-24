@@ -18,7 +18,7 @@ showcase:     complete
 tested_on:
 workshop:     3806760893
 remaining:
-  - "unverified: the nine Pickle features are written and have never been run. Two passes are owed, minimal English and minimal French; execution and the reading of their captures is the done -> tested gate."
+  - "unverified: the nine Pickle features are written and have never been run. Both passes were submitted to the TicketDispatcher on 2026-09-24, English 20260924-164450-033-a0a5 and French 20260924-164450-859-0e2e, full validation with no filter and no dependency map; they sat 26th and 27th of 29 pending. Execution and the reading of their captures is the done -> tested gate, and a queued request is not a run."
   - "unverified: the place worker drawing the watch area on the ground has no scenario in the suite. The out-of-game tests prove the type exists and the patch adds the node, neither proves anything is drawn. It wants a @review capture of the build menu, so it is a scenario still to write rather than a defect."
   - "unverified: whether the distance settings survive the game being closed and reopened. The reload feature covers a save written and read inside one process, which is not a restart: that needs two launches chained under one lock."
   - "unverified: what a particular button editor such as RIMMSQOL does with the EG_Settings shortcut. The suite proves the mechanism any such mod uses, not one editor version."
