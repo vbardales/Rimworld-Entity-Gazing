@@ -334,23 +334,27 @@ at every run and adds nothing.
 | 15 settings bounds and persistence | partly proved out of game; only the window lifecycle and the restart are Gherkin |
 | 16 the MainButtons shortcut | Gherkin, with a `@requires` on the button editor |
 
-**Three passes, and the file has to say so or the mod is merely tried.**
+**Two passes, and the file has to say so or the mod is merely tried.** Both on the minimal set the
+staging script mounts — Core, the DLC, Harmony, RimLogging, Pickle, Anomaly and this mod — one in
+English and one in French. The language is fixed at staging and never switched during a run:
+switching reloads every def under the runner, and the step waits for a language that never arrives.
 
-1. **Without the optional mods** — the minimal set the staging script mounts: Core, the DLC,
-   Harmony, RimLogging, Pickle, the hard dependencies and this mod. It proves the mod stands on its
-   own, and it is the only pass whose screenshots are clean.
-2. **With the optional mods** — what `loadAfter` names plus what the dependency map adds. It proves
-   the mod stands in the scenery it will actually load in.
-3. **One pass per language**, `-Language French` and English. The language is fixed at staging and
-   never switched during a run: switching reloads every def under the runner and the step waits for
-   a language that never arrives.
+**No "with the optional mods" pass is owed**, and that is a finding rather than an omission: this
+mod declares no optional integration at all. Its `loadAfter` names only `Ludeon.RimWorld` and
+`Ludeon.RimWorld.Anomaly`, both vanilla. Inventing a second run under a different name to fill the
+row would be a duplicate, not a pass.
 
-There is no declared incompatibility, so no incompatibility pass is owed. If one is ever declared,
+**No incompatibility pass is owed** either: nothing is declared `incompatibleWith`. If one ever is,
 it takes a pass of its own whose job is to go and look at whether the claim is still true.
 
-`@requires:` is owed on scenario 16 alone, since the button editor is the only optional thing any
-scenario needs. A scenario skipped for want of its condition is not a scenario passed: that pass
-has to be run with a map that mounts the editor, and its report read before it is cited.
+**No `@requires:` tag is owed anywhere.** Scenario 16 looked like it needed one, since a button
+editor reveals the shortcut — but what the editor does is set the same field the suite sets, so the
+mechanism is testable without it. What a *particular* editor version does with this button is a
+separate claim, and it stays `unverified` rather than being dressed up as a skipped scenario. A
+scenario skipped for want of its condition is not a scenario passed, and the cheapest way to avoid
+that trap is to owe nothing.
+
+The suite, its scope and its commands live in [Tests/Pickle/README.md](Tests/Pickle/README.md).
 
 ## The bar for `tested`
 

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>EntityGazing.PickleSteps</AssemblyName>
+    <RootNamespace>EntityGazing.PickleSteps</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <OutputPath>..\Mod\Pickle\Assemblies\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- No publicizer. This suite touches only public game API, and the distributed mod deliberately
+         has none either: adding one here while GenerateAssemblyInfo is off is the trap that killed
+         half of two other mods in this collection. -->
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*-*" ExcludeAssets="runtime" PrivateAssets="all" />
+    <PackageReference Include="RimWorks.Pickle.Ref" Version="4.*" ExcludeAssets="runtime" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The mod under test, for its settings and Mod types. Private=false: the game loads the real
+         one, and a copy under Pickle/Assemblies would be a second EntityGazing.dll. -->
+    <Reference Include="EntityGazing">
+      <HintPath>..\..\..\Mod\Assemblies\EntityGazing.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

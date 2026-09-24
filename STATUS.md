@@ -9,7 +9,7 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-stage:        preTest
+stage:        done
 settings_audit: complete
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
@@ -18,10 +18,10 @@ showcase:     complete
 tested_on:
 workshop:     3806760893
 remaining:
-  - "feature: no Pickle suite exists, and none is justified as not applicable. That is the one criterion of preTest -> done that is not met, and the reason for the downgrade below. TESTING.md now specifies what belongs in Gherkin, what to drop as already proved out of game, and the three passes to run them in."
-  - "unverified: all sixteen manual scenarios in TESTING.md await a running colony. Under the current bar for tested they cannot be signed off by hand at all, since each must be automated and green or listed as not applicable, so they are the specification for the missing suites."
-  - "unverified: settings window lifecycle, real colony effects, restart persistence and the optional button-editor shortcut, in English and French; TESTING.md scenarios 15 and 16."
-  - "unverified: English and French in-game display, both holders and the opportunistic job report; TESTING.md scenarios 3 and 4."
+  - "unverified: the nine Pickle features are written and have never been run. Two passes are owed, minimal English and minimal French; execution and the reading of their captures is the done -> tested gate."
+  - "unverified: the place worker drawing the watch area on the ground has no scenario in the suite. The out-of-game tests prove the type exists and the patch adds the node, neither proves anything is drawn. It wants a @review capture of the build menu, so it is a scenario still to write rather than a defect."
+  - "unverified: whether the distance settings survive the game being closed and reopened. The reload feature covers a save written and read inside one process, which is not a restart: that needs two launches chained under one lock."
+  - "unverified: what a particular button editor such as RIMMSQOL does with the EG_Settings shortcut. The suite proves the mechanism any such mod uses, not one editor version."
   - "unverified: French load without Anomaly; the shared DefInjected checker raises two MayRequire translation-gating notices, a DLC-off runtime check rather than a demonstrated defect."
   - "unverified: the Workshop item exists but has never been subscribed to or opened, so the showcase has not been seen in place."
 session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
