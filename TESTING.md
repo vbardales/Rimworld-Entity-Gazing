@@ -323,7 +323,7 @@ at every run and adds nothing.
 | Scenario above | Where it belongs |
 |---|---|
 | 1 loads with and without the DLC | Gherkin, one pass per DLC state |
-| 2 the patch landed where it aimed | already proved out of game, by the patch-engine test — **drop** |
+| 2 the patch landed where it aimed | **split.** Steps 1 and 2, the def shape, are proved out of game by running the game's own patch engine — drop them. Step 3 stays: that the place worker actually *draws* the watch area on the ground is visual, and the out-of-game suites only prove the type exists and the node landed |
 | 3, 4, 5, 6 the gaze itself | Gherkin, the heart of it |
 | 7 the pain field | Gherkin |
 | 8, 10, 11 participants, sight, opportunistic | Gherkin |

@@ -14,8 +14,10 @@ item and bring back `Mod/About/PublishedFileId.txt`, which is item **3806760893*
 every item private; this one has not been made public, and the entry says nothing about the mod
 being tested or released.
 
-What the upload contained is `Mod/` exactly as it stood at commit `c6dc0a5`, and nothing but that
-file has changed since.
+What the upload contained is `Mod/` exactly as it stood at commit `c6dc0a5`. Nothing under `Mod/`
+has changed since — only this file was added to it — so what Steam holds still matches what is
+published here. Work outside `Mod/`, on the documents and the test suites, does not ship and does
+not affect that.
 
 ### Added
 

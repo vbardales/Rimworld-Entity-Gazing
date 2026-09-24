@@ -456,7 +456,9 @@ Test-That "the documents name the patch file that actually exists" {
     # game's own files, and every one of those would read as a mod file named but missing - which
     # is a false alarm that trains a reader to ignore this test. Names here are external on
     # purpose, not exceptions granted to the mod.
-    $external = @('junit.xml', 'ModsConfig.xml', 'LoadFolders.xml')
+    # LoadFolders.xml is deliberately NOT here: a mod owns that file, so if this one ever gains
+    # it and the documents name it, this test must still check that it exists.
+    $external = @('junit.xml', 'ModsConfig.xml')
     $named = [regex]::Matches($readme + $changes + $testing, '[A-Za-z]+\.xml') | ForEach-Object { $_.Value } | Sort-Object -Unique
     $named = @($named | Where-Object { $external -notcontains $_ })
     $onDisk = @($xmlFiles | ForEach-Object { $_.Name })

@@ -23,11 +23,18 @@ Source/bin/
 # Windows shortcuts dropped in the mod folder, never content.
 *.lnk
 
-# Pre-converted textures. RimWorld builds its own .dds cache beside every PNG it loads, so these
-# appear inside Mod/Textures without anyone asking. They are derived files: they bloat the
-# repository, they go stale the moment the PNG changes, and the game regenerates them. None exists
-# here today - this mod ships no texture of its own - and the rule is here so none ever lands.
+# Pre-converted .dds textures, excluded by instruction, and safe to exclude HERE because this mod
+# ships no texture of its own: none exists on disk or anywhere in the history.
+#
+# Read this before copying the rule to a mod that does have textures. A .dds is not always a
+# derived file - Workshop mods ship them as real content - and the Workshop uploader sends Mod/
+# from disk, not from git. On a mod with textures this rule would therefore publish a file the
+# repository does not contain: a fresh clone builds a mod missing it, and nothing says why.
+# If this mod ever ships a .dds, revisit the rule rather than force-adding past it.
 *.dds
+
+# On Linux the two rules below are case-sensitive, so the explicit Tests/Pickle/Evidence/ line
+# matters even though Windows would have matched it through the lowercase one.
 
 # Pickle run evidence, kept on disk and never in git. Screenshots and Player.log grow without
 # bound (PickleTools has seen 10 GB in a day), so the report itself stays out of the history and

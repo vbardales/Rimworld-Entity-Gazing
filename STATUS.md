@@ -18,21 +18,12 @@ showcase:     complete
 tested_on:
 workshop:     3806760893
 remaining:
-  - feature: no Pickle suite exists, and none is justified as not applicable. That is the one
-    criterion of preTest -> done that is not met, and the reason for the downgrade below. TESTING.md
-    now specifies what belongs in Gherkin, what to drop as already proved out of game, and the
-    three passes to run them in
-  - unverified: all sixteen manual scenarios in TESTING.md await a running colony. Under the
-    current bar for tested they cannot be signed off by hand at all: each is either automated and
-    green or listed as not applicable, so they are the specification for the missing suites
-  - unverified: settings window lifecycle, real colony effects, restart persistence and the
-    optional button-editor shortcut, in English and French; scenarios 15 and 16
-  - unverified: English and French in-game display, both holders and the opportunistic job report;
-    scenarios 3 and 4
-  - unverified: French load without Anomaly; the shared DefInjected checker raises two MayRequire
-    translation-gating notices, a DLC-off runtime check rather than a demonstrated defect
-  - unverified: the Workshop item exists but has never been subscribed to or opened, so the
-    showcase has not been seen in place
+  - "feature: no Pickle suite exists, and none is justified as not applicable. That is the one criterion of preTest -> done that is not met, and the reason for the downgrade below. TESTING.md now specifies what belongs in Gherkin, what to drop as already proved out of game, and the three passes to run them in."
+  - "unverified: all sixteen manual scenarios in TESTING.md await a running colony. Under the current bar for tested they cannot be signed off by hand at all, since each must be automated and green or listed as not applicable, so they are the specification for the missing suites."
+  - "unverified: settings window lifecycle, real colony effects, restart persistence and the optional button-editor shortcut, in English and French; TESTING.md scenarios 15 and 16."
+  - "unverified: English and French in-game display, both holders and the opportunistic job report; TESTING.md scenarios 3 and 4."
+  - "unverified: French load without Anomaly; the shared DefInjected checker raises two MayRequire translation-gating notices, a DLC-off runtime check rather than a demonstrated defect."
+  - "unverified: the Workshop item exists but has never been subscribed to or opened, so the showcase has not been seen in place."
 session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
 updated:      2026-09-24, mod session
 ---
