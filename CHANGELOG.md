@@ -5,13 +5,19 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 
 ## [Unreleased]
 
-Nothing released yet. The mod has never been published and has never been watched running in a
-colony.
+Nothing since 0.1.0. The version that arrives with publication is 1.0.0, and it is not here yet.
+
+## [0.1.0] — 2026-09-24
+
+Creation of a published file ID. A first upload whose only purpose was to create the Workshop
+item and bring back `Mod/About/PublishedFileId.txt`, which is item **3806760893**. Steam creates
+every item private; this one has not been made public, and the entry says nothing about the mod
+being tested or released.
+
+What the upload contained is `Mod/` exactly as it stood at commit `c6dc0a5`, and nothing but that
+file has changed since.
 
 ### Added
-
-- Global viewing-distance settings (1 to 20 cells) with defaults 2 to 6, native Mod options access, optional hidden MainButtons shortcut, English/French labels and settings regression checks.
-- Distributed MIT licence and provenance documentation; corrected source link and recreation-type comment.
 
 - **Entity gazing**, a recreation type of its own, `EG_EntityGazing` — the point of the mod. The
   Anomaly DLC ships no recreation content whatsoever, and tolerance being counted per type, an
@@ -22,18 +28,14 @@ colony.
   worker that draws that range at build time. It costs nothing: they were already built for study.
 - The **holding spot gives less** than the platform, 0.8 against 1, following the game's own
   description of it. An entity roped to the floor is a poorer show than one clamped to a frame.
-- `JoyGiver_WatchEntity`, the mod's gameplay giver. It is the vanilla `JoyGiver_WatchBuilding` plus one
-  condition — the platform must be holding a living pawn — without which colonists would gaze at
-  empty platforms.
-- French translation.
-
-- **A test suite**, in `_tools/`. Nothing a player sees changes. Two scripts, neither of which
-  starts the game: one on the shape of the mod, one on whether the base game still does what the mod
-  hands it to do. They read the installed game's own data and assembly, so they check what the mod
-  assumes rather than what its prose claims.
-- **A mutation campaign**, `_tools/Run-Mutations.ps1`, which breaks the mod on purpose on a copy and
-  checks that the right test turns red. The earlier campaign recorded every mutation doing so; it has not been rerun after the settings changes. Historically, the tests that
-  cannot be reddened that way are named at the foot of each suite instead of being passed over.
+- `JoyGiver_WatchEntity`, the mod's gameplay giver. It is the vanilla `JoyGiver_WatchBuilding` plus
+  one condition — the platform must be holding a living pawn — without which colonists would gaze
+  at empty platforms.
+- **Global viewing-distance settings**, 1 to 20 cells with defaults 2 to 6, reachable through Mod
+  options, with an optional MainButtons shortcut that is hidden by its own def and opens the same
+  window.
+- French translation, settings labels included.
+- Distributed MIT licence and provenance documentation.
 
 ### Notes
 
@@ -47,3 +49,12 @@ colony.
 - The patch is not symmetrical between the two holders, and cannot be: `HoldingPlatform` has no
   `building` node and gets one created at the root, `HoldingSpot` has one and gets its settings
   added inside it. Reversing the two produces sibling nodes the game silently half-reads.
+
+### Development, not shipped
+
+- **Three test suites** in `_tools/`, none of which starts the game: the shape of the mod, what the
+  base game still does with what the mod hands it, and the settings. 76 checks, all green.
+- **A mutation campaign**, `_tools/Run-Mutations.ps1`, which breaks the mod on purpose on a copy
+  and checks that the right test turns red. Every mutation was recorded doing so before the
+  settings work; it has not been rerun since.
+- **Sixteen manual scenarios** in `TESTING.md`, none of them played in a colony.
