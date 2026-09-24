@@ -33,8 +33,8 @@ updated:      2026-09-24, mod session
 ## Workflow audit — 2026-09-24
 
 **done → preTest.** This section is the current record and supersedes the stage conclusions below;
-their results are kept. Audited at `c6dc0a5`, with `Mod/About/PublishedFileId.txt` untracked at the
-time and committed as part of this pass. No game was launched.
+their results are kept. Audited at `c6dc0a5` and re-verified at `3b85067`, with
+`Mod/About/PublishedFileId.txt` untracked at the start and committed as part of this pass. No game was launched.
 
 ### Why the downgrade
 
@@ -77,6 +77,50 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps
 ```
 
 Seventy-six checks, all green, against the build that is in the repository.
+
+### Second pass, same day: the shared checkers, run rather than quoted
+
+The first pass re-ran the mod's own suites but took the monorepo checkers and the two protocol
+gates from the previous session's record. The protocol says to verify artefacts and real results
+rather than a declared status, so they were run here, against `3b85067`.
+
+| Check | Result |
+|---|---|
+| `scripts/Check-XmlFields.ps1` | 4 files, no unknown field: every element maps to a 1.6 field |
+| `scripts/Check-DefRefs.ps1` | every reference points at the right def type, every `ParentName` resolves |
+| `scripts/Check-TypeRefs.ps1` | 77 element names searched, no reference outside RimWorld and Unity |
+| `scripts/Check-DefInjected.ps1` | 11589 defs indexed, 4 keys checked, **0 errors**, 2 `MayRequire` notices |
+| `_tools/Run-Tests.ps1` | 23 passed, 0 failed |
+| `_tools/Run-Functional-Tests.ps1` | 35 passed, 0 failed |
+| `_tools/Run-Settings-Tests.ps1` | 18 passed, 0 failed |
+
+`Check-XmlClasses.ps1` was not run: it requires a `-TypeLists` argument and no type list exists in
+`scripts/`. Its ground is covered twice over here — `Check-TypeRefs` found no third-party type, and
+the form suite resolves every `Class=` in the patch against the loaded assemblies — so this is a
+tool that does not apply rather than a check skipped.
+
+**The two `MayRequire` notices stay `unverified`, which is what TRANSLATIONS.md prescribes** for an
+unresolved target: not a success. Both French DefInjected files carry keys for defs gated on
+Anomaly while sitting in an ungated folder. With the DLC off and the game in French, the injection
+has no def to land on. Whether that is silent or a logged warning is a runtime question, so it
+belongs to `done → tested` and not to a stage gate. If it turns out to be noisy, the fix is a
+`LoadFolders.xml` with an `IfModActive` branch — a file this mod does not have today.
+
+**Translation gate, re-verified at the source rather than by its record.** Every player-facing
+string in `Source/` goes through `.Translate()`: the settings title, the help line, both distance
+labels and the reset button. The only bare literals are two Scribe keys and two defNames, which
+TRANSLATIONS.md excludes by name. Nothing player-facing is hard-coded, so `localization`,
+`translation_en` and `translation_fr` stay `complete`. The last commits to touch player-facing text
+were the settings work; the two after it changed only the LICENSE files, so no field is reset to
+`unchecked`.
+
+**Settings gate.** MOD_SETTINGS.md is satisfied on the ground the protocol allows for this
+transition — sources, defs and the applicable automated tests, with in-game verification belonging
+to `tested`. Primary access is Mod options, the shortcut is hidden by its own def with no
+per-frame visibility override, and both routes open the same instance. No customization mod is
+required to reach the settings.
+
+None of this moves the stage. The Pickle gap below is unchanged.
 
 ### The 0.1.0 pre-publication
 
