@@ -301,3 +301,101 @@ Record the exact editor version; repeat the checks in EN and FR.
 4. Check labels, help, accents, clipping and Player.log throughout. Expect no errors.
 
 Not executed in game; no third-party integration version is certified yet.
+---
+
+# What is still missing, and what it takes to close it
+
+Everything above is a **manual** scenario, and none has been played. Under the current bar for
+`tested`, a manual scenario is not a form of test that can be signed off: what was left to tick by
+hand is either automated and green, or listed as not applicable with its reason. So the sixteen
+above are not the last mile — they are the specification for the Pickle suites that do not exist
+yet.
+
+## The Pickle suites this mod needs, and the passes to run them in
+
+None is written. This is the gap that keeps the mod at `preTest`, and this section is here so the
+work is specified rather than rediscovered.
+
+What belongs in Gherkin is only what a running game can show. Anything an out-of-game suite already
+proves must stay out: a scenario that repeats `_tools/` confiscates the machine for tens of minutes
+at every run and adds nothing.
+
+| Scenario above | Where it belongs |
+|---|---|
+| 1 loads with and without the DLC | Gherkin, one pass per DLC state |
+| 2 the patch landed where it aimed | already proved out of game, by the patch-engine test — **drop** |
+| 3, 4, 5, 6 the gaze itself | Gherkin, the heart of it |
+| 7 the pain field | Gherkin |
+| 8, 10, 11 participants, sight, opportunistic | Gherkin |
+| 9 socially proper room | Gherkin |
+| 12 save, quit, reload | Gherkin, nothing else survives a reload |
+| 13 the holding spot | Gherkin |
+| 14 watchers stay in the room | Gherkin |
+| 15 settings bounds and persistence | partly proved out of game; only the window lifecycle and the restart are Gherkin |
+| 16 the MainButtons shortcut | Gherkin, with a `@requires` on the button editor |
+
+**Three passes, and the file has to say so or the mod is merely tried.**
+
+1. **Without the optional mods** — the minimal set the staging script mounts: Core, the DLC,
+   Harmony, RimLogging, Pickle, the hard dependencies and this mod. It proves the mod stands on its
+   own, and it is the only pass whose screenshots are clean.
+2. **With the optional mods** — what `loadAfter` names plus what the dependency map adds. It proves
+   the mod stands in the scenery it will actually load in.
+3. **One pass per language**, `-Language French` and English. The language is fixed at staging and
+   never switched during a run: switching reloads every def under the runner and the step waits for
+   a language that never arrives.
+
+There is no declared incompatibility, so no incompatibility pass is owed. If one is ever declared,
+it takes a pass of its own whose job is to go and look at whether the claim is still true.
+
+`@requires:` is owed on scenario 16 alone, since the button editor is the only optional thing any
+scenario needs. A scenario skipped for want of its condition is not a scenario passed: that pass
+has to be run with a map that mounts the editor, and its report read before it is cited.
+
+## The bar for `tested`
+
+Four conditions, and the first three are recent:
+
+- **No scenario left in `@wip`.** One set aside is either repaired and replayed, or deleted with
+  its reason. A remaining `@wip` is not a pass, it is a postponement.
+- **Every conditional scenario has run.** Each `@requires:` has had its own pass, on a map that
+  mounts what it requires, and that report has been read — `setName` and the suite and scenario
+  names checked before it is cited, because the report folder is shared by the whole machine.
+- **No manual test left to sign off.** Automated and green, or listed as not applicable with its
+  reason.
+- **`@review` screenshots actually opened and looked at.** That one is not another manual test: it
+  is reading an image a scenario has already proved to be in the right state. A green `@review`
+  says the journey happened, never that the picture shows anything.
+
+Read `exitReason` before any number in a report, and check scenarios played against features
+discovered. A run killed in flight leaves something that looks exactly like a result.
+
+## Evidence: what is kept, and what goes
+
+Reports are **kept on disk, never in git**. Screenshots and `Player.log` grow without bound, and
+`.gitignore` here excludes `Tests/Pickle/Evidence/`, `evidence/` and `pickle-reports-archive/`.
+
+Ask the launcher to keep a run with `-EvidenceDir Tests/Pickle/Evidence/<run>`: it copies the report
+into the mod **before the lock is released**, which the shared rolling archive does not survive.
+
+**Keep, out of a run:**
+
+- `summary.md`, `summary.json` and `junit.xml` — small, and they carry `exitReason`.
+- the `@review` screenshots of the pass **without the optional mods**, which are the only clean
+  ones, and only those a scenario actually points at.
+- `Player.log` **only** when the run failed or something has to be explained. A green run's log
+  proves nothing that the summary does not.
+
+**Delete:**
+
+- every screenshot of the passes with optional mods, unless one is the sole proof of something.
+- every report about a build that has been superseded. A report on an older DLL says nothing about
+  the current one, and it is the most expensive kind of file to keep: it looks like proof.
+- everything a newer report replaces, as soon as it replaces it. This decision is never left to the
+  next run.
+
+**Commit instead:** one short text summary per run under `docs/runs/`, named for its date and the
+commit it ran against, cited by `STATUS.md`. History as one text line per run, never as folders.
+
+Never delete a report a `STATUS.md` field still points at. Repoint it first, and list what goes and
+what stays before deleting anything.

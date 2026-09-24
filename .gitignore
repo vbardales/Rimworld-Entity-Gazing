@@ -22,3 +22,17 @@ Source/bin/
 
 # Windows shortcuts dropped in the mod folder, never content.
 *.lnk
+
+# Pre-converted textures. RimWorld builds its own .dds cache beside every PNG it loads, so these
+# appear inside Mod/Textures without anyone asking. They are derived files: they bloat the
+# repository, they go stale the moment the PNG changes, and the game regenerates them. None exists
+# here today - this mod ships no texture of its own - and the rule is here so none ever lands.
+*.dds
+
+# Pickle run evidence, kept on disk and never in git. Screenshots and Player.log grow without
+# bound (PickleTools has seen 10 GB in a day), so the report itself stays out of the history and
+# only a short text summary under docs/runs/ is committed, cited by STATUS.md. See the evidence
+# section of TESTING.md for what is worth keeping out of a run and what is deleted with it.
+Tests/Pickle/Evidence/
+evidence/
+pickle-reports-archive/

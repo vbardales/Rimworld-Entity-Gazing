@@ -9,25 +9,115 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-stage:        done
+stage:        preTest
 settings_audit: complete
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
 dependencies: declared
 showcase:     complete
 tested_on:
-workshop:
+workshop:     3806760893
 remaining:
-  - unverified: settings window lifecycle, actual colony effects, restart persistence and optional RIMMSQOL shortcut in English and French; scenarios 15 and 16
-  - unverified: French load without Anomaly; shared DefInjected checker flags two MayRequire translation-gating notices
-  - unverified: English and French in-game display checks in TESTING.md scenarios 3 and 4, including both holders and opportunistic job reports
-  - unverified: all sixteen manual scenarios in TESTING.md await execution in a running colony
-  - unverified: Workshop upload and in-place showcase have not been verified
-session:      Codex, maintainer of this standalone local repository
-updated:      2026-09-13
+  - feature: no Pickle suite exists, and none is justified as not applicable. That is the one
+    criterion of preTest -> done that is not met, and the reason for the downgrade below. TESTING.md
+    now specifies what belongs in Gherkin, what to drop as already proved out of game, and the
+    three passes to run them in
+  - unverified: all sixteen manual scenarios in TESTING.md await a running colony. Under the
+    current bar for tested they cannot be signed off by hand at all: each is either automated and
+    green or listed as not applicable, so they are the specification for the missing suites
+  - unverified: settings window lifecycle, real colony effects, restart persistence and the
+    optional button-editor shortcut, in English and French; scenarios 15 and 16
+  - unverified: English and French in-game display, both holders and the opportunistic job report;
+    scenarios 3 and 4
+  - unverified: French load without Anomaly; the shared DefInjected checker raises two MayRequire
+    translation-gating notices, a DLC-off runtime check rather than a demonstrated defect
+  - unverified: the Workshop item exists but has never been subscribed to or opened, so the
+    showcase has not been seen in place
+session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
+updated:      2026-09-24, mod session
 ---
 
 # Entity Gazing — status
+
+## Workflow audit — 2026-09-24
+
+**done → preTest.** This section is the current record and supersedes the stage conclusions below;
+their results are kept. Audited at `c6dc0a5`, with `Mod/About/PublishedFileId.txt` untracked at the
+time and committed as part of this pass. No game was launched.
+
+### Why the downgrade
+
+One criterion of `preTest → done` is not met: **Pickle suites written, with their scope justified.**
+This repository contains no `.feature` file, no Gherkin of any kind, and nothing anywhere that
+argues they are not applicable. Silence is not a justification, and the protocol is explicit that
+any non-applicability has to be written down.
+
+The gap is real rather than formal. Sixteen manual scenarios exist precisely because they need a
+running colony — the gaze itself, the pain field, a reload, a settings window, a shortcut revealed
+by a third-party editor. That is the definition of what belongs in Gherkin. And under the current
+bar for `tested`, **a manual test is no longer a thing that can be signed off**: what was left to
+tick by hand is either automated and green, or listed as not applicable with its reason. So those
+sixteen are not the last mile before `tested`; they are the specification of the suites that do not
+exist. `TESTING.md` now carries that specification: what to write, what to drop because an
+out-of-game test already proves it, and the three passes to run it in.
+
+Nothing else regressed. Every criterion up to and including `l10n → preTest` was re-verified and
+holds.
+
+### What was verified, this pass
+
+| Transition | Verdict |
+|---|---|
+| dansMonoRepo → horsMonoRepo | validated: standalone repository, GitHub remote, pushed, STATUS present, `original`/public consistent, naming consistent, documentation in English with distributed copies |
+| → ModIcon générée | validated: 128×128, 21 KB, present in `Mod/About`; the build is current and the shipped assembly is not older than its sources |
+| → Preview générée | validated: 896×504, 479 KB, inspected |
+| → preOptions | validated: English description, accent colours distinct, no suffix on an original creation |
+| preOptions → options | validated: settings reachable through Mod options, `EG_Settings` hidden by its own def and opening the same window, 18 settings checks green |
+| options → l10n | validated: EN/FR complete, no hard-coded UI string, DefInjected paths and case correct |
+| l10n → preTest | validated: Anomaly declared as the only dependency, `MayRequire` on all three gameplay defs, the patch conditional |
+| preTest → done | **not met**: no Pickle suite, no justification |
+
+Out-of-game suites re-run at `c6dc0a5`, not taken from the previous record:
+
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1             23 passed, 0 failed
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1  35 passed, 0 failed
+powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps1    18 passed, 0 failed
+```
+
+Seventy-six checks, all green, against the build that is in the repository.
+
+### The 0.1.0 pre-publication
+
+The Workshop item exists: **3806760893**, created by a first upload whose only purpose was to bring
+back a published file ID. `Mod/About/PublishedFileId.txt` is committed, which is the one step that
+does not get a second chance — lost, the next upload creates a second item. `CHANGELOG.md` now opens
+on `## [0.1.0]`, the creation of a published file ID, describing what the upload contained: `Mod/`
+as it stood at `c6dc0a5`.
+
+**This changes no stage.** A pre-publication is an act, not a state; the item is private, as Steam
+creates every item, and nothing about it says the mod is tested or released. The version that
+arrives with `published` is 1.0.0.
+
+### `.dds` and evidence
+
+Both rules are in `.gitignore`, and both are preventive: **this repository has neither today.** No
+`.dds` exists on disk or in the history — the mod ships no texture of its own — and no Pickle run
+has ever been made, so there is no evidence folder to clean out. Nothing was deleted, because there
+was nothing to delete, and saying so is more useful than a tidy-up that did not happen.
+
+What the rules buy is the next run. `Tests/Pickle/Evidence/`, `evidence/` and
+`pickle-reports-archive/` stay out of git for the reason PickleTools measured at ten gigabytes in a
+day. What gets committed instead is a short text summary per run under `docs/runs/`, cited from
+here. `TESTING.md` says which files are worth keeping out of a run, which are deleted with it, and
+that a report about a superseded build is the most expensive kind of file to keep, because it looks
+like proof.
+
+### To reach `done` again
+
+Write the Pickle suites specified in `TESTING.md`, and justify in writing anything left out of
+them. Their execution is **not** required for `done`; that belongs to `done → tested`.
+
 
 ## Audit fixes — 2026-09-13
 
