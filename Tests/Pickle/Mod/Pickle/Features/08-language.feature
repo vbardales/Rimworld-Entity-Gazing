@@ -25,6 +25,10 @@ Feature: the mod's own texts in the language this pass runs
     And I close all dialogs
     Then no errors were logged
 
+  # The watcher is selected and the camera moved onto them before the shutter. The second run's
+  # capture was taken with nothing selected and the camera on the colony's front door: it passed,
+  # and showed no job report at all. A review capture that does not frame the thing under review
+  # proves nothing, and a green step is no evidence that it did.
   Scenario: a colonist mid-gaze is captured for review in this language
     Given Entity Gazing spawns a "HoldingPlatform"
     And Entity Gazing tethers a downed "Fingerspike" to it
@@ -33,5 +37,8 @@ Feature: the mod's own texts in the language this pass runs
     And Entity Gazing "Watcher" starts the offered job
     And I wait 600 ticks
     Then Entity Gazing "Watcher" is watching the holder
+    When I select "Watcher"
+    And I move the camera to "Watcher"
+    Then the inspect pane shows "Watcher"
     When I take a screenshot "entity gazing job report in this language"
     Then no errors were logged

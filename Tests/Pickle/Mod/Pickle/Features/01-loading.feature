@@ -15,9 +15,12 @@ Feature: Entity Gazing loads with its runtime contracts
     And def "EG_WatchEntity" of type "JoyGiverDef" exists
     And def "EG_Settings" of type "MainButtonDef" exists
 
+  # Pickle records the patcher under the mod's display name, not its packageId. The first run of
+  # this scenario named "nelim.entitygazing" and was answered "patched by Entity Gazing": the patch
+  # had landed all along, the assertion was spelling the mod a way nothing stores.
   Scenario: the patch reached both of Anomaly's entity holders
-    Then def "HoldingPlatform" was patched by mod "nelim.entitygazing"
-    And def "HoldingSpot" was patched by mod "nelim.entitygazing"
+    Then def "HoldingPlatform" was patched by mod "Entity Gazing"
+    And def "HoldingSpot" was patched by mod "Entity Gazing"
 
   Scenario: a clean profile loads the documented defaults
     Then Entity Gazing setting "minimumDistance" reads 2

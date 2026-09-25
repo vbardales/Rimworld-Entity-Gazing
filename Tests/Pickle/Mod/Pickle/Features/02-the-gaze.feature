@@ -41,4 +41,4 @@ Feature: a colonist gazes at an occupied holding platform
   Scenario: the game computes watch cells from the patched range
     Given Entity Gazing spawns a "HoldingPlatform"
     And Entity Gazing tethers a downed "Fingerspike" to it
-    Then Entity Gazing the watch cells lie 2 to 6 cells from the holder
+    Then Entity Gazing the watch cells lie 2 to 6 cells along the facing axis

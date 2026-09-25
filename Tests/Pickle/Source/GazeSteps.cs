@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using RimWorld;
 using RimWorks.Pickle;
@@ -19,14 +20,26 @@ namespace EntityGazing.PickleSteps
     [PickleSteps]
     public class GazeSteps
     {
+        /// <summary>
+        /// The holder is given to the player before it is spawned, and that is not cosmetic.
+        /// ListerBuildings.Add sorts a building into allBuildingsColonist or allBuildingsNonColonist
+        /// on its faction at SpawnSetup, once. JoyUtility.JoyKindsOnMapTempList walks only the
+        /// colonist list, so a factionless holder is invisible to the recreation-types readout even
+        /// though the giver, which scans by def, still finds it. That split cost three scenarios on
+        /// the second run: "offered as entity gazing" red while "sends a colonist to it" was green.
+        /// Setting the faction after the spawn would not do - the lister is not re-sorted.
+        /// </summary>
         [Given("Entity Gazing spawns a {string}")]
         public void SpawnHolder(PickleContext ctx, string defName)
         {
             var def = DefDatabase<ThingDef>.GetNamedSilentFail(defName);
             ctx.Require(def != null, $"no ThingDef named '{defName}'");
             var thing = ThingMaker.MakeThing(def, GenStuff.DefaultStuffFor(def));
+            thing.SetFactionDirect(Faction.OfPlayer);
             var building = GenSpawn.Spawn(thing, Driver.FreeCell(ctx), Driver.Map(ctx)) as Building;
             ctx.Require(building != null, $"'{defName}' did not spawn as a Building");
+            ctx.Require(Driver.Map(ctx).listerBuildings.allBuildingsColonist.Contains(building),
+                $"'{defName}' spawned but did not enter the colonist building list");
             ctx.Set(new Driver.SpawnedHolder { Thing = building });
         }
 
@@ -156,8 +169,16 @@ namespace EntityGazing.PickleSteps
         /// Proves the patched range reaches the vanilla utility that places watchers, on a real map
         /// with a real rotation. The out-of-game suite proves the number is written into the def;
         /// only this proves the game computes cells from it.
+        ///
+        /// The range is measured along the facing axis, not as a straight line. WatchBuildingUtility
+        /// builds a rect per cardinal direction: the distance range runs along that direction and
+        /// watchBuildingStandRectWidth spreads sideways, so the far corner of a 2~6 range in a rect
+        /// 5 wide sits at sqrt(6^2 + 2^2) = 6.32 cells. The second run failed this assertion three
+        /// times on exactly that corner while measuring a euclidean distance - the mod was right and
+        /// the yardstick was wrong. Both holders are rotatable=false, so all four rects exist and
+        /// the axial component of an offset is whichever of its two parts is larger.
         /// </summary>
-        [Then("Entity Gazing the watch cells lie {int} to {int} cells from the holder")]
+        [Then("Entity Gazing the watch cells lie {int} to {int} cells along the facing axis")]
         public void WatchCellsWithin(PickleContext ctx, int low, int high)
         {
             var holder = Driver.HolderThing(ctx);
@@ -165,10 +186,27 @@ namespace EntityGazing.PickleSteps
                 .CalculateWatchCells(holder.def, holder.Position, holder.Rotation, Driver.Map(ctx))
                 .ToList();
             ctx.Assert(cells.Count > 0, "the game computed no watch cell at all for this holder");
-            var nearest = cells.Min(c => c.DistanceTo(holder.Position));
-            var furthest = cells.Max(c => c.DistanceTo(holder.Position));
+
+            var halfWidth = holder.def.building.watchBuildingStandRectWidth / 2;
+            var worst = IntVec3.Invalid;
+            var nearest = int.MaxValue;
+            var furthest = int.MinValue;
+            foreach (var cell in cells)
+            {
+                var offset = cell - holder.Position;
+                var axial = Math.Max(Math.Abs(offset.x), Math.Abs(offset.z));
+                var lateral = Math.Min(Math.Abs(offset.x), Math.Abs(offset.z));
+                if (axial < nearest) nearest = axial;
+                if (axial > furthest) furthest = axial;
+                if (lateral > halfWidth && !worst.IsValid) worst = cell;
+            }
+
+            ctx.Assert(!worst.IsValid,
+                $"a watch cell at {worst} sits more than {halfWidth} cells to the side of a holder "
+                + $"whose rect is {holder.def.building.watchBuildingStandRectWidth} wide");
             ctx.Assert(nearest >= low && furthest <= high,
-                $"watch cells span {nearest:0.##} to {furthest:0.##} cells, outside {low} to {high}");
+                $"watch cells span {nearest} to {furthest} cells along the facing axis, "
+                + $"outside {low} to {high}");
         }
 
         /// <summary>

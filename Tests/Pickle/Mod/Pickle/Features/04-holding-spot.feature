@@ -21,5 +21,5 @@ Feature: the holding spot is watched too, and is a poorer show
   Scenario: the spot computes watch cells from the same range as the platform
     Given Entity Gazing spawns a "HoldingSpot"
     And Entity Gazing tethers a downed "Fingerspike" to it
-    Then Entity Gazing the watch cells lie 2 to 6 cells from the holder
+    Then Entity Gazing the watch cells lie 2 to 6 cells along the facing axis
     And no errors were logged

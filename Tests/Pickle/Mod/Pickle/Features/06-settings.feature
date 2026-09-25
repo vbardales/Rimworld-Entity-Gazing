@@ -27,5 +27,5 @@ Feature: the settings window, and what it changes in play
     Given Entity Gazing spawns a "HoldingPlatform"
     And Entity Gazing tethers a downed "Fingerspike" to it
     When Entity Gazing sets the distances to 4 and 9
-    Then Entity Gazing the watch cells lie 4 to 9 cells from the holder
+    Then Entity Gazing the watch cells lie 4 to 9 cells along the facing axis
     And no errors were logged
