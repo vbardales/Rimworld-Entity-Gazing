@@ -67,7 +67,13 @@ function Read-Text([string]$p) { Get-Content $p -Raw -Encoding UTF8 }
 # tried: an unresolvable name asked for twice recurses to a stack overflow rather than an error.
 # The null guard matters because the handler lives on the process AppDomain, which outlives this
 # script's scope.
-$script:probeDirs = @($Managed, (Join-Path $Mod 'Assemblies'))
+# The Pickle framework is in its own mod folder, and the step assembly names it: without this the
+# hook-shape test cannot even read an attribute off a hook.
+$script:probeDirs = @(
+    $Managed,
+    (Join-Path $Mod 'Assemblies'),
+    (Join-Path (Split-Path $Managed -Parent | Split-Path -Parent) 'Mods\Pickle-local\Assemblies')
+)
 $script:probed = @{}
 $script:asmResolver = [System.ResolveEventHandler]{
     param($sender, $e)
@@ -591,6 +597,43 @@ Test-That "the same-room requirement matches what every vanilla watch building d
     ($with -eq $vanilla) -and ($oursSame -eq $oursTotal) -and ($oursTotal -eq 2)
 }
 
+# The teardown hook is the single most expensive line of this suite, measured in lost runs. It has
+# failed two Pickle passes, both times not by being wrong about the mod but by throwing: Pickle
+# invokes hooks by reflection, so anything escaping one surfaces as "Exception has been thrown by
+# the target of an invocation", attached to a scenario whose every step passed, with no hook named.
+# A scenario reported broken while it is green is worse than a scenario reported broken.
+#
+# So the shape is checked rather than trusted. A catch clause whose try block starts at IL offset 0
+# is the only arrangement in which no path through the hook can escape it.
+Test-That "every Pickle teardown hook is wrapped so it cannot fail the scenario it cleans up after" {
+    $stepsDll = Join-Path $ModRoot 'Tests\Pickle\Mod\Pickle\Assemblies\EntityGazing.PickleSteps.dll'
+    if (-not (Test-Path $stepsDll)) { Note 'no step assembly built'; return 'skip' }
+
+    $hooks = @()
+    foreach ($t in (Get-AssemblyTypes $stepsDll)) {
+        foreach ($m in $t.GetMethods('Public,NonPublic,Instance,Static,DeclaredOnly')) {
+            if ($m.GetCustomAttributesData() | Where-Object { $_.AttributeType.Name -like 'AfterScenario*' }) {
+                $hooks += $m
+            }
+        }
+    }
+    if (-not $hooks.Count) { Note 'no [AfterScenario] hook declared'; return 'skip' }
+
+    $bad = @()
+    foreach ($m in $hooks) {
+        $clauses = $m.GetMethodBody().ExceptionHandlingClauses
+        $guarded = $clauses | Where-Object {
+            $_.TryOffset -eq 0 -and
+            $_.Flags -eq [System.Reflection.ExceptionHandlingClauseOptions]::Clause -and
+            $_.CatchType -eq [System.Exception]
+        }
+        if (-not $guarded) { $bad += "$($m.DeclaringType.Name).$($m.Name)" }
+    }
+    Note ("{0} hook(s) checked" -f $hooks.Count)
+    if ($bad.Count) { Note ("unguarded: {0}" -f ($bad -join ', ')) }
+    $bad.Count -eq 0
+}
+
 # ---------------------------------------------------------------------------------------------
 Write-Host ""
 Write-Host ("  {0} passed, {1} failed, {2} total" -f $script:pass, $script:fail, $script:n) `
@@ -602,8 +645,12 @@ if ($script:fail) { exit 1 }
 # ---------------------------------------------------------------------------------------------
 # What has been seen to fail
 #
-# Fifteen of the thirty-five tests here have been watched turning red, driven by Run-Mutations.ps1
+# Fifteen of the thirty-six tests here have been watched turning red, driven by Run-Mutations.ps1
 # beside this file: 2, 3, 8, 10, 11, 23, 24, 25, 26, 27, 29, 32, 33, 34, 35.
+#
+# Test 36 was not reddened by the campaign, and did not need to be: it came up red the first time it
+# ran, on a hook nobody had gone looking at. The one it was written for was already fixed; it found
+# the other. That is the whole argument for it, and it is a better one than a mutation.
 #
 # The other twenty have not, and most of them cannot be. Tests 4 to 6, 9, 12 to 22, 30 and 31 ask
 # questions about Assembly-CSharp itself - does this field still exist, does this class still read

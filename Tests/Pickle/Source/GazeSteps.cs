@@ -212,20 +212,40 @@ namespace EntityGazing.PickleSteps
         /// <summary>
         /// A holder left standing outlives the scenario and changes what the next one measures.
         ///
-        /// The try/catch is not decoration. ctx.Get throws when the scenario never stored a holder,
-        /// and a teardown hook that throws fails the scenario it was cleaning up after. The first
-        /// run of this suite lost ten scenarios to exactly that - every one of them a scenario that
-        /// spawns nothing, all reported as "Exception has been thrown by the target of an
-        /// invocation", with nothing in the message to say which step or hook was at fault.
+        /// Nothing in here may throw, and that is the whole design. A teardown hook that throws
+        /// fails the scenario it was cleaning up after, and Pickle reports it as "Exception has
+        /// been thrown by the target of an invocation" with no step and no hook named - so the
+        /// scenario reads as broken while every one of its own steps passed. This hook has now
+        /// cost two runs that way. First by calling ctx.Get in scenarios that store no holder, ten
+        /// of them. Then, once that was guarded, by destroying a holder belonging to the map the
+        /// reload had already discarded: the reload scenario came back red with all ten of its
+        /// steps green.
+        ///
+        /// So the reload guard is Find.Maps, not Spawned. A thing carried across a reload still
+        /// answers Spawned truthfully about a map the game no longer has, and destroying it there
+        /// tears at a lister that is gone. The blanket catch behind it is the admission that this
+        /// list of ways to be stale is not provably complete: cleanup failing quietly costs the
+        /// next scenario a stray building, cleanup throwing costs a verdict.
         /// </summary>
         [AfterScenario]
         public void Cleanup(PickleContext ctx)
         {
-            Driver.SpawnedHolder stored;
-            try { stored = ctx.Get<Driver.SpawnedHolder>(); }
-            catch { return; }
-            var holder = stored?.Thing;
-            if (holder != null && holder.Spawned) holder.Destroy(DestroyMode.Vanish);
+            try
+            {
+                Driver.SpawnedHolder stored;
+                try { stored = ctx.Get<Driver.SpawnedHolder>(); }
+                catch { return; }
+
+                var holder = stored?.Thing;
+                if (holder == null || holder.Destroyed || !holder.Spawned) return;
+                if (holder.Map == null || !Find.Maps.Contains(holder.Map)) return;
+
+                holder.Destroy(DestroyMode.Vanish);
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"[Entity Gazing] the scenario's holder could not be cleaned up: {e.Message}");
+            }
         }
     }
 }

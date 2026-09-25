@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using RimWorld;
 using RimWorks.Pickle;
@@ -164,19 +165,32 @@ namespace EntityGazing.PickleSteps
 
         // --- teardown -------------------------------------------------------------------------
 
+        /// <summary>
+        /// Wrapped for the same reason as the holder cleanup in GazeSteps, and this one matters
+        /// more: it runs after every scenario in the suite, not only those that spawned something.
+        /// Anything escaping it would redden a scenario whose own steps all passed, and Pickle
+        /// would name neither the hook nor the line.
+        /// </summary>
         [AfterScenario]
         public void Restore(PickleContext ctx)
         {
-            var def = DefDatabase<MainButtonDef>.GetNamedSilentFail(ShortcutDefName);
-            if (def != null) def.buttonVisible = false;
-
-            // Distances are global and outlive the scenario: a pass that left 9~12 behind would
-            // change what every later scenario measures, and the failure would look like the mod's.
-            var mod = LoadedModManager.GetMod<EntityGazingMod>();
-            if (mod?.Settings != null)
+            try
             {
-                mod.Settings.ResetDefaults();
-                mod.ApplySettings();
+                var def = DefDatabase<MainButtonDef>.GetNamedSilentFail(ShortcutDefName);
+                if (def != null) def.buttonVisible = false;
+
+                // Distances are global and outlive the scenario: a pass that left 9~12 behind would
+                // change what every later scenario measures, and the failure would look like the mod's.
+                var mod = LoadedModManager.GetMod<EntityGazingMod>();
+                if (mod?.Settings != null)
+                {
+                    mod.Settings.ResetDefaults();
+                    mod.ApplySettings();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"[Entity Gazing] the scenario's interface state could not be restored: {e.Message}");
             }
         }
     }
