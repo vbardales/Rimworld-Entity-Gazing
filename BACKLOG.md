@@ -68,8 +68,9 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
   without the template "must not be published with the generated workflow": semantic-release creates
   the tag and the GitHub release first, then the Steam step throws, leaving a release that never
   reached Steam.
-- **The mutation campaign has not been rerun** since the settings and packaging work, and README.md
-  says so. It is 35 mutations over three suites that now hold 78 checks.
+- ~~The mutation campaign has not been rerun.~~ Done 2026-09-25: all 35 woke their test. What it
+  still does not cover is functional test 36, the teardown-hook guard, which has no mutation and
+  needs none — it came up red on its first run, on a hook nobody had looked at.
 
 ## Not blocking anything, worth knowing
 

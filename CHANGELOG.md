@@ -22,6 +22,14 @@ The version that arrives with publication is 1.0.0, and it is not here yet.
   under `Mod/` has changed: no def, no patch, no assembly, no translation. The mod a player runs
   behaves exactly as 0.1.0 did.
 
+### Development, not shipped
+
+- **The mutation campaign was rerun** on 2026-09-25, which 0.1.0 recorded as owed. All 35 mutations
+  woke the test they were aimed at, against suites that have grown to 78 checks since.
+- **The Pickle suite is complete**: thirteen features, thirty-two scenarios, four passes. The two
+  ordinary passes are green in both languages; the restart pair, the place-worker capture and the
+  pass without Anomaly have never run.
+
 ## [0.1.0] — 2026-09-24
 
 Creation of a published file ID. A first upload whose only purpose was to create the Workshop

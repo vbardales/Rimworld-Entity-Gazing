@@ -120,9 +120,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
 ```
 
 A green suite proves nothing on its own, so a third script breaks the mod on purpose — 35 mutations
-on a copy, each aimed at one test. The earlier campaign recorded every mutation turning its test red; it has not been rerun after the settings and packaging-test changes. Which
-tests that leaves unproven, and why, is written at the foot of each suite rather than left to
-assumption.
+on a copy, each aimed at one test. Rerun on 2026-09-25 against the suites as they now stand: all 35
+woke the test they were aimed at, nine of them waking a second test as well, which is recorded as
+collateral rather than hidden. Which tests that still leaves unproven, and why, is written at the
+foot of each suite rather than left to assumption.
 
 ## Not yet tested in a running colony
 
