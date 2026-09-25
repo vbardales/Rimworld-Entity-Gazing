@@ -14,9 +14,9 @@ The version that arrives with publication is 1.0.0, and it is not here yet.
   gains the `IF I GO QUIET`, `AI-GENERATED` and `THANKS` sections the publishing protocol asks for,
   with Pickle and RimLogging credited as development-only tools.
 
-  **This does not reach the live Workshop page.** `SetItemDescription` is called only when an item
-  is created, so item 3806760893 still carries the old text and can only be corrected by hand on
-  Steam. The file is fixed so that the repository and the page can be made to agree.
+  **The live page could not follow from a commit**, since `SetItemDescription` fires only when an
+  item is created. Item 3806760893 was edited by hand on the Workshop page on 2026-09-25, and the
+  public page read back afterwards to confirm it. The repository and the page now agree.
 
 - `Mod/About/About.xml` is therefore no longer byte-identical to what 0.1.0 uploaded. Nothing else
   under `Mod/` has changed: no def, no patch, no assembly, no translation. The mod a player runs

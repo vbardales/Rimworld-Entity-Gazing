@@ -4,22 +4,7 @@ Things that are wrong now, as opposed to work not yet done, which is in [BACKLOG
 Nothing here is a gameplay defect: the two Pickle passes are green in both languages, and the three
 out-of-game suites are green.
 
-## 1. The **published** Steam page names no AI tool, and no commit can fix it
-
-`Mod/About/About.xml` said *"Created with AI assistance."* where PUBLISHING.md requires the real
-tools to be named — "Claude", "Codex", "DALL-E" — and says so explicitly against writing "un outil
-d'IA".
-
-**The file is fixed** as of 2026-09-25: the description now names Claude Code (Anthropic), Codex
-(OpenAI) and DALL-E, and carries the `IF I GO QUIET`, `AI-GENERATED` and `THANKS` sections in the
-order AUDIT.md asks for, with Pickle and RimLogging credited as development-only tools.
-
-**The live page is not fixed and cannot be from here.** `SetItemDescription` is called only when an
-item is created. Item 3806760893 was created at 0.1.0, so the Workshop page still carries the old
-sentence and no update will replace it. It is a hand edit on Steam, and only Virginie can make it.
-The text to paste is the `<description>` of `Mod/About/About.xml` as it now stands.
-
-## 2. `About.xml` declares Anomaly a hard dependency while the documents call it optional
+## 1. `About.xml` declares Anomaly a hard dependency while the documents call it optional
 
 `modDependencies` names `Ludeon.RimWorld.Anomaly`. README.md, the Steam description and the
 CHANGELOG all say "Without it the mod loads but adds no recreation activity" — which describes a
@@ -37,6 +22,14 @@ with the DLC switched off cannot declare it as a dependency, or the pass written
 cannot be staged.
 
 ---
+
+Closed on 2026-09-25: the Steam page's AI mention. `Mod/About/About.xml` said *"Created with AI
+assistance"* where PUBLISHING.md requires the real tools named. The file now names Claude Code
+(Anthropic), Codex (OpenAI) and DALL-E, and carries `IF I GO QUIET`, `AI-GENERATED` and `THANKS` in
+AUDIT.md's order, with Pickle and RimLogging credited as development-only tools. Because
+`SetItemDescription` fires only when an item is created, the live page could not follow from a
+commit: it was edited by hand on the Workshop page for item 3806760893 the same day, and the public
+page was read back afterwards to confirm it rather than trusting the "changes saved" banner.
 
 Closed on 2026-09-25: `Tests/Pickle/README.md` was stale in four places, two of which told a reader
 to call the launcher by hand and arm a `Monitor` that WELCOME.md §3 forbids. Rewritten around the

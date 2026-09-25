@@ -51,8 +51,8 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
 - **`PUBLICATION.md` does not exist.** AUDIT.md requires it: the order of the Workshop captures with
   what each shows, the thank-you comments to post, the dependencies and DLC to declare, and the
   adult-content answers. The CI also reads its `### <version>` fenced block as the Steam change note.
-- **The description correction has to be made by hand on Steam.** See BUGS.md 1. The file is ready;
-  the page is not, and no commit can change that.
+- **The Workshop page's description is done**, by hand on 2026-09-25, and read back to confirm. Any
+  later change to `About.xml`'s description needs the same hand edit: no update will carry it.
 - **No `Mod/README.template.md` and no `.github/workflows`.** OPERATIONS.md is explicit that a mod
   without the template "must not be published with the generated workflow": semantic-release creates
   the tag and the GitHub release first, then the Steam step throws, leaving a release that never
