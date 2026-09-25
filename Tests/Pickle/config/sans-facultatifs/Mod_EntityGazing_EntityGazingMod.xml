@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The documented defaults, seeded into the profile at every staging of the ordinary pass.
+
+     The Config folder is NOT wiped between passes: only files listed in seeded-files.txt are
+     removed, and a settings file the game itself wrote is not one of them. So a pass that leaves
+     non-default distances behind hands them to whatever runs this mod next, and feature 01's
+     "a clean profile loads the documented defaults" would fail on a profile that was never clean -
+     reading as a mod defect.
+
+     The restart pair is exactly such a pass: 11-restart-write leaves 9 and 12 on disk on purpose.
+     Its first run happened to end with a file carrying no values at all, because Scribe omits a
+     value equal to its default, so nothing leaked. That is luck, not a mechanism. This seed is the
+     mechanism, and it runs before launch 1 of that pair too, which is where the writer wants it. -->
+<SettingsBlock>
+  <ModSettings Class="EntityGazing.EntityGazingSettings">
+    <minimumDistance>2</minimumDistance>
+    <maximumDistance>6</maximumDistance>
+  </ModSettings>
+</SettingsBlock>

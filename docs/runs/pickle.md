@@ -15,3 +15,6 @@ survives, so it carries the verdict and the cause rather than a pointer to bytes
 ## Mutation campaigns
 
 - 2026-09-25 · 35 mutations · 64f5de0 · all 35 woke the test they were aimed at; nine also woke a second, recorded as collateral. Functional test 36, the teardown-hook guard, has no mutation and needs none: it came up red on its first run
+- 2026-09-25 21:13 · en · 94b5 · d9ca1da · passed · restart pair, 2 launches under one lock, 1+1 passed · two distinct Player.logs 94 s apart, and the reader's guard passed, so the static was fresh: a genuine second process
+- 2026-09-25 21:14 · en · 1d08 · d9ca1da · passed · 5 discovered, 5 run, 5 passed · the pass without Anomaly, and the first real use of a pass map's `!<packageId>`: the harness accepts it
+- 2026-09-25 21:15 · en · 0242 · d9ca1da · failed · 2 run, 0 passed · both on "the game computes no watch cell at (60, 0, 60)". The capture answered in one word: Undiscovered. A hardcoded cell under unexplored mountain

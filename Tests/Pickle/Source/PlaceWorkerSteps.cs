@@ -22,6 +22,44 @@ namespace EntityGazing.PickleSteps
     [PickleSteps]
     public class PlaceWorkerSteps
     {
+        /// <summary>
+        /// Frames open ground, chosen here rather than written into the feature.
+        ///
+        /// The first run of this feature named cell (60, 60) and came back red on both scenarios
+        /// with "the game computes no watch cell there". The capture said why in one word:
+        /// Undiscovered. That cell is unexplored rock under the mountain, so nothing around it is
+        /// standable and CalculateWatchCells rightly returns none. A coordinate written into a
+        /// feature is a claim about one saved map's geography, and this suite has no business
+        /// making one.
+        ///
+        /// Open ground is defined the way a player would: not fogged, standable, no edifice, and
+        /// enough of the same around it that a watch rect has somewhere to go. That last condition
+        /// is not the assertion in disguise - it asks for free cells, while the step that follows
+        /// asks the game for watch cells, which are filtered by room and line of sight as well.
+        /// </summary>
+        [When("Entity Gazing frames open ground for a placement")]
+        public void FrameOpenGround(PickleContext ctx)
+        {
+            var map = Driver.Map(ctx);
+            IntVec3 chosen;
+            var found = CellFinder.TryFindRandomCellNear(map.Center, map, 60, c => IsOpen(map, c)
+                    && GenRadial.RadialCellsAround(c, 6f, true).Count(n => IsOpen(map, n)) >= 40,
+                out chosen);
+            ctx.Require(found,
+                "no open ground was found on this map: every candidate was fogged, blocked or "
+                + "hemmed in, so there is nowhere a watch area could be drawn");
+
+            Find.CameraDriver.JumpToCurrentMapLoc(chosen);
+            ctx.Set(new FramedCell { Cell = chosen });
+        }
+
+        internal sealed class FramedCell { public IntVec3 Cell; }
+
+        private static bool IsOpen(Map map, IntVec3 c)
+        {
+            return c.InBounds(map) && !c.Fogged(map) && c.Standable(map) && c.GetEdifice(map) == null;
+        }
+
         [When("Entity Gazing holds the build designator for {string}")]
         public void HoldDesignator(PickleContext ctx, string defName)
         {
@@ -63,10 +101,17 @@ namespace EntityGazing.PickleSteps
                 $"the pointer is at {pointer}, outside the map: Designator_Place.SelectedUpdate "
                 + "returns before drawing anything, and the capture would show no watch area");
 
+            // Verified on the first run rather than assumed: the harness leaves the pointer at the
+            // centre of the screen, so moving the camera moves the cell the ghost is drawn on.
             var centre = Find.CameraDriver.MapPosition;
             ctx.Assert((pointer - centre).LengthHorizontalSquared <= 4,
                 $"the pointer is at {pointer} but the camera is on {centre}. The watch area is drawn "
                 + "at the pointer, so the capture would frame one cell and draw the area on another.");
+
+            ctx.Assert(!pointer.Fogged(map),
+                $"the pointer is on unexplored ground at {pointer}. Nothing there is standable, so "
+                + "the game computes no watch cell and the capture shows an empty brown screen - "
+                + "which is what cell (60, 60) gave on this feature's first run.");
 
             // Rot4.North rather than the designator's own rotation, which is a protected field this
             // suite will not reach for: it touches only public game API, like the mod it tests.
