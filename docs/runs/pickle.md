@@ -10,3 +10,4 @@ survives, so it carries the verdict and the cause rather than a pointer to bytes
 - 2026-09-25 14:14 · fr · b7bf · 57097e7 · failed · 23 run, 22 passed · identical to a657, same scenario, same hook. Settings window and job report both correct French
 - 2026-09-25 16:26 · en · 5929 · 82656f8 · passed · 1 run, 1 passed · fix check on the reload scenario alone, confirming the guarded teardown hooks. Its archive was 2.06 GB for that one scenario, almost all of it the shared screenshot folder copied whole
 - 2026-09-25 17:48 · en · 5eb3 · 64f5de0 · passed · 23 discovered, 23 run, 23 passed · no @wip, no conditional scenario, both @review captures read and correct. Its archive was 10 MB, not 2 GB: the shared screenshot folder had been cleared in between
+- 2026-09-25 18:2x · fr · 1a55 · 64f5de0 · passed · 23 discovered, 23 run, 23 passed · identical to 5eb3. Both @review captures read: clean French throughout, "Observe l'entité captive."
