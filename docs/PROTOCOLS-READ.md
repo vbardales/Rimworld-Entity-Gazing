@@ -25,6 +25,17 @@ git --git-dir=../rimworld-protocols.git --work-tree=. log -1 --format='%h %ad' -
 
 Its work tree was clean when this was written, so nothing here is `modified, not committed`.
 
+**A second way the same command lies, on Windows.** The steps catalogue is tracked as
+`PickleTools/docs/steps.md`, lowercase. This note first recorded it as untracked, because
+`PickleTools/README.md` is linked one way and the folder opens the other: NTFS is case-insensitive,
+so `Docs/steps.md` reads perfectly, while git's index knows only `docs/steps.md` and answers a
+`git log` on the other spelling with silence. Silence reads exactly like "generated, not tracked".
+Corrected after TicketDispatcher said so, and checked rather than taken on trust: the tracked blob
+and the file read here have the same SHA-256.
+
+So both halves of this exercise have now been wrong once, in the two ways a version command can
+fail without erroring — naming a deletion, and naming nothing at all.
+
 ## Read, and load-bearing for this mod
 
 | Document | Repository | Version | What it decided here |
@@ -35,7 +46,7 @@ Its work tree was clean when this was written, so nothing here is `modified, not
 | `Rimworld-Ticket-Dispatcher/docs/WELCOME.md` | dispatcher | `79668cc` 2026-09-25 | Small tickets, one request per pass, no watcher of my own. §5 is what this file answers. |
 | `Rimworld-Ticket-Dispatcher/docs/SUBMIT.md` | dispatcher | `79668cc` 2026-09-25 | Every option of a request, and the launcher's exit codes — including that 0 is not a verdict. |
 | `PickleTools/Headless/README.md` | PickleTools | `b2712fc` 2026-09-25 | The two mechanisms the three missing checks need: `!<packageId>` in a pass map for a DLC-off pass, and `-Then` for a restart under one lock. Also the trap list: a step that waits needs `TimeoutSeconds`, `I select` is an exact match on `LabelCap`. |
-| `PickleTools/Docs/steps.md` | PickleTools | untracked (generated); read at mtime 2026-09-25 17:43, sha256 61750eca84d2… | `ExpansionSteps` has exactly the assertion a DLC-off pass needs, and `ScreenshotMode` the one a build-menu capture needs. |
+| `PickleTools/docs/steps.md` | PickleTools | `d6d8db1` 2026-09-25 | `ExpansionSteps` has exactly the assertion a DLC-off pass needs, and `ScreenshotMode` the one a build-menu capture needs. |
 | `PickleTools/README.md` | PickleTools | `2b7b6d0` 2026-09-25 | How a tool is staged from a pass map, and that its `About.xml` packageId must match the map line. |
 | `EntityGazing/TESTING.md` | this mod | `f063460` | The conversion table that owes the three checks with no scenario. |
 | `EntityGazing/Tests/Pickle/README.md` | this mod | `f063460` | Stale in four places, listed in BUGS.md. |
