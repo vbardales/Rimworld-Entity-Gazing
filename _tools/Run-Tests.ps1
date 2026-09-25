@@ -505,6 +505,44 @@ Test-That "the documents name the patch file that actually exists" {
     $ghost.Count -eq 0
 }
 
+# Two copies of one text, on purpose and for a while. The Workshop description lives in About.xml
+# today, hand-edited on the page because SetItemDescription only fires when an item is created; the
+# Markdown block of PUBLICATION.md is the source the CI will use the day this mod moves to it, and
+# it has to carry the page's text before that day. Until then nothing keeps them in step but this.
+#
+# Markup is normalised away rather than compared: one side is Markdown, the other the plain form
+# About.xml carries. What is compared is the prose, which is what drifts.
+Test-That "the Markdown description source and About.xml still say the same thing" {
+    $pub = Join-Path $ModRoot 'PUBLICATION.md'
+    if (-not (Test-Path $pub)) { Note 'no PUBLICATION.md'; return 'skip' }
+    $text = Read-Text $pub
+    $m = [regex]::Match($text, '(?s)##\s+Steam description.*?```markdown\r?\n(.*?)\r?\n```')
+    if (-not $m.Success) { Note 'no "## Steam description" markdown block'; return 'skip' }
+
+    function Normalise([string]$s) {
+        $s = $s -replace '\[([^\]]*)\]\(([^)]*)\)', '$1 $2'      # markdown link -> text url
+        $s = $s -replace '\[url=([^\]]*)\]([^\[]*)\[/url\]', '$2 $1'  # bbcode link -> text url
+        $s = $s -replace '(?m)^#{1,6}\s*', ''                    # headings
+        $s = $s -replace '\*\*?', ''                             # bold / italics
+        ($s -replace '\s+', ' ').Trim().ToLowerInvariant()
+    }
+
+    $fromBlock = Normalise $m.Groups[1].Value
+    $fromAbout = Normalise ([xml](Read-Text (Join-Path $Mod 'About\About.xml'))).ModMetaData.description
+
+    if ($fromBlock -ne $fromAbout) {
+        # Name the first place they part company: a whole-text diff is unreadable at this length.
+        $a = $fromBlock -split ' '; $b = $fromAbout -split ' '
+        $i = 0; while ($i -lt $a.Count -and $i -lt $b.Count -and $a[$i] -eq $b[$i]) { $i++ }
+        Note ("they part at word {0}: block has '{1}', About.xml has '{2}'" -f $i,
+              (($a[$i..([Math]::Min($i + 6, $a.Count - 1))]) -join ' '),
+              (($b[$i..([Math]::Min($i + 6, $b.Count - 1))]) -join ' '))
+    } else {
+        Note ("{0} words, identical once markup is normalised" -f ($fromBlock -split ' ').Count)
+    }
+    $fromBlock -eq $fromAbout
+}
+
 # ---------------------------------------------------------------------------------------------
 Write-Host ""
 Write-Host ("  {0} passed, {1} failed, {2} total" -f $script:pass, $script:fail, $script:n) `

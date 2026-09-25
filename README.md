@@ -98,7 +98,7 @@ Two suites, no RimWorld launched, well under a minute for both. They read the in
 `Data` folder and its `Assembly-CSharp` — so they check what this mod assumes rather than what this
 page claims.
 
-The first is about form: 24 form tests covering well-formed XML, every element still a field on its
+The first is about form: 25 form tests covering well-formed XML, every element still a field on its
 1.6 class, translation keys that name a real def and a real field, packaging, and the documents
 against the defs. The last group is the one that keeps this page honest — every number quoted here
 and in the changelog is read back out of the XML, so changing a value and not the prose turns the

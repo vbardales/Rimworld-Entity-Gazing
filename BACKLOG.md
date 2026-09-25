@@ -64,11 +64,14 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
 - **`PUBLICATION.md` now exists**, with the `### 1.0.0` change-note block in the shape the release
   plugin enforces. Its date is filled in on the day of the upload, and its screenshot order is
   still undecided — the gallery needs captures nothing has taken yet.
-- **No `Mod/README.template.md` and no `.github/workflows`.** The template is not a trap waiting to
-  fire — the wrapper plugin checks the description sources in `verifyConditions`, before any tag or
-  release is created, and `bootstrap-release.sh` skips a repository without one. What is real is
-  that the day this mod is bootstrapped, the template becomes the source of the Workshop page and
-  overwrites it at every publication, so it has to carry what the page says today before that day.
+- **No `.github/workflows`, and no `Mod/README.template.md` — which this mod now does not need.**
+  The standard Virginie chose on 2026-09-25 puts the description in one Markdown block under
+  `## Steam description` of `PUBLICATION.md`, and generates `About.xml`'s `<description>` from it.
+  That block is written, so the source already carries the page's text, and
+  `bootstrap-release.sh` picks the standard configuration on its own because the heading is there.
+  Nothing is adopted: no workflow, no config, and `About.xml` keeps its hand-written BBCode link
+  until the migration, as `OPERATIONS.md` requires of a mod that has not moved.
+  Two copies of one text exist meanwhile, and form test 25 is what keeps them in step.
 - ~~The mutation campaign has not been rerun.~~ Done 2026-09-25: all 35 woke their test. What it
   still does not cover is functional test 36, the teardown-hook guard, which has no mutation and
   needs none — it came up red on its first run, on a hook nobody had looked at.

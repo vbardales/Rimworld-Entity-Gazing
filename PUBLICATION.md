@@ -32,6 +32,66 @@ before the first CI release:
 Neither file is written yet, deliberately: they live under `Mod/`, which is the staged payload, and
 three Pickle requests are queued against the current tree.
 
+## Steam description
+
+The single Markdown source, under the standard Virginie chose on 2026-09-25. **Nothing reads it
+yet.** This mod is not on the CI, so the live page and `Mod/About/About.xml` are still what count
+today, and the block below exists because `OPERATIONS.md` requires the source to carry the text of
+the page *before* the first publish that would send it — and because `bootstrap-release.sh` picks
+the standard configuration on its own when `PUBLICATION.md` carries a `## Steam description` line.
+
+Two things will change on the day it is adopted, and neither is an accident:
+
+- **The five section labels become real headings.** They are plain uppercase lines on the page
+  today; `##` converts to `[h2]`. That is the intended change, and the dry-run diff is where it is
+  read before anything is sent.
+- **The link line changes shape.** `[Source code on GitHub](url)` converts to the BBCode link the
+  page already shows, and generates `Source code on GitHub (url)` in `About.xml` — which today
+  carries the BBCode form by hand. `OPERATIONS.md` says a mod that has not migrated keeps its
+  hand-written link, so `About.xml` is left alone until then. The first `--sync-about --write` is
+  the migration: read the diff.
+
+Until that day this block and `About.xml` are two copies of one text, which is exactly how prose
+drifts. Form test 25 compares them and goes red if they part company.
+
+```markdown
+Colonists can go and look at the horrors you keep chained up, as recreation.
+
+The Anomaly DLC contains no recreation content at all - not one recreation type, not one giver, nothing. You capture entities, bolt them to a holding platform in the middle of your base, study them for knowledge, and then nobody ever looks at them again. This adds the obvious missing thing: watching them, the way a colonist watches a television.
+
+## WHY IT IS WORTH A MOD
+
+The base game has ten recreation types and only five of them come from a building. Expectations ask for up to six different types, and tolerance is counted per type, not per building - a colonist who has played chess all week is just as tired of poker. An eleventh type is therefore worth far more than a tenth building of a type you already had. This one costs nothing extra: the platform was already built for study.
+
+## THE VIEWING DISTANCE IS THE REAL SETTING
+
+Watchers stand two to six cells away, which is deliberately close. A nociosphere projects a pain field out to 5.9 cells, so a good share of the audience will be standing inside it. That is the price of the show, and it comes out of an existing vanilla mechanic rather than a line of code - it varies by entity, and a fleshbeast hurts nobody. Change the viewing distance in Mod options → Entity Gazing. The default is 2 to 6 cells; allowed distances are 1 to 20 cells. Settings are global and saved when the window closes. Changes affect new viewing positions on both holders; current watchers may finish where they are.
+
+An empty platform is never watched. The gameplay giver adds that occupancy check; the viewing distance is configurable. Movement - walking there, facing it, accumulating recreation - is the base game's own television logic.
+
+Needs Anomaly. Without it the mod loads but adds no recreation activity.
+
+No colony save data of its own; viewing-distance settings are stored globally.
+
+## IF I GO QUIET
+
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
+
+## AI-GENERATED
+
+The code, the documentation and the tests were written with Claude Code (Anthropic) and Codex (OpenAI), under human direction and review. The icon and the preview image were generated with DALL-E (OpenAI).
+
+## THANKS
+
+Ludeon Studios, whose television logic supplies the watching activity: this mod adds a condition to it and changes nothing else.
+
+Pickle and RimLogging, which run this mod's in-game acceptance tests. Both are development tools only; neither is a dependency of what you are downloading.
+
+This mod is MIT licensed. Provenance and artwork credits are in ATTRIBUTION.md in the repository. RimWorld and Anomaly by Ludeon Studios.
+
+[Source code on GitHub](https://github.com/vbardales/Rimworld-Entity-Gazing)
+```
+
 ## The change note: the CI checks this shape, it does not write it
 
 `release-steam-plugin.mjs` runs in **documented mode** — `bootstrap-release.sh` writes
