@@ -48,11 +48,22 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
 
 ## Before `tested → prepublished`
 
-- **`PUBLICATION.md` does not exist.** AUDIT.md requires it: the order of the Workshop captures with
+- **`PUBLICATION.md` held the Steam change note and did not exist.** Written 2026-09-25. AUDIT.md requires it: the order of the Workshop captures with
   what each shows, the thank-you comments to post, the dependencies and DLC to declare, and the
   adult-content answers. The CI also reads its `### <version>` fenced block as the Steam change note.
 - **The Workshop page's description is done**, by hand on 2026-09-25, and read back to confirm. Any
   later change to `About.xml`'s description needs the same hand edit: no update will carry it.
+- **One line is already owed to it: PickleTools.** PUBLISHING.md asks for the credit as soon as a
+  pass stages a piece of it, and `wsl-deps.no-anomaly.map` now stages `ExpansionSteps`. It has a
+  private Workshop page, `3806142401`, and the mention carries the link and the same "development
+  only" wording as Pickle and RimLogging. Not done the same day because `About.xml` is under `Mod/`
+  and three requests were already queued against that tree; it goes in after they report.
+- **`Mod/README.template.md` and `Mod/.steamignore` do not exist**, and the day this mod is
+  bootstrapped onto the CI the template becomes the source of the page — overwriting the hand edit
+  at every publication. Both are under `Mod/`, so they wait for the queue too. See PUBLICATION.md.
+- **`PUBLICATION.md` now exists**, with the `### 1.0.0` change-note block in the shape the release
+  plugin enforces. Its date is filled in on the day of the upload, and its screenshot order is
+  still undecided — the gallery needs captures nothing has taken yet.
 - **No `Mod/README.template.md` and no `.github/workflows`.** OPERATIONS.md is explicit that a mod
   without the template "must not be published with the generated workflow": semantic-release creates
   the tag and the GitHub release first, then the Steam step throws, leaving a release that never
