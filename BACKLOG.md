@@ -4,57 +4,55 @@ Work not yet done, in the order the workflow asks for it. Defects that exist now
 [BUGS.md](BUGS.md). What has been read, at which version, is in
 [docs/PROTOCOLS-READ.md](docs/PROTOCOLS-READ.md).
 
-## Before `done → tested`: three checks with no scenario
+## Before `done → tested`: two passes that have never run
 
-TESTING.md's own conversion table owes these three, and a check with no scenario is not a check that
-passed. Each is a scenario to write rather than a missing capability: the launcher already does what
-all three need.
+The three checks TESTING.md's table owed are **written** as of 2026-09-25 — features 10, 11, 12 and
+13, seven scenarios — and none of them has ever been played. A scenario written is not a scenario
+passed, and these three in particular are the ones most likely to be wrong on their first run,
+because each rests on something this mod has never exercised.
 
-### 1. The mod loading without Anomaly
+### The restart pair, 11 and 12
 
-Scenario 1 of the table asks for **one pass per DLC state**, and only the DLC-on state has ever run.
-The out-of-game suites prove the class lives in `Assembly-CSharp` and the defs carry `MayRequire`,
-which is why the assembly loads at all; they cannot show what the game does with the DLC switched
-off.
+```
+-Filter '11-restart-write' -Then '12-restart-read'
+```
 
-How: a `Tests/Pickle/wsl-deps.sans-anomaly.map` holding `!ludeon.rimworld.anomaly`, plus
-`nelim.pickletools.expansions path:PickleTools/ExpansionSteps/Mod` for the assertion
-`the expansion "Ludeon.RimWorld.Anomaly" is not active`. One request, `-DepMap`. Worth knowing
-before spending it: Headless/README.md says the `!<packageId>` line was tested in a sandbox and
-**never yet seen in a real run** — "whether the game really leaves the DLC out of a loaded save is
-what the first real pass has to show". So this pass proves the harness as much as the mod, and a red
-here may belong to either.
+One lock, one staging, two launches. What could go wrong on the first run, in the order it would
+show: the settings file's name is built from the mod's folder name and the **Mod** class's type
+name, read from `Verse.Mod.GetSettings` rather than guessed, and a wrong guess reads as "no
+settings file" whatever the mod wrote. The writer stands the teardown down through a static flag,
+so if `InterfaceSteps.Restore` ever stops honouring it the writer's values are wiped before the
+second launch. And the reader's guard fails loudly by design when the two features are played in
+one process, which is what happens if someone drops the `-Then` and files two requests.
 
-This also settles BUGS.md 3, and the two `MayRequire` translation-gating notices the shared
+### The pass without Anomaly, 13
+
+```
+-DepMap wsl-deps.no-anomaly.map -Filter '13-without-anomaly'
+```
+
+`PickleTools/Headless/README.md` records that the `!<packageId>` line has only ever been exercised
+in a sandbox with a fake game, and that "whether the game really leaves the DLC out of a loaded save
+is what the first real pass has to show". **This pass proves the harness as much as the mod**, and a
+red may belong to either — which is why the feature's background asserts the DLC is really gone,
+through `ExpansionSteps`, before anything else is asked.
+
+It also settles BUGS.md 2, and the two `MayRequire` translation-gating notices the shared
 DefInjected checker raises.
 
-### 2. The place worker drawing the watch area on the ground
+### And the ordinary passes have to be replayed
 
-The table kept this one deliberately when it dropped the rest of scenario 2, because it is the only
-visual half: out of game we prove the type exists and the patch adds the node, never that anything
-is drawn. It wants a `@review` capture of the build menu with a holder selected.
-
-`ScreenshotMode` supplies what such a capture needs — `developer mode is turned off for the capture`
-in particular, since the runner starts the game with it on and its toolbar would be in frame.
-
-### 3. The distance settings surviving the game being closed and reopened
-
-The reload feature covers a save written and read inside one process, which is not a restart.
-
-How: two features, a writer and a reader, played as `-Filter write -Then read` — one request, one
-lock, two launches, staged once. The design to copy is RimmsqolSteps': its reader **refuses to pass
-when the writer ran in this process**, so a restart test that never restarted comes back red instead
-of green.
+Features 10 through 13 did not exist when `5eb3` and `1a55` ran. The two ordinary passes now carry
+25 scenarios instead of 23, and their filter now has to exclude 11, 12 and 13 by name. Four passes
+in total, and `Tests/Pickle/README.md` holds the four commands.
 
 ## Before `tested → prepublished`
 
 - **`PUBLICATION.md` does not exist.** AUDIT.md requires it: the order of the Workshop captures with
   what each shows, the thank-you comments to post, the dependencies and DLC to declare, and the
   adult-content answers. The CI also reads its `### <version>` fenced block as the Steam change note.
-- **The description's missing sections**, in AUDIT.md's order after the body: `IF I GO QUIET` with
-  the adoption clause word for word, `AI-GENERATED`, `THANKS` crediting Pickle and RimLogging as
-  development-only tools, the ATTRIBUTION line, then the source link. Only the last is present. See
-  BUGS.md 1 for why this is a hand edit on Steam and not a file change.
+- **The description correction has to be made by hand on Steam.** See BUGS.md 1. The file is ready;
+  the page is not, and no commit can change that.
 - **No `Mod/README.template.md` and no `.github/workflows`.** OPERATIONS.md is explicit that a mod
   without the template "must not be published with the generated workflow": semantic-release creates
   the tag and the GitHub release first, then the Steam step throws, leaving a release that never

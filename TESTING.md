@@ -305,39 +305,54 @@ Not executed in game; no third-party integration version is certified yet.
 
 # What is still missing, and what it takes to close it
 
-Everything above is a **manual** scenario, and none has been played. Under the current bar for
-`tested`, a manual scenario is not a form of test that can be signed off: what was left to tick by
-hand is either automated and green, or listed as not applicable with its reason. So the sixteen
-above are not the last mile — they are the specification for the Pickle suites that do not exist
-yet.
+Everything above was written as a **manual** scenario, and none was ever played as one. Under the
+current bar for `tested`, a manual scenario is not a form of test that can be signed off: what was
+left to tick by hand is either automated and green, or listed as not applicable with its reason. So
+the sixteen above were never the last mile — they were the specification for the Pickle suites, and
+they have now all been converted or deliberately dropped.
+
+**The conversion is complete as of 2026-09-25.** Thirteen features, thirty-two scenarios, four
+passes. The table below is what was decided, kept as the record of why each line went where it
+went; `Tests/Pickle/README.md` is the live description of the suite and the four commands that run
+it. The three lines that took longest to close are named there too: the DLC-off pass, the place
+worker's drawing, and the restart, each of which needed something the ordinary pass cannot do.
 
 ## The Pickle suites this mod needs, and the passes to run them in
 
-None is written. This is the gap that keeps the mod at `preTest`, and this section is here so the
-work is specified rather than rediscovered.
+This section is the specification the suite was written from. It is kept because it records the
+reasoning, not because anything here is still outstanding.
 
 What belongs in Gherkin is only what a running game can show. Anything an out-of-game suite already
 proves must stay out: a scenario that repeats `_tools/` confiscates the machine for tens of minutes
 at every run and adds nothing.
 
-| Scenario above | Where it belongs |
-|---|---|
-| 1 loads with and without the DLC | Gherkin, one pass per DLC state |
-| 2 the patch landed where it aimed | **split.** Steps 1 and 2, the def shape, are proved out of game by running the game's own patch engine — drop them. Step 3 stays: that the place worker actually *draws* the watch area on the ground is visual, and the out-of-game suites only prove the type exists and the node landed |
-| 3, 4, 5, 6 the gaze itself | Gherkin, the heart of it |
-| 7 the pain field | Gherkin |
-| 8, 10, 11 participants, sight, opportunistic | Gherkin |
-| 9 socially proper room | Gherkin |
-| 12 save, quit, reload | Gherkin, nothing else survives a reload |
-| 13 the holding spot | Gherkin |
-| 14 watchers stay in the room | Gherkin |
-| 15 settings bounds and persistence | partly proved out of game; only the window lifecycle and the restart are Gherkin |
-| 16 the MainButtons shortcut | Gherkin, with a `@requires` on the button editor |
+| Scenario above | Where it belongs | Where it went |
+|---|---|---|
+| 1 loads with and without the DLC | Gherkin, one pass per DLC state | 01 for the DLC on, **13 for the DLC off**, in its own pass |
+| 2 the patch landed where it aimed | **split.** Steps 1 and 2, the def shape, are proved out of game by running the game's own patch engine — drop them. Step 3 stays: that the place worker actually *draws* the watch area on the ground is visual, and the out-of-game suites only prove the type exists and the node landed | steps 1–2 dropped; **step 3 is 10**, a `@review` capture under the build designator |
+| 3, 4, 5, 6 the gaze itself | Gherkin, the heart of it | 02 |
+| 7 the pain field | Gherkin | 05 |
+| 8, 10, 11 participants, sight, opportunistic | Gherkin | 02, 03 |
+| 9 socially proper room | Gherkin | 02 |
+| 12 save, quit, reload | Gherkin, nothing else survives a reload | 09 |
+| 13 the holding spot | Gherkin | 04 |
+| 14 watchers stay in the room | Gherkin | 02 |
+| 15 settings bounds and persistence | partly proved out of game; only the window lifecycle and the restart are Gherkin | 06 for the window, **11 and 12 for the restart**, as a `-Then` pair |
+| 16 the MainButtons shortcut | Gherkin, with a `@requires` on the button editor | 07, and **no `@requires`** — see below |
 
-**Two passes, and the file has to say so or the mod is merely tried.** Both on the minimal set the
-staging script mounts — Core, the DLC, Harmony, RimLogging, Pickle, Anomaly and this mod — one in
-English and one in French. The language is fixed at staging and never switched during a run:
-switching reloads every def under the runner, and the step waits for a language that never arrives.
+**Four passes, and the file has to say so or the mod is merely tried.** Two ordinary ones on the
+minimal set the staging script mounts — Core, the DLC, Harmony, RimLogging, Pickle, Anomaly and
+this mod — one in English and one in French; then the restart pair, and the pass without Anomaly.
+The language is fixed at staging and never switched during a run: switching reloads every def under
+the runner, and the step waits for a language that never arrives.
+
+The last two exist because the ordinary pass cannot hold them. A restart is two processes, so it is
+`-Filter 11-restart-write -Then 12-restart-read`: one lock, one staging, two launches. A DLC is
+switched off at staging, so the DLC-off feature needs its own map file,
+`wsl-deps.no-anomaly.map`, carrying `!ludeon.rimworld.anomaly`. Both are excluded by name from
+the ordinary passes, and that exclusion is not cosmetic: the writer of the restart pair leaves
+values on disk on purpose, and playing it inside the plain run makes that run wrong rather than
+red. `Tests/Pickle/README.md` holds the four commands.
 
 **No "with the optional mods" pass is owed**, and that is a finding rather than an omission: this
 mod declares no optional integration at all. Its `loadAfter` names only `Ludeon.RimWorld` and
@@ -347,12 +362,21 @@ row would be a duplicate, not a pass.
 **No incompatibility pass is owed** either: nothing is declared `incompatibleWith`. If one ever is,
 it takes a pass of its own whose job is to go and look at whether the claim is still true.
 
-**No `@requires:` tag is owed anywhere.** Scenario 16 looked like it needed one, since a button
-editor reveals the shortcut — but what the editor does is set the same field the suite sets, so the
-mechanism is testable without it. What a *particular* editor version does with this button is a
-separate claim, and it stays `unverified` rather than being dressed up as a skipped scenario. A
-scenario skipped for want of its condition is not a scenario passed, and the cheapest way to avoid
-that trap is to owe nothing.
+**No `@requires:` tag is owed anywhere, and the DLC-off feature is the case that proves the rule
+rather than breaking it.** Scenario 16 looked like it needed one, since a button editor reveals the
+shortcut — but what the editor does is set the same field the suite sets, so the mechanism is
+testable without it. What a *particular* editor version does with this button is a separate claim,
+and it stays `unverified` rather than being dressed up as a skipped scenario.
+
+Feature 13 is the one that tempts a tag hardest and must not have one. `@requires:` means "this
+scenario needs that mod **active**"; what 13 needs is the opposite, and Pickle has no tag for an
+absence. `@requires:ludeon.rimworld.anomaly` would skip it in the very pass written for it, and a
+packageId invented to mean "absent" would skip it in every pass forever — a scenario that never
+runs, inside a suite that reads as though it covered the case. So 13 is selected by its filter and
+excluded from the others by name, and nothing is skipped anywhere.
+
+A scenario skipped for want of its condition is not a scenario passed, and the cheapest way to
+avoid that trap is to owe nothing.
 
 The suite, its scope and its commands live in [Tests/Pickle/README.md](Tests/Pickle/README.md).
 

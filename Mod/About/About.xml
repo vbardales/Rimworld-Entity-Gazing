@@ -25,7 +25,21 @@ Needs Anomaly. Without it the mod loads but adds no recreation activity.
 
 No colony save data of its own; viewing-distance settings are stored globally.
 
-This mod is MIT licensed. Created with AI assistance. RimWorld and Anomaly by Ludeon Studios.
+IF I GO QUIET
+
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
+
+AI-GENERATED
+
+The code, the documentation and the tests were written with Claude Code (Anthropic) and Codex (OpenAI), under human direction and review. The icon and the preview image were generated with DALL-E (OpenAI).
+
+THANKS
+
+Ludeon Studios, whose television logic supplies the watching activity: this mod adds a condition to it and changes nothing else.
+
+Pickle and RimLogging, which run this mod's in-game acceptance tests. Both are development tools only; neither is a dependency of what you are downloading.
+
+This mod is MIT licensed. Provenance and artwork credits are in ATTRIBUTION.md in the repository. RimWorld and Anomaly by Ludeon Studios.
 
 [url=https://github.com/vbardales/Rimworld-Entity-Gazing]Source code on GitHub[/url]</description>
   <modDependencies>

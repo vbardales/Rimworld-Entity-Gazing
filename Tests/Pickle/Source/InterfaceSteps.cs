@@ -181,6 +181,11 @@ namespace EntityGazing.PickleSteps
 
                 // Distances are global and outlive the scenario: a pass that left 9~12 behind would
                 // change what every later scenario measures, and the failure would look like the mod's.
+                //
+                // Except for the writer of the restart pair, whose entire purpose is to leave values
+                // behind for the next launch. It stands this down, and the reader turns it back on.
+                if (RestartSteps.KeepSettings) return;
+
                 var mod = LoadedModManager.GetMod<EntityGazingMod>();
                 if (mod?.Settings != null)
                 {

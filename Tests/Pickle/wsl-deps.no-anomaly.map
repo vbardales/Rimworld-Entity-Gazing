@@ -1,0 +1,12 @@
+# The pass that switches Anomaly off.
+#
+# `!<packageId>` takes a DLC out of ModsConfig.xml for this pass only. Its Data folder stays where
+# it is; the absence from the list is what switches it off, and knownExpansions is left alone so no
+# "new expansion" dialog greets the run.
+#
+# ExpansionSteps supplies the one assertion this pass cannot do without: that the DLC really is
+# inactive. Without it a staging that quietly failed to remove Anomaly would run the whole feature
+# against a game that still has it, and every "no def exists" would fail in a way that reads like a
+# mod defect rather than a harness one.
+!ludeon.rimworld.anomaly
+nelim.pickletools.expansions   path:PickleTools/ExpansionSteps/Mod

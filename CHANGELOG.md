@@ -5,7 +5,22 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 
 ## [Unreleased]
 
-Nothing since 0.1.0. The version that arrives with publication is 1.0.0, and it is not here yet.
+The version that arrives with publication is 1.0.0, and it is not here yet.
+
+### Changed
+
+- **The Workshop description now names the tools that wrote this mod** — Claude Code (Anthropic),
+  Codex (OpenAI), DALL-E for the artwork — where it said only "Created with AI assistance", and
+  gains the `IF I GO QUIET`, `AI-GENERATED` and `THANKS` sections the publishing protocol asks for,
+  with Pickle and RimLogging credited as development-only tools.
+
+  **This does not reach the live Workshop page.** `SetItemDescription` is called only when an item
+  is created, so item 3806760893 still carries the old text and can only be corrected by hand on
+  Steam. The file is fixed so that the repository and the page can be made to agree.
+
+- `Mod/About/About.xml` is therefore no longer byte-identical to what 0.1.0 uploaded. Nothing else
+  under `Mod/` has changed: no def, no patch, no assembly, no translation. The mod a player runs
+  behaves exactly as 0.1.0 did.
 
 ## [0.1.0] — 2026-09-24
 
@@ -14,10 +29,13 @@ item and bring back `Mod/About/PublishedFileId.txt`, which is item **3806760893*
 every item private; this one has not been made public, and the entry says nothing about the mod
 being tested or released.
 
-What the upload contained is `Mod/` exactly as it stood at commit `c6dc0a5`. Nothing under `Mod/`
-has changed since — only this file was added to it — so what Steam holds still matches what is
-published here. Work outside `Mod/`, on the documents and the test suites, does not ship and does
-not affect that.
+What the upload contained is `Mod/` exactly as it stood at commit `c6dc0a5`. Work outside `Mod/`,
+on the documents and the test suites, does not ship and does not affect that.
+
+Two files under `Mod/` have changed since, and neither changes what the mod does:
+`About/PublishedFileId.txt`, added by this upload, and `About/About.xml`, whose description was
+corrected on 2026-09-25 to name the AI tools — see Unreleased, and note that the correction cannot
+reach the published page from here.
 
 ### Added
 

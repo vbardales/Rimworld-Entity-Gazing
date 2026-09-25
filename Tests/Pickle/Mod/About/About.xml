@@ -17,13 +17,14 @@
       <displayName>Pickle</displayName>
       <steamWorkshopUrl>steam://url/CommunityFilePage/3791648678</steamWorkshopUrl>
     </li>
-    <li>
-      <packageId>Ludeon.RimWorld.Anomaly</packageId>
-      <displayName>Anomaly</displayName>
-    </li>
   </modDependencies>
+  <!-- Anomaly is deliberately NOT a dependency of this companion, only a loadAfter. The mod under
+       test does require it, and says so; this suite has to run on both sides of that. The
+       sans-anomaly pass exists precisely to load the game with the DLC switched off, and a
+       companion that declared it would be staged asking for a DLC the pass has removed. -->
   <loadAfter>
     <li>nelim.entitygazing</li>
     <li>rimworks.pickle</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
   </loadAfter>
 </ModMetaData>
