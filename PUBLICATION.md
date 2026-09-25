@@ -21,10 +21,11 @@ agree, and any further change means the same hand edit.
 the description from `Mod/README.template.md` and **overwrites the page at every publication**. So
 before the first CI release:
 
-- `Mod/README.template.md` has to exist, in Markdown, carrying what the page now says. Without it
-  `compileReadme` throws in the publish step — *after* semantic-release has created the tag and the
-  GitHub release, leaving a release that never reached Steam. `OPERATIONS.md` is explicit: a mod
-  without the template must not be published with the generated workflow.
+- `Mod/README.template.md` has to exist, in Markdown, carrying what the page now says. Its absence
+  is caught early rather than late: the wrapper plugin's `verifyConditions` calls `checkMod` for
+  every mod before semantic-release creates anything, so the run stops with no tag and no GitHub
+  release. That is what the wrapper is for, and `bootstrap-release.sh` also skips a repository that
+  has no template. The error message still describes the failure it prevents.
 - `Mod/.steamignore` has to list `/README.template.md` and `/README.md`, or both ship to players.
 - Once both exist, the template is the source and the Steam page is no longer edited by hand.
 
@@ -39,13 +40,16 @@ fenced block under `### <version>` of this file, **sent as written**. The plugin
 block over the Steam byte limit, and refuses one whose first line does not carry the version:
 
 ```
-^\[h2\].*<version>.*\[/h2\]$
+^\[(b|h[1-3])\].*<version>.*\[/(b|h[1-3])\]$
 ```
+
+Any of `[b]`, `[h1]`, `[h2]` or `[h3]` satisfies it, which is what PUBLISHING.md's `[b]1.3.0[/b]`
+needs. It was `[h2]` only until `a2abeda` in `Rimworld-Release-Admin`, relaxed the same day.
 
 The comment beside that check says where it comes from: semantic-release used to generate the
 version heading, a block sent as written has only the heading it carries, and Steam shows an entry
 with no version at all when it has none — Architect Studio 1.0.5. A published note can only be
-fixed by hand, so the dry-run stops instead.
+fixed by hand, so the check runs in `verifyConditions`, before any tag exists.
 
 So the first line is written here, not generated. The usual form is a link to the comparison
 between the two tags:

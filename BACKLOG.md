@@ -64,10 +64,11 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
 - **`PUBLICATION.md` now exists**, with the `### 1.0.0` change-note block in the shape the release
   plugin enforces. Its date is filled in on the day of the upload, and its screenshot order is
   still undecided — the gallery needs captures nothing has taken yet.
-- **No `Mod/README.template.md` and no `.github/workflows`.** OPERATIONS.md is explicit that a mod
-  without the template "must not be published with the generated workflow": semantic-release creates
-  the tag and the GitHub release first, then the Steam step throws, leaving a release that never
-  reached Steam.
+- **No `Mod/README.template.md` and no `.github/workflows`.** The template is not a trap waiting to
+  fire — the wrapper plugin checks the description sources in `verifyConditions`, before any tag or
+  release is created, and `bootstrap-release.sh` skips a repository without one. What is real is
+  that the day this mod is bootstrapped, the template becomes the source of the Workshop page and
+  overwrites it at every publication, so it has to carry what the page says today before that day.
 - ~~The mutation campaign has not been rerun.~~ Done 2026-09-25: all 35 woke their test. What it
   still does not cover is functional test 36, the teardown-hook guard, which has no mutation and
   needs none — it came up red on its first run, on a hook nobody had looked at.
