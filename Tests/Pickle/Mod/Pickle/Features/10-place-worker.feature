@@ -17,9 +17,14 @@ Feature: the build menu draws the watch area on the ground
   # under the mountain, nothing standable, so no watch cell and a brown screen. A coordinate in a
   # feature is a claim about one saved map's geography, and this suite should not be making one.
   #
-  # What to look for in the capture: a rectangular outline around the ghost of the holder, running
-  # two to six cells out along each of the four directions and five cells wide. An outline that is
-  # missing, or that hugs the ghost, is the finding.
+  # What to look for in the capture: a cross of four outlined rectangles around the ghost of the
+  # holder, one per cardinal direction, each five cells wide, starting two cells out and ending at
+  # six. An outline that is missing, or that hugs the ghost, is the finding.
+  #
+  # An outline cut into an irregular shape is NOT a finding: EverPossibleToWatchFrom filters the
+  # cells by line of sight and by room, so a holder placed against rock gets the area a watcher
+  # could really use. The first green run showed exactly that for the holding spot, and it is why
+  # the step now asks for nine clear cells all round - true behaviour, unreadable review.
 
   Background:
     Given the save "test-colony" is loaded

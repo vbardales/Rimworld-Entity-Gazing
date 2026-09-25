@@ -36,18 +36,28 @@ namespace EntityGazing.PickleSteps
         /// enough of the same around it that a watch rect has somewhere to go. That last condition
         /// is not the assertion in disguise - it asks for free cells, while the step that follows
         /// asks the game for watch cells, which are filtered by room and line of sight as well.
+        ///
+        /// The margin is demanding on purpose, and the reason is the picture rather than the test.
+        /// The first green run framed the holding spot at the edge of explored ground: the outline
+        /// was drawn, correctly, clipped to the cells a watcher could really use - and a reader
+        /// could no longer check the one thing the capture exists for, that it runs two to six
+        /// cells out and five wide. An area cut by rock is right behaviour and an unreadable
+        /// review. Nine cells of clear ground in every direction is what makes the shape legible.
         /// </summary>
         [When("Entity Gazing frames open ground for a placement")]
         public void FrameOpenGround(PickleContext ctx)
         {
+            const float Margin = 9f;
             var map = Driver.Map(ctx);
+            var wanted = GenRadial.NumCellsInRadius(Margin);
             IntVec3 chosen;
-            var found = CellFinder.TryFindRandomCellNear(map.Center, map, 60, c => IsOpen(map, c)
-                    && GenRadial.RadialCellsAround(c, 6f, true).Count(n => IsOpen(map, n)) >= 40,
+            var found = CellFinder.TryFindRandomCellNear(map.Center, map, 80, c => IsOpen(map, c)
+                    && GenRadial.RadialCellsAround(c, Margin, true).Count(n => IsOpen(map, n)) >= wanted * 0.95f,
                 out chosen);
             ctx.Require(found,
-                "no open ground was found on this map: every candidate was fogged, blocked or "
-                + "hemmed in, so there is nowhere a watch area could be drawn");
+                $"no ground with {Margin} clear cells all round was found: every candidate was "
+                + "fogged, blocked or hemmed in. The watch area would still be drawn, but clipped "
+                + "to what a watcher could use, and the capture would not show its shape");
 
             Find.CameraDriver.JumpToCurrentMapLoc(chosen);
             ctx.Set(new FramedCell { Cell = chosen });
