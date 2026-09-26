@@ -9,17 +9,16 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-stage:        done
+stage:        tested
 settings_audit: complete
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
 dependencies: declared
 showcase:     complete
-tested_on:
+tested_on:    9352e70 (Mod/ unchanged since d9ca1da)
 workshop:     3806760893
 remaining:
-  - "verified: every Pickle pass is green, and every @review capture was opened and read. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ itself has not changed by one byte since d9ca1da, so what shipped is what was tested."
-  - "unverified: the restart pair on the tree that ships. 5bcee70 added a settings seed for the ordinary pass, under Tests/Pickle/config/, after the pair had already run, and the pair uses that same pass folder - the launcher names it after the pass, and that name is not the repository to rename. The pair own code is unchanged since d9ca1da and the seed sets 2 and 6, which the writer overwrites with 9 and 12, so it should not matter - but should not is not seen. Replayed as 63c8 against 9352e70; until it reports green the stage stays at done."
+  - "verified: every Pickle pass is green, and every @review capture was opened and read. The restart pair replayed as 63c8 against 9352e70, the tree that ships: exitReason passed both launches, 1 + 1 scenarios, two distinct Player.log files a minute apart, the reader guard passed. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ itself has not changed by one byte since d9ca1da, so what shipped is what was tested."
   - "unverified: whether About.xml should keep declaring Anomaly a hard dependency while every document calls it optional. Feature 13 now shows what the mod does without the DLC - it loads quietly, its three gameplay defs are gated away, the settings open cleanly and the shortcut stays hidden - which is the evidence for the choice, not the choice. A hard dependency makes the mod list demand the DLC of a player without it; dropping it would make the mod silently inert for them. Left as it is: that is a decision for Virginie, and it was not mine to take."
   - "unverified: what a particular button editor such as RIMMSQOL does with the EG_Settings shortcut. The suite proves the mechanism any such mod uses, not one editor version."
   - "unverified: the Workshop item exists but has never been subscribed to or opened, so the showcase has not been seen in place."
