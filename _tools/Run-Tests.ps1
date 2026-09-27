@@ -505,42 +505,37 @@ Test-That "the documents name the patch file that actually exists" {
     $ghost.Count -eq 0
 }
 
-# Two copies of one text, on purpose and for a while. The Workshop description lives in About.xml
-# today, hand-edited on the page because SetItemDescription only fires when an item is created; the
-# Markdown block of PUBLICATION.md is the source the CI will use the day this mod moves to it, and
-# it has to carry the page's text before that day. Until then nothing keeps them in step but this.
-#
-# Markup is normalised away rather than compared: one side is Markdown, the other the plain form
-# About.xml carries. What is compared is the prose, which is what drifts.
+# The mod is on the CI now (bootstrapped 2026-09-27): About.xml's <description> is generated from
+# PUBLICATION.md's "## Steam description" block by .github/scripts/about-description.mjs, and the
+# same dry-run that would publish already refuses a drift with aboutProblem(). This test asks that
+# same converter, rather than keeping a second, hand-rolled normaliser that can itself go stale -
+# which is exactly what happened to the one this replaced the day the CI started writing plain text
+# instead of BBCode into About.xml.
 Test-That "the Markdown description source and About.xml still say the same thing" {
-    $pub = Join-Path $ModRoot 'PUBLICATION.md'
-    if (-not (Test-Path $pub)) { Note 'no PUBLICATION.md'; return 'skip' }
-    $text = Read-Text $pub
-    $m = [regex]::Match($text, '(?s)##\s+Steam description.*?```markdown\r?\n(.*?)\r?\n```')
-    if (-not $m.Success) { Note 'no "## Steam description" markdown block'; return 'skip' }
+    $config = Join-Path $ModRoot '.github\publish.config.json'
+    if (-not (Test-Path $config)) { Note 'no .github/publish.config.json: not on the CI yet'; return 'skip' }
+    $node = Get-Command node -ErrorAction SilentlyContinue
+    if (-not $node) { Note 'node not found on PATH'; return 'skip' }
 
-    function Normalise([string]$s) {
-        $s = $s -replace '\[([^\]]*)\]\(([^)]*)\)', '$1 $2'      # markdown link -> text url
-        $s = $s -replace '\[url=([^\]]*)\]([^\[]*)\[/url\]', '$2 $1'  # bbcode link -> text url
-        $s = $s -replace '(?m)^#{1,6}\s*', ''                    # headings
-        $s = $s -replace '\*\*?', ''                             # bold / italics
-        ($s -replace '\s+', ' ').Trim().ToLowerInvariant()
+    # Written beside the scripts it imports, not in a temp folder: ES module imports resolve
+    # relative to the importing file, not the working directory.
+    $script = @'
+import { loadConfig } from "./config.mjs";
+import { aboutProblem } from "./about-description.mjs";
+const config = await loadConfig(process.argv[2]);
+const problem = await aboutProblem(process.argv[2], config);
+console.log(problem ? ("PROBLEM: " + problem) : "OK");
+'@
+    $scriptPath = Join-Path $ModRoot ".github\scripts\_eg-about-check-$PID.mjs"
+    Set-Content -Path $scriptPath -Value $script -Encoding utf8
+    try {
+        $result = & node $scriptPath $ModRoot 2>&1
+    } finally {
+        Remove-Item $scriptPath -Force -ErrorAction SilentlyContinue
     }
-
-    $fromBlock = Normalise $m.Groups[1].Value
-    $fromAbout = Normalise ([xml](Read-Text (Join-Path $Mod 'About\About.xml'))).ModMetaData.description
-
-    if ($fromBlock -ne $fromAbout) {
-        # Name the first place they part company: a whole-text diff is unreadable at this length.
-        $a = $fromBlock -split ' '; $b = $fromAbout -split ' '
-        $i = 0; while ($i -lt $a.Count -and $i -lt $b.Count -and $a[$i] -eq $b[$i]) { $i++ }
-        Note ("they part at word {0}: block has '{1}', About.xml has '{2}'" -f $i,
-              (($a[$i..([Math]::Min($i + 6, $a.Count - 1))]) -join ' '),
-              (($b[$i..([Math]::Min($i + 6, $b.Count - 1))]) -join ' '))
-    } else {
-        Note ("{0} words, identical once markup is normalised" -f ($fromBlock -split ' ').Count)
-    }
-    $fromBlock -eq $fromAbout
+    $line = ($result | Select-Object -Last 1)
+    Note $line
+    $line -eq 'OK'
 }
 
 # ---------------------------------------------------------------------------------------------
