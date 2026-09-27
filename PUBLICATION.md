@@ -9,29 +9,25 @@ The mod reached `tested` on 2026-09-26. This file was written early, at `done`, 
 plugin refuses a publication without it and because the change note has a shape that is easy to get
 wrong; it now carries the queued edits `tested` freed.
 
-## The description, and the trap waiting in it
+## The description, and the trap that used to wait in it
 
-**Today the page is hand-edited, and that is the only way.** `About.xml`'s description was sent
-once, by the in-game upload that created the item: RimWorld calls `SetItemDescription` only when
-`creating` is true. The page was corrected by hand on 2026-09-25 to name the AI tools and to carry
-`IF I GO QUIET`, `AI-GENERATED` and `THANKS`. `Mod/About/About.xml` holds the same text, so the two
-agree, and any further change means the same hand edit.
+**The mod was bootstrapped onto the CI on 2026-09-27** (`c8fbeb3`). `About.xml`'s `<description>`
+is generated from the `## Steam description` block below by
+`.github/scripts/about-description.mjs`, and every dry-run refuses to publish if it has drifted -
+form test 25 runs the same check locally. Hand-editing `About.xml`'s description is no longer
+correct: edit the block below instead and let the converter carry it.
 
-**The day this mod is bootstrapped onto the CI, that reverses.** `semantic-release-steam` compiles
-the description from `Mod/README.template.md` and **overwrites the page at every publication**. So
-before the first CI release:
+**The live Steam page has not caught up, and cannot on its own.** `SetItemDescription` only fires
+when RimWorld creates the item, which already happened for 3806760893 - so nothing short of a
+publish, or a hand edit of the page, changes what a browser sees today. The page still shows the
+BBCode text written by hand on 2026-09-25, one generation behind: it named the AI tools and carried
+`IF I GO QUIET`, `AI-GENERATED` and `THANKS`, but not yet the PickleTools line added 2026-09-27. A
+publish's dry-run would send the current block in BBCode; short of that, the same hand edit closes
+the gap.
 
-- `Mod/README.template.md` has to exist, in Markdown, carrying what the page now says. Its absence
-  is caught early rather than late: the wrapper plugin's `verifyConditions` calls `checkMod` for
-  every mod before semantic-release creates anything, so the run stops with no tag and no GitHub
-  release. That is what the wrapper is for, and `bootstrap-release.sh` also skips a repository that
-  has no template. The error message still describes the failure it prevents.
-- `Mod/.steamignore` has to list `/README.template.md` and `/README.md`, or both ship to players.
-- Once both exist, the template is the source and the Steam page is no longer edited by hand.
-
-Neither file is written yet. They live under `Mod/`, the staged payload; the three Pickle requests
-that queued against it have since reported and the mod is `tested`, so nothing blocks them now
-beyond deciding to make the move to the CI standard.
+No `Mod/README.template.md` was needed: this mod's `.github/publish.config.json` names
+`PUBLICATION.md` itself as `description.file`, so the Markdown source stays here rather than moving
+to a template file under `Mod/`.
 
 ## Steam description
 
