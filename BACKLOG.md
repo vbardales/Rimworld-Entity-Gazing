@@ -53,11 +53,9 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
   adult-content answers. The CI also reads its `### <version>` fenced block as the Steam change note.
 - **The Workshop page's description is done**, by hand on 2026-09-25, and read back to confirm. Any
   later change to `About.xml`'s description needs the same hand edit: no update will carry it.
-- **One line is already owed to it: PickleTools.** PUBLISHING.md asks for the credit as soon as a
-  pass stages a piece of it, and `wsl-deps.no-anomaly.map` now stages `ExpansionSteps`. It has a
-  private Workshop page, `3806142401`, and the mention carries the link and the same "development
-  only" wording as Pickle and RimLogging. Not done the same day because `About.xml` is under `Mod/`
-  and three requests were already queued against that tree; it goes in after they report.
+- ~~One line was owed to PickleTools.~~ Done 2026-09-27, once `tested` freed `About.xml`: all three
+  test tools now linked in the description (Pickle, RimLogging, PickleTools), in `About.xml` and in
+  `PUBLICATION.md`'s Markdown source alike. Not yet hand-applied to the live Steam page.
 - **`Mod/README.template.md` and `Mod/.steamignore` do not exist**, and the day this mod is
   bootstrapped onto the CI the template becomes the source of the page — overwriting the hand edit
   at every publication. Both are under `Mod/`, so they wait for the queue too. See PUBLICATION.md.

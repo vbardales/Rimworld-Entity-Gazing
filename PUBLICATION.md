@@ -5,9 +5,9 @@ an upload, and for whoever takes the mod over. Workshop item **3806760893**.
 `Mod/About/PublishedFileId.txt` holds the id and must never be lost: without it the next upload
 creates a second item.
 
-The mod is at `done`. Nothing here is due until `tested`, and this file exists early because the
-release plugin refuses a publication without it and because the change note has a shape that is
-easy to get wrong.
+The mod reached `tested` on 2026-09-26. This file was written early, at `done`, because the release
+plugin refuses a publication without it and because the change note has a shape that is easy to get
+wrong; it now carries the queued edits `tested` freed.
 
 ## The description, and the trap waiting in it
 
@@ -29,8 +29,9 @@ before the first CI release:
 - `Mod/.steamignore` has to list `/README.template.md` and `/README.md`, or both ship to players.
 - Once both exist, the template is the source and the Steam page is no longer edited by hand.
 
-Neither file is written yet, deliberately: they live under `Mod/`, which is the staged payload, and
-three Pickle requests are queued against the current tree.
+Neither file is written yet. They live under `Mod/`, the staged payload; the three Pickle requests
+that queued against it have since reported and the mod is `tested`, so nothing blocks them now
+beyond deciding to make the move to the CI standard.
 
 ## Steam description
 
@@ -85,7 +86,7 @@ The code, the documentation and the tests were written with Claude Code (Anthrop
 
 Ludeon Studios, whose television logic supplies the watching activity: this mod adds a condition to it and changes nothing else.
 
-Pickle and RimLogging, which run this mod's in-game acceptance tests. Both are development tools only; neither is a dependency of what you are downloading.
+[Pickle](https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678), [RimLogging](https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696) and [PickleTools](https://steamcommunity.com/sharedfiles/filedetails/?id=3806142401), which run this mod's in-game acceptance tests. All three are development tools only; none is a dependency of what you are downloading.
 
 This mod is MIT licensed. Provenance and artwork credits are in ATTRIBUTION.md in the repository. RimWorld and Anomaly by Ludeon Studios.
 
@@ -161,8 +162,8 @@ a holding spot being watched, and a colonist picking up the nociosphere's pain f
   Anomaly is what will settle it, and the Workshop DLC box follows whatever that decides.
 - **No other dependency.** `loadAfter` names only `Ludeon.RimWorld` and `Ludeon.RimWorld.Anomaly`,
   both vanilla. Nothing is `incompatibleWith`.
-- Pickle and RimLogging run the tests and are **development only**: neither is a dependency of what
-  players download, and the description says so.
+- Pickle, RimLogging and PickleTools run the tests and are **development only**: none is a
+  dependency of what players download, and the description says so.
 
 ## Content boxes
 
@@ -190,13 +191,9 @@ Both are the author's own or the collection's own, so for the **comments** regis
 `WORKSHOP_COMMENTS.md` decides, and this project is added to a covering entry rather than posting a
 second comment.
 
-**PickleTools is owed a line in the description that it does not yet have**, and that is new as of
-2026-09-25. PUBLISHING.md asks for it as soon as a pass of the mod stages a piece of it, and
-`Tests/Pickle/wsl-deps.no-anomaly.map` now stages `ExpansionSteps`. It has a private Workshop page,
-`3806142401`, so the mention carries the link and the same "development only" wording as Pickle and
-RimLogging.
-
-It was not added the same day the page was corrected, and the reason is the queue rather than
-oversight: `About.xml` lives under `Mod/`, three Pickle requests were already filed against the
-tree as it stood, and a request carries no SHA. It goes in with the next hand edit of the page,
-once those have reported.
+**PickleTools' line is added, 2026-09-27.** It was owed since 2026-09-25, when
+`Tests/Pickle/wsl-deps.no-anomaly.map` first staged `ExpansionSteps`, but waited behind three Pickle
+requests already filed against the tree as it then stood. Those reported and the mod moved to
+`tested`, which freed `About.xml` again. The mention carries its private Workshop page,
+`3806142401`, and the same "development only" wording as Pickle and RimLogging - all three now
+linked. Not yet hand-applied to the live Steam page; that happens with the next description edit.
