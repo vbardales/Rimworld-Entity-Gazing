@@ -1,0 +1,20 @@
+{
+  "templateStamp": "a8ca11cdd9a3",
+  "workshopId": "3806760893",
+  "packageId": "nelim.entitygazing",
+  "releaseTitle": "Entity Gazing {version}",
+  "requirePaths": [
+    "Assemblies/EntityGazing.dll"
+  ],
+  "forbidPaths": [],
+  "previewFile": "About/Preview.png",
+  "aboutFromDescription": true,
+  "build": {
+    "project": "Source/EntityGazing.csproj"
+  },
+  "description": {
+    "file": "PUBLICATION.md",
+    "format": "markdown",
+    "heading": "^## Steam description$"
+  }
+}
