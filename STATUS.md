@@ -15,7 +15,7 @@ licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
 dependencies: declared
 showcase:     complete
-tested_on:    9352e70 (Mod/ changed at 4716bd3: description text only, see remaining)
+tested_on:    "9352e70 (Mod/ changed at 4716bd3 - description text only, see remaining)"
 workshop:     3806760893
 remaining:
   - "verified: every Pickle pass is green, and every @review capture was opened and read. The restart pair replayed as 63c8 against 9352e70, the tree that ships: exitReason passed both launches, 1 + 1 scenarios, two distinct Player.log files a minute apart, the reader guard passed. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ changed once more at 4716bd3, after `tested`: About.xml's THANKS paragraph gained the PickleTools link owed to it. No Pickle scenario reads the description text, and `_tools/Run-Tests.ps1` stayed 25 of 25, so the change is not re-run rather than untested."
