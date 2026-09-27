@@ -156,10 +156,8 @@ a holding spot being watched, and a colonist picking up the nociosphere's pain f
 
 ## Dependencies and DLC
 
-- **Anomaly is required**, and declared in `About.xml` as `modDependencies`. Whether that hard
-  declaration is right is an open question recorded in `BUGS.md`: every document says the mod loads
-  without the DLC and merely adds nothing, which describes an optional dependency. The pass without
-  Anomaly is what will settle it, and the Workshop DLC box follows whatever that decides.
+- **Anomaly is required**, and declared in `About.xml` as `modDependencies`. Decided 2026-09-27,
+  after feature 13: the hard declaration stays. Check the Workshop DLC box for Anomaly.
 - **No other dependency.** `loadAfter` names only `Ludeon.RimWorld` and `Ludeon.RimWorld.Anomaly`,
   both vanilla. Nothing is `incompatibleWith`.
 - Pickle, RimLogging and PickleTools run the tests and are **development only**: none is a

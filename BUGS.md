@@ -4,17 +4,19 @@ Things that are wrong now, as opposed to work not yet done, which is in [BACKLOG
 Nothing here is a gameplay defect: the two Pickle passes are green in both languages, and the three
 out-of-game suites are green.
 
-## 1. `About.xml` declares Anomaly a hard dependency while the documents call it optional
+## 1. `About.xml` declares Anomaly a hard dependency while the documents call it optional — closed
 
 `modDependencies` names `Ludeon.RimWorld.Anomaly`. README.md, the Steam description and the
 CHANGELOG all say "Without it the mod loads but adds no recreation activity" — which describes a
 mod that degrades, not one that refuses. The defs carry `MayRequire` precisely so it can load.
 
-**Left as it is on purpose, and now testable.** Both readings are defensible, and this is a decision
-rather than an error: a hard dependency makes the mod list demand the DLC of a player who does not
-have it, and dropping it would instead make the mod silently inert for them. Feature 13, in the
-pass without Anomaly, is what will show which of those a player actually meets. Changing the
-declaration before reading that report would be guessing.
+**Decided 2026-09-27: the hard dependency stays.** Feature 13 supplied the evidence a decision
+needed: with the DLC really absent, the mod loads without error, its three gameplay defs are gated
+away, and nothing else breaks. That is the state a player reaches after removing the DLC once the
+mod is already enabled — `modDependencies` cannot stop that, only fresh enabling through the mod
+list, which is exactly where it should ask for the DLC. Virginie confirmed keeping it. The
+README/CHANGELOG wording about loading without Anomaly still describes that reachable state
+correctly and needs no change.
 
 The **test companion** is a different matter and has been changed: `Tests/Pickle/Mod/About/About.xml`
 now names Anomaly in `loadAfter` only. A development companion whose whole job includes running
