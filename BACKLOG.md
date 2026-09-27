@@ -4,47 +4,12 @@ Work not yet done, in the order the workflow asks for it. Defects that exist now
 [BUGS.md](BUGS.md). What has been read, at which version, is in
 [docs/PROTOCOLS-READ.md](docs/PROTOCOLS-READ.md).
 
-## Before `done → tested`: two passes that have never run
+## `done → tested`, closed 2026-09-26
 
-The three checks TESTING.md's table owed are **written** as of 2026-09-25 — features 10, 11, 12 and
-13, seven scenarios — and none of them has ever been played. A scenario written is not a scenario
-passed, and these three in particular are the ones most likely to be wrong on their first run,
-because each rests on something this mod has never exercised.
-
-### The restart pair, 11 and 12
-
-```
--Filter '11-restart-write' -Then '12-restart-read'
-```
-
-One lock, one staging, two launches. What could go wrong on the first run, in the order it would
-show: the settings file's name is built from the mod's folder name and the **Mod** class's type
-name, read from `Verse.Mod.GetSettings` rather than guessed, and a wrong guess reads as "no
-settings file" whatever the mod wrote. The writer stands the teardown down through a static flag,
-so if `InterfaceSteps.Restore` ever stops honouring it the writer's values are wiped before the
-second launch. And the reader's guard fails loudly by design when the two features are played in
-one process, which is what happens if someone drops the `-Then` and files two requests.
-
-### The pass without Anomaly, 13
-
-```
--DepMap wsl-deps.no-anomaly.map -Filter '13-without-anomaly'
-```
-
-`PickleTools/Headless/README.md` records that the `!<packageId>` line has only ever been exercised
-in a sandbox with a fake game, and that "whether the game really leaves the DLC out of a loaded save
-is what the first real pass has to show". **This pass proves the harness as much as the mod**, and a
-red may belong to either — which is why the feature's background asserts the DLC is really gone,
-through `ExpansionSteps`, before anything else is asked.
-
-It also settles BUGS.md 2, and the two `MayRequire` translation-gating notices the shared
-DefInjected checker raises.
-
-### And the ordinary passes have to be replayed
-
-Features 10 through 13 did not exist when `5eb3` and `1a55` ran. The two ordinary passes now carry
-25 scenarios instead of 23, and their filter now has to exclude 11, 12 and 13 by name. Four passes
-in total, and `Tests/Pickle/README.md` holds the four commands.
+All seven scenarios across features 10–13 have run, and all four Pickle passes are green: ordinary
+English and French (25/25 each), the restart pair (94b5 on d9ca1da, replayed as 63c8 on 9352e70,
+the tree that ships), the pass without Anomaly (1d08, 5/5), and the place worker (e986). See
+`STATUS.md` and `docs/runs/pickle.md` for the run IDs and revisions.
 
 ## Before `tested → prepublished`
 
@@ -55,7 +20,9 @@ in total, and `Tests/Pickle/README.md` holds the four commands.
   later change to `About.xml`'s description needs the same hand edit: no update will carry it.
 - ~~One line was owed to PickleTools.~~ Done 2026-09-27, once `tested` freed `About.xml`: all three
   test tools now linked in the description (Pickle, RimLogging, PickleTools), in `About.xml` and in
-  `PUBLICATION.md`'s Markdown source alike. Not yet hand-applied to the live Steam page.
+  `PUBLICATION.md`'s Markdown source alike. **Not yet hand-applied to the live Steam page** — the
+  next hand edit of item 3806760893's description has this line to carry too.
+- ~~Whether Anomaly should stay a hard dependency.~~ Decided 2026-09-27: it stays. See `BUGS.md` 1.
 - **`Mod/README.template.md` and `Mod/.steamignore` do not exist**, and the day this mod is
   bootstrapped onto the CI the template becomes the source of the page — overwriting the hand edit
   at every publication. Both are under `Mod/`, so they wait for the queue too. See PUBLICATION.md.

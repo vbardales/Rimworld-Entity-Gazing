@@ -12,23 +12,30 @@ The version that arrives with publication is 1.0.0, and it is not here yet.
 - **The Workshop description now names the tools that wrote this mod** — Claude Code (Anthropic),
   Codex (OpenAI), DALL-E for the artwork — where it said only "Created with AI assistance", and
   gains the `IF I GO QUIET`, `AI-GENERATED` and `THANKS` sections the publishing protocol asks for,
-  with Pickle and RimLogging credited as development-only tools.
+  with Pickle, RimLogging and PickleTools credited as development-only tools (the PickleTools line
+  added 2026-09-27, once `tested` freed the file again).
 
   **The live page could not follow from a commit**, since `SetItemDescription` fires only when an
   item is created. Item 3806760893 was edited by hand on the Workshop page on 2026-09-25, and the
-  public page read back afterwards to confirm it. The repository and the page now agree.
+  public page read back afterwards to confirm it. The repository and the page now agree, except for
+  the PickleTools line, not yet hand-applied.
 
 - `Mod/About/About.xml` is therefore no longer byte-identical to what 0.1.0 uploaded. Nothing else
   under `Mod/` has changed: no def, no patch, no assembly, no translation. The mod a player runs
   behaves exactly as 0.1.0 did.
 
+- **Anomaly stays a hard `modDependencies` entry.** Decided 2026-09-27 once feature 13 showed what
+  the mod does with the DLC really absent: it loads quietly, its three gameplay defs are gated
+  away, nothing else breaks. See `BUGS.md` 1, closed.
+
 ### Development, not shipped
 
 - **The mutation campaign was rerun** on 2026-09-25, which 0.1.0 recorded as owed. All 35 mutations
-  woke the test they were aimed at, against suites that have grown to 78 checks since.
-- **The Pickle suite is complete**: thirteen features, thirty-two scenarios, four passes. The two
-  ordinary passes are green in both languages; the restart pair, the place-worker capture and the
-  pass without Anomaly have never run.
+  woke the test they were aimed at, against suites that have grown to 79 checks since.
+- **The Pickle suite is complete and all four passes are green**: thirteen features, thirty-two
+  scenarios. Ordinary English and French, the restart pair (replayed once more as 63c8, on the tree
+  that ships), the place-worker capture, and the pass without Anomaly. The mod reached `tested` on
+  2026-09-26.
 
 ## [0.1.0] — 2026-09-24
 
