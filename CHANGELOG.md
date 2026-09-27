@@ -5,7 +5,9 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 
 ## [Unreleased]
 
-The version that arrives with publication is 1.0.0, and it is not here yet.
+## [1.0.0] — 2026-09-27
+
+The version that arrives with publication is 1.0.0.
 
 ### Changed
 
