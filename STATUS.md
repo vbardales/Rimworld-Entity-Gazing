@@ -13,6 +13,7 @@ stage:        tested
 settings_audit: complete
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
+upstream_mod_remotes: N/A
 dependencies: declared
 showcase:     complete
 tested_on:    "9352e70 (Mod/ changed twice since: 4716bd3 and the CI bootstrap c36f00f/c8ba583 - description text only, see remaining)"
