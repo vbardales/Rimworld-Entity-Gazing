@@ -1,0 +1,12 @@
+# The pass that takes the Workshop gallery's pictures, and nothing else.
+#
+# It stages PickleTools' zen meadow studio and the three companions the shots lean on, so the
+# scene in each image is chosen instead of borrowed from the test colony. Feature 14 is valid only
+# here: its Background loads the studio's saved fixture, which no other pass stages. The other
+# passes exclude it by name (Tests/Pickle/README.md).
+#
+# Anomaly stays ON: the shots are of the mod doing its job, which needs the DLC.
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.clearscreen      path:PickleTools/ClearScreen/Mod
+nelim.pickletools.inspecttabs      path:PickleTools/InspectTabs/Mod
+nelim.pickletools.screenshotmode   path:PickleTools/ScreenshotMode/Mod

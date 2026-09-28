@@ -30,13 +30,24 @@ namespace EntityGazing.PickleSteps
         /// Setting the faction after the spawn would not do - the lister is not re-sorted.
         /// </summary>
         [Given("Entity Gazing spawns a {string}")]
-        public void SpawnHolder(PickleContext ctx, string defName)
+        public void SpawnHolder(PickleContext ctx, string defName) => SpawnHolderNear(ctx, defName, null);
+
+        /// <summary>
+        /// The same holder, staged where the camera is looking instead of near the map centre. A
+        /// publication shot frames a scene first and needs the subject inside it; the ordinary
+        /// scenarios do not care where on the map the holder lands.
+        /// </summary>
+        [Given("Entity Gazing spawns a {string} where the camera looks")]
+        public void SpawnHolderInView(PickleContext ctx, string defName) =>
+            SpawnHolderNear(ctx, defName, Find.CameraDriver.MapPosition);
+
+        private static void SpawnHolderNear(PickleContext ctx, string defName, IntVec3? near)
         {
             var def = DefDatabase<ThingDef>.GetNamedSilentFail(defName);
             ctx.Require(def != null, $"no ThingDef named '{defName}'");
             var thing = ThingMaker.MakeThing(def, GenStuff.DefaultStuffFor(def));
             thing.SetFactionDirect(Faction.OfPlayer);
-            var building = GenSpawn.Spawn(thing, Driver.FreeCell(ctx), Driver.Map(ctx)) as Building;
+            var building = GenSpawn.Spawn(thing, Driver.FreeCell(ctx, near, near.HasValue ? 3 : 20), Driver.Map(ctx)) as Building;
             ctx.Require(building != null, $"'{defName}' did not spawn as a Building");
             ctx.Require(Driver.Map(ctx).listerBuildings.allBuildingsColonist.Contains(building),
                 $"'{defName}' spawned but did not enter the colonist building list");
@@ -65,12 +76,18 @@ namespace EntityGazing.PickleSteps
         }
 
         [Given("Entity Gazing spawns the colonist {string} with no recreation")]
-        public void SpawnColonist(PickleContext ctx, string name)
+        public void SpawnColonist(PickleContext ctx, string name) => SpawnColonistNear(ctx, name, null);
+
+        [Given("Entity Gazing spawns the colonist {string} with no recreation where the camera looks")]
+        public void SpawnColonistInView(PickleContext ctx, string name) =>
+            SpawnColonistNear(ctx, name, Find.CameraDriver.MapPosition);
+
+        private static void SpawnColonistNear(PickleContext ctx, string name, IntVec3? near)
         {
             var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(
                 PawnKindDefOf.Colonist, Faction.OfPlayer, forceGenerateNewPawn: true));
             pawn.Name = new NameSingle(name);
-            GenSpawn.Spawn(pawn, Driver.FreeCell(ctx), Driver.Map(ctx));
+            GenSpawn.Spawn(pawn, Driver.FreeCell(ctx, near, near.HasValue ? 8 : 20), Driver.Map(ctx));
             pawn.needs.AddOrRemoveNeedsAsAppropriate();
             ctx.Require(pawn.needs?.joy != null, $"'{name}' has no recreation need");
             pawn.needs.joy.CurLevel = 0f;

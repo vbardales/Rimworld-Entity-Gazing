@@ -3,7 +3,7 @@
 In-game acceptance tests. Development only: the companion under `Mod/` is never published, and
 nothing here is part of the Workshop payload.
 
-Thirteen features, thirty-two scenarios, spread over four passes because two of them cannot share a
+Fourteen features, thirty-seven scenarios, spread over five passes because three of them cannot share a
 game with the rest. Writing them was the `preTest → done` criterion; running them all and reading
 their captures is `done → tested`.
 
@@ -27,6 +27,7 @@ building, a tethered pawn, a window, a reload, a second launch or a DLC switched
 | 10 place worker | the watch area drawn on the ground under the build designator — an image, not an assertion |
 | 11 / 12 restart | a value that has to outlive the process, which one process cannot show |
 | 13 without Anomaly | what the game does with the patch, the window and the shortcut when the defs are gone |
+| 14 publication shots | not a verification: the Workshop gallery pictures, taken in the zen meadow studio instead of the test colony |
 
 **Dropped rather than converted.** The manual scenario that checked the patch had landed on the
 right nodes is proved out of game, by running the game's own patch engine against the real Anomaly
@@ -38,11 +39,12 @@ recreation source on the map. It fails for reasons that are not the mod's and pa
 much. Asking the giver on a real map with a real holder runs exactly the mod's one override and the
 vanilla code beneath it, deterministically.
 
-## The four passes
+## The five passes
 
-Twenty-five scenarios run in the two ordinary passes. The other seven cannot: the restart pair
-needs two launches, and the DLC-off feature needs a game staged without Anomaly. Every scenario is
-covered by exactly one pass, and the four together are what `tested` asks for.
+Twenty-five scenarios run in the two ordinary passes. The other twelve cannot: the restart pair
+needs two launches, the DLC-off feature needs a game staged without Anomaly, and the publication
+shots need the studio fixture. Every scenario is covered by exactly one pass. The first four are
+what `tested` asks for; the studio pass is what the gallery asks for and proves nothing about the mod.
 
 | Pass | Features | Scenarios | Language | What it establishes |
 |---|---|---|---|---|
@@ -50,8 +52,9 @@ covered by exactly one pass, and the four together are what `tested` asks for.
 | minimal French | 01–10 | 25 | French | the same UI and job text in the other language |
 | restart | 11, 12 | 2 | English | a global setting outliving the process |
 | without Anomaly | 13 | 5 | English | the mod with the DLC switched off |
+| studio | 14 | 5 | English | the gallery pictures, in a scene chosen for them |
 
-The restart pair and the DLC-off feature are **excluded from the ordinary passes by name**, and
+The restart pair, the DLC-off feature and the publication shots are **excluded from the ordinary passes by name**, and
 that exclusion is not optional. `11-restart-write` leaves 9 to 12 on disk on purpose and stands the
 teardown down; `12-restart-read` refuses to pass when the writer ran in the same process. Playing
 either inside the plain run makes the run wrong rather than red.
@@ -66,17 +69,18 @@ From the collection root, with the session id from `get_session` and the mod's S
 `PLAIN` below is the filter the two ordinary passes share:
 
 ```
-PLAIN = Entity Gazing - Pickle tests,!11-restart-write,!12-restart-read,!13-without-anomaly
+PLAIN = Entity Gazing - Pickle tests,!11-restart-write,!12-restart-read,!13-without-anomaly,!14-publication-shots
 ```
 
 ```powershell
 $S = 'Rimworld-Ticket-Dispatcher\scripts\Submit-PickleRun.ps1'
-$Plain = 'Entity Gazing - Pickle tests,!11-restart-write,!12-restart-read,!13-without-anomaly'
+$Plain = 'Entity Gazing - Pickle tests,!11-restart-write,!12-restart-read,!13-without-anomaly,!14-publication-shots'
 
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'final English SHA' -Filter $Plain -EvidenceDir EntityGazing/Tests/Pickle/Evidence/en
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'final French SHA' -Language French -Filter $Plain -EvidenceDir EntityGazing/Tests/Pickle/Evidence/fr
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'restart SHA' -Filter '11-restart-write' -Then '12-restart-read' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/restart
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'without Anomaly SHA' -DepMap wsl-deps.no-anomaly.map -Filter '13-without-anomaly' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/no-anomaly
+powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'publication shots SHA' -DepMap wsl-deps.studio.map -Filter '14-publication-shots' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/studio
 ```
 
 The suite name comes first in every filter that carries an exclusion. A filter of exclusions alone
