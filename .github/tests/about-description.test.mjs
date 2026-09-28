@@ -22,6 +22,11 @@ test('Markdown becomes the plain text a player reads in the mod list', () => {
   ].join(NL));
 });
 
+test('a link keeps brackets inside its own text, and a bare bracket before it stays out of the text', () => {
+  assert.equal(markdownToPlainText('[[XND] Nocturnal](https://example.com/a) ok'), '[XND] Nocturnal (https://example.com/a) ok');
+  assert.equal(markdownToPlainText('See [note] and [Pickle](https://example.com/b)'), 'See [note] and Pickle (https://example.com/b)');
+});
+
 test('words with underscores or asterisks are left alone, and blank lines are collapsed', () => {
   assert.equal(markdownToPlainText('a snake_case_name and 2 * 3 * 4' + NL + NL + NL + NL + 'end'), 'a snake_case_name and 2 * 3 * 4' + NL + NL + 'end');
   assert.equal(markdownToPlainText('![alt text](https://x.test/i.png) and ![https://x.test/j.png](https://x.test/j.png)'), 'alt text (https://x.test/i.png) and https://x.test/j.png');
