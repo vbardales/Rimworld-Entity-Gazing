@@ -143,12 +143,13 @@ the GitHub release notes, read separately by the same plugin.
 Steam shows the first one large, so the most demonstrative goes first, not the prettiest. Every
 image is opened and looked at before it is uploaded; a filename is not evidence of what it holds.
 
-**Not decided yet, and it needs images this repository does not have.** What exists today is
-`Mod/About/Preview.png`, the banner, and two `@review` captures per language under
-`Tests/Pickle/Evidence/` — the settings window, and a colonist mid-gaze with the inspect pane open.
-The gaze capture is a candidate for the first slot; the others a gallery would want, and nothing
-has taken yet, are the watch area drawn under the build designator (feature 10 will produce one),
-a holding spot being watched, and a colonist picking up the nociosphere's pain field.
+**Not decided yet, and it needs images this repository does not have.** The only image made for
+the page is `Mod/About/Preview.png`, the banner. **The Pickle captures under
+`Tests/Pickle/Evidence/` are test evidence, not gallery material**: they come from the harness's
+test colony under Xvfb, not from a colony chosen to show the mod (Virginie, 2026-09-28: wrong
+colony). The gallery has to be shot by hand in a real colony. Shots it would want: a colonist
+mid-gaze at a held entity, the watch area drawn under the build designator, a holding spot being
+watched, the settings window, and a colonist standing in a nociosphere's pain field.
 
 ## Dependencies and DLC
 
