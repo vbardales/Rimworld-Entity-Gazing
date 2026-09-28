@@ -8,6 +8,11 @@
 # Every shot is @review: a green scenario proves an image was produced, not that it shows what
 # the page says. Each one is opened and looked at before it goes into the gallery folder.
 #
+# The first run of this feature (ticket 935f) came back with three fixable problems, read out of
+# the captures rather than any assertion: colonists a few pixels at the studio's own zoom, a red
+# resource-cost label over the watch-area ghost, and a health-tab shot cluttered by the alert
+# stack and the dev-mode toolbar. All three are addressed below rather than accepted.
+#
 # What each capture has to show:
 #   gaze         watchers standing 2 to 6 cells from a held fingerspike, a platform in the middle
 #   holding spot the same, on the floor marker
@@ -21,6 +26,11 @@ Feature: shots for the Workshop page
     Given the save "nelim-zen-meadow-studio" is loaded
     And I close all dialogs
     And Nelim's Pickle Tools: I frame the studio "display"
+    # The studio's own "display" zoom (rootSize 12) frames the whole demonstration room, meant for
+    # a preset built to hold furniture. A colonist is a few pixels at that distance. 10 is close
+    # enough to read a face and still wide enough that the watch-area cross, up to 6 cells out and
+    # 5 wide, is not clipped by the edge of the shot.
+    And Entity Gazing zooms the camera to 10 cells
 
   Scenario: colonists gazing at a held entity
     Given Entity Gazing spawns a "HoldingPlatform" where the camera looks
@@ -57,6 +67,9 @@ Feature: shots for the Workshop page
     And I take a screenshot "publication - holding spot"
 
   Scenario: the watch area drawn under the build designator
+    # The first run's capture had a red "40 (not enough stored)" cost label sitting on the ghost:
+    # the studio map keeps no steel, and the designator prices what it is about to place, honestly.
+    Given Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
     Then Entity Gazing the game is about to draw a watch area at the pointer
     When Nelim's Pickle Tools: studio presentation mode is enabled
@@ -82,4 +95,10 @@ Feature: shots for the Workshop page
     And I move the camera to "Iris"
     And Nelim's Pickle Tools: I open the "Health" inspect tab
     Then Nelim's Pickle Tools: the "Health" inspect tab is open
-    When I take a screenshot "publication - pain field"
+    # The inspect tab is not a Window, so screenshot mode (which only keeps open windows) hides it
+    # along with the HUD - the same reason SkillIcons' own Bio-tab shot keeps the normal interface.
+    # Developer mode off removes the "Dev tool..." button this run's capture showed; clearing the
+    # letters and alerts removes what had piled up onto the colonist bar by then.
+    When Nelim's Pickle Tools: developer mode is turned off for the capture
+    And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
+    And I take a screenshot "publication - pain field"

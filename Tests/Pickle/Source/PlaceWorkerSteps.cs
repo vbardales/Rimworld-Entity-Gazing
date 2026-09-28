@@ -65,6 +65,38 @@ namespace EntityGazing.PickleSteps
 
         internal sealed class FramedCell { public IntVec3 Cell; }
 
+        /// <summary>
+        /// A publication shot loses its subject at the studio's own zoom: "display" frames a whole
+        /// 12-cell room, and a colonist at that distance is a few pixels. This does not touch the
+        /// camera position, only how much of the map its rootSize shows - the same field
+        /// ScreenshotStudio's own Frame step sets, smaller here because the room is the frame and
+        /// the platform is the subject.
+        /// </summary>
+        [When("Entity Gazing zooms the camera to {float} cells")]
+        public void Zoom(PickleContext ctx, float size)
+        {
+            Find.CameraDriver.SetRootSize(size);
+        }
+
+        /// <summary>
+        /// The build designator prices what it is about to place, and a studio map keeps no steel
+        /// stocked: the first run's watch-area capture came back with a red "40 (not enough
+        /// stored)" cost label sitting over the ghost. The label is the designator being honest, not
+        /// a bug, and the fix is not to hide it but to make it true - 50 steel is more than the
+        /// costliest holder needs, dropped near the framed cell rather than the map centre so
+        /// nothing else in the shot moves.
+        /// </summary>
+        [Given("Entity Gazing has steel stocked near the placement")]
+        public void StockSteel(PickleContext ctx)
+        {
+            var map = Driver.Map(ctx);
+            var centre = ctx.Get<FramedCell>()?.Cell ?? Find.CameraDriver.MapPosition;
+            var cell = Driver.FreeCell(ctx, centre + new IntVec3(6, 0, 6), 8);
+            var steel = ThingMaker.MakeThing(ThingDefOf.Steel);
+            steel.stackCount = 50;
+            GenSpawn.Spawn(steel, cell, map);
+        }
+
         private static bool IsOpen(Map map, IntVec3 c)
         {
             return c.InBounds(map) && !c.Fogged(map) && c.Standable(map) && c.GetEdifice(map) == null;
