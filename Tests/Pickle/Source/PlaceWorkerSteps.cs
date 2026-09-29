@@ -90,7 +90,9 @@ namespace EntityGazing.PickleSteps
         public void StockSteel(PickleContext ctx)
         {
             var map = Driver.Map(ctx);
-            var centre = ctx.Get<FramedCell>()?.Cell ?? Find.CameraDriver.MapPosition;
+            IntVec3 centre;
+            try { centre = ctx.Get<FramedCell>().Cell; }
+            catch { centre = Find.CameraDriver.MapPosition; }
             var cell = Driver.FreeCell(ctx, centre + new IntVec3(6, 0, 6), 8);
             var steel = ThingMaker.MakeThing(ThingDefOf.Steel);
             steel.stackCount = 50;
