@@ -1,6 +1,6 @@
 ---
-localization: complete
-translation_en: complete
+localization: partial
+translation_en: partial
 translation_fr: partial
 mod:          Entity Gazing
 packageId:    nelim.entitygazing
@@ -9,7 +9,8 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-stage:        tested
+stage:        showcase
+workflow_stage: options
 settings_audit: complete
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
@@ -20,6 +21,7 @@ tested_on:    "9352e70 (Mod/ changed twice since: 4716bd3 and the CI bootstrap c
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
+  - "defect: plural keys missing (TRANSLATIONS.md, Counts and plurals, 2026-09-25). EG_MinimumDistance and EG_MaximumDistance display a count ({0}, 1 to 20) through a single key in Keyed/Settings.xml, EN and FR: 1 shows as '1 cells' / '1 cases'. Need .One/.Many forms in both languages and Translate calls choosing by count in Source/EntityGazingMod.cs:73,75. Audit 2026-10-02 did not fix it, by rule. Mod/ then changes, so the DLL, Pickle 08-language and the tested bar need a re-run."
   - "verified: every Pickle pass is green, and every @review capture was opened and read. The restart pair replayed as 63c8 against 9352e70, the tree that ships: exitReason passed both launches, 1 + 1 scenarios, two distinct Player.log files a minute apart, the reader guard passed. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ changed twice since `tested`: 4716bd3 (the PickleTools link) and the CI bootstrap (About.xml's description switched from hand-written BBCode to plain text generated from PUBLICATION.md). No Pickle scenario reads the description text, and `_tools/Run-Tests.ps1` stayed 25 of 25 through both, so the changes are not re-run rather than untested."
   - "decided 2026-09-27: About.xml keeps Anomaly as a hard modDependencies entry. Feature 13 supplied the evidence - loads quietly without the DLC, three gameplay defs gated away, settings clean, shortcut hidden - and Virginie confirmed keeping the hard declaration. See BUGS.md 1, closed."
   - "blocking prepublished: the Workshop gallery order is still undecided (PUBLICATION.md) - it needs captures nothing has taken yet beyond the two @review screenshots per language. AUDIT.md's tested-to-prepublished gate needs that order settled and justified before the first real send."
@@ -28,10 +30,26 @@ remaining:
   - "unverified: the Workshop item exists but has never been subscribed to or opened, so the showcase has not been seen in place."
   - "unverified: French review by Virginie (TRANSLATIONS.md, 2026-09-30). FRENCH_REVIEW.md generated 2026-09-30 at 51bdc9a, 5 files / 9 rows: 1 Keyed, 3 DefInjected. No text agrees with a pawn's gender, so no {PAWN_gender} switch is expected anywhere in this mod - nothing flagged."
 session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
-updated:      2026-09-27, mod session
+updated:      2026-10-02, audit session
 ---
 
 # Entity Gazing — status
+
+## Workflow audit — 2026-10-02
+
+**tested → showcase** (`workflow_stage: options`). Audited at `affc5e2`; the working tree has only untracked
+`Art/*.ico` and `desktop.ini` files plus `.github/` edits from another session, none touching `Mod/`. No game launched.
+This supersedes the stage in older sections; their results stay.
+
+- **Defect (blocks `options → l10n`):** the plural rule (TRANSLATIONS.md, 2026-09-25) postdates the earlier `complete`.
+  `EG_MinimumDistance` and `EG_MaximumDistance` print a number through one key with no `.One`/`.Many`, in EN and FR. Not fixed: an audit does not.
+- **Checked, fine:** `.dds` rule in `.gitignore`; no `.dds` on disk or in git. `PublishedFileId.txt` present (3806760893), committed in `e6164c0`;
+  CHANGELOG already has `[0.1.0]`. No `@wip`; `@requires` only on feature 14, which ran under `wsl-deps.studio.map`.
+  No manual test left (TESTING.md). `upstream_mod_remotes: N/A`, licence `original`: no upstream repo to base on or send PRs to.
+- **Evidence trimmed 164 MB to 48 MB** (`Tests/Pickle/Evidence/`, gitignored, never in git): dropped superseded `studio` and `studio-1` (kept `studio-2`, 2026-09-30, 5/5)
+  and every `report.html` / `messages.ndjson` (26 MB each). Kept per scenario: latest `summary.md`, `junit.xml`, `Player.log`, screenshots of the current revision.
+- **Unverified, unchanged:** French review by Virginie; Workshop gallery order; live description one generation behind `About.xml`.
+- **Next:** add plural forms (EN + FR), rebuild, rerun `_tools/Run-Tests.ps1`, replay `08-language` in EN and FR, then a new audit.
 
 ## Workflow audit — 2026-09-24
 

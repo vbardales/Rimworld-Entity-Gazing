@@ -65,3 +65,23 @@ fail without erroring — naming a deletion, and naming nothing at all.
 `PUBLICATION.md`, `BACKLOG.md`, `NOTES.md` and `BUGS.md` were asked for and were absent.
 `BACKLOG.md` and `BUGS.md` are written with this note; `PUBLICATION.md` belongs to
 `tested → prepublished` and is listed in BACKLOG.md rather than invented now.
+
+## Re-read 2026-10-02 (audit session, mod at `affc5e2`)
+
+Current versions (protocols repo unless noted). Changed since the table above: re-read the load-bearing ones; the rest only if they move again.
+
+| Document | Version | Use here |
+|---|---|---|
+| `AUDIT.md` | `d1fdbe1` 2026-10-02 | Read in full. Found the plural defect, stage `showcase`, `workflow_stage: options`. |
+| `TRANSLATIONS.md` | `af8427f` 2026-10-02 | Plurals + French review rules read. Plural rule is the defect. |
+| `AGENTS.md` | `7fd7475` 2026-09-29 | Evidence rules; used to trim `Tests/Pickle/Evidence/`. |
+| `MOD_SETTINGS.md` | `b83933b` 2026-09-23 | Unchanged since last read. |
+| `PUBLISHING.md` | `4e8f11a` 2026-10-02 | Not re-read: only matters after `tested`. |
+| `STYLE_RIMWORLD.md` | `c105a43` 2026-10-01 | Not re-read: showcase already delivered. |
+| `WORKSHOP_COMMENTS.md` | `7fd7475` 2026-09-29 | Not needed before publication. |
+| `scripts/SEARCHING.md` | `50de695` 2026-09-28 | Not needed. |
+| `PickleTools/README.md`, `Headless/README.md`, `docs/steps.md` | `ff20d89`, `ed4e73a`, `da7c3b0` | Not re-read: no new suite work. |
+| `OPERATIONS.md` | `3c03f51` 2026-09-26 | Not needed before a publish. |
+| `WELCOME.md`, `SUBMIT.md` | `77ca9d7`, `d07b2b8` | Needed only when a Pickle run is submitted. |
+
+This mod's own docs (`STATUS`, `README`, `CHANGELOG`, `ATTRIBUTION`, `LICENSE`, `PUBLICATION`, `TESTING`, `BACKLOG`, `BUGS`, `docs/runs/`, `Tests/Pickle/`, `About.xml`) were checked for the audit; `NOTES.md` does not exist.
