@@ -22,15 +22,21 @@ test('Markdown becomes the plain text a player reads in the mod list', () => {
   ].join(NL));
 });
 
-test('a link keeps brackets inside its own text, and a bare bracket before it stays out of the text', () => {
-  assert.equal(markdownToPlainText('[[XND] Nocturnal](https://example.com/a) ok'), '[XND] Nocturnal (https://example.com/a) ok');
-  assert.equal(markdownToPlainText('See [note] and [Pickle](https://example.com/b)'), 'See [note] and Pickle (https://example.com/b)');
-});
-
 test('words with underscores or asterisks are left alone, and blank lines are collapsed', () => {
   assert.equal(markdownToPlainText('a snake_case_name and 2 * 3 * 4' + NL + NL + NL + NL + 'end'), 'a snake_case_name and 2 * 3 * 4' + NL + NL + 'end');
   assert.equal(markdownToPlainText('![alt text](https://x.test/i.png) and ![https://x.test/j.png](https://x.test/j.png)'), 'alt text (https://x.test/i.png) and https://x.test/j.png');
   assert.equal(markdownToPlainText('line one  ' + NL + 'line two\r\nline three'), 'line one' + NL + 'line two' + NL + 'line three');
+});
+
+test('a link whose visible text itself contains brackets still converts', () => {
+  assert.equal(
+    markdownToPlainText('[[XND] Nocturnal Animals (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2269731409)'),
+    '[XND] Nocturnal Animals (Continued) (https://steamcommunity.com/sharedfiles/filedetails/?id=2269731409)',
+  );
+  assert.equal(
+    markdownToPlainText('![[alt]](https://x.test/i.png)'),
+    '[alt] (https://x.test/i.png)',
+  );
 });
 
 const about = (description, extra = '') => `<?xml version="1.0" encoding="utf-8"?>${NL}<ModMetaData>${NL}  <name>T</name>${NL}${extra}  <description>${description}</description>${NL}  <url>https://example.com</url>${NL}</ModMetaData>${NL}`;
@@ -73,4 +79,13 @@ test('a source that is not Markdown, or is empty, cannot generate About.xml', as
   await assert.rejects(aboutProblem(await repo({ description: 'x' }), { description: { file: 'PUBLICATION.md' } }), /needs a Markdown description source/);
   await assert.rejects(aboutProblem(await repo({ description: 'x', block: '---' }), config), /the description is empty/);
   await assert.rejects(aboutProblem(await repo({ description: 'x' }), { description: { ...config.description, heading: '^## Nowhere$' } }), /no "\^## Nowhere\$" section found/);
+});
+
+test('a link whose URL holds balanced parentheses is not cut short', () => {
+  assert.equal(
+    markdownToPlainText('[Foo](https://en.wikipedia.org/wiki/Foo_(bar))'),
+    'Foo (https://en.wikipedia.org/wiki/Foo_(bar))',
+  );
+  assert.equal(markdownToPlainText('See [a](https://x.test/a) and [b](https://x.test/b_(c)) now'), 'See a (https://x.test/a) and b (https://x.test/b_(c)) now');
+  assert.equal(markdownToPlainText('![i](https://x.test/i_(2).png)'), 'i (https://x.test/i_(2).png)');
 });

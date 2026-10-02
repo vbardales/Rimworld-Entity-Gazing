@@ -43,3 +43,6 @@ Source/bin/
 Tests/Pickle/Evidence/
 evidence/
 pickle-reports-archive/
+
+# Windows folder-icon metadata, local only (see AUDIT.md "Icônes locales").
+desktop.ini
