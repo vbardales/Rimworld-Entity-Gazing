@@ -48,7 +48,9 @@ This supersedes the stage in older sections; their results stay.
   No manual test left (TESTING.md). `upstream_mod_remotes: N/A`, licence `original`: no upstream repo to base on or send PRs to.
 - **Evidence trimmed 164 MB to 48 MB** (`Tests/Pickle/Evidence/`, gitignored, never in git): dropped superseded `studio` and `studio-1` (kept `studio-2`, 2026-09-30, 5/5)
   and every `report.html` / `messages.ndjson` (26 MB each). Kept per scenario: latest `summary.md`, `junit.xml`, `Player.log`, screenshots of the current revision.
-- **Unverified, unchanged:** French review by Virginie; Workshop gallery order; live description one generation behind `About.xml`.
+- **`Art/` reworked (`bdccf57`, 2026-10-02):** `Art/Preview.png`, `preview-overlay.html`, `render-preview.cjs`, `preview-268.png`, `preview-background.png`, `preview-qa.json`, `cutout-icon.cjs`, `ModIcon-cutout.png`, `ModIcon-badge.png` and `steam/00-preview.png` left the tree. Older sections below that cite them describe the 2026-09 Preview pipeline; the files stay in git history. The shipped images are `Mod/About/Preview.png` and `Mod/About/ModIcon.png`; sources `Art/Preview-source.png`, `Art/ModIcon-source.png`; palette `Art/preview-palette.json`.
+- **Plural fix** (`85ec8b6`): `translation_fr: complete` after Virginie's review of that revision; `localization` and `translation_en` wait for the EN and FR replays.
+- **Unverified, unchanged:** Workshop gallery order; live description one generation behind `About.xml`.
 - **Next:** add plural forms (EN + FR), rebuild, rerun `_tools/Run-Tests.ps1`, replay `08-language` in EN and FR, then a new audit.
 
 ## Workflow audit — 2026-09-24
