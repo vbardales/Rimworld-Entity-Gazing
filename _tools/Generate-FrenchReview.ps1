@@ -73,7 +73,9 @@ $out = New-Object System.Text.StringBuilder
 [void]$out.AppendLine('(STATUS.md, `upstream_mod_remotes: N/A`) — there is no source-language text to carry, so')
 [void]$out.AppendLine('English is the Original for every row.')
 [void]$out.AppendLine()
-[void]$out.AppendLine("Generated $(Get-Date -Format 'yyyy-MM-dd'), revision: working tree at commit 51bdc9a.")
+$rev = (git -C $Root log -1 --format=%h -- Mod/Languages Mod/Defs).Trim()
+$dirty = if (git -C $Root status --porcelain -- Mod/Languages Mod/Defs) { ' (uncommitted changes)' } else { '' }
+[void]$out.AppendLine("Generated $(Get-Date -Format 'yyyy-MM-dd'), French texts as of commit $rev$dirty.")
 [void]$out.AppendLine()
 
 foreach ($ff in $frenchFiles) {
