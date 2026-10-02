@@ -1,7 +1,7 @@
 ---
 localization: partial
 translation_en: partial
-translation_fr: unchecked
+translation_fr: complete
 mod:          Entity Gazing
 packageId:    nelim.entitygazing
 repo:         Rimworld-Entity-Gazing
@@ -28,7 +28,7 @@ remaining:
   - "blocking prepublished: the live Steam page still carries the 2026-09-25 hand-edited description, one generation behind About.xml (missing the PickleTools line, and in BBCode rather than the CI's plain text). The dry-run shows what update_description=true would send; nothing has been sent yet."
   - "unverified: what a particular button editor such as RIMMSQOL does with the EG_Settings shortcut. The suite proves the mechanism any such mod uses, not one editor version."
   - "unverified: the Workshop item exists but has never been subscribed to or opened, so the showcase has not been seen in place."
-  - "unverified: French review by Virginie (TRANSLATIONS.md, 2026-09-30). FRENCH_REVIEW.md generated 2026-09-30 at 51bdc9a, 5 files / 9 rows: 1 Keyed, 3 DefInjected. No text agrees with a pawn's gender, so no {PAWN_gender} switch is expected anywhere in this mod - nothing flagged."
+  - "done 2026-10-02: French review by Virginie, stated in chat at revision 85ec8b6 (the `Translation audit` review line is hers to write). Was: unverified: French review (TRANSLATIONS.md, 2026-09-30). FRENCH_REVIEW.md generated 2026-09-30 at 51bdc9a, 5 files / 9 rows: 1 Keyed, 3 DefInjected. No text agrees with a pawn's gender, so no {PAWN_gender} switch is expected anywhere in this mod - nothing flagged."
 session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
 updated:      2026-10-02, audit session
 ---
