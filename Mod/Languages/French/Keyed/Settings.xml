@@ -2,7 +2,9 @@
 <LanguageData>
   <EG_SettingsTitle>Entity Gazing</EG_SettingsTitle>
   <EG_SettingsHelp>Distances d'observation en cases, de 1 à 20. Par défaut : 2 à 6. Les changements s'appliquent immédiatement aux deux types de support lors du choix de nouvelles positions ; les observateurs actuels peuvent achever leur observation depuis leur position actuelle. Ces réglages sont globaux, pour les nouvelles parties comme les sauvegardes existantes, et sont enregistrés à la fermeture de cette fenêtre. Une distance accrue peut éviter le champ de douleur d'une entité. Anomaly est nécessaire à cette activité.</EG_SettingsHelp>
-  <EG_MinimumDistance>Distance minimale : {0} cases</EG_MinimumDistance>
-  <EG_MaximumDistance>Distance maximale : {0} cases</EG_MaximumDistance>
+  <EG_MinimumDistance>Distance minimale : {0}</EG_MinimumDistance>
+  <EG_Cells.One>{0} case</EG_Cells.One>
+  <EG_Cells.Many>{0} cases</EG_Cells.Many>
+  <EG_MaximumDistance>Distance maximale : {0}</EG_MaximumDistance>
   <EG_ResetDefaults>Rétablir les valeurs par défaut</EG_ResetDefaults>
 </LanguageData>

@@ -2,7 +2,9 @@
 <LanguageData>
   <EG_SettingsTitle>Entity Gazing</EG_SettingsTitle>
   <EG_SettingsHelp>Viewing distances in cells, from 1 to 20. Defaults: 2 to 6. Changes affect both holders immediately when choosing new viewing positions; current watchers may finish at their existing positions. Settings apply globally to new and existing saves and are saved when this window closes. Greater distances can avoid an entity's pain field. Anomaly is required for the activity.</EG_SettingsHelp>
-  <EG_MinimumDistance>Minimum distance: {0} cells</EG_MinimumDistance>
-  <EG_MaximumDistance>Maximum distance: {0} cells</EG_MaximumDistance>
+  <EG_MinimumDistance>Minimum distance: {0}</EG_MinimumDistance>
+  <EG_Cells.One>{0} cell</EG_Cells.One>
+  <EG_Cells.Many>{0} cells</EG_Cells.Many>
+  <EG_MaximumDistance>Maximum distance: {0}</EG_MaximumDistance>
   <EG_ResetDefaults>Restore defaults</EG_ResetDefaults>
 </LanguageData>

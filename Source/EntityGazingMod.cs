@@ -64,15 +64,17 @@ namespace EntityGazing
             base.WriteSettings();
         }
 
+        private static TaggedString Cells(int count) => (count == 1 ? "EG_Cells.One" : "EG_Cells.Many").Translate(count);
+
         public override void DoSettingsWindowContents(Rect inRect)
         {
             var listing = new Listing_Standard();
             listing.Begin(inRect);
             listing.Label("EG_SettingsHelp".Translate());
             listing.Gap();
-            listing.Label("EG_MinimumDistance".Translate(Settings.minimumDistance));
+            listing.Label("EG_MinimumDistance".Translate(Cells(Settings.minimumDistance)));
             int minimum = (int)Math.Round(listing.Slider(Settings.minimumDistance, 1, 20));
-            listing.Label("EG_MaximumDistance".Translate(Settings.maximumDistance));
+            listing.Label("EG_MaximumDistance".Translate(Cells(Settings.maximumDistance)));
             int maximum = (int)Math.Round(listing.Slider(Settings.maximumDistance, minimum, 20));
             if (minimum != Settings.minimumDistance || maximum != Settings.maximumDistance)
             {
