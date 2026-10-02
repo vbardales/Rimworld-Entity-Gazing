@@ -1,7 +1,7 @@
 ---
 localization: partial
 translation_en: partial
-translation_fr: partial
+translation_fr: unchecked
 mod:          Entity Gazing
 packageId:    nelim.entitygazing
 repo:         Rimworld-Entity-Gazing
@@ -21,7 +21,7 @@ tested_on:    "9352e70 (Mod/ changed twice since: 4716bd3 and the CI bootstrap c
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
-  - "defect: plural keys missing (TRANSLATIONS.md, Counts and plurals, 2026-09-25). EG_MinimumDistance and EG_MaximumDistance display a count ({0}, 1 to 20) through a single key in Keyed/Settings.xml, EN and FR: 1 shows as '1 cells' / '1 cases'. Need .One/.Many forms in both languages and Translate calls choosing by count in Source/EntityGazingMod.cs:73,75. Audit 2026-10-02 did not fix it, by rule. Mod/ then changes, so the DLL, Pickle 08-language and the tested bar need a re-run."
+  - "defect, fixed in 85ec8b6 (EG_Cells.One/.Many, EN+FR), awaiting replay: tickets 20261002-201530-351-9376 (EN) and 20261002-201531-154-9a23 (FR) at 145b343. Was: plural keys missing (TRANSLATIONS.md, Counts and plurals, 2026-09-25). EG_MinimumDistance and EG_MaximumDistance display a count ({0}, 1 to 20) through a single key in Keyed/Settings.xml, EN and FR: 1 shows as '1 cells' / '1 cases'. Need .One/.Many forms in both languages and Translate calls choosing by count in Source/EntityGazingMod.cs:73,75. Audit 2026-10-02 did not fix it, by rule. Mod/ then changes, so the DLL, Pickle 08-language and the tested bar need a re-run."
   - "verified: every Pickle pass is green, and every @review capture was opened and read. The restart pair replayed as 63c8 against 9352e70, the tree that ships: exitReason passed both launches, 1 + 1 scenarios, two distinct Player.log files a minute apart, the reader guard passed. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ changed twice since `tested`: 4716bd3 (the PickleTools link) and the CI bootstrap (About.xml's description switched from hand-written BBCode to plain text generated from PUBLICATION.md). No Pickle scenario reads the description text, and `_tools/Run-Tests.ps1` stayed 25 of 25 through both, so the changes are not re-run rather than untested."
   - "decided 2026-09-27: About.xml keeps Anomaly as a hard modDependencies entry. Feature 13 supplied the evidence - loads quietly without the DLC, three gameplay defs gated away, settings clean, shortcut hidden - and Virginie confirmed keeping the hard declaration. See BUGS.md 1, closed."
   - "blocking prepublished: the Workshop gallery order is still undecided (PUBLICATION.md) - it needs captures nothing has taken yet beyond the two @review screenshots per language. AUDIT.md's tested-to-prepublished gate needs that order settled and justified before the first real send."
