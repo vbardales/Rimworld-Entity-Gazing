@@ -1,0 +1,41 @@
+{
+  "title": "Entity Gazing",
+  "titleSize": 50,
+  "titleParts": [
+    { "text": "Entity Gazing", "scale": 1 }
+  ],
+  "suffix": "",
+  "tag": "",
+  "copyLines": [
+    "Colonists watch the horrors you keep chained up, as recreation."
+  ],
+  "layout": "panel",
+  "panelAnchor": "top-left",
+  "backgroundFile": "Preview.png",
+  "backgroundPosition": "center",
+  "backgroundSize": "cover",
+  "echo": {
+    "file": "echo.png",
+    "preSized": true,
+    "color": "var(--accent)",
+    "width": 240,
+    "height": 240,
+    "opacity": 1,
+    "veil": false,
+    "panelTop": 2,
+    "panelRight": -1,
+    "panelWidth": 46,
+    "flipX": true
+  },
+  "iconBadge": {
+    "file": "ModIcon-badge.png",
+    "corner": "bottom-left",
+    "width": 180,
+    "translate": "-5%, 5%",
+    "outline": false,
+    "veil": "radial",
+    "veilSize": 275,
+    "veilLeft": -55,
+    "veilBottom": -61
+  }
+}
