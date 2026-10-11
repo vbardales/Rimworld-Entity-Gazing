@@ -34,7 +34,7 @@ to a template file under `Mod/`.
 The single Markdown source, under the standard Virginie chose on 2026-09-25. **Nothing reads it
 yet.** This mod is not on the CI, so the live page and `Mod/About/About.xml` are still what count
 today, and the block below exists because `OPERATIONS.md` requires the source to carry the text of
-the page *before* the first publish that would send it — and because `bootstrap-release.sh` picks
+the page *before* the first publish that would send it, and because `bootstrap-release.sh` picks
 the standard configuration on its own when `PUBLICATION.md` carries a `## Steam description` line.
 
 Two things will change on the day it is adopted, and neither is an accident:
@@ -43,7 +43,7 @@ Two things will change on the day it is adopted, and neither is an accident:
   today; `##` converts to `[h2]`. That is the intended change, and the dry-run diff is where it is
   read before anything is sent.
 - **The link line changes shape.** `[Source code on GitHub](url)` converts to the BBCode link the
-  page already shows, and generates `Source code on GitHub (url)` in `About.xml` — which today
+  page already shows, and generates `Source code on GitHub (url)` in `About.xml`, which today
   carries the BBCode form by hand. `OPERATIONS.md` says a mod that has not migrated keeps its
   hand-written link, so `About.xml` is left alone until then. The first `--sync-about --write` is
   the migration: read the diff.
