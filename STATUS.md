@@ -526,3 +526,8 @@ both holders, opportunistic reports, raw keys, fallback, accents and clipping. T
   identifiable; rule visible; warm secondary and cool accent distinct in the saved palette.
   The secondary is intentionally unused in this title, since it has no affix or status tag.
 - Both mod test suites rerun: 23 form and 35 functional checks pass. No publication performed.
+
+
+## Preview source migration — 2026-10-03
+
+Copy, typography, layout and palette are consolidated in `Art/Preview.config.json`. Canonical inputs are `Art/Preview-source.png`, `Art/echo.png` and `Art/ModIcon-source.png`; temporary renderer diagnostics belong under ignored `Art/.render/`. Existing Preview, gallery and ICO outputs were preserved because they were present and coherent; no render was run. Superseded JSON files and generated QA intermediates were removed. Nothing published.
