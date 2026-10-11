@@ -2,7 +2,7 @@
 # Source/Directory.Build.props sends them outside the mod folder: they must never end up in it,
 # since RimWorld's Workshop uploader sends Mod/ as it stands, with no exclusion possible, and an
 # obj/ sitting there would ship the publicised Assembly-CSharp.dll to every subscriber.
-.build/
+build/
 Source/obj/
 Source/bin/
 
@@ -46,3 +46,6 @@ pickle-reports-archive/
 
 # Windows folder-icon metadata, local only (see AUDIT.md "Icônes locales").
 desktop.ini
+
+# Reproducible Preview diagnostics generated locally by the shared renderer.
+Art/.render/

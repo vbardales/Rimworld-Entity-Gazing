@@ -10,7 +10,7 @@ their captures is `done → tested`.
 ## What is in Gherkin, and what deliberately is not
 
 Pickle costs a machine for tens of minutes a run. Everything provable without the game stays in
-`_tools/`, where 78 checks already run in under a minute. What is left here needs a map, a spawned
+`scripts/`, where 78 checks already run in under a minute. What is left here needs a map, a spawned
 building, a tethered pawn, a window, a reload, a second launch or a DLC switched off.
 
 | Feature | Why only a running game can show it |

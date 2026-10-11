@@ -20,10 +20,11 @@ tested_on:    "9352e70 (Mod/ changed twice since: 4716bd3 and the CI bootstrap c
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
+  - "unverified: Run-Functional-Tests.ps1 check 36 (teardown hook guard) fails on this machine since 2026-10-11 with FileNotFoundException for RimWorks.Pickle 4.9.1.0 while reading Tests/Pickle/Mod/Pickle/Assemblies/EntityGazing.PickleSteps.dll (SAME as a fresh build). Environment, not the mod: the checker cannot resolve the installed Pickle. Other 35 functional, 25 form and 18 settings checks pass. Needs the checker pointed at Pickle 4.9.1.0 before it is trusted again."
   - "waiting on Pickle: replay tickets 20261011-210631-678-f107 (EN) and 20261011-210632-668-e3a7 (FR), filter 08-language, tree 85ec8b6 (Mod/ unchanged since). Evidence in Tests/Pickle/Evidence/plural-en and plural-fr. Green EN+FR clears the plural defect below; then localization and translation_en go complete."
   - "unverified: this session has not re-read the protocols, so protocols_read_sha is absent."
   - "defect, fixed in 85ec8b6 (EG_Cells.One/.Many, EN+FR), awaiting replay: tickets 20261002-201530-351-9376 (EN) and 20261002-201531-154-9a23 (FR) at 145b343. Was: plural keys missing (TRANSLATIONS.md, Counts and plurals, 2026-09-25). EG_MinimumDistance and EG_MaximumDistance display a count ({0}, 1 to 20) through a single key in Keyed/Settings.xml, EN and FR: 1 shows as '1 cells' / '1 cases'. Need .One/.Many forms in both languages and Translate calls choosing by count in Source/EntityGazingMod.cs:73,75. Audit 2026-10-02 did not fix it, by rule. Mod/ then changes, so the DLL, Pickle 08-language and the tested bar need a re-run."
-  - "verified: every Pickle pass is green, and every @review capture was opened and read. The restart pair replayed as 63c8 against 9352e70, the tree that ships: exitReason passed both launches, 1 + 1 scenarios, two distinct Player.log files a minute apart, the reader guard passed. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ changed twice since `tested`: 4716bd3 (the PickleTools link) and the CI bootstrap (About.xml's description switched from hand-written BBCode to plain text generated from PUBLICATION.md). No Pickle scenario reads the description text, and `_tools/Run-Tests.ps1` stayed 25 of 25 through both, so the changes are not re-run rather than untested."
+  - "verified: every Pickle pass is green, and every @review capture was opened and read. The restart pair replayed as 63c8 against 9352e70, the tree that ships: exitReason passed both launches, 1 + 1 scenarios, two distinct Player.log files a minute apart, the reader guard passed. Ordinary English 6494 and French 168e against 574dce1: exitReason passed, ten features discovered, 25 of 25 scenarios run, none skipped, none @wip, none conditional. The restart pair 94b5 (two launches under one lock, two distinct Player.log files 94 s apart, the reader guard passed so the static was fresh) and the pass without Anomaly 1d08 (5 of 5, the first real use of a pass map ! line) against d9ca1da. The place worker e986 against 5bcee70, whose holding spot capture was then made legible by a wider clearing and read again in 6494 and 168e. Mod/ changed twice since `tested`: 4716bd3 (the PickleTools link) and the CI bootstrap (About.xml's description switched from hand-written BBCode to plain text generated from PUBLICATION.md). No Pickle scenario reads the description text, and `scripts/Run-Tests.ps1` stayed 25 of 25 through both, so the changes are not re-run rather than untested."
   - "decided 2026-09-27: About.xml keeps Anomaly as a hard modDependencies entry. Feature 13 supplied the evidence - loads quietly without the DLC, three gameplay defs gated away, settings clean, shortcut hidden - and Virginie confirmed keeping the hard declaration. See BUGS.md 1, closed."
   - "blocking prepublished: the Workshop gallery order is still undecided (PUBLICATION.md) - it needs captures nothing has taken yet beyond the two @review screenshots per language. AUDIT.md's tested-to-prepublished gate needs that order settled and justified before the first real send."
   - "blocking prepublished: the live Steam page still carries the 2026-09-25 hand-edited description, one generation behind About.xml (missing the PickleTools line, and in BBCode rather than the CI's plain text). The dry-run shows what update_description=true would send; nothing has been sent yet."
@@ -53,7 +54,7 @@ This supersedes the stage in older sections; their results stay.
 - **`Art/` reworked (`bdccf57`, 2026-10-02):** `Art/Preview.png`, `preview-overlay.html`, `render-preview.cjs`, `preview-268.png`, `preview-background.png`, `preview-qa.json`, `cutout-icon.cjs`, `ModIcon-cutout.png`, `ModIcon-badge.png` and `steam/00-preview.png` left the tree. Older sections below that cite them describe the 2026-09 Preview pipeline; the files stay in git history. The shipped images are `Mod/About/Preview.png` and `Mod/About/ModIcon.png`; sources `Art/Preview-source.png`, `Art/ModIcon-source.png`; palette `Art/preview-palette.json`.
 - **Plural fix** (`85ec8b6`): `translation_fr: complete` after Virginie's review of that revision; `localization` and `translation_en` wait for the EN and FR replays.
 - **Unverified, unchanged:** Workshop gallery order; live description one generation behind `About.xml`.
-- **Next:** add plural forms (EN + FR), rebuild, rerun `_tools/Run-Tests.ps1`, replay `08-language` in EN and FR, then a new audit.
+- **Next:** add plural forms (EN + FR), rebuild, rerun `scripts/Run-Tests.ps1`, replay `08-language` in EN and FR, then a new audit.
 
 ## Workflow audit — 2026-09-24
 
@@ -96,9 +97,9 @@ holds.
 Out-of-game suites re-run at `c6dc0a5`, not taken from the previous record:
 
 ```
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1             23 passed, 0 failed
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1  35 passed, 0 failed
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps1    18 passed, 0 failed
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1             23 passed, 0 failed
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1  35 passed, 0 failed
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Settings-Tests.ps1    18 passed, 0 failed
 ```
 
 Seventy-six checks, all green, against the build that is in the repository.
@@ -115,9 +116,9 @@ rather than a declared status, so they were run here, against `3b85067`.
 | `scripts/Check-DefRefs.ps1` | every reference points at the right def type, every `ParentName` resolves |
 | `scripts/Check-TypeRefs.ps1` | 77 element names searched, no reference outside RimWorld and Unity |
 | `scripts/Check-DefInjected.ps1` | 11589 defs indexed, 4 keys checked, **0 errors**, 2 `MayRequire` notices |
-| `_tools/Run-Tests.ps1` | 23 passed, 0 failed |
-| `_tools/Run-Functional-Tests.ps1` | 35 passed, 0 failed |
-| `_tools/Run-Settings-Tests.ps1` | 18 passed, 0 failed |
+| `scripts/Run-Tests.ps1` | 23 passed, 0 failed |
+| `scripts/Run-Functional-Tests.ps1` | 35 passed, 0 failed |
+| `scripts/Run-Settings-Tests.ps1` | 18 passed, 0 failed |
 
 `Check-XmlClasses.ps1` was not run: it requires a `-TypeLists` argument and no type list exists in
 `scripts/`. Its ground is covered twice over here — `Check-TypeRefs` found no third-party type, and
@@ -217,9 +218,9 @@ Verification commands for this working tree:
 
 ```powershell
 dotnet build Source/EntityGazing.csproj --no-restore -c Release
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Settings-Tests.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-DefInjected.ps1 -TransMod ./Mod
 ```
 
@@ -271,7 +272,7 @@ STATUS.md and TESTING.md. During the audit HEAD advanced externally to
 `0a5123f49c308b08d9e7323a0b451bc7276994f5`; the intervening diff contains only those
 two documentation files. Source, tests and distributed artifacts are unchanged, so their
 checks remain applicable. This audit edits only STATUS.md and creates ignored build
-verification output under `.build/audit/`. Existing scenarios and historical results are
+verification output under `build/audit/`. Existing scenarios and historical results are
 preserved. No commit, push, publication, feature implementation or image generation performed.
 
 | Transition | Direct result, independent of earlier blockers |
@@ -297,11 +298,11 @@ record that provenance explicitly; do not invent a licence for RimWorld or third
 
 ### Executed checks and artifact evidence
 
-- `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1`:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1`:
   **23 passed, 0 failed**, including all five XML files, reflected fields, references,
   French paths/coverage and image dimensions. Its packaging checks do not check for the
   missing distributed licence or ATTRIBUTION: a green suite does not override those findings.
-- `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1`:
+- `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1`:
   **35 passed, 0 failed**, using installed RimWorld **1.6.4871 rev590**. Actual patch-engine
   application to both holders, reflection/IL readers and source compilation succeeded.
   These are technical integration tests outside a colony; no RIMMSQOL integration was tested.
@@ -312,7 +313,7 @@ record that provenance explicitly; do not invent a licence for RimWorld or third
   meaningful and nonempty. Neither has parameters, tags or grammar tokens. The entire C#
   class adds no UI strings; patches add only values and references, not further owned text.
 - `dotnet build Source/EntityGazing.csproj --no-restore -c Release -t:Rebuild
-  -p:OutputPath=C:\Users\nelim\Documents\rimworld\EntityGazing\.build\audit\`:
+  -p:OutputPath=C:\Users\nelim\Documents\rimworld\EntityGazing\build\audit\`:
   **succeeded, 0 warnings, 0 errors**, after approved retry for SDK-directory access.
   Rebuilt and shipped DLL SHA256 both equal
   `26E734F3CE8C293885B2026C363A89D4FF3E9F847A726CEDC4A09775A46540B1`.
@@ -394,8 +395,8 @@ provenance. Neither `silent` nor `forbidden` applies to the evidence here.
 
 ## Verification on 2026-09-12
 
-- `_tools/Run-Tests.ps1`: **23 passed, 0 failed**.
-- `_tools/Run-Functional-Tests.ps1`: **35 passed, 0 failed**.
+- `scripts/Run-Tests.ps1`: **23 passed, 0 failed**.
+- `scripts/Run-Functional-Tests.ps1`: **35 passed, 0 failed**.
 - Total: **58 automated checks passed**, against the installed RimWorld assemblies and data.
   These cover structure, compatibility and integration outside a running game; they do not
   simulate a colony or directly establish every gameplay outcome.
@@ -407,7 +408,7 @@ provenance. Neither `silent` nor `forbidden` applies to the evidence here.
 - `TESTING.md`: **14 manual functional scenarios**, with setup and pass criteria, covering DLC
   on/off, patch effects, recreation, empty/dead entities, pain, capacity, access, sight,
   opportunistic use, saves, both holders and same-room restrictions. **Not executed in game**.
-- `_tools/Run-Mutations.ps1`: 34 mutation cases exist. The earlier documentation reports a
+- `scripts/Run-Mutations.ps1`: 34 mutation cases exist. The earlier documentation reports a
   successful campaign; it was not rerun in this audit. It does not prove all 58 checks have been
   observed failing; the suite footers explain the limits.
 - Corrected About description from four to five building-based recreation types, matching
@@ -462,8 +463,8 @@ are outside the in-game text inventory, as prescribed by the protocol.
 Validation commands run from this repository:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-DefInjected.ps1 -TransMod ./Mod
 ```
 

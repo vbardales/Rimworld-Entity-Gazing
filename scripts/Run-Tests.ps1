@@ -20,7 +20,7 @@
   prose turns this suite red instead of quietly ageing the page.
 
 .EXAMPLE
-  powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1
 #>
 param(
     [string]$Managed = 'C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed'

@@ -10,7 +10,7 @@ namespace EntityGazing.PickleSteps
     /// <summary>
     /// Shared lookups for this suite. Everything here reaches for state the running game owns: a
     /// map, a spawned holder, the mod instance. None of it can be reached from an out-of-game test,
-    /// which is the whole reason these scenarios exist rather than living in _tools/.
+    /// which is the whole reason these scenarios exist rather than living in scripts/.
     /// </summary>
     public static class Driver
     {

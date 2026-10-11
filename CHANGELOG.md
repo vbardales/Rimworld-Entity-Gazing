@@ -89,9 +89,9 @@ reach the published page from here.
 
 ### Development, not shipped
 
-- **Three test suites** in `_tools/`, none of which starts the game: the shape of the mod, what the
+- **Three test suites** in `scripts/`, none of which starts the game: the shape of the mod, what the
   base game still does with what the mod hands it, and the settings. 76 checks, all green.
-- **A mutation campaign**, `_tools/Run-Mutations.ps1`, which breaks the mod on purpose on a copy
+- **A mutation campaign**, `scripts/Run-Mutations.ps1`, which breaks the mod on purpose on a copy
   and checks that the right test turns red. Every mutation was recorded doing so before the
   settings work; it has not been rerun since.
 - **Sixteen manual scenarios** in `TESTING.md`, none of them played in a colony.

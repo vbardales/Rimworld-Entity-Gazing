@@ -21,7 +21,7 @@
   Anomaly def files. Nothing is asserted from memory; the numbers in the README are recomputed.
 
 .EXAMPLE
-  powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1
 #>
 param(
     [string]$Managed  = 'C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed',

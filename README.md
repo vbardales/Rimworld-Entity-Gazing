@@ -90,8 +90,8 @@ pain field the whole design rests on.
 ## Tests
 
 ```
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Tests.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Functional-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1
 ```
 
 Two suites, no RimWorld launched, well under a minute for both. They read the installed game — its
@@ -116,7 +116,7 @@ recreation types in Core with five from a building, the nociosphere's pain field
 RimWorld release that moves one of those is reported instead of quietly ageing the page.
 
 ```
-powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Mutations.ps1
 ```
 
 A green suite proves nothing on its own, so a third script breaks the mod on purpose — 35 mutations
@@ -164,6 +164,6 @@ A native MainButtons entry, `EG_Settings`, is hidden by default. Compatible cust
 tools can reveal it; it opens the same native settings dialog and is optional. No third-party
 mod is required. Interactive RIMMSQOL compatibility has not yet been tested.
 
-Run `powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Settings-Tests.ps1`
+Run `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Settings-Tests.ps1`
 for settings bounds, application, reset, primitive Scribe persistence and EN/FR coverage checks.
 These desktop checks do not certify the game's window lifecycle or a colony session.

@@ -41,7 +41,7 @@ $s.ApplyTo(([Runtime.Serialization.FormatterServices]::GetUninitializedObject([V
 Check 'missing DLC targets are safe' { $true }
 $s.ResetDefaults(); $s.ApplyTo($a); $s.ApplyTo($b)
 Check 'reset restores actual holder values' { $ap.watchBuildingStandDistanceRange.min -eq 2 -and $bp.watchBuildingStandDistanceRange.max -eq 6 }
-$scratch=Join-Path $root '.build\settings-tests'
+$scratch=Join-Path $root 'build\settings-tests'
 [void][IO.Directory]::CreateDirectory($scratch)
 $save=Join-Path $scratch 'roundtrip.xml'
 $s.minimumDistance=8; $s.maximumDistance=14

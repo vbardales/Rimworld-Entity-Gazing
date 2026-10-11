@@ -3,7 +3,7 @@
 Nothing in this mod has ever been watched happening in a colony. This file is the list of what has
 to be seen, and what counts as a pass for each.
 
-Two test suites run beside it, in `_tools/`, and neither of them starts the game. They check that
+Two test suites run beside it, in `scripts/`, and neither of them starts the game. They check that
 the defs are well formed, that the game still has every field and class they name, that the one
 override still takes the slot it means to, and that the patch lands where it aims. None of that is
 a single tick of play, which is what this file is for.
@@ -323,7 +323,7 @@ This section is the specification the suite was written from. It is kept because
 reasoning, not because anything here is still outstanding.
 
 What belongs in Gherkin is only what a running game can show. Anything an out-of-game suite already
-proves must stay out: a scenario that repeats `_tools/` confiscates the machine for tens of minutes
+proves must stay out: a scenario that repeats `scripts/` confiscates the machine for tens of minutes
 at every run and adds nothing.
 
 | Scenario above | Where it belongs | Where it went |

@@ -28,12 +28,12 @@
   harness guard, which is the guard doing its job.
 
 .EXAMPLE
-  powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Mutations.ps1
 
 .EXAMPLE
   One mutation by name, which is how you work on a single test:
 
-  powershell -NoProfile -ExecutionPolicy Bypass -File _tools/Run-Mutations.ps1 -Only 'invented stat'
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Mutations.ps1 -Only 'invented stat'
 #>
 param(
     # Short, and outside the session scratchpad: a NuGet restore under a deep temp path runs into
@@ -110,10 +110,10 @@ foreach ($m in $mutations) {
 
     if (Test-Path $Work) { Remove-Item $Work -Recurse -Force -ErrorAction SilentlyContinue }
     Copy-Item $Src $Work -Recurse -Force
-    Remove-Item "$Work\.git", "$Work\.build" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item "$Work\.git", "$Workbuild" -Recurse -Force -ErrorAction SilentlyContinue
     & $m.do
 
-    $script = if ($m.suite -eq 'form') { "$Work\_tools\Run-Tests.ps1" } else { "$Work\_tools\Run-Functional-Tests.ps1" }
+    $script = if ($m.suite -eq 'form') { "$Work\scripts\Run-Tests.ps1" } else { "$Work\scripts\Run-Functional-Tests.ps1" }
     $ErrorActionPreference = 'Continue'   # a child writing to stderr is not this script's failure
     $out = & powershell -NoProfile -ExecutionPolicy Bypass -File $script 2>&1 | Out-String
     $ErrorActionPreference = 'Stop'
