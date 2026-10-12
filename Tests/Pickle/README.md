@@ -27,7 +27,7 @@ building, a tethered pawn, a window, a reload, a second launch or a DLC switched
 | 10 place worker | the watch area drawn on the ground under the build designator — an image, not an assertion |
 | 11 / 12 restart | a value that has to outlive the process, which one process cannot show |
 | 13 without Anomaly | what the game does with the patch, the window and the shortcut when the defs are gone |
-| 14 publication shots | not a verification: the Workshop gallery pictures, taken in the zen meadow studio instead of the test colony |
+| 14 publication shots | not a verification: the Workshop gallery pictures, taken in the Sanctuary (enclosure-south, at dusk) instead of the test colony |
 
 **Dropped rather than converted.** The manual scenario that checked the patch had landed on the
 right nodes is proved out of game, by running the game's own patch engine against the real Anomaly
@@ -43,8 +43,8 @@ vanilla code beneath it, deterministically.
 
 Twenty-five scenarios run in the two ordinary passes. The other twelve cannot: the restart pair
 needs two launches, the DLC-off feature needs a game staged without Anomaly, and the publication
-shots need the studio fixture. Every scenario is covered by exactly one pass. The first four are
-what `tested` asks for; the studio pass is what the gallery asks for and proves nothing about the mod.
+shots need the Sanctuary fixture. Every scenario is covered by exactly one pass. The first four are
+what `tested` asks for; the sanctuary pass is what the gallery asks for and proves nothing about the mod.
 
 | Pass | Features | Scenarios | Language | What it establishes |
 |---|---|---|---|---|
@@ -52,7 +52,7 @@ what `tested` asks for; the studio pass is what the gallery asks for and proves 
 | minimal French | 01–10 | 25 | French | the same UI and job text in the other language |
 | restart | 11, 12 | 2 | English | a global setting outliving the process |
 | without Anomaly | 13 | 5 | English | the mod with the DLC switched off |
-| studio | 14 | 5 | English | the gallery pictures, in a scene chosen for them |
+| sanctuary | 14 | 5 | English | the gallery pictures, in a scene chosen for them |
 
 The restart pair, the DLC-off feature and the publication shots are **excluded from the ordinary passes by name**, and
 that exclusion is not optional. `11-restart-write` leaves 9 to 12 on disk on purpose and stands the
@@ -80,7 +80,7 @@ powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_I
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'final French SHA' -Language French -Filter $Plain -EvidenceDir EntityGazing/Tests/Pickle/Evidence/fr
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'restart SHA' -Filter '11-restart-write' -Then '12-restart-read' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/restart
 powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'without Anomaly SHA' -DepMap wsl-deps.no-anomaly.map -Filter '13-without-anomaly' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/no-anomaly
-powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'publication shots SHA' -DepMap wsl-deps.studio.map -Filter '14-publication-shots' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/studio
+powershell.exe -ExecutionPolicy Bypass -File $S -Mod EntityGazing -Owner local_ID -Label 'publication shots SHA' -DepMap wsl-deps.sanctuary.map -Filter '14-publication-shots' -EvidenceDir EntityGazing/Tests/Pickle/Evidence/studio
 ```
 
 The suite name comes first in every filter that carries an exclusion. A filter of exclusions alone

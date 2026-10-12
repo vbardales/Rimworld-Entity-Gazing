@@ -1,0 +1,15 @@
+# The pass that takes the Workshop gallery's pictures, and nothing else.
+#
+# The scenes are played on the sanctuary save "Nelims-tribe" carried by Sanctuary Backlot (the named
+# places and the steps "Nelim's Sanctuary: ..."), with PickleTools' ScreenshotStudio for the studio steps
+# and two companions the shots lean on. The fixture must come from the Backlot only: two fixtures of that
+# name fail Pickle. Used with -DepMap wsl-deps.sanctuary.map (it replaces wsl-deps.studio.map, owner rule
+# of 2026-10-09: gallery scenarios play in the Sanctuary, not in the zen meadow studio).
+#
+# Feature 14 is valid only here. The other passes skip it through its @requires tags.
+#
+# Anomaly stays ON: the shots are of the mod doing its job, which needs the DLC.
+nelim.sanctuarybacklot             path:SanctuaryBacklot/Mod
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.clearscreen      path:PickleTools/ClearScreen/Mod
+nelim.pickletools.screenshotmode   path:PickleTools/ScreenshotMode/Mod
