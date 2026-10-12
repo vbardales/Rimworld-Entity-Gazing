@@ -32,6 +32,7 @@ remaining:
   - "done 2026-10-02: French review by Virginie, stated in chat at revision 85ec8b6 (the `Translation audit` review line is hers to write). Was: unverified: French review (TRANSLATIONS.md, 2026-09-30). FRENCH_REVIEW.md generated 2026-09-30 at 51bdc9a, 5 files / 9 rows: 1 Keyed, 3 DefInjected. No text agrees with a pawn's gender, so no {PAWN_gender} switch is expected anywhere in this mod - nothing flagged."
 session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
 code_review_sha: f31ff5e83865401305c5b3e9d5fbb4291a4b7e74
+echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 updated:      2026-10-02, audit session
 protocols_read_sha: 0f8d8d6f62536df04f415039724307411c2eede7
 ---
@@ -132,3 +133,7 @@ both holders, opportunistic reports, raw keys, fallback, accents and clipping. T
 ## Preview source migration — 2026-10-03
 
 Copy, typography, layout and palette are consolidated in `Art/Preview.config.json`. Canonical inputs are `Art/Preview-source.png`, `Art/echo.png` and `Art/ModIcon-source.png`; temporary renderer diagnostics belong under ignored `Art/.render/`. Existing Preview, gallery and ICO outputs were preserved because they were present and coherent; no render was run. Superseded JSON files and generated QA intermediates were removed. Nothing published.
+
+## Preview echo decision, 2026-10-12
+
+Virginie validated the Preview at the commit named by `echo_review_sha`: `Art/echo-concept.png` (conceptual echo, no capture shows the entity yet), `echo.panelWidth` 36 (height limited to the panel), `iconBadge.translate` `-12.5%, 12.5%`. `Mod/About/Preview.png` and `Art/Gallery/0-preview.png` are byte copies. Re-ask when the gallery captures are accepted (STYLE_RIMWORLD.md, Echo).
