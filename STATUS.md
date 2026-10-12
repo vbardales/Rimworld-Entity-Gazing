@@ -31,7 +31,7 @@ remaining:
   - "unverified: the Workshop item exists but has never been subscribed to or opened, so the showcase has not been seen in place."
   - "done 2026-10-02: French review by Virginie, stated in chat at revision 85ec8b6 (the `Translation audit` review line is hers to write). Was: unverified: French review (TRANSLATIONS.md, 2026-09-30). FRENCH_REVIEW.md generated 2026-09-30 at 51bdc9a, 5 files / 9 rows: 1 Keyed, 3 DefInjected. No text agrees with a pawn's gender, so no {PAWN_gender} switch is expected anywhere in this mod - nothing flagged."
 session:      local_2c8cbd89-28f1-4b1a-9830-51a1cae086d3
-code_review_sha: f31ff5e83865401305c5b3e9d5fbb4291a4b7e74
+code_review_sha: 64ca3de280fc2c29018f50dd456653aa527f02d7
 echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 updated:      2026-10-02, audit session
 protocols_read_sha: 0f8d8d6f62536df04f415039724307411c2eede7
