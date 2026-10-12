@@ -9,8 +9,8 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-workflow_stage: playTests[1.0.0]
-settings_audit: complete
+workflow_stage: shootGallery[1.0.0]
+settings_audit: passed
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
 upstream_mod_remotes: N/A
@@ -35,7 +35,7 @@ code_review_sha: 64ca3de280fc2c29018f50dd456653aa527f02d7
 echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
 updated:      2026-10-02, audit session
-protocols_read_sha: 0f8d8d6f62536df04f415039724307411c2eede7
+protocols_read_sha: 1c0276ddd688a333c2d066cafc11e9a882697516
 ---
 
 # Entity Gazing — status
