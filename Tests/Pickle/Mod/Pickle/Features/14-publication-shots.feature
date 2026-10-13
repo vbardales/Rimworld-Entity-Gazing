@@ -85,8 +85,11 @@ Feature: shots for the Workshop page
     And Entity Gazing spawns a "HoldingPlatform" where the camera looks
     And Entity Gazing tethers a downed "Nociosphere" to it
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
+    And Entity Gazing spawns the colonist "Basil" with no recreation where the camera looks
     When Entity Gazing asks the giver for a job for "Iris"
     And Entity Gazing "Iris" starts the offered job
+    And Entity Gazing asks the giver for a job for "Basil"
+    And Entity Gazing "Basil" starts the offered job
     And I wait 1200 ticks
     Then Entity Gazing "Iris" carries the hediff "PainField"
     When Nelim's Pickle Tools: studio presentation mode is enabled
