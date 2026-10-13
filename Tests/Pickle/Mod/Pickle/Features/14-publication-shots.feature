@@ -14,10 +14,10 @@
 # then the other holder, then the price (the pain field), then the dial the player turns (the settings).
 #
 # Shot plan, in gallery order after 0- (the Preview):
-#   1. gaze          three colonists standing 2 to 6 cells from a held fingerspike, a platform in the middle (hour 20)
-#   2. watch area    the cross of four outlined rects drawn around a holder being placed (hour 20)
-#   3. holding spot  the same on the floor marker, two colonists (hour 20)
-#   4. pain field    one colonist inside a nociosphere's reach, the hediff proven first (hour 21)
+#   1. gaze          three colonists standing 2 to 6 cells from a held fingerspike, a platform in the middle (hour 18)
+#   2. watch area    the cross of four outlined rects drawn around a holder being placed (hour 18)
+#   3. holding spot  the same on the floor marker, two colonists (hour 18)
+#   4. pain field    one colonist inside a nociosphere's reach, the hediff proven first (hour 19)
 #   5. settings      the Mod options window alone, no HUD
 #
 # The colonists are generated, not dressed: a first pass, to see the composition. Apparel and faces are a
@@ -32,10 +32,10 @@ Feature: shots for the Workshop page
     And Nelim's Sanctuary: the sanctuary "enclosure-south" is emptied
     And Nelim's Sanctuary: I am at the sanctuary "enclosure-south"
     And I set the weather to "Clear"
-    And Entity Gazing zooms the camera to 10 cells
+    And Entity Gazing zooms the camera to 6 cells
 
   Scenario: colonists gazing at a held entity
-    Given I set the hour to 20
+    Given I set the hour to 18
     And Entity Gazing spawns a "HoldingPlatform" where the camera looks
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
@@ -57,7 +57,7 @@ Feature: shots for the Workshop page
   Scenario: the watch area drawn under the build designator
     # The studio maps keep no steel and the designator prices what it is about to place, honestly: a red
     # "40 (not enough stored)" label sat on the ghost in the first studio run. Stock it so the label is true.
-    Given I set the hour to 20
+    Given I set the hour to 18
     And Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
     Then Entity Gazing the game is about to draw a watch area at the pointer
@@ -65,7 +65,7 @@ Feature: shots for the Workshop page
     And I take a screenshot "publication - watch area"
 
   Scenario: the holding spot is watched too
-    Given I set the hour to 20
+    Given I set the hour to 18
     And Entity Gazing spawns a "HoldingSpot" where the camera looks
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
@@ -81,7 +81,7 @@ Feature: shots for the Workshop page
     And I take a screenshot "publication - holding spot"
 
   Scenario: a colonist inside a nociosphere's reach
-    Given I set the hour to 21
+    Given I set the hour to 19
     And Entity Gazing spawns a "HoldingPlatform" where the camera looks
     And Entity Gazing tethers a downed "Nociosphere" to it
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
