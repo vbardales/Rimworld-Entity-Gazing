@@ -91,8 +91,8 @@ This mod is MIT licensed. Provenance and artwork credits are in ATTRIBUTION.md i
 
 ## The change note: the CI checks this shape, it does not write it
 
-`release-steam-plugin.mjs` runs in **documented mode** — `bootstrap-release.sh` writes
-`documented: true` for every mod it bootstraps — and in that mode the Steam change note is the
+`release-steam-plugin.mjs` runs in **documented mode** (`bootstrap-release.sh` writes
+`documented: true` for every mod it bootstraps), and in that mode the Steam change note is the
 fenced block under `### <version>` of this file, **sent as written**. The plugin reads it, refuses a
 block over the Steam byte limit, and refuses one whose first line does not carry the version:
 
@@ -105,7 +105,7 @@ needs. It was `[h2]` only until `a2abeda` in `Rimworld-Release-Admin`, relaxed t
 
 The comment beside that check says where it comes from: semantic-release used to generate the
 version heading, a block sent as written has only the heading it carries, and Steam shows an entry
-with no version at all when it has none — Architect Studio 1.0.5. A published note can only be
+with no version at all when it has none, Architect Studio 1.0.5. A published note can only be
 fixed by hand, so the check runs in `verifyConditions`, before any tag exists.
 
 So the first line is written here, not generated. The usual form is a link to the comparison
@@ -114,7 +114,7 @@ between the two tags:
 `[h2][url=https://github.com/<owner>/<repo>/compare/v<previous>...v<version>]<version>[/url] (<date>)[/h2]`
 
 **1.0.0 is the exception, and this mod is at that exception.** There is no tag in this repository
-yet — 0.1.0 was an in-game upload, not a release — so a `compare/v0.1.0...v1.0.0` link would point
+yet, 0.1.0 was an in-game upload, not a release, so a `compare/v0.1.0...v1.0.0` link would point
 at nothing. The heading links to the release itself instead, which the CI creates after a
 successful upload.
 
@@ -171,7 +171,7 @@ nudity, no sexual content, no gore. The entities are the base game's, drawn by t
 - Commit `Mod/About/PublishedFileId.txt` immediately if it ever changes. It already exists here.
 - Steam creates every item private. `RimWorld` never calls `SetItemVisibility`: going public is a
   hand action on the page, and it is what turns `prepublished` into `published`.
-- Read the public page afterwards — description, change note, images — rather than the banner that
+- Read the public page afterwards (description, change note, images) rather than the banner that
   says the change was saved.
 
 ## Thanks to post on the mods' pages

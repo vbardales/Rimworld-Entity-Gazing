@@ -1,6 +1,6 @@
 # Entity Gazing
 
-A RimWorld mod that lets colonists go and look at the horrors you keep chained up, as recreation —
+A RimWorld mod that lets colonists go and look at the horrors you keep chained up, as recreation,
 and, with it, a recreation type the base game does not have.
 
 Needs the Anomaly DLC. Without it the mod loads but adds no recreation activity.
@@ -23,7 +23,7 @@ The new type matters more than the new activity. Two rules make that so:
   poker.
 
 So an eleventh type is worth far more than another building on a type the colony already had. Of
-the base game's ten types, only five come from a building at all — Gaming_Cerebral,
+the base game's ten types, only five come from a building at all, Gaming_Cerebral,
 Gaming_Dexterity, HighCulture, Telescope and Television. And this one costs nothing extra: the
 platform was already built for study.
 
@@ -34,7 +34,7 @@ Watchers stand two to six cells away, which is deliberately close. A nociosphere
 audience will be standing inside it.
 
 That is the price of the show, and it comes out of an existing vanilla mechanic rather than a line
-of code. It varies by entity on its own — a fleshbeast hurts nobody. Use Mod options -> Entity Gazing to change the minimum and maximum distance without editing XML.
+of code. It varies by entity on its own, a fleshbeast hurts nobody. Use Mod options -> Entity Gazing to change the minimum and maximum distance without editing XML.
 
 No thought is granted, deliberately. A positive one would reward contemplating an abomination; a
 negative one would turn a source of recreation into a source of malus. The joy gained is already
@@ -62,7 +62,7 @@ this way.
 
 The gameplay class, `JoyGiver_WatchEntity`, adds a single condition to the
 vanilla giver: the platform must actually be holding a living pawn. Without it, naming
-`HoldingPlatform` in a vanilla `JoyGiverDef` would be enough — but colonists would then go and
+`HoldingPlatform` in a vanilla `JoyGiverDef` would be enough, but colonists would then go and
 contemplate empty platforms, which is to say a steel frame with chains hanging off it.
 
 `CompEntityHolderPlatform` belongs to Anomaly but lives in `Assembly-CSharp` like all expansion
@@ -73,14 +73,14 @@ code, so the class exists even without the DLC and no reflection is needed. The 
 
 Anomaly ships two entity holders, and the mod covers both: the steel **holding platform**, and the
 **holding spot**, the floor marker you use before you can build one. They share a comp and a class,
-so they watch identically. The spot gives less — a `JoyGainFactor` of 0.8 against the platform's 1,
+so they watch identically. The spot gives less, a `JoyGainFactor` of 0.8 against the platform's 1,
 following the game's own line that it is *not as good as a steel holding platform, but a lot better
 than nothing*.
 
 Patching the two is not symmetrical, and that is the one real trap in the file. `HoldingPlatform`
 has a `statBases` and **no** `building` node; `HoldingSpot` has both. So the platform's building
 settings are created at the root and the spot's are added inside the node it already has. Do it the
-other way round and you get two sibling nodes, of which the game reads one — silently, with a holder
+other way round and you get two sibling nodes, of which the game reads one, silently, with a holder
 that looks perfectly normal until someone tries to use it.
 
 Watchers are held to the same room, as on all five vanilla watch buildings. That one is not
@@ -94,13 +94,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Tests.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Functional-Tests.ps1
 ```
 
-Two suites, no RimWorld launched, well under a minute for both. They read the installed game — its
-`Data` folder and its `Assembly-CSharp` — so they check what this mod assumes rather than what this
+Two suites, no RimWorld launched, well under a minute for both. They read the installed game, its
+`Data` folder and its `Assembly-CSharp`, so they check what this mod assumes rather than what this
 page claims.
 
 The first is about form: 25 form tests covering well-formed XML, every element still a field on its
 1.6 class, translation keys that name a real def and a real field, packaging, and the documents
-against the defs. The last group is the one that keeps this page honest — every number quoted here
+against the defs. The last group is the one that keeps this page honest, every number quoted here
 and in the changelog is read back out of the XML, so changing a value and not the prose turns the
 suite red.
 
@@ -109,7 +109,7 @@ override still takes the base class's vtable slot rather than a new one, which i
 between the mod working and colonists gazing at empty platforms with no error anywhere. It runs the
 game's own patch engine on the shipped patch file against the real Anomaly defs, and reads the
 result. And it scans every method body in the game to find who reads each setting these defs write
-— the fault nothing else catches, a setting no code on its path ever reads.
+: the fault nothing else catches, a setting no code on its path ever reads.
 
 The numbers in this file are recomputed at every run: Anomaly shipping no recreation content, ten
 recreation types in Core with five from a building, the nociosphere's pain field at 5.9 cells. A
@@ -119,7 +119,7 @@ RimWorld release that moves one of those is reported instead of quietly ageing t
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-Mutations.ps1
 ```
 
-A green suite proves nothing on its own, so a third script breaks the mod on purpose — 35 mutations
+A green suite proves nothing on its own, so a third script breaks the mod on purpose, 35 mutations
 on a copy, each aimed at one test. Rerun on 2026-09-25 against the suites as they now stand: all 35
 woke the test they were aimed at, nine of them waking a second test as well, which is recorded as
 collateral rather than hidden. Which tests that still leaves unproven, and why, is written at the
@@ -129,8 +129,8 @@ foot of each suite rather than left to assumption.
 
 Nothing above plays. The mod has never been watched running in a colony.
 
-[TESTING.md](TESTING.md) holds the sixteen scenarios that have to be watched there — the gaze
-itself, the empty platform nobody looks at, the pain field that is the price of the show — with what
+[TESTING.md](TESTING.md) holds the sixteen scenarios that have to be watched there, the gaze
+itself, the empty platform nobody looks at, the pain field that is the price of the show, with what
 counts as a pass for each.
 
 ## Languages
