@@ -33,21 +33,38 @@ namespace EntityGazing.PickleSteps
         public void SpawnHolder(PickleContext ctx, string defName) => SpawnHolderNear(ctx, defName, null);
 
         /// <summary>
-        /// The same holder, staged where the camera is looking instead of near the map centre. A
-        /// publication shot frames a scene first and needs the subject inside it; the ordinary
-        /// scenarios do not care where on the map the holder lands.
+        /// A publication shot composes its frame: the holder goes on a chosen cell (radius 1, so a
+        /// clear map gives that very cell) and the camera is then centred on it, rather than the
+        /// holder landing wherever the camera happened to look.
         /// </summary>
-        [Given("Entity Gazing spawns a {string} where the camera looks")]
-        public void SpawnHolderInView(PickleContext ctx, string defName) =>
-            SpawnHolderNear(ctx, defName, Find.CameraDriver.MapPosition);
+        [Given("Entity Gazing spawns a {string} at x={int} z={int}")]
+        public void SpawnHolderAt(PickleContext ctx, string defName, int x, int z) =>
+            SpawnHolderNear(ctx, defName, new IntVec3(x, 0, z), 1);
 
-        private static void SpawnHolderNear(PickleContext ctx, string defName, IntVec3? near)
+        [When("Entity Gazing centres the camera on the holder")]
+        public void CentreOnHolder(PickleContext ctx) =>
+            Find.CameraDriver.JumpToCurrentMapLoc(Driver.HolderThing(ctx).Position);
+
+        /// <summary>
+        /// A pawn already on the map (the Sanctuary's own colonist, say) is made to want recreation,
+        /// as the spawned colonists are, so the giver offers her the holder.
+        /// </summary>
+        [Given("Entity Gazing {string} has no recreation")]
+        public void NoRecreation(PickleContext ctx, string name)
+        {
+            var pawn = Driver.PawnNamed(ctx, name);
+            pawn.needs.AddOrRemoveNeedsAsAppropriate();
+            ctx.Require(pawn.needs?.joy != null, $"'{name}' has no recreation need");
+            pawn.needs.joy.CurLevel = 0f;
+        }
+
+        private static void SpawnHolderNear(PickleContext ctx, string defName, IntVec3? near, int radius = 3)
         {
             var def = DefDatabase<ThingDef>.GetNamedSilentFail(defName);
             ctx.Require(def != null, $"no ThingDef named '{defName}'");
             var thing = ThingMaker.MakeThing(def, GenStuff.DefaultStuffFor(def));
             thing.SetFactionDirect(Faction.OfPlayer);
-            var building = GenSpawn.Spawn(thing, Driver.FreeCell(ctx, near, near.HasValue ? 3 : 20), Driver.Map(ctx)) as Building;
+            var building = GenSpawn.Spawn(thing, Driver.FreeCell(ctx, near, near.HasValue ? radius : 20), Driver.Map(ctx)) as Building;
             ctx.Require(building != null, $"'{defName}' did not spawn as a Building");
             ctx.Require(Driver.Map(ctx).listerBuildings.allBuildingsColonist.Contains(building),
                 $"'{defName}' spawned but did not enter the colonist building list");
