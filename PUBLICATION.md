@@ -145,7 +145,7 @@ image is opened and looked at before it is uploaded; a filename is not evidence 
 
 The gallery is shot in the Sanctuary (`enclosure-south`, Pickle feature 14, pass
 `wsl-deps.sanctuary.map`), one story: the evening a colony decides that the thing it keeps chained up
-is also its best entertainment. Order proposed 2026-10-13, pending acceptance:
+is also its best entertainment. Order proposed 2026-10-13, pictures being reshot 2026-10-14 (Nelim as protagonist), pending acceptance:
 
 | File | Shows | Why here |
 |---|---|---|
