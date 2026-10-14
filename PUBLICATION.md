@@ -143,13 +143,18 @@ the GitHub release notes, read separately by the same plugin.
 Steam shows the first one large, so the most demonstrative goes first, not the prettiest. Every
 image is opened and looked at before it is uploaded; a filename is not evidence of what it holds.
 
-**Not decided yet, and it needs images this repository does not have.** The only image made for
-the page is `Mod/About/Preview.png`, the banner. **The Pickle captures under
-`Tests/Pickle/Evidence/` are test evidence, not gallery material**: they come from the harness's
-test colony under Xvfb, not from a colony chosen to show the mod (Virginie, 2026-09-28: wrong
-colony). The gallery has to be shot by hand in a real colony. Shots it would want: a colonist
-mid-gaze at a held entity, the watch area drawn under the build designator, a holding spot being
-watched, the settings window, and a colonist standing in a nociosphere's pain field.
+The gallery is shot in the Sanctuary (`enclosure-south`, Pickle feature 14, pass
+`wsl-deps.sanctuary.map`), one story: the evening a colony decides that the thing it keeps chained up
+is also its best entertainment. Order proposed 2026-10-13, pending acceptance:
+
+| File | Shows | Why here |
+|---|---|---|
+| `0-preview.png` | The banner (`Mod/About/Preview.png`) | Byte copy, first by rule |
+| `1-gaze.png` | Three colonists standing around a held fingerspike | The mod's whole idea in one frame |
+| `2-watch-area.png` | The cross of four outlined rects around a platform being placed | How the game picks where colonists stand |
+| `3-holding-spot.png` | The same on the floor marker, two colonists | The second holder |
+| `4-pain-field.png` | A colonist beside a nociosphere on its platform | The price of the show |
+| `5-settings.png` | The Mod options window, cropped | The dial the player turns |
 
 ## Dependencies and DLC
 
