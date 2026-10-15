@@ -14,3 +14,13 @@ nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
 nelim.pickletools.clearscreen      path:PickleTools/ClearScreen/Mod
 nelim.pickletools.screenshotmode   path:PickleTools/ScreenshotMode/Mod
 nelim.pickletools.colonistrace     path:PickleTools/ColonistRace/Mod
+# Nelim's face ("Nelim has her own face" needs Nals and MouthSmirkSmile from Vanilla Textures Expanded: Facial Animations; EyeGenes3 and the two fixes redraw spawned and loaded pawns). Same block as SanctuaryBacklot/Tests/Pickle/wsl-deps.sanctuary.map. First run of Nelim's gallery (gallery-4) failed 5 of 5 without it: 'Nals Facial Animation is not loaded'.
+Nals.FacialAnimation 1635901197
+nals.facialanimationexperimentals 2581693737
+VanillaExpanded.VTEXE.FacialAnims 2816938779
+Newton.AKNExtras.FacialAnimations 2889716301
+lucius.eyegenes3 3745223213
+astryl.FacialAnimationPerformancePatch 3790129900
+vk.addeyes.EX 3694711465
+Moshii.NLFA.InitFix 3609895011
+ccj.nlfaloadfix 3721489042
