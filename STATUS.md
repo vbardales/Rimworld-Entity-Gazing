@@ -35,7 +35,7 @@ code_review_sha: 64ca3de280fc2c29018f50dd456653aa527f02d7
 echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
 updated:      2026-10-15, shootGallery session
-protocols_read_sha: 727cbcb5511d4532a3ec767e70630bb1334d2b9d
+protocols_read_sha: 6eeb289af92096fa3a7ee40825e3b5221030873d
 ---
 
 # Entity Gazing — status
