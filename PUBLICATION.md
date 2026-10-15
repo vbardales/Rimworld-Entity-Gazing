@@ -145,15 +145,15 @@ image is opened and looked at before it is uploaded; a filename is not evidence 
 
 The gallery is shot in the Sanctuary (`enclosure-south`, Pickle feature 14, pass
 `wsl-deps.sanctuary.map`), one story: the evening a colony decides that the thing it keeps chained up
-is also its best entertainment. Order proposed 2026-10-13, pictures being reshot 2026-10-14 (Nelim as protagonist), pending acceptance:
+is also its best entertainment. Order proposed 2026-10-15 (run gallery-5, Nelim as protagonist), pending acceptance:
 
 | File | Shows | Why here |
 |---|---|---|
 | `0-preview.png` | The banner (`Mod/About/Preview.png`) | Byte copy, first by rule |
-| `1-gaze.png` | Three colonists standing around a held fingerspike | The mod's whole idea in one frame |
+| `1-gaze.png` | Nelim and two guests standing around a held fingerspike | The mod's whole idea in one frame |
 | `2-watch-area.png` | The cross of four outlined rects around a platform being placed | How the game picks where colonists stand |
 | `3-holding-spot.png` | The same on the floor marker, two colonists | The second holder |
-| `4-pain-field.png` | A colonist beside a nociosphere on its platform | The price of the show |
+| `4-pain-field.png` | Nelim and a guest, eyes shut, beside a nociosphere on its platform | The price of the show |
 | `5-settings.png` | The Mod options window, cropped | The dial the player turns |
 
 ## Dependencies and DLC
