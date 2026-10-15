@@ -1,3 +1,4 @@
+@requires:nelim.pickletools.expansions
 Feature: the mod without the DLC it is built on
 
   # TESTING.md's table asks scenario 1 for one pass per DLC state, and until now only the DLC-on
