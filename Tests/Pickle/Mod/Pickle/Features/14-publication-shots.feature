@@ -2,7 +2,7 @@
 # thirteen features do not: this one exists so the gallery images are taken in a scene chosen for
 # them, in the Sanctuary, rather than cropped by hand out of the test colony's evidence.
 #
-# VALID ONLY IN THE SANCTUARY PASS: wsl-deps.sanctuary.map stages Sanctuary Backlot (the fixture
+# VALID ONLY IN THE SANCTUARY PASS: wsl-deps.sanctuary.map stages Sanctuary Backlot and its body, trousers and face mods (the fixture
 # "Nelims-tribe" and the named places) and the studio companions. The other passes skip this file.
 #
 # Every shot is @review: a green scenario proves an image was produced, not that it shows what
@@ -36,7 +36,6 @@ Feature: shots for the Workshop page
     And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
     And Nelim's Sanctuary: I am at the sanctuary "enclosure-south"
     And I set the weather to "Clear"
-    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants"
     And Nelim's Sanctuary: Nelim has her own face
 
   Scenario: Nelim and her guests gazing at a held entity
@@ -54,6 +53,7 @@ Feature: shots for the Workshop page
     And Entity Gazing asks the giver for a job for "Basil"
     And Entity Gazing "Basil" starts the offered job
     And I wait 600 ticks
+    And Nelim's Sanctuary: the appearance of "Nelim" is logged
     Then Entity Gazing "Nelim" is watching the holder
     And Entity Gazing "Iris" is watching the holder
     And Entity Gazing "Basil" is watching the holder

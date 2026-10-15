@@ -8,13 +8,21 @@
 #
 # Feature 14 is valid only here. The other passes skip it through its @requires tags.
 #
+# The Backlot block below is copied from SanctuaryBacklot/Tests/Pickle/wsl-deps.sanctuary.map on 2026-10-15 (bodies, trousers, facial animation set, Show Hair; seeds in Tests/Pickle/config/sanctuary/). The first copy only took the face mods and Nelim came out bare in gallery-5: without WDI, the body variants and AB's Visible Pants her trousers are not drawn.
 # Anomaly stays ON: the shots are of the mod doing its job, which needs the DLC.
-nelim.sanctuarybacklot             path:SanctuaryBacklot/Mod
 nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
-nelim.pickletools.clearscreen      path:PickleTools/ClearScreen/Mod
-nelim.pickletools.screenshotmode   path:PickleTools/ScreenshotMode/Mod
-nelim.pickletools.colonistrace     path:PickleTools/ColonistRace/Mod
-# Nelim's face ("Nelim has her own face" needs Nals and MouthSmirkSmile from Vanilla Textures Expanded: Facial Animations; EyeGenes3 and the two fixes redraw spawned and loaded pawns). Same block as SanctuaryBacklot/Tests/Pickle/wsl-deps.sanctuary.map. First run of Nelim's gallery (gallery-4) failed 5 of 5 without it: 'Nals Facial Animation is not loaded'.
+nelim.pickletools.camerazoom path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor path:PickleTools/StageDecor/Mod
+nelim.pickletools.coatsteps path:PickleTools/CoatSteps/Mod
+nelim.pickletools.clearscreen path:PickleTools/ClearScreen/Mod
+nelim.pickletools.colonistrace path:PickleTools/ColonistRace/Mod
+nelim.pickletools.clickdiagnostics path:PickleTools/ClickDiagnostics/Mod
+nelim.pickletools   path:PickleTools/Tests/Pickle/StandaloneBase/Mod
+tiagocc0.FemaleBodyVariants 3798082132
+tiagocc0.FemaleApparelVariants 3799726535
+wdi.realistic.bodies 3527486510
+ab.vplrf 2986402536
+nelim.venustouch.waistlines path:VenusTouchWaistlines/Mod
 Nals.FacialAnimation 1635901197
 nals.facialanimationexperimentals 2581693737
 VanillaExpanded.VTEXE.FacialAnims 2816938779
@@ -22,5 +30,11 @@ Newton.AKNExtras.FacialAnimations 2889716301
 lucius.eyegenes3 3745223213
 astryl.FacialAnimationPerformancePatch 3790129900
 vk.addeyes.EX 3694711465
+sd.fa.movingvanillaeyes 3753978140
+SleepyFrieren.beautygenefa 3685072616
+ria.cuterkidsforfacialanimation 3807706870
 Moshii.NLFA.InitFix 3609895011
 ccj.nlfaloadfix 3721489042
+RaccoonCuddler.ShowHair 3255379190
+nelim.sanctuarybacklot             path:SanctuaryBacklot/Mod
+nelim.pickletools.screenshotmode   path:PickleTools/ScreenshotMode/Mod
