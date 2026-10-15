@@ -60,8 +60,19 @@ Feature: shots for the Workshop page
     And Entity Gazing spawns the colonist "Basil" with no recreation where the camera looks
     And Nelim's Pickle Tools: "Iris" wears "Apparel_BasicShirt" dyed rgb (36, 112, 122)
     And Nelim's Pickle Tools: "Iris" wears "Apparel_Pants" dyed rgb (52, 48, 56)
+    And Nelim's Pickle Tools: "Iris" gender is female
+    And Nelim's Pickle Tools: "Iris" hairstyle is "Flowy"
+    And Nelim's Pickle Tools: "Iris" hair colour is rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "Iris" brows are "BrowNormal"
+    And Nelim's Pickle Tools: "Iris" mouth is "MouthSmirkSmile"
     And Nelim's Pickle Tools: "Basil" wears "Apparel_BasicShirt" dyed rgb (204, 150, 52)
     And Nelim's Pickle Tools: "Basil" wears "Apparel_Pants" dyed rgb (52, 48, 56)
+    And Nelim's Pickle Tools: "Basil" gender is male
+    And Nelim's Pickle Tools: "Basil" hairstyle is "Bowlcut"
+    And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
+    And Nelim's Pickle Tools: "Basil" beard is "none"
+    And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
+    And Nelim's Pickle Tools: "Basil" mouth is "MouthSmirkSmile"
     When Entity Gazing asks the giver for a job for "Nelim"
     And Entity Gazing "Nelim" starts the offered job
     And Entity Gazing asks the giver for a job for "Iris"
@@ -107,6 +118,12 @@ Feature: shots for the Workshop page
     And Entity Gazing spawns the colonist "Basil" with no recreation where the camera looks
     And Nelim's Pickle Tools: "Basil" wears "Apparel_BasicShirt" dyed rgb (204, 150, 52)
     And Nelim's Pickle Tools: "Basil" wears "Apparel_Pants" dyed rgb (52, 48, 56)
+    And Nelim's Pickle Tools: "Basil" gender is male
+    And Nelim's Pickle Tools: "Basil" hairstyle is "Bowlcut"
+    And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
+    And Nelim's Pickle Tools: "Basil" beard is "none"
+    And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
+    And Nelim's Pickle Tools: "Basil" mouth is "MouthSmirkSmile"
     When Entity Gazing asks the giver for a job for "Nelim"
     And Entity Gazing "Nelim" starts the offered job
     And Entity Gazing asks the giver for a job for "Basil"
@@ -133,6 +150,14 @@ Feature: shots for the Workshop page
     And Entity Gazing spawns the colonist "Basil" with no recreation where the camera looks
     And Nelim's Pickle Tools: "Basil" wears "Apparel_BasicShirt" dyed rgb (204, 150, 52)
     And Nelim's Pickle Tools: "Basil" wears "Apparel_Pants" dyed rgb (52, 48, 56)
+    And Nelim's Pickle Tools: "Basil" gender is male
+    And Nelim's Pickle Tools: "Basil" hairstyle is "Bowlcut"
+    And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
+    And Nelim's Pickle Tools: "Basil" beard is "none"
+    And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
+    And Nelim's Pickle Tools: "Basil" mouth is "MouthSmirkSmile"
+    And Nelim's Pickle Tools: "Basil" mouth is "MouthNormal"
+    And Nelim's Pickle Tools: "Basil" lids are "LidSharp"
     When Entity Gazing asks the giver for a job for "Nelim"
     And Entity Gazing "Nelim" starts the offered job
     And Entity Gazing asks the giver for a job for "Basil"
