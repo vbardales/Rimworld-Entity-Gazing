@@ -33,6 +33,7 @@ remaining:
   - "done 2026-10-02: French review by Virginie, stated in chat at revision 85ec8b6 (the `Translation audit` review line is hers to write). Was: unverified: French review (TRANSLATIONS.md, 2026-09-30). FRENCH_REVIEW.md generated 2026-09-30 at 51bdc9a, 5 files / 9 rows: 1 Keyed, 3 DefInjected. No text agrees with a pawn's gender, so no {PAWN_gender} switch is expected anywhere in this mod - nothing flagged."
 session:      local_d552515a-9ab6-4523-b8d5-7b638d027134
 code_review_sha: 64ca3de280fc2c29018f50dd456653aa527f02d7
+publication_changelog_review_sha: bbe5af21606d3db0b5ce075310b7a70898fcef82
 echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
 updated:      2026-10-15, shootGallery session
