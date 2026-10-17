@@ -1,429 +1,295 @@
 # Entity Gazing — in-game test scenarios
 
-Nothing in this mod has ever been watched happening in a colony. This file is the list of what has
-to be seen, and what counts as a pass for each.
+Mod never watched in real colony. This file = list of what must be seen, and what counts as pass.
 
-Two test suites run beside it, in `scripts/`, and neither of them starts the game. They check that
-the defs are well formed, that the game still has every field and class they name, that the one
-override still takes the slot it means to, and that the patch lands where it aims. None of that is
-a single tick of play, which is what this file is for.
+Two test suites run beside it, in `scripts/`. Neither starts game. They check defs well formed, game still has every named field and class, the one override still takes its slot, patch lands where aimed. None is a single tick of play. That is what this file is for.
 
-It is not shipped: it lives beside `Mod/`, never inside it, so Steam never receives it.
+Not shipped: lives beside `Mod/`, never inside, so Steam never receives it.
 
 ## Before starting
 
-- RimWorld 1.6 with the **Anomaly** DLC. Development mode on, so that silent failures become red
-  text.
-- The log to read afterwards, and to attach to any report:
+- RimWorld 1.6 with **Anomaly** DLC. Dev mode on, so silent failures become red text.
+- Log to read afterwards, attach to any report:
   `C:\Users\nelim\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Player.log`
-- Materials and subjects: a **holding platform** costs steel and needs research in a normal game.
-  Debug actions → Spawn thing → `HoldingPlatform` and `HoldingSpot`, and Debug actions → Spawn pawn
-  → an entity such as `Nociosphere`, `Fleshbeast` or `Shambler`. An entity has to be **downed**
-  before it can be tethered. Both holders are covered by the mod and scenario 13 compares them.
-- Colonists with recreation already low, and a schedule block set to Recreation. Debug actions →
-  Needs → set recreation to zero is faster than waiting.
+- Materials and subjects: **holding platform** costs steel, needs research in normal game. Debug actions → Spawn thing → `HoldingPlatform` and `HoldingSpot`, and Debug actions → Spawn pawn → entity such as `Nociosphere`, `Fleshbeast` or `Shambler`. Entity must be **downed** before tethered. Mod covers both holders; scenario 13 compares them.
+- Colonists with recreation already low, schedule block set to Recreation. Debug actions → Needs → set recreation to zero faster than waiting.
 
-Useful conversions: 60 ticks is one second at normal speed, 2500 ticks is one in-game hour. A full
-gaze is **4000 ticks**, so about an hour and a half of game time.
+Useful conversions: 60 ticks = one second at normal speed, 2500 ticks = one in-game hour. Full gaze = **4000 ticks**, about hour and half game time.
 
-The numbers this file leans on, all read out of the defs: watch distance **2 to 6** cells in a rect
-**5** wide, **5** participants at most, `JoyGainFactor` **1**, base chance **2**, sight required,
-no chair wanted.
+Numbers this file leans on, all read from defs: watch distance **2 to 6** cells in rect **5** wide, **5** participants max, `JoyGainFactor` **1**, base chance **2**, sight required, no chair wanted.
 
 ---
 
 ## 1. It loads, with and without the DLC
 
-Everything else depends on this. All three gameplay defs carry `MayRequire="Ludeon.RimWorld.Anomaly"` and
-the patch is wrapped in a `PatchOperationConditional`, so the mod is supposed to be inert rather
-than broken when the DLC is off.
+Everything else depends on this. All three gameplay defs carry `MayRequire="Ludeon.RimWorld.Anomaly"` and patch wrapped in `PatchOperationConditional`, so mod supposed to be inert, not broken, when DLC off.
 
-1. Start the game with the mod active and **Anomaly disabled**.
-2. Read the log.
+1. Start game with mod active and **Anomaly disabled**.
+2. Read log.
 
-**Pass:** no red line, no `Could not resolve cross-reference`, no failed patch. The assembly still
-loads — it always does, and that is by design — but nothing of the mod appears in game.
+**Pass:** no red line, no `Could not resolve cross-reference`, no failed patch. Assembly still loads — always does, by design — but nothing of mod appears in game.
 **Fail:** any error naming `EG_`, `HoldingPlatform`, or `EntityGazing.JoyGiver_WatchEntity`.
 
-3. Enable Anomaly, restart, read the log again.
+3. Enable Anomaly, restart, read log again.
 
-**Pass:** still clean, and the three defs exist. Check with Debug actions → **Def lookup**, or the
-debug inspector: `EG_EntityGazing`, `EG_WatchEntity` (the job) and `EG_WatchEntity` (the giver).
+**Pass:** still clean, three defs exist. Check with Debug actions → **Def lookup**, or debug inspector: `EG_EntityGazing`, `EG_WatchEntity` (the job) and `EG_WatchEntity` (the giver).
 
-A failed `PatchOperationAdd` is the likely fault here and it is **loud** — the game names the file
-and the xpath. A silently wrong one is the next test.
+Failed `PatchOperationAdd` is likely fault here and **loud** — game names file and xpath. Silently wrong one is next test.
 
 ## 2. The patch landed where it was aimed
 
-This is the scenario for the one real subtlety in the XML. `HoldingPlatform` already has a
-`<statBases>`, so the patch adds *inside* it; `<building>` does not exist on the def, so the patch
-creates it at the root and relies on inheritance merging it with the parent's.
+Scenario for the one real subtlety in XML. `HoldingPlatform` already has `<statBases>`, so patch adds *inside* it; `<building>` does not exist on def, so patch creates it at root and relies on inheritance merging it with parent's.
 
-1. Build or spawn a holding platform.
+1. Build or spawn holding platform.
 2. Debug inspector on it, or Debug actions → Def lookup → `HoldingPlatform`.
 
-**Pass, and check all four:**
+**Pass, check all four:**
 
-- `JoyGainFactor` is **1**, and the platform's other stats are **still there**. If the patch had
-  created a second `<statBases>` sibling, the game would read only one and the platform would have
-  lost its original stats — that is the failure this test exists for.
+- `JoyGainFactor` is **1**, platform's other stats **still there**. If patch had created second `<statBases>` sibling, game reads only one and platform loses original stats — failure this test exists for.
 - `building.joyKind` is `EG_EntityGazing`.
 - `building.watchBuildingStandDistanceRange` is `2~6`.
-- **The rest of the `<building>` block survived.** The holding platform inherits building settings
-  from `HoldingPlatformBase`; if the new node replaced rather than merged, they are gone. This is
-  the other half of the same risk and it is easy to miss, because a platform with a broken
-  `<building>` block still looks normal until you try to tether something to it.
+- **Rest of `<building>` block survived.** Holding platform inherits building settings from `HoldingPlatformBase`; if new node replaced rather than merged, they gone. Other half of same risk, easy to miss, because platform with broken `<building>` block still looks normal until you try to tether something.
 
-3. Select the platform in the build menu, before placing it.
+3. Select platform in build menu, before placing.
 
-**Pass:** the watch area is drawn on the ground — that is `PlaceWorker_WatchArea`, added by the
-same patch. If no area is drawn, the place worker did not land.
+**Pass:** watch area drawn on ground — that is `PlaceWorker_WatchArea`, added by same patch. No area drawn = place worker did not land.
 
 ## 3. An occupied platform becomes a recreation source
 
-1. Spawn an entity, down it, have it tethered to the platform.
-2. Select the platform.
+1. Spawn entity, down it, tether to platform.
+2. Select platform.
 
-**Pass:** the inspect pane names it as a source of recreation, and the recreation type reads
-**entity gazing**. In French, `contemplation d'entité`.
+**Pass:** inspect pane names it as recreation source, recreation type reads **entity gazing**. French: `contemplation d'entité`.
 
-3. Open a colonist's Needs tab, Recreation, and hover the list of types.
+3. Open colonist's Needs tab, Recreation, hover list of types.
 
-**Pass:** entity gazing is among the types the colony can offer. This is the whole point of the
-mod, so if it is absent here, stop and read the log.
+**Pass:** entity gazing among types colony can offer. Whole point of mod, so if absent, stop and read log.
 
 ## 4. A colonist goes and watches, on their own
 
-Translation validation: repeat scenarios 3 and 4 in English and French, with Anomaly
-enabled, for both the holding platform and holding spot. Check the recreation source,
-Needs tooltip and active job report against the text inventory in STATUS.md. Also observe
-an opportunistically started job, since its report allows the vanilla opportunistic prefix.
-Fail on raw keys, English fallback in French, broken accents, malformed prefixes or clipping.
-Record game version, date, language, holder and results. These language checks have not yet
-been executed in a running colony.
+Translation validation: repeat scenarios 3 and 4 in English and French, Anomaly enabled, for both holding platform and holding spot. Check recreation source, Needs tooltip, active job report against text inventory in STATUS.md. Also observe opportunistically started job, since its report allows vanilla opportunistic prefix. Fail on raw keys, English fallback in French, broken accents, malformed prefixes or clipping. Record game version, date, language, holder, results. Language checks not yet executed in running colony.
 
 The one behaviour everything else supports.
 
-1. A colonist with recreation low, a schedule block on Recreation, an occupied platform in reach.
-2. Let it run. Do not force the job.
+1. Colonist with recreation low, schedule block on Recreation, occupied platform in reach.
+2. Let it run. Do not force job.
 
-**Pass:** the colonist walks to the platform, stops **two to six cells away**, faces it, and the
-job description reads *watching the contained entity* (French: *observe l'entité captive*).
-Recreation rises. The bar's tooltip credits **entity gazing**.
-**Fail, and each means something different:**
+**Pass:** colonist walks to platform, stops **two to six cells away**, faces it, job description reads *watching the contained entity* (French: *observe l'entité captive*). Recreation rises. Bar tooltip credits **entity gazing**.
+**Fail, each means something different:**
 
-- Never goes → the giver is not being picked. Check `baseChance`, the schedule, and whether the
-  platform is reachable and in a socially proper room (see scenario 9).
-- Goes and stands on the platform's own cell, or ten cells away → the distance range did not land;
-  go back to scenario 2.
-- Goes and the job ends instantly → `JobDriver_WatchBuilding` is failing its own checks. The log
-  usually says why.
+- Never goes → giver not picked. Check `baseChance`, schedule, whether platform reachable and in socially proper room (see scenario 9).
+- Goes and stands on platform's own cell, or ten cells away → distance range did not land; go back to scenario 2.
+- Goes and job ends instantly → `JobDriver_WatchBuilding` failing own checks. Log usually says why.
 
-3. Let the job run to the end rather than interrupting it.
+3. Let job run to end, do not interrupt.
 
-**Pass:** it lasts about 4000 ticks, an hour and a half of game time, unless something interrupts.
+**Pass:** lasts about 4000 ticks, hour and half game time, unless something interrupts.
 
 ## 5. An empty platform is never watched
 
-**This is the gameplay giver's occupancy condition.** `JoyGiver_WatchEntity` exists for this single
-condition and nothing else; if this test fails, the assembly is not being used at all.
+**This is gameplay giver's occupancy condition.** `JoyGiver_WatchEntity` exists for this single condition only; if test fails, assembly not used at all.
 
-1. Leave a holding platform built and **empty**.
-2. Colonists with recreation at zero, Recreation scheduled, nothing else on offer.
-3. Let it run for a full day.
+1. Leave holding platform built and **empty**.
+2. Colonists with recreation zero, Recreation scheduled, nothing else on offer.
+3. Run full day.
 
-**Pass:** nobody ever walks over to stare at an empty steel frame. The platform does not appear as
-an available recreation source while it is empty.
-**Fail:** a colonist gazes at nothing. That means the vanilla `JoyGiver_WatchBuilding` is running
-instead of the mod's subclass — check that `giverClass` reads `EntityGazing.JoyGiver_WatchEntity`
-and that the assembly loaded.
+**Pass:** nobody ever walks over to stare at empty steel frame. Platform does not appear as available recreation source while empty.
+**Fail:** colonist gazes at nothing. Means vanilla `JoyGiver_WatchBuilding` running instead of mod's subclass — check `giverClass` reads `EntityGazing.JoyGiver_WatchEntity` and assembly loaded.
 
 ## 6. A dead entity is not a show
 
-The same condition, second half: `held != null && !held.Dead`.
+Same condition, second half: `held != null && !held.Dead`.
 
-1. An occupied platform, a colonist mid-gaze.
-2. Kill the entity while it is still tethered. Debug actions → Kill, or damage it.
+1. Occupied platform, colonist mid-gaze.
+2. Kill entity while still tethered. Debug actions → Kill, or damage it.
 
-**Pass:** the corpse on the platform stops being a recreation source. No new colonist starts a
-gaze. The one already watching may finish their job — the check runs when the job is chosen, not
-every tick — but nobody starts a new one.
+**Pass:** corpse on platform stops being recreation source. No new colonist starts gaze. One already watching may finish job — check runs when job chosen, not every tick — but nobody starts new one.
 
 ## 7. The pain field is the price of the show
 
-The design claim of the whole mod, and it is meant to come out of vanilla rather than out of this
-mod's code.
+Design claim of whole mod, meant to come from vanilla, not this mod's code.
 
-1. Tether a **nociosphere** specifically. It carries a `CompProperties_CauseHediff_AoE` applying
-   `PainField` out to **5.9** cells.
-2. Let several colonists gaze, standing at their various distances.
+1. Tether **nociosphere** specifically. Carries `CompProperties_CauseHediff_AoE` applying `PainField` out to **5.9** cells.
+2. Let several colonists gaze, standing at various distances.
 
-**Pass:** the watchers standing inside 5.9 cells pick up the `PainField` hediff and hurt; the ones
-at the far end of the range may not. Recreation still rises — pain is the cost, not a veto.
+**Pass:** watchers inside 5.9 cells pick up `PainField` hediff and hurt; ones at far end of range may not. Recreation still rises — pain is cost, not veto.
 
-3. Repeat with a **fleshbeast**, which has no such comp.
+3. Repeat with **fleshbeast**, which has no such comp.
 
-**Pass:** nobody hurts. The price varies by entity, on its own, with no code of ours. That is the
-point: it is a vanilla mechanic being used, not simulated.
+**Pass:** nobody hurts. Price varies by entity, on its own, no code of ours. Point: vanilla mechanic used, not simulated.
 
-If you decide the cost is too harsh, use Mod options -> Entity Gazing to set a minimum distance above 5.9 cells.
+If cost too harsh, use Mod options -> Entity Gazing to set minimum distance above 5.9 cells.
 
 ## 8. Several watchers, and no chairs
 
 1. Five or more colonists free at once, one occupied platform, recreation low all round.
 
-**Pass:** up to **five** watch at the same time (`joyMaxParticipants`), spread across the watch
-area, all facing the platform. A sixth does something else.
+**Pass:** up to **five** watch at once (`joyMaxParticipants`), spread across watch area, all facing platform. Sixth does something else.
 
-**Pass, and check it explicitly:** nobody drags a chair over. `desireSit` is false, deliberately —
-you do not pull up a seat in front of a cage of horrors. A colonist sitting down here means the
-giver being used is not the one this mod declares.
+**Pass, check explicitly:** nobody drags chair over. `desireSit` false, deliberately — you do not pull up seat in front of cage of horrors. Colonist sitting down here = giver used is not the one this mod declares.
 
 ## 9. The room has to be proper
 
-The patch sets `socialPropernessMatters`, the same flag the vanilla televisions carry.
+Patch sets `socialPropernessMatters`, same flag vanilla televisions carry.
 
-1. Put a holding platform inside a **prison** room, with an entity on it.
-2. A free colonist with recreation low, nothing else on offer.
+1. Put holding platform inside **prison** room, entity on it.
+2. Free colonist with recreation low, nothing else on offer.
 
-**Pass:** the free colonist does not go. Prisoners in that room might.
+**Pass:** free colonist does not go. Prisoners in that room might.
 
-This is worth watching rather than assuming, because containment rooms and prison rooms are easy to
-confuse in a real base, and a platform in the wrong sort of room simply produces a recreation
-source nobody ever uses — with no error anywhere.
+Worth watching, not assuming: containment rooms and prison rooms easy to confuse in real base, and platform in wrong sort of room just produces recreation source nobody uses — no error anywhere.
 
 ## 10. Sight is required
 
-1. A colonist blinded, or with both eyes destroyed. Debug actions → damage, or spawn one.
-2. Recreation low, an occupied platform available, nothing else on offer.
+1. Colonist blinded, or both eyes destroyed. Debug actions → damage, or spawn one.
+2. Recreation low, occupied platform available, nothing else on offer.
 
-**Pass:** they never go. `requiredCapacities` is `Sight` alone, and this activity is nothing but
-looking.
+**Pass:** never go. `requiredCapacities` is `Sight` alone, activity is nothing but looking.
 
-**Pass, second half:** a colonist with **no hands** goes anyway. Hands are not required and must not
-be — you very much do not touch.
+**Pass, second half:** colonist with **no hands** goes anyway. Hands not required and must not be — you very much do not touch.
 
 ## 11. On the way past
 
-`allowOpportunisticPrefix` is true, so the job may be taken as a detour rather than as a decision.
+`allowOpportunisticPrefix` true, so job may be taken as detour, not decision.
 
-1. A colonist with a long walk that passes near an occupied platform, recreation somewhat low but
-   not desperate.
+1. Colonist with long walk passing near occupied platform, recreation somewhat low but not desperate.
 
-**Pass:** they sometimes stop and watch on the way, then carry on. This is a *sometimes*, not an
-*always*; it is not a fail unless it never happens across a long session.
+**Pass:** sometimes stop and watch on way, then carry on. *Sometimes*, not *always*; not fail unless never happens across long session.
 
 ## 12. Save, quit, reload
 
-The mod adds no colony save data. Global viewing-distance settings are stored separately.
+Mod adds no colony save data. Global viewing-distance settings stored separately.
 
-1. Mid-gaze, save. Quit to the menu. Reload.
+1. Mid-gaze, save. Quit to menu. Reload.
 
-**Pass:** the colony loads with no error naming `EG_` or `EntityGazing`, and the colonist either
-resumes or picks a new job. Nothing in the log about a missing class or an unresolved reference.
+**Pass:** colony loads with no error naming `EG_` or `EntityGazing`, colonist either resumes or picks new job. Nothing in log about missing class or unresolved reference.
 
-2. With the same save, **disable the mod** and load it again.
+2. Same save, **disable mod**, load again.
 
-**Pass:** the save opens. The recreation type disappears from the colony, which is expected and
-harmless; there is no orphaned component to complain about.
+**Pass:** save opens. Recreation type disappears from colony, expected and harmless; no orphaned component to complain.
 
 ## 13. The holding spot works too, and is a poorer show
 
-`HoldingSpot`, the floor marker you use before you can build a platform, carries the same
-`CompProperties_EntityHolderPlatform` and the same `Building_HoldingPlatform` class. The mod covers
-both.
+`HoldingSpot`, floor marker used before you can build platform, carries same `CompProperties_EntityHolderPlatform` and same `Building_HoldingPlatform` class. Mod covers both.
 
-1. Build a holding spot, no platform anywhere, tether an entity to it.
+1. Build holding spot, no platform anywhere, tether entity to it.
 2. Colonists with recreation low.
 
-**Pass:** they go and watch it, exactly as they would a platform. The watch area is drawn when the
-spot is selected in the build menu.
+**Pass:** go and watch it, exactly like platform. Watch area drawn when spot selected in build menu.
 
-3. Compare the recreation gained here with the same gaze at a platform.
+3. Compare recreation gained here with same gaze at platform.
 
-**Pass:** the spot gives noticeably less. Its `JoyGainFactor` is **0.8** against the platform's
-**1**, following the game's own description of it — *not as good as a steel holding platform, but a
-lot better than nothing*. An entity roped to the floor is a poorer show than one clamped to a frame.
+**Pass:** spot gives noticeably less. Its `JoyGainFactor` **0.8** vs platform's **1**, following game's own description — *not as good as a steel holding platform, but a lot better than nothing*. Entity roped to floor = poorer show than one clamped to frame.
 
-**This scenario also guards the patch's one real trap,** which is inverted between the two defs. The
-spot already has a `<building>` node where the platform has none, so its settings are added *inside*
-it while the platform's are created at the root. Get that backwards and the spot ends up with two
-`<building>` nodes, the game reads one, and the spot keeps its original settings while silently
-gaining none of the new ones. Worth a look in Debug → Def lookup: the spot's `building` block must
-still carry `sowTag` and `artificialForMeditationPurposes` **alongside** the new `joyKind`.
+**This scenario also guards patch's one real trap,** inverted between two defs. Spot already has `<building>` node where platform has none, so its settings added *inside* it while platform's created at root. Get backwards and spot ends with two `<building>` nodes, game reads one, spot keeps original settings and silently gains none of new. Worth look in Debug → Def lookup: spot's `building` block must still carry `sowTag` and `artificialForMeditationPurposes` **alongside** new `joyKind`.
 
 ## 14. Watchers stay in the room
 
-`watchBuildingInSameRoom` is set on both holders, as all five vanilla watch buildings set it. This
-is not cosmetic: it is what keeps the audience inside the pain field.
+`watchBuildingInSameRoom` set on both holders, as all five vanilla watch buildings set it. Not cosmetic: keeps audience inside pain field.
 
-1. Put a holder in a sealed containment room with an entity on it.
-2. Colonists outside, in an adjacent room, within six cells of it through the wall.
+1. Put holder in sealed containment room with entity on it.
+2. Colonists outside, adjacent room, within six cells through wall.
 
-**Pass:** nobody watches from out there. Watching happens inside the room or not at all.
-**Fail:** a colonist stands on the far side of a wall and gazes. They would be watching through
-solid stone, and — worse for the design — standing clear of the pain field that is the whole price
-of the show.
+**Pass:** nobody watches from out there. Watching happens inside room or not at all.
+**Fail:** colonist stands far side of wall and gazes. Watching through solid stone, and — worse for design — standing clear of pain field that is whole price of show.
 
 ## 15. Settings, bounds, defaults and persistence
 
-Preconditions: RimWorld 1.6 with Anomaly and Entity Gazing; no customization mod. Start
-with a fresh mod configuration, then repeat with an existing colony save. Reset to default
-settings before running the earlier gameplay scenarios. Repeat this scenario in EN and FR.
+Preconditions: RimWorld 1.6 with Anomaly and Entity Gazing; no customization mod. Start with fresh mod configuration, then repeat with existing colony save. Reset to default settings before running earlier gameplay scenarios. Repeat in EN and FR.
 
-1. Open Mod options -> Entity Gazing. Expect minimum 2 and maximum 6, readable labels/help,
-   correct accents and no raw keys, fallback, clipping or errors in Player.log.
-2. Move each slider to both ends. Expect integer values between 1 and 20, always min <= max.
-   There is no text entry, so empty or nonnumeric input is not applicable.
-3. Set 8 to 12, close the dialog, and start new watching jobs at both holder types in a
-   sufficiently large room. Expect new viewing positions within 8 to 12 cells. Current jobs
-   may finish at their old positions. The nociosphere's 5.9-cell field should not reach them.
-4. Reopen settings, restart the game and reload the save. Expect 8 to 12 retained. Start a new
-   colony and expect the same global values. Observe new jobs and check logs again.
-5. Restore defaults. Expect both controls and both holder ranges to return to 2 to 6.
+1. Open Mod options -> Entity Gazing. Expect minimum 2 and maximum 6, readable labels/help, correct accents, no raw keys, fallback, clipping or errors in Player.log.
+2. Move each slider to both ends. Expect integer values 1 to 20, always min <= max. No text entry, so empty or nonnumeric input not applicable.
+3. Set 8 to 12, close dialog, start new watching jobs at both holder types in sufficiently large room. Expect new viewing positions within 8 to 12 cells. Current jobs may finish at old positions. Nociosphere's 5.9-cell field should not reach them.
+4. Reopen settings, restart game, reload save. Expect 8 to 12 retained. Start new colony, expect same global values. Observe new jobs, check logs again.
+5. Restore defaults. Expect both controls and both holder ranges return to 2 to 6.
 6. Disable Anomaly and restart. Open and save settings without exceptions; no activity exists.
 
-Record game version, language, new/existing save, observed ranges, log path and outcome.
+Record game version, language, new/existing save, observed ranges, log path, outcome.
 Not executed in game yet.
 
 ## 16. Optional MainButtons shortcut
 
-Preconditions: default configuration, then RIMMSQOL or another compatible button editor.
-Record the exact editor version; repeat the checks in EN and FR.
+Preconditions: default configuration, then RIMMSQOL or other compatible button editor. Record exact editor version; repeat checks in EN and FR.
 
-1. Without an editor, expect no visible or greyed-out Entity Gazing main button. The ordinary
-   Mod options entry must still work.
-2. With the editor, find EG_Settings and reveal it. Click it: expect the same native settings
-   window and values as Mod options. Change to 7 to 10 and close; reopen through Mod options
-   and expect 7 to 10. Reverse the route and verify shared values and persistence after restart.
-3. Hide the shortcut through the editor, restart, and expect it to stay hidden. Remove the
-   editor and verify Mod options still works. Restore 2 to 6 before gameplay regressions.
-4. Check labels, help, accents, clipping and Player.log throughout. Expect no errors.
+1. Without editor, expect no visible or greyed-out Entity Gazing main button. Ordinary Mod options entry must still work.
+2. With editor, find EG_Settings and reveal it. Click: expect same native settings window and values as Mod options. Change to 7 to 10 and close; reopen through Mod options, expect 7 to 10. Reverse route, verify shared values and persistence after restart.
+3. Hide shortcut through editor, restart, expect stays hidden. Remove editor, verify Mod options still works. Restore 2 to 6 before gameplay regressions.
+4. Check labels, help, accents, clipping, Player.log throughout. Expect no errors.
 
-Not executed in game; no third-party integration version is certified yet.
+Not executed in game; no third-party integration version certified yet.
 ---
 
 # What is still missing, and what it takes to close it
 
-Everything above was written as a **manual** scenario, and none was ever played as one. Under the
-current bar for `tested`, a manual scenario is not a form of test that can be signed off: what was
-left to tick by hand is either automated and green, or listed as not applicable with its reason. So
-the sixteen above were never the last mile — they were the specification for the Pickle suites, and
-they have now all been converted or deliberately dropped.
+Everything above written as **manual** scenario, none ever played as one. Under current bar for `tested`, manual scenario cannot be signed off: what was left to tick by hand is either automated and green, or listed not applicable with reason. So sixteen above never last mile — they were specification for Pickle suites, now all converted or deliberately dropped.
 
-**The conversion is complete as of 2026-09-25.** Thirteen features, thirty-two scenarios, four
-passes. The table below is what was decided, kept as the record of why each line went where it
-went; `Tests/Pickle/README.md` is the live description of the suite and the four commands that run
-it. The three lines that took longest to close are named there too: the DLC-off pass, the place
-worker's drawing, and the restart, each of which needed something the ordinary pass cannot do.
+**Conversion complete as of 2026-09-25.** Thirteen features, thirty-two scenarios, four passes. Table below = what was decided, kept as record of why each line went where it went; `Tests/Pickle/README.md` = live description of suite and four commands that run it. Three lines that took longest to close also named there: DLC-off pass, place worker's drawing, restart, each needing something ordinary pass cannot do.
 
 ## The Pickle suites this mod needs, and the passes to run them in
 
-This section is the specification the suite was written from. It is kept because it records the
-reasoning, not because anything here is still outstanding.
+Section = specification suite was written from. Kept because it records reasoning, not because anything still outstanding.
 
-What belongs in Gherkin is only what a running game can show. Anything an out-of-game suite already
-proves must stay out: a scenario that repeats `scripts/` confiscates the machine for tens of minutes
-at every run and adds nothing.
+Only what running game can show belongs in Gherkin. Anything out-of-game suite already proves must stay out: scenario repeating `scripts/` confiscates machine for tens of minutes every run and adds nothing.
 
 | Scenario above | Where it belongs | Where it went |
 |---|---|---|
-| 1 loads with and without the DLC | Gherkin, one pass per DLC state | 01 for the DLC on, **13 for the DLC off**, in its own pass |
-| 2 the patch landed where it aimed | **split.** Steps 1 and 2, the def shape, are proved out of game by running the game's own patch engine — drop them. Step 3 stays: that the place worker actually *draws* the watch area on the ground is visual, and the out-of-game suites only prove the type exists and the node landed | steps 1–2 dropped; **step 3 is 10**, a `@review` capture under the build designator |
-| 3, 4, 5, 6 the gaze itself | Gherkin, the heart of it | 02 |
+| 1 loads with and without the DLC | Gherkin, one pass per DLC state | 01 for DLC on, **13 for DLC off**, own pass |
+| 2 the patch landed where it aimed | **split.** Steps 1 and 2, def shape, proved out of game by running game's own patch engine — drop. Step 3 stays: that place worker actually *draws* watch area on ground is visual, out-of-game suites only prove type exists and node landed | steps 1–2 dropped; **step 3 is 10**, `@review` capture under build designator |
+| 3, 4, 5, 6 the gaze itself | Gherkin, heart of it | 02 |
 | 7 the pain field | Gherkin | 05 |
 | 8, 10, 11 participants, sight, opportunistic | Gherkin | 02, 03 |
 | 9 socially proper room | Gherkin | 02 |
-| 12 save, quit, reload | Gherkin, nothing else survives a reload | 09 |
+| 12 save, quit, reload | Gherkin, nothing else survives reload | 09 |
 | 13 the holding spot | Gherkin | 04 |
 | 14 watchers stay in the room | Gherkin | 02 |
-| 15 settings bounds and persistence | partly proved out of game; only the window lifecycle and the restart are Gherkin | 06 for the window, **11 and 12 for the restart**, as a `-Then` pair |
-| 16 the MainButtons shortcut | Gherkin, with a `@requires` on the button editor | 07, and **no `@requires`** — see below |
+| 15 settings bounds and persistence | partly proved out of game; only window lifecycle and restart are Gherkin | 06 for window, **11 and 12 for restart**, as `-Then` pair |
+| 16 the MainButtons shortcut | Gherkin, with `@requires` on button editor | 07, and **no `@requires`** — see below |
 
-**Four passes, and the file has to say so or the mod is merely tried.** Two ordinary ones on the
-minimal set the staging script mounts — Core, the DLC, Harmony, RimLogging, Pickle, Anomaly and
-this mod — one in English and one in French; then the restart pair, and the pass without Anomaly.
-The language is fixed at staging and never switched during a run: switching reloads every def under
-the runner, and the step waits for a language that never arrives.
+**Four passes, file must say so or mod merely tried.** Two ordinary ones on minimal set staging script mounts — Core, DLC, Harmony, RimLogging, Pickle, Anomaly, this mod — one English, one French; then restart pair, and pass without Anomaly. Language fixed at staging, never switched during run: switching reloads every def under runner, step waits for language that never arrives.
 
-The last two exist because the ordinary pass cannot hold them. A restart is two processes, so it is
-`-Filter 11-restart-write -Then 12-restart-read`: one lock, one staging, two launches. A DLC is
-switched off at staging, so the DLC-off feature needs its own map file,
-`wsl-deps.no-anomaly.map`, carrying `!ludeon.rimworld.anomaly`. Both are excluded by name from
-the ordinary passes, and that exclusion is not cosmetic: the writer of the restart pair leaves
-values on disk on purpose, and playing it inside the plain run makes that run wrong rather than
-red. `Tests/Pickle/README.md` holds the four commands.
+Last two exist because ordinary pass cannot hold them. Restart = two processes, so `-Filter 11-restart-write -Then 12-restart-read`: one lock, one staging, two launches. DLC switched off at staging, so DLC-off feature needs own map file, `wsl-deps.no-anomaly.map`, carrying `!ludeon.rimworld.anomaly`. Both excluded by name from ordinary passes, exclusion not cosmetic: restart pair's writer leaves values on disk on purpose, playing it inside plain run makes that run wrong rather than red. `Tests/Pickle/README.md` holds four commands.
 
-**No "with the optional mods" pass is owed**, and that is a finding rather than an omission: this
-mod declares no optional integration at all. Its `loadAfter` names only `Ludeon.RimWorld` and
-`Ludeon.RimWorld.Anomaly`, both vanilla. Inventing a second run under a different name to fill the
-row would be a duplicate, not a pass.
+**No "with the optional mods" pass owed**, a finding not omission: mod declares no optional integration at all. Its `loadAfter` names only `Ludeon.RimWorld` and `Ludeon.RimWorld.Anomaly`, both vanilla. Inventing second run under different name to fill row = duplicate, not pass.
 
-**No incompatibility pass is owed** either: nothing is declared `incompatibleWith`. If one ever is,
-it takes a pass of its own whose job is to go and look at whether the claim is still true.
+**No incompatibility pass owed** either: nothing declared `incompatibleWith`. If ever declared, takes own pass whose job is check whether claim still true.
 
-**No `@requires:` tag is owed anywhere, and the DLC-off feature is the case that proves the rule
-rather than breaking it.** Scenario 16 looked like it needed one, since a button editor reveals the
-shortcut — but what the editor does is set the same field the suite sets, so the mechanism is
-testable without it. What a *particular* editor version does with this button is a separate claim,
-and it stays `unverified` rather than being dressed up as a skipped scenario.
+**No `@requires:` tag owed anywhere, and DLC-off feature is case proving rule, not breaking it.** Scenario 16 looked like it needed one, since button editor reveals shortcut — but editor sets same field suite sets, so mechanism testable without it. What *particular* editor version does with this button = separate claim, stays `unverified` rather than dressed up as skipped scenario.
 
-Feature 13 is the one that tempts a tag hardest and must not have one. `@requires:` means "this
-scenario needs that mod **active**"; what 13 needs is the opposite, and Pickle has no tag for an
-absence. `@requires:ludeon.rimworld.anomaly` would skip it in the very pass written for it, and a
-packageId invented to mean "absent" would skip it in every pass forever — a scenario that never
-runs, inside a suite that reads as though it covered the case. So 13 is selected by its filter and
-excluded from the others by name, and nothing is skipped anywhere.
+Feature 13 tempts tag hardest and must not have one. `@requires:` means "this scenario needs that mod **active**"; 13 needs opposite, Pickle has no tag for absence. `@requires:ludeon.rimworld.anomaly` would skip it in very pass written for it, and packageId invented to mean "absent" would skip it in every pass forever — scenario that never runs, inside suite that reads as covering case. So 13 selected by filter, excluded from others by name, nothing skipped anywhere.
 
-A scenario skipped for want of its condition is not a scenario passed, and the cheapest way to
-avoid that trap is to owe nothing.
+Scenario skipped for want of condition is not scenario passed, cheapest way to avoid trap is owe nothing.
 
-The suite, its scope and its commands live in [Tests/Pickle/README.md](Tests/Pickle/README.md).
+Suite, scope, commands live in [Tests/Pickle/README.md](Tests/Pickle/README.md).
 
 ## The bar for `tested`
 
-Four conditions, and the first three are recent:
+Four conditions, first three recent:
 
-- **No scenario left in `@wip`.** One set aside is either repaired and replayed, or deleted with
-  its reason. A remaining `@wip` is not a pass, it is a postponement.
-- **Every conditional scenario has run.** Each `@requires:` has had its own pass, on a map that
-  mounts what it requires, and that report has been read — `setName` and the suite and scenario
-  names checked before it is cited, because the report folder is shared by the whole machine.
-- **No manual test left to sign off.** Automated and green, or listed as not applicable with its
-  reason.
-- **`@review` screenshots actually opened and looked at.** That one is not another manual test: it
-  is reading an image a scenario has already proved to be in the right state. A green `@review`
-  says the journey happened, never that the picture shows anything.
+- **No scenario left in `@wip`.** One set aside either repaired and replayed, or deleted with reason. Remaining `@wip` not pass, postponement.
+- **Every conditional scenario has run.** Each `@requires:` had own pass, on map mounting what it requires, report read — `setName` and suite and scenario names checked before citing, because report folder shared by whole machine.
+- **No manual test left to sign off.** Automated and green, or listed not applicable with reason.
+- **`@review` screenshots actually opened and looked at.** Not another manual test: reading image scenario already proved in right state. Green `@review` says journey happened, never that picture shows anything.
 
-Read `exitReason` before any number in a report, and check scenarios played against features
-discovered. A run killed in flight leaves something that looks exactly like a result.
+Read `exitReason` before any number in report, check scenarios played against features discovered. Run killed in flight leaves something looking exactly like result.
 
 ## Evidence: what is kept, and what goes
 
-Reports are **kept on disk, never in git**. Screenshots and `Player.log` grow without bound, and
-`.gitignore` here excludes `Tests/Pickle/Evidence/`, `evidence/` and `pickle-reports-archive/`.
+Reports **kept on disk, never in git**. Screenshots and `Player.log` grow without bound, `.gitignore` here excludes `Tests/Pickle/Evidence/`, `evidence/` and `pickle-reports-archive/`.
 
-Ask the launcher to keep a run with `-EvidenceDir Tests/Pickle/Evidence/<run>`: it copies the report
-into the mod **before the lock is released**, which the shared rolling archive does not survive.
+Ask launcher to keep run with `-EvidenceDir Tests/Pickle/Evidence/<run>`: copies report into mod **before lock released**, which shared rolling archive does not survive.
 
 **Keep, out of a run:**
 
-- `summary.md`, `summary.json` and `junit.xml` — small, and they carry `exitReason`.
-- the `@review` screenshots of the pass **without the optional mods**, which are the only clean
-  ones, and only those a scenario actually points at.
-- `Player.log` **only** when the run failed or something has to be explained. A green run's log
-  proves nothing that the summary does not.
+- `summary.md`, `summary.json`, `junit.xml` — small, carry `exitReason`.
+- `@review` screenshots of pass **without optional mods**, only clean ones, and only those scenario actually points at.
+- `Player.log` **only** when run failed or something must be explained. Green run's log proves nothing summary does not.
 
 **Delete:**
 
-- every screenshot of the passes with optional mods, unless one is the sole proof of something.
-- every report about a build that has been superseded. A report on an older DLL says nothing about
-  the current one, and it is the most expensive kind of file to keep: it looks like proof.
-- everything a newer report replaces, as soon as it replaces it. This decision is never left to the
-  next run.
+- every screenshot of passes with optional mods, unless sole proof of something.
+- every report about superseded build. Report on older DLL says nothing about current one, most expensive kind of file to keep: looks like proof.
+- everything newer report replaces, as soon as it replaces it. Never left to next run.
 
-**Commit instead:** one short text summary per run under `docs/runs/`, named for its date and the
-commit it ran against, cited by `STATUS.md`. History as one text line per run, never as folders.
+**Commit instead:** one short text summary per run under `docs/runs/`, named for date and commit it ran against, cited by `STATUS.md`. History as one text line per run, never folders.
 
-Never delete a report a `STATUS.md` field still points at. Repoint it first, and list what goes and
-what stays before deleting anything.
+Never delete report a `STATUS.md` field still points at. Repoint first, list what goes and what stays before deleting anything.
