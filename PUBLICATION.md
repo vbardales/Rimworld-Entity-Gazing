@@ -31,25 +31,15 @@ to a template file under `Mod/`.
 
 ## Steam description
 
-The single Markdown source, under the standard Virginie chose on 2026-09-25. **Nothing reads it
-yet.** This mod is not on the CI, so the live page and `Mod/About/About.xml` are still what count
-today, and the block below exists because `OPERATIONS.md` requires the source to carry the text of
-the page *before* the first publish that would send it, and because `bootstrap-release.sh` picks
-the standard configuration on its own when `PUBLICATION.md` carries a `## Steam description` line.
+The single Markdown source, under the standard chosen by Virginie on 2026-09-25. Since the CI bootstrap
+(2026-09-27, `c8fbeb3`) the CI reads this block: `Mod/About/About.xml`'s `<description>` is generated
+from it, and every dry-run refuses to publish if the two have drifted. Form test 25 runs the same
+check locally. The live Steam page is not generated yet: it keeps the hand-written text of 2026-09-25
+until the next publish sends this block.
 
-Two things will change on the day it is adopted, and neither is an accident:
-
-- **The five section labels become real headings.** They are plain uppercase lines on the page
-  today; `##` converts to `[h2]`. That is the intended change, and the dry-run diff is where it is
-  read before anything is sent.
-- **The link line changes shape.** `[Source code on GitHub](url)` converts to the BBCode link the
-  page already shows, and generates `Source code on GitHub (url)` in `About.xml`, which today
-  carries the BBCode form by hand. `OPERATIONS.md` says a mod that has not migrated keeps its
-  hand-written link, so `About.xml` is left alone until then. The first `--sync-about --write` is
-  the migration: read the diff.
-
-Until that day this block and `About.xml` are two copies of one text, which is exactly how prose
-drifts. Form test 25 compares them and goes red if they part company.
+The block converts to BBCode for the page: the five section labels become `[h2]` headings (plain
+uppercase lines on the page today), and `[Source code on GitHub](url)` becomes the BBCode link. The
+dry-run diff is where that change is read before anything is sent.
 
 ```markdown
 Colonists can go and look at the horrors you keep chained up, as recreation.
