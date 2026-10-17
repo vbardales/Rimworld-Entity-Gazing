@@ -20,7 +20,7 @@
 # SHOOTING PLAN, in gallery order after 0- (the Preview). Place: the enclosure, holder on cell (149, 214), camera
 # centred ON the holder after the colonists have walked, then zoomed. Time: the same afternoon, an hour apart at most.
 #   1. gaze          17h. Nelim, Iris and Basil in a half circle round a platform and a held fingerspike; two stick lanterns
-#                    and a campfire behind them in the foreground-south; zoom 5, subject in the middle third. Says: the
+#                    (still unlit, it is daylight) and a lit campfire behind them in the foreground-south; zoom 5, subject in the middle third. Says: the
 #                    audience arrives, the colonists look at it, a thing the mod adds.
 #   2. watch area    18h. The ghost of a holding platform at the pointer with the cross of four outlined rects, Nelim at
 #                    its east edge and Iris at its west edge, both looking on (people in the frame, not a diagram), a
@@ -54,9 +54,7 @@ Feature: shots for the Workshop page
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (144, 218)
-    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (144, 218) is lit
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (154, 218)
-    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (154, 218) is lit
     And Nelim's Pickle Tools: I place the decor "Campfire" at (149, 210)
     And Nelim's Pickle Tools: the decor "Campfire" at (149, 210) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (153, 216)
