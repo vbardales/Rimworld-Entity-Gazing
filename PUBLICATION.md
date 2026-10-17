@@ -147,7 +147,7 @@ is also its best entertainment. Order proposed 2026-10-15 (run gallery-5, Nelim 
 | `5-settings.png` | The Mod options window, cropped | The dial the player turns |
 
 Shooting plan revised 2026-10-17 (feature 14): the fleshbeast replaces the second fingerspike in 3, Iris is in
-2 and 3, the hediff is asserted for both colonists in 4. Nothing is shot yet at this revision.
+2 and 3, the hediff is asserted for both colonists in 4. Order kept (director's call 2026-10-17): 1 stays first as the most demonstrative frame, and 2 reads as a flashback through its subtitle. Nothing is shot yet at this revision.
 
 ## Gallery subtitles
 
@@ -156,8 +156,8 @@ One English line per scene, set under the image from the clean original (GALLERY
 | index | file | line |
 |---|---|---|
 | 1 | `1-gaze.png` | Nelim and her friends gather to watch what she keeps chained up. |
-| 2 | `2-watch-area.png` | The game shows where they will stand before anything is built. |
-| 3 | `3-holding-spot.png` | A floor marker works too, and some guests are harmless. |
+| 2 | `2-watch-area.png` | Earlier that day, the game showed where everyone would stand. |
+| 3 | `3-holding-spot.png` | A floor marker holds a guest too, and this one is harmless. |
 | 4 | `4-pain-field.png` | Standing close has a price, written on their faces. |
 
 ## Dependencies and DLC
