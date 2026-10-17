@@ -141,10 +141,24 @@ is also its best entertainment. Order proposed 2026-10-15 (run gallery-5, Nelim 
 |---|---|---|
 | `0-preview.png` | The banner (`Mod/About/Preview.png`) | Byte copy, first by rule |
 | `1-gaze.png` | Nelim and two guests standing around a held fingerspike | The mod's whole idea in one frame |
-| `2-watch-area.png` | The cross of four outlined rects around a platform being placed | How the game picks where colonists stand |
-| `3-holding-spot.png` | The same on the floor marker, two colonists | The second holder |
-| `4-pain-field.png` | Nelim and a guest, eyes shut, beside a nociosphere on its platform | The price of the show |
+| `2-watch-area.png` | The cross of four outlined rects around a platform being placed, Nelim and Iris looking on | How the game picks where colonists stand |
+| `3-holding-spot.png` | The floor marker holding a fleshbeast, Nelim and Iris beside it | The second holder, and a show with no price |
+| `4-pain-field.png` | Nelim and Basil, faces marked by pain, beside a nociosphere on its platform | The price of the show |
 | `5-settings.png` | The Mod options window, cropped | The dial the player turns |
+
+Shooting plan revised 2026-10-17 (feature 14): the fleshbeast replaces the second fingerspike in 3, Iris is in
+2 and 3, the hediff is asserted for both colonists in 4. Nothing is shot yet at this revision.
+
+## Gallery subtitles
+
+One English line per scene, set under the image from the clean original (GALLERY.md, "Sous-titres"). `0-` and `5-` (interface) carry none.
+
+| index | file | line |
+|---|---|---|
+| 1 | `1-gaze.png` | Nelim and her friends gather to watch what she keeps chained up. |
+| 2 | `2-watch-area.png` | The game shows where they will stand before anything is built. |
+| 3 | `3-holding-spot.png` | A floor marker works too, and some guests are harmless. |
+| 4 | `4-pain-field.png` | Standing close has a price, written on their faces. |
 
 ## Dependencies and DLC
 

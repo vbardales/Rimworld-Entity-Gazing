@@ -23,13 +23,18 @@
 #                    and a campfire behind them in the foreground-south; zoom 5, subject in the middle third. Says: the
 #                    audience arrives, the colonists look at it, a thing the mod adds.
 #   2. watch area    18h. The ghost of a holding platform at the pointer with the cross of four outlined rects, Nelim at
-#                    its east edge looking on, a lantern lit near her; zoom 7 (the rects need room). Says: the game
-#                    shows where people will stand before you build.
-#   3. holding spot  18h. The other holder, a floor marker, Nelim and Basil close beside it, one lantern, a daylily pot;
-#                    zoom 4 (a closer portrait than 1). Says: it works for the cheaper holder too.
+#                    its east edge and Iris at its west edge, both looking on (people in the frame, not a diagram), a
+#                    lantern lit near Nelim; zoom 7 (the rects need room). Says: the game shows where people will
+#                    stand before you build.
+#   3. holding spot  18h. The other holder, a floor marker, with a FLESHBEAST on it (not the fingerspike of 1: a second
+#                    kind of entity, and the one that hurts nobody), Nelim and Iris close beside it, one lantern, a
+#                    daylily pot; zoom 4 (a closer portrait than 1). Says: it works for the cheaper holder, and
+#                    not every show has a price.
 #   4. pain field    19h, dusk. A nociosphere on a platform, Nelim and Basil at arm's reach, a torch and a campfire
-#                    lighting their faces; zoom 4; the hediff proven first, so their faces carry the pain Facial
-#                    Animation draws. Says: the price, on the faces.
+#                    lighting their faces; zoom 4; the hediff proven first for BOTH of them, so their faces carry the
+#                    pain Facial Animation draws (read on the capture: if it does not show, the shot is redone).
+#                    Says: the price, on the faces.
+#   Guests across the series: Iris in 1, 2, 3; Basil in 1 and 4; Nelim in all.
 #   5. settings      the Mod options window alone, on the backdrop for a tall window, cropped sideways.
 @review @requires:nelim.sanctuarybacklot @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.stagedecor @requires:nelim.pickletools.clearscreen @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.colonistrace @requires:Mlie.StickLantern
 Feature: shots for the Workshop page
@@ -98,6 +103,16 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (156, 217) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (156, 214)
+    And Entity Gazing "Nelim" has no recreation
+    And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
+    And Nelim's Pickle Tools: "Iris" wears "Apparel_BasicShirt" dyed rgb (36, 112, 122)
+    And Nelim's Pickle Tools: "Iris" wears "Apparel_Pants" dyed rgb (52, 48, 56)
+    And Nelim's Pickle Tools: "Iris" gender is female
+    And Nelim's Pickle Tools: "Iris" hairstyle is "Flowy"
+    And Nelim's Pickle Tools: "Iris" hair colour is rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "Iris" brows are "BrowNormal"
+    And Nelim's Pickle Tools: "Iris" mouth is "MouthSmirkSmile"
+    And Nelim's Pickle Tools: "Iris" stands at (142, 214)
     And Entity Gazing zooms the camera to 7 cells
     And Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
@@ -109,28 +124,27 @@ Feature: shots for the Workshop page
   Scenario: the holding spot is watched too
     Given I set the hour to 18
     And Entity Gazing spawns a "HoldingSpot" at x=149 z=214
-    And Entity Gazing tethers a downed "Fingerspike" to it
+    And Entity Gazing tethers a downed "Fleshbeast" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (146, 217) is lit
     And Nelim's Pickle Tools: I place the decor "PlantPot" at (152, 211)
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
     And Entity Gazing "Nelim" has no recreation
-    And Entity Gazing spawns the colonist "Basil" with no recreation where the camera looks
-    And Nelim's Pickle Tools: "Basil" wears "Apparel_BasicShirt" dyed rgb (204, 150, 52)
-    And Nelim's Pickle Tools: "Basil" wears "Apparel_Pants" dyed rgb (52, 48, 56)
-    And Nelim's Pickle Tools: "Basil" gender is male
-    And Nelim's Pickle Tools: "Basil" hairstyle is "Bowlcut"
-    And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
-    And Nelim's Pickle Tools: "Basil" beard is "none"
-    And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
-    And Nelim's Pickle Tools: "Basil" mouth is "MouthSmirkSmile"
+    And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
+    And Nelim's Pickle Tools: "Iris" wears "Apparel_BasicShirt" dyed rgb (36, 112, 122)
+    And Nelim's Pickle Tools: "Iris" wears "Apparel_Pants" dyed rgb (52, 48, 56)
+    And Nelim's Pickle Tools: "Iris" gender is female
+    And Nelim's Pickle Tools: "Iris" hairstyle is "Flowy"
+    And Nelim's Pickle Tools: "Iris" hair colour is rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "Iris" brows are "BrowNormal"
+    And Nelim's Pickle Tools: "Iris" mouth is "MouthSmirkSmile"
     When Entity Gazing asks the giver for a job for "Nelim"
     And Entity Gazing "Nelim" starts the offered job
-    And Entity Gazing asks the giver for a job for "Basil"
-    And Entity Gazing "Basil" starts the offered job
+    And Entity Gazing asks the giver for a job for "Iris"
+    And Entity Gazing "Iris" starts the offered job
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
-    And Entity Gazing "Basil" is watching the holder
+    And Entity Gazing "Iris" is watching the holder
     When Entity Gazing centres the camera on the holder
     And Entity Gazing zooms the camera to 4 cells
     And Nelim's Pickle Tools: studio presentation mode is enabled
@@ -155,7 +169,6 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
     And Nelim's Pickle Tools: "Basil" beard is "none"
     And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
-    And Nelim's Pickle Tools: "Basil" mouth is "MouthSmirkSmile"
     And Nelim's Pickle Tools: "Basil" mouth is "MouthNormal"
     And Nelim's Pickle Tools: "Basil" lids are "LidSharp"
     When Entity Gazing asks the giver for a job for "Nelim"
@@ -164,6 +177,7 @@ Feature: shots for the Workshop page
     And Entity Gazing "Basil" starts the offered job
     And I wait 1200 ticks
     Then Entity Gazing "Nelim" carries the hediff "PainField"
+    And Entity Gazing "Basil" carries the hediff "PainField"
     When Entity Gazing centres the camera on the holder
     And Entity Gazing zooms the camera to 4 cells
     And Nelim's Pickle Tools: studio presentation mode is enabled
