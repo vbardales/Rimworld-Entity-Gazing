@@ -45,7 +45,7 @@
 #                    both pawns are placed last, just before the capture, and the cross is asserted first.
 #   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
 #                    Nelim: Apparel_ShirtRuffle ivory (232, 224, 204), Apparel_Pants indigo (60, 56, 86), Apparel_Sash
-#                    rust (170, 70, 48), hairstyle Long, mouth MouthSmile. Action: watching, a stray labrador named Pip
+#                    rust (170, 70, 48), hairstyle Long, mouth MouthSmile. Action: watching, a stray labrador (kind LabradorRetriever) named Pip
 #                    sitting at (146, 216), seen from the front (facing South). Decor: stick lantern (146, 217) lit,
 #                    a fully grown daylily (152, 211). Composition: zoom 4, a closer portrait than 1, dog in the
 #                    lower-left foreground, Nelim and Iris right of centre. Says: it works for the cheaper holder, and
@@ -199,7 +199,7 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
     And Entity Gazing "Iris" is watching the holder
-    And Nelim's Pickle Tools: an adult animal of kind "Labrador" named "Pip" is spawned at (146, 216)
+    And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Pip" is spawned at (146, 216)
     And Nelim's Pickle Tools: the animal "Pip" stands at (146, 216) facing South
     When Entity Gazing centres the camera on the holder
     And Entity Gazing zooms the camera to 4 cells
