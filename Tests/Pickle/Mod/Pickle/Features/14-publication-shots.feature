@@ -26,10 +26,10 @@
 #                    its east edge and Iris at its west edge, both looking on (people in the frame, not a diagram), a
 #                    lantern lit near Nelim; zoom 7 (the rects need room). Says: the game shows where people will
 #                    stand before you build.
-#   3. holding spot  18h. The other holder, a floor marker, with a FLESHBEAST on it (not the fingerspike of 1: a second
-#                    kind of entity, and the one that hurts nobody), Nelim and Iris close beside it, one lantern, a
-#                    daylily pot; zoom 4 (a closer portrait than 1). Says: it works for the cheaper holder, and
-#                    not every show has a price.
+#   3. holding spot  18h. The other holder, a floor marker, a fingerspike on it (the entity proven harmless in feature
+#                    05; the held entity differs from 4 and the framing from 1: closer portrait, floor marker instead
+#                    of platform, Iris instead of Basil, daylily pot), Nelim and Iris close beside it, one lantern;
+#                    zoom 4. Says: it works for the cheaper holder, and not every show has a price.
 #   4. pain field    19h, dusk. A nociosphere on a platform, Nelim and Basil at arm's reach, a torch and a campfire
 #                    lighting their faces; zoom 4; the hediff proven first for BOTH of them, so their faces carry the
 #                    pain Facial Animation draws (read on the capture: if it does not show, the shot is redone).
@@ -104,7 +104,7 @@ Feature: shots for the Workshop page
     Given I set the hour to 18
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (156, 217) is lit
-    And Nelim's Pickle Tools: "Nelim" stands at (156, 214)
+    And Nelim's Pickle Tools: "Nelim" stands at (154, 214)
     And Entity Gazing "Nelim" has no recreation
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
     And Nelim's Pickle Tools: "Iris" wears "Apparel_BasicShirt" dyed rgb (36, 112, 122)
@@ -115,7 +115,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Iris" brows are "BrowNormal"
     And Nelim's Pickle Tools: "Iris" mouth is "MouthSmirkSmile"
     And Nelim's Pickle Tools: "Iris" face tattoo is "Face_Stars"
-    And Nelim's Pickle Tools: "Iris" stands at (142, 214)
+    And Nelim's Pickle Tools: "Iris" stands at (144, 214)
     And Entity Gazing zooms the camera to 7 cells
     And Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
@@ -127,7 +127,7 @@ Feature: shots for the Workshop page
   Scenario: the holding spot is watched too
     Given I set the hour to 18
     And Entity Gazing spawns a "HoldingSpot" at x=149 z=214
-    And Entity Gazing tethers a downed "Fleshbeast" to it
+    And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (146, 217) is lit
     And Nelim's Pickle Tools: I place the decor "PlantPot" at (152, 211)

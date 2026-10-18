@@ -138,3 +138,17 @@ Copy, typography, layout and palette consolidated in `Art/Preview.config.json`. 
 ## Preview echo decision, 2026-10-12
 
 Virginie validated Preview at commit named by `echo_review_sha`: `Art/echo-concept.png` (conceptual echo, no capture shows entity yet), `echo.panelWidth` 36 (height limited to panel), `iconBadge.translate` `-12.5%, 12.5%`. `Mod/About/Preview.png` and `Art/Gallery/0-preview.png` are byte copies. Re-ask when gallery captures accepted (STYLE_RIMWORLD.md, Echo).
+
+## Shotlist, estimates before play (2026-10-18, feature 14, gallery-9 pending)
+
+Story: Nelim, with her friends Iris and Basil, watches what she keeps chained in `enclosure-south` as the afternoon turns to dusk (17h, 18h, 18h, 19h), then the Mod options window. Estimate = how well the shot will say what its line says; every scene must reach 4 before it is played. No capture read yet.
+
+| # | Shot | Estimate | Main risk | Rework done |
+|---|---|---|---|---|
+| 1 | gaze, 17h, platform, fingerspike, Nelim, Iris, Basil | 4 | the giver chooses where each watcher stands, so the half circle is not scripted; Iris and Basil face tattoos may not show under Facial Animation | lanterns unlit by day, campfire lit; two daylilies |
+| 2 | watch area, 18h, designator ghost, Nelim and Iris | 4 | the ghost is drawn at the camera centre only; Iris has no job and may drift | Nelim (154, 214) and Iris (144, 214) inside the cross; Iris added so the frame has people |
+| 3 | holding spot, 18h, floor marker, fingerspike, Nelim, Iris | 4 | looks like shot 1 (same entity); the contrast is closer framing, other holder, other guest | fleshbeast dropped (def name never run); fingerspike proven harmless in feature 05 |
+| 4 | pain field, 19h, nociosphere, Nelim, Basil | 4 | pain may not show on the faces; Basil may stand outside 5.9 cells | hediff asserted for both; duplicate mouth step removed; torch and campfire light the faces |
+| 5 | settings window, backdrop for height | 4 | crop of the window | none needed |
+
+Lowest estimate 4. Not yet counted: tattoo and hair mods (NPT ticket 20261018-012441-902-2cfe), animals (a dog is kept out by the kept-out step), held objects (no weapon: a drafted pawn does not watch).

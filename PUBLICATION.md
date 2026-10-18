@@ -142,12 +142,11 @@ is also its best entertainment. Order proposed 2026-10-15 (run gallery-5, Nelim 
 | `0-preview.png` | The banner (`Mod/About/Preview.png`) | Byte copy, first by rule |
 | `1-gaze.png` | Nelim and two guests standing around a held fingerspike | The mod's whole idea in one frame |
 | `2-watch-area.png` | The cross of four outlined rects around a platform being placed, Nelim and Iris looking on | How the game picks where colonists stand |
-| `3-holding-spot.png` | The floor marker holding a fleshbeast, Nelim and Iris beside it | The second holder, and a show with no price |
+| `3-holding-spot.png` | The floor marker holding a fingerspike, Nelim and Iris beside it | The second holder, and a show with no price |
 | `4-pain-field.png` | Nelim and Basil, faces marked by pain, beside a nociosphere on its platform | The price of the show |
 | `5-settings.png` | The Mod options window, cropped | The dial the player turns |
 
-Shooting plan revised 2026-10-17 (feature 14): the fleshbeast replaces the second fingerspike in 3, Iris is in
-2 and 3, the hediff is asserted for both colonists in 4. Order kept (director's call 2026-10-17): 1 stays first as the most demonstrative frame, and 2 reads as a flashback through its subtitle. Nothing is shot yet at this revision.
+Shooting plan revised 2026-10-17 (feature 14): Iris is in 2 and 3, shot 3 keeps the proven fingerspike on the floor marker, the hediff is asserted for both colonists in 4. Order kept (director's call 2026-10-17): 1 stays first as the most demonstrative frame, and 2 reads as a flashback through its subtitle. Nothing is shot yet at this revision.
 
 ## Gallery subtitles
 
