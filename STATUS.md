@@ -139,16 +139,15 @@ Copy, typography, layout and palette consolidated in `Art/Preview.config.json`. 
 
 Virginie validated Preview at commit named by `echo_review_sha`: `Art/echo-concept.png` (conceptual echo, no capture shows entity yet), `echo.panelWidth` 36 (height limited to panel), `iconBadge.translate` `-12.5%, 12.5%`. `Mod/About/Preview.png` and `Art/Gallery/0-preview.png` are byte copies. Re-ask when gallery captures accepted (STYLE_RIMWORLD.md, Echo).
 
-## Shotlist, estimates before play (2026-10-18, feature 14, gallery-9 pending)
+## Shotlist, estimates before play (2026-10-18, reworked against GALLERY.md criteria a to j)
 
-Story: Nelim, with her friends Iris and Basil, watches what she keeps chained in `enclosure-south` as the afternoon turns to dusk (17h, 18h, 18h, 19h), then the Mod options window. Estimate = how well the shot will say what its line says; every scene must reach 4 before it is played. No capture read yet.
+Story: Nelim watches what she keeps chained in `enclosure-south` with her friends Iris and Basil as the afternoon turns to dusk (17h, 18h, 18h, 19h); full plan, outfits, decor and plans in the header of `Tests/Pickle/Mod/Pickle/Features/14-publication-shots.feature`. Scene 5 (Mod options window, interface) is set aside. Estimate = how well the shot will say what its line says. Nothing played at this revision.
 
-| # | Shot | Estimate | Main risk | Rework done |
-|---|---|---|---|---|
-| 1 | gaze, 17h, platform, fingerspike, Nelim, Iris, Basil | 4 | the giver chooses where each watcher stands, so the half circle is not scripted; Iris and Basil face tattoos may not show under Facial Animation | lanterns unlit by day, campfire lit; two daylilies |
-| 2 | watch area, 18h, designator ghost, Nelim and Iris | 4 | the ghost is drawn at the camera centre only; Iris has no job and may drift | Nelim (154, 214) and Iris (144, 214) inside the cross; Iris added so the frame has people |
-| 3 | holding spot, 18h, floor marker, fingerspike, Nelim, Iris | 4 | looks like shot 1 (same entity); the contrast is closer framing, other holder, other guest | fleshbeast dropped (def name never run); fingerspike proven harmless in feature 05 |
-| 4 | pain field, 19h, nociosphere, Nelim, Basil | 4 | pain may not show on the faces; Basil may stand outside 5.9 cells | hediff asserted for both; duplicate mouth step removed; torch and campfire light the faces |
-| 5 | settings window, backdrop for height | 4 | crop of the window | none needed |
+| # | Shot | Score | Outfit of Nelim | Action or state | Living things | Decor (removed after) | Main risk | Plan |
+|---|---|---|---|---|---|---|---|---|
+| 1 | gaze, 17h | 4 | CollarShirt wine, Pants charcoal, Corset ink; Ponytails; MouthSmile | watching the held fingerspike | Iris, Basil; 2 daylilies | 2 stick lanterns unlit, campfire lit | the three watchers line up | they face the holder, decentred subject, read the capture, Basil leaves if it is a lineup |
+| 2 | watch area, 18h | 4 | BasicShirt sage, Pants brown; FancyBun; MouthNormal | carries 3 Steel to the platform | Iris; 3 yellow tall grass | stick lantern lit | ghost drawn at the pointer only, Iris may drift | pawns placed last, ghost asserted first |
+| 3 | holding spot, 18h | 4 | ShirtRuffle ivory, Pants indigo, Sash rust; Long; MouthSmile | watching, with Pip the labrador facing South | Iris, a dog from the front; daylily | stick lantern lit | dog walks off or kind name wrong | no kept-out step here, dog spawned after the walk and placed last |
+| 4 | pain field, 19h | 4 | BasicShirt ash under Jacket slate, Pants; Wavy; MouthSad, LidUnimpressed | wounded: PainField on both | Basil; 2 yellow tall grass | torch and campfire lit | pain not visible on faces, Basil out of the field | hediff asserted for both, face parts set by hand, read the capture |
 
-Lowest estimate 4. Not yet counted: tattoo and hair mods (NPT ticket 20261018-012441-902-2cfe), animals (a dog is kept out by the kept-out step), held objects (no weapon: a drafted pawn does not watch).
+Lowest score 4 (estimated, no capture read). Open: tattoo and hair mods wait for NPT ticket 20261018-012441-902-2cfe; the dog kind `Labrador` and the steel carry are unproven; no weapon (a drafted pawn does not watch).

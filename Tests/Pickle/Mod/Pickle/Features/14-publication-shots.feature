@@ -10,32 +10,55 @@
 #
 # THE STORY (one story, GALLERY.md). Nelim, the colony's only colonist, keeps a creature chained in the walled
 # enclosure `enclosure-south`. One late afternoon she finds that watching it is the best entertainment she has, and
-# she calls her two friends over. They stand round it while the light goes: the audience gathers (1), she sees how
-# the game places the thing that will hold it (2), shows the other kind of holder (3), the night falls and the
-# creature that hurts has its say, at a price (4); the dial the player turns is the last picture (5).
-# Nelim is the protagonist of every frame (main character rule): her own trousers, corset and face come from the
-# fixture and the pass (nothing here dresses her); Iris and Basil are her guests, dressed in colours chosen to
-# stand off hers. Dusk is lit by what a camp would hold: stick lanterns, a torch, a campfire.
+# she calls her two friends over. The audience gathers while the light goes (1), she brings the steel for the platform
+# that will hold it and sees where the game will let people stand (2), shows the cheaper holder, with a stray dog
+# come to look too (3), and at nightfall the creature that hurts has its say, at a price (4); the dial the player turns
+# is the last picture (5, interface, set aside from the scoring). Nelim is the protagonist of every frame, and each
+# shot dresses her differently (outfit, hairstyle, mouth named per scene); Iris and Basil are her guests, in colours
+# chosen to stand off hers. Dusk is lit by what a camp would hold: stick lanterns, a torch, a campfire.
 #
-# SHOOTING PLAN, in gallery order after 0- (the Preview). Place: the enclosure, holder on cell (149, 214), camera
-# centred ON the holder after the colonists have walked, then zoomed. Time: the same afternoon, an hour apart at most.
-#   1. gaze          17h. Nelim, Iris and Basil in a half circle round a platform and a held fingerspike; two stick lanterns
-#                    (still unlit, it is daylight) and a lit campfire behind them in the foreground-south; zoom 5, subject in the middle third. Says: the
-#                    audience arrives, the colonists look at it, a thing the mod adds.
-#   2. watch area    18h. The ghost of a holding platform at the pointer with the cross of four outlined rects, Nelim at
-#                    its east edge and Iris at its west edge, both looking on (people in the frame, not a diagram), a
-#                    lantern lit near Nelim; zoom 7 (the rects need room). Says: the game shows where people will
-#                    stand before you build.
-#   3. holding spot  18h. The other holder, a floor marker, a fingerspike on it (the entity proven harmless in feature
-#                    05; the held entity differs from 4 and the framing from 1: closer portrait, floor marker instead
-#                    of platform, Iris instead of Basil, daylily pot), Nelim and Iris close beside it, one lantern;
-#                    zoom 4. Says: it works for the cheaper holder, and not every show has a price.
-#   4. pain field    19h, dusk. A nociosphere on a platform, Nelim and Basil at arm's reach, a torch and a campfire
-#                    lighting their faces; zoom 4; the hediff proven first for BOTH of them, so their faces carry the
-#                    pain Facial Animation draws (read on the capture: if it does not show, the shot is redone).
-#                    Says: the price, on the faces.
-#   Guests across the series: Iris in 1, 2, 3; Basil in 1 and 4; Nelim in all.
-#   5. settings      the Mod options window alone, on the backdrop for a tall window, cropped sideways.
+# SHOOTING PLAN, gallery order after 0- (the Preview). Place: the enclosure, holder on cell (149, 214), camera centred
+# ON the holder after the colonists have walked, then zoomed. Weather Clear. Time: the same afternoon, an hour apart
+# at most; each scenario reloads the save and sets its own hour. Decor belongs to one scene and is removed after it.
+#   1. gaze          17h, daylight, lanterns unlit. Subject: Nelim, Iris and Basil watching a held fingerspike on a
+#                    platform. Nelim: Apparel_CollarShirt wine (122, 40, 58), Apparel_Pants charcoal (48, 44, 52),
+#                    Apparel_Corset ink (30, 28, 34), hairstyle Ponytails, mouth MouthSmile. Action: watching (the mod's
+#                    job). Decor: two stick lanterns (144, 218) (154, 218), a lit campfire (149, 210), two daylilies
+#                    fully grown (146, 219) (152, 219). Composition: zoom 5, platform decentred into the middle third,
+#                    lantern and flowers in the foreground-south, campfire behind. Says: the audience arrives.
+#                    RISK: the giver picks each watcher's cell, so the three could line up. PLAN: they face the holder
+#                    (not the camera), the subject is decentred, and the capture is read; if it reads as a lineup,
+#                    Basil leaves this shot.
+#   2. watch area    18h. Subject: the watch area drawn under the build designator (cross of four outlined rects).
+#                    Nelim: Apparel_BasicShirt sage (112, 140, 96), Apparel_Pants brown (92, 70, 48), hairstyle
+#                    FancyBun, mouth MouthNormal, carries 3 of the item Steel for the platform (the action), standing
+#                    at (154, 214); Iris, teal shirt, standing at (144, 214), both inside the cross. Decor: stick
+#                    lantern (156, 217) lit, three Plant_YellowTallGrass fully grown (146, 218) (150, 219) (153, 218).
+#                    Composition: zoom 7, ghost at the centre, both pawns at the cross edges, grass in the
+#                    foreground. Says: the game shows where people will stand before you build.
+#                    RISK: the designator ghost draws only at the pointer, and Iris, with no job, may drift. PLAN:
+#                    both pawns are placed last, just before the capture, and the cross is asserted first.
+#   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
+#                    Nelim: Apparel_ShirtRuffle ivory (232, 224, 204), Apparel_Pants indigo (60, 56, 86), Apparel_Sash
+#                    rust (170, 70, 48), hairstyle Long, mouth MouthSmile. Action: watching, a stray labrador named Pip
+#                    sitting at (146, 216), seen from the front (facing South). Decor: stick lantern (146, 217) lit,
+#                    a fully grown daylily (152, 211). Composition: zoom 4, a closer portrait than 1, dog in the
+#                    lower-left foreground, Nelim and Iris right of centre. Says: it works for the cheaper holder, and
+#                    even a dog comes to look.
+#                    RISK: the dog may walk off, its kind name may be wrong, and the kept-out step would send it away.
+#                    PLAN: the kept-out step is left out of this scene, the dog is spawned after the colonists have
+#                    walked and placed just before the capture; a wrong kind name fails with the list of valid ones.
+#   4. pain field    19h, dusk. Subject: a nociosphere on a platform and the price of watching. Nelim: Apparel_BasicShirt
+#                    ash (150, 150, 150) under Apparel_Jacket slate (52, 68, 98), Apparel_Pants (40, 36, 44),
+#                    hairstyle Wavy, mouth MouthSad and lids LidUnimpressed (the pain). Basil: mustard shirt,
+#                    MouthNormal, LidSharp, beside her. State: both carry the PainField hediff. Decor: a torch (145, 217)
+#                    and a campfire (153, 211) lit, two Plant_YellowTallGrass (147, 219) (151, 219). Composition: zoom 4,
+#                    faces lit warm, platform behind them. Says: the price, on the faces.
+#                    RISK: the pain may not show on the faces, and Basil may stand outside the 5.9 cells. PLAN: the
+#                    hediff is asserted for both, mouth and lids are set by hand, and the capture is read; if it does
+#                    not show, the shot is redone with the face steps.
+#   Guests across the series: Iris in 1, 2, 3; Basil in 1 and 4; Nelim in all; a dog in 3.
+#   5. settings      the Mod options window alone, on the backdrop for a tall window, cropped sideways (interface).
 @review @requires:nelim.sanctuarybacklot @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.stagedecor @requires:nelim.pickletools.clearscreen @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.colonistrace @requires:Mlie.StickLantern
 Feature: shots for the Workshop page
 
@@ -44,13 +67,19 @@ Feature: shots for the Workshop page
     And I close all dialogs
     And Nelim's Sanctuary: the animals are removed from the sanctuary "enclosure-south"
     And Nelim's Sanctuary: the sanctuary "enclosure-south" is emptied
-    And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
     And Nelim's Sanctuary: I am at the sanctuary "enclosure-south"
     And I set the weather to "Clear"
     And Nelim's Sanctuary: Nelim has her own face
 
   Scenario: Nelim and her guests gazing at a held entity
     Given I set the hour to 17
+    And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSmile"
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (144, 218)
@@ -102,9 +131,19 @@ Feature: shots for the Workshop page
     # "40 (not enough stored)" label sat on the ghost in the first studio run. Stock it so the label is true.
     # The designator draws at the pointer, which is the camera centre: the enclosure's centre, (149, 214).
     Given I set the hour to 18
+    And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (112, 140, 96)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (92, 70, 48)
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "FancyBun"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthNormal"
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (156, 217) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (154, 214)
+    And Nelim's Pickle Tools: "Nelim" carries 3 of the item "Steel"
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (146, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (150, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (153, 218) fully grown
     And Entity Gazing "Nelim" has no recreation
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
     And Nelim's Pickle Tools: "Iris" wears "Apparel_BasicShirt" dyed rgb (36, 112, 122)
@@ -126,11 +165,17 @@ Feature: shots for the Workshop page
 
   Scenario: the holding spot is watched too
     Given I set the hour to 18
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_ShirtRuffle" dyed rgb (232, 224, 204)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (60, 56, 86)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Sash" dyed rgb (170, 70, 48)
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Long"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSmile"
     And Entity Gazing spawns a "HoldingSpot" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (146, 217) is lit
-    And Nelim's Pickle Tools: I place the decor "PlantPot" at (152, 211)
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 211) fully grown
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
     And Entity Gazing "Nelim" has no recreation
     And Entity Gazing spawns the colonist "Iris" with no recreation where the camera looks
@@ -149,6 +194,8 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
     And Entity Gazing "Iris" is watching the holder
+    And Nelim's Pickle Tools: an adult animal of kind "Labrador" named "Pip" is spawned at (146, 216)
+    And Nelim's Pickle Tools: the animal "Pip" stands at (146, 216) facing South
     When Entity Gazing centres the camera on the holder
     And Entity Gazing zooms the camera to 4 cells
     And Nelim's Pickle Tools: studio presentation mode is enabled
@@ -157,12 +204,22 @@ Feature: shots for the Workshop page
 
   Scenario: Nelim inside a nociosphere's reach
     Given I set the hour to 19
+    And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (150, 150, 150)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (40, 36, 44)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Jacket" dyed rgb (52, 68, 98)
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Wavy"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSad"
+    And Nelim's Pickle Tools: "Nelim" lids are "LidUnimpressed"
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Nociosphere" to it
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (145, 217)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (145, 217) is lit
     And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 211)
     And Nelim's Pickle Tools: the decor "Campfire" at (153, 211) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (147, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (151, 219) fully grown
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
     And Entity Gazing "Nelim" has no recreation
     And Entity Gazing spawns the colonist "Basil" with no recreation where the camera looks
