@@ -8,6 +8,11 @@
 # Every shot is @review: a green scenario proves an image was produced, not that it shows what
 # the page says. Each one is opened and looked at before it goes into the gallery folder.
 #
+# THE STORY IN FOUR LINES (criterion k): WHO Nelim (protagonist) and her friends Iris and Basil; WHERE the walled
+# enclosure `enclosure-south` of the Sanctuary, always the same corner; WHICH DAY one clear late afternoon; RHYTHM of time
+# 17h, 18h, 18h, 19h, so the light goes from daylight to dusk, one episode per scene, each one moving the evening on:
+# the audience arrives (1), the platform is planned (2), the cheaper holder gets its visitor (3), night shows the price (4).
+#
 # THE STORY (one story, GALLERY.md). Nelim, the colony's only colonist, keeps a creature chained in the walled
 # enclosure `enclosure-south`. One late afternoon she finds that watching it is the best entertainment she has, and
 # she calls her two friends over. The audience gathers while the light goes (1), she brings the steel for the platform
