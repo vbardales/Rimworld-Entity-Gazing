@@ -49,3 +49,7 @@ desktop.ini
 
 # Reproducible Preview diagnostics generated locally by the shared renderer.
 Art/.render/
+
+# Pickle runs land in Inbox, parked failures wait in Parked; proofs live in Tests/Pickle/Evidence (minified).
+Tests/Pickle/Inbox/
+Tests/Pickle/Parked/
