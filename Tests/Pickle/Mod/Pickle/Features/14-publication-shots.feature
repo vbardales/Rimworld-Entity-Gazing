@@ -36,7 +36,7 @@
 #                    Basil leaves this shot.
 #   2. watch area    18h. Subject: the watch area drawn under the build designator (cross of four outlined rects).
 #                    Nelim: Apparel_BasicShirt sage (112, 140, 96), Apparel_Pants brown (92, 70, 48), hairstyle
-#                    FancyBun, mouth MouthNormal, carries 3 of the item Steel for the platform (the action), standing
+#                    Ponytails, mouth MouthNormal, carries 3 of the item Steel for the platform (the action), standing
 #                    at (154, 214); Iris, teal shirt, standing at (144, 214), both inside the cross. Decor: stick
 #                    lantern (156, 217) lit, three Plant_YellowTallGrass fully grown (146, 218) (150, 219) (153, 218).
 #                    Composition: zoom 7, ghost at the centre, both pawns at the cross edges, grass in the
@@ -45,7 +45,7 @@
 #                    both pawns are placed last, just before the capture, and the cross is asserted first.
 #   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
 #                    Nelim: Apparel_ShirtRuffle ivory (232, 224, 204), Apparel_Pants indigo (60, 56, 86), Apparel_Sash
-#                    rust (170, 70, 48), hairstyle Long, mouth MouthSmile. Action: watching, a stray labrador (kind LabradorRetriever) named Pip
+#                    rust (170, 70, 48), hairstyle Ponytails, mouth MouthSmile. Action: watching, Nelim's labrador Shogun (kind LabradorRetriever)
 #                    sitting at (146, 216), seen from the front (facing South). Decor: stick lantern (146, 217) lit,
 #                    a fully grown daylily (152, 211). Composition: zoom 4, a closer portrait than 1, dog in the
 #                    lower-left foreground, Nelim and Iris right of centre. Says: it works for the cheaper holder, and
@@ -55,7 +55,7 @@
 #                    walked and placed just before the capture; a wrong kind name fails with the list of valid ones.
 #   4. pain field    19h, dusk. Subject: a nociosphere on a platform and the price of watching. Nelim: Apparel_BasicShirt
 #                    ash (150, 150, 150) under Apparel_Jacket slate (52, 68, 98), Apparel_Pants (40, 36, 44),
-#                    hairstyle Wavy, mouth MouthSad and lids LidUnimpressed (the pain). Basil: mustard shirt,
+#                    hairstyle Ponytails, mouth MouthSad and lids LidUnimpressed (the pain). Basil: mustard shirt,
 #                    MouthNormal, LidSharp, beside her. State: both carry the PainField hediff. Decor: a torch (145, 217)
 #                    and a campfire (153, 211) lit, two Plant_YellowTallGrass (147, 219) (151, 219). Composition: zoom 4,
 #                    faces lit warm, platform behind them. Says: the price, on the faces.
@@ -139,7 +139,7 @@ Feature: shots for the Workshop page
     And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (112, 140, 96)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (92, 70, 48)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "FancyBun"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
     And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthNormal"
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 217)
@@ -173,7 +173,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_ShirtRuffle" dyed rgb (232, 224, 204)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (60, 56, 86)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Sash" dyed rgb (170, 70, 48)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "Long"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
     And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthSmile"
     And Entity Gazing spawns a "HoldingSpot" at x=149 z=214
@@ -199,8 +199,8 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
     And Entity Gazing "Iris" is watching the holder
-    And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Pip" is spawned at (146, 216)
-    And Nelim's Pickle Tools: the animal "Pip" stands at (146, 216) facing South
+    And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Shogun" is spawned at (146, 216)
+    And Nelim's Pickle Tools: the animal "Shogun" stands at (146, 216) facing South
     When Entity Gazing centres the camera on the holder
     And Entity Gazing zooms the camera to 4 cells
     And Nelim's Pickle Tools: studio presentation mode is enabled
@@ -213,7 +213,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (150, 150, 150)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (40, 36, 44)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Jacket" dyed rgb (52, 68, 98)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "Wavy"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
     And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthSad"
     And Nelim's Pickle Tools: "Nelim" lids are "LidUnimpressed"
