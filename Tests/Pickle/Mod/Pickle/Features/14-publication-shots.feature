@@ -111,7 +111,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Basil" hairstyle is "Bowlcut"
     And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
     And Nelim's Pickle Tools: "Basil" beard is "none"
-    And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
+    And Nelim's Pickle Tools: "Basil" brows are "BrowFurryMonobrow"
     And Nelim's Pickle Tools: "Basil" mouth is "MouthSmirkSmile"
     And Nelim's Pickle Tools: "Basil" face tattoo is "Face_Warpaint"
     When Entity Gazing asks the giver for a job for "Nelim"
@@ -234,7 +234,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Basil" hairstyle is "Bowlcut"
     And Nelim's Pickle Tools: "Basil" hair colour is rgb (46, 34, 28)
     And Nelim's Pickle Tools: "Basil" beard is "none"
-    And Nelim's Pickle Tools: "Basil" brows are "BrowTanuki"
+    And Nelim's Pickle Tools: "Basil" brows are "BrowFurryMonobrow"
     And Nelim's Pickle Tools: "Basil" mouth is "MouthNormal"
     And Nelim's Pickle Tools: "Basil" face tattoo is "Face_Warpaint"
     And Nelim's Pickle Tools: "Basil" lids are "LidSharp"
