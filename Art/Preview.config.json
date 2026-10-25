@@ -14,7 +14,7 @@
   },
   "backgroundFile": "Preview-source.png",
   "echo": {
-    "file": "echo-concept.png",
+    "file": "echo-source.png",
     "color": "var(--accent)",
     "width": 240,
     "height": 240
