@@ -39,7 +39,7 @@ publication_changelog_review_sha: bbe5af21606d3db0b5ce075310b7a70898fcef82
 echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
 updated:      2026-10-20, shootGallery session
-protocols_read_sha: e552fd9823504a685ddedd14953c3f62a699851b
+protocols_read_sha: 9f1422d00edce3a848fa9e43ff812545d9c99dd8
 ---
 # Entity Gazing — status
 
@@ -139,20 +139,19 @@ Copy, typography, layout and palette consolidated in `Art/Preview.config.json`. 
 
 ## Preview echo decision, 2026-10-12
 
-Virginie validated Preview at commit named by `echo_review_sha`: `Art/echo-concept.png` (conceptual echo, no capture shows entity yet), `echo.panelWidth` 36 (height limited to panel), `iconBadge.translate` `-12.5%, 12.5%`. `Mod/About/Preview.png` and `Art/Gallery/0-preview.png` are byte copies. Re-ask when gallery captures accepted (STYLE_RIMWORLD.md, Echo).
+Virginie validated Preview at commit named by `echo_review_sha`: `Art/echo-concept.png` (conceptual echo, no capture shows entity yet; replaced 2026-10-25 by `Art/echo-source.png`, echo-concept.png deleted, owner choice), `echo.panelWidth` 36 (height limited to panel), `iconBadge.translate` `-12.5%, 12.5%`. `Mod/About/Preview.png` and `Art/Gallery/0-preview.png` are byte copies. Re-ask when gallery captures accepted (STYLE_RIMWORLD.md, Echo).
 
-## Shotlist, estimates before play (2026-10-18, reworked against GALLERY.md criteria a to j)
+## Shotlist, estimates before play (2026-10-25, Nelim alone, reworked against GALLERY.md criteria a to k)
 
-Story: Nelim watches what she keeps chained in `enclosure-south` with her friends Iris and Basil as the afternoon turns to dusk (17h, 18h, 18h, 19h); full plan, outfits, decor and plans in the header of `Tests/Pickle/Mod/Pickle/Features/14-publication-shots.feature`. Scene 5 (Mod options window, interface) is set aside. Estimate = how well the shot will say what its line says. Nothing played at this revision.
+Story: Nelim alone with the creature she keeps chained in `enclosure-south`, one clear late afternoon (17h, 18h, 18h, 19h), her dog Shogun comes to look in scene 3; full plan in the header of `Tests/Pickle/Mod/Pickle/Features/14-publication-shots.feature`. Owner refused Iris and Basil on 2026-10-25 (colonists other than NSB's need special authorization): no guest colonist. Scene 5 (Mod options window, interface) set aside. Nothing played at this revision (ticket 20261025-152439-126-f4fb pending, tree 9e4a523).
 
-| # | Shot | Score | Outfit of Nelim | Action or state | Living things | Decor (removed after) | Main risk | Plan |
-|---|---|---|---|---|---|---|---|---|
-| 1 | gaze, 17h | 4 | CollarShirt wine, Pants charcoal, Corset ink; Ponytails; MouthSmile | watching the held fingerspike | Iris, Basil; 2 daylilies | 2 stick lanterns unlit, campfire lit | the three watchers line up | they face the holder, decentred subject, read the capture, Basil leaves if it is a lineup |
-| 2 | watch area, 18h | 4 | BasicShirt sage, Pants brown; Ponytails; MouthNormal | carries 3 Steel to the platform | Iris; 3 yellow tall grass | stick lantern lit | ghost drawn at the pointer only, Iris may drift | pawns placed last, ghost asserted first |
-| 3 | holding spot, 18h | 4 | ShirtRuffle ivory, Pants indigo, Sash rust; Ponytails; MouthSmile | watching, with Shogun the labrador facing South | Iris, a dog from the front; daylily | stick lantern lit | dog walks off or kind name wrong | no kept-out step here, dog spawned after the walk and placed last |
-| 4 | pain field, 19h | 4 | BasicShirt ash under Jacket slate, Pants; Ponytails; MouthSad, LidUnimpressed | wounded: PainField on both | Basil; 2 yellow tall grass | torch and campfire lit | pain not visible on faces, Basil out of the field | hediff asserted for both, face parts set by hand, read the capture |
+| # | zoom | a time | b decor | c living | d Nelim | e action and instant | f composition | g says | j at 268 px | Score | Risk |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 gaze | 6 medium | 17h Clear, 600 ticks | 2 stick lanterns unlit, lit campfire, 2 daylilies | daylilies | wine CollarShirt, charcoal Pants, ink Corset, Ponytails, smile | watching; just sat down, fingerspike about to strain | decentred platform, flowers in foreground | she settles down to watch | platform + wine shirt as two shapes | 4.5 | watching reads static |
+| 2 watch area | 7 wide | 18h Clear | lit stick lantern, 3 tall grass | grass | same outfit, smile | carries 3 Steel, mid-haul into the cross; designator held | ghost at centre, Nelim at cross edge, grass foreground | the game shows where people will stand | four outlined rects | 4.5 | ghost draws only at pointer; UI subject |
+| 3 holding spot | 4 close | 18h Clear, 600 ticks | lit stick lantern, daylily | Shogun (front), daylily | same outfit, smile | watching, Shogun just arrived; Nelim turns | dog lower-left foreground, Nelim right | even a dog comes to look | dog face + marker | 4.5 | dog drifts; posed facing South |
+| 4 pain field | 3 tight | 19h dusk, 1200 ticks | torch, lit campfire, 2 tall grass | tall grass | same outfit + slate Jacket (cold), MouthSad, LidUnimpressed | PainField, pain just reached her | face right of centre, grass foreground, platform left | the price, on her face | face + platform (doubtful) | 4 | pain unreadable at thumbnail; jacket vs corset layer |
 
-Lowest score 4 (estimated, no capture read). Open: tattoo and hair mods wait for NPT ticket 20261018-012441-902-2cfe; the dog kind `Labrador` and the steel carry are unproven; no weapon (a drafted pawn does not watch).
+k (series): one written story, variety medium / wide / close / tight, opening 1, closing 4, rhythm 17h to 19h: ok. Series mean 4.4.
 
-DepMap and steps (field 6): all four scenes play on `wsl-deps.sanctuary.map` as it is (Sanctuary Backlot, body, trousers and face mods, ScreenshotStudio, StageDecor, Stick Lantern); no mod added yet. Steps: Nelim's Pickle Tools `wears ... dyed rgb`, `hairstyle is`, `hair colour is rgb`, `mouth is`, `lids are`, `carries 3 of the item`, an adult animal spawned and `stands at ... facing South`, `I place the decor ... fully grown`, `is lit`, `the decor is removed`; Entity Gazing's own spawn, tether, giver and hediff steps. No step is missing. Candidates not yet in the map: four tattoo and hair mods catalogued by NPT (ticket 1d58); a tattoo and a hairstyle for Iris and Basil would be picked after gallery-9 and gallery-10. Subtitles: `PUBLICATION.md`, "Gallery subtitles".
-Hair rule (canon, SanctuaryBacklot GALERIE-HISTOIRE.md): Nelim keeps a high ponytail in every scene, never a bun, lowered only under a closed cover; her dog is Shogun.
+Opus director pass (2026-10-25), kept: scene 2 instant is mid-haul, not "just set down" (header fixed). Kept for the replay, not applied while ticket f4fb is pending: reuse the campfire cell (149, 210) in scene 4 so the closing image answers the opening; Shogun caught mid-trot rather than posed. Rejected: scene 1 at zoom 7 (the cross of scene 2 needs the wide shot), scene 2 at zoom 5 (cross may not fit), scene 3 at 18h30 (hour step takes whole hours), identical lantern cells in all four scenes (decor belongs to one scene), body turned away in 4 (no step for it; ask NPT if the face does not read).

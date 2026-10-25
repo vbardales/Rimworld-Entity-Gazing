@@ -43,8 +43,8 @@
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
 #   2. watch area    18h, game time 600 ticks of setup. Subject: the watch area drawn under the build designator (cross of
 #                    four outlined rects). Nelim, same outfit as 1 but MouthSmile again, carries 3 of the item Steel for the
-#                    platform, standing at (154, 214) inside the cross. Instant: she has just set the steel down on the
-#                    stockpile and the next second she lays the first platform blueprint. Obtained: the carry step, the
+#                    platform, standing at (154, 214) inside the cross. Instant: she is mid-haul, steel in her arms, walking
+#                    into the cross; the next second she lays the first platform blueprint. Obtained: the carry step, the
 #                    designator held, the ghost asserted before the capture. Decor: stick lantern (156, 217) lit, three
 #                    Plant_YellowTallGrass fully grown (146, 218) (150, 219) (153, 218). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
