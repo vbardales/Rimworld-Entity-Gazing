@@ -166,8 +166,9 @@ Feature: shots for the Workshop page
     Then Entity Gazing "Nelim" is watching the holder
     And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Shogun" is spawned at (146, 216)
     And Nelim's Pickle Tools: the animal "Shogun" stands at (146, 216) facing South
-    When Entity Gazing centres the camera on the holder
-    And Entity Gazing zooms the camera to 4 cells
+    # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
+    And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
+    When Nelim's Pickle Tools: I frame the cells (145, 212) to (153, 217) filling 85 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
     And Nelim's Pickle Tools: the decor is removed
@@ -197,8 +198,9 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" starts the offered job
     And I wait 1200 ticks
     Then Entity Gazing "Nelim" carries the hediff "PainField"
-    When Entity Gazing centres the camera on the holder
-    And Entity Gazing zooms the camera to 3 cells
+    # Zoom 3 on the holder left Nelim out of frame in gallery-12: hold her facing the camera, frame her with the platform.
+    And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
+    When Nelim's Pickle Tools: I frame the cells (147, 212) to (153, 216) filling 85 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed
