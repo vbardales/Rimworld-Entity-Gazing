@@ -20,6 +20,7 @@ tested_on:    "85ec8b6 (Mod/ tree unchanged since; replays f107 EN and e3a7 FR g
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
+  - "todo 2026-11-03: Preview rendered again without echo.width/height (protocols rule 2026-11-03): the echo (chained X) is now large and overlaps the title edge and panel corner. Render discarded (git checkout), nothing committed; rerun node ../scripts/Render-Preview.cjs after the fix. Needs a positioned or smaller echo in Art/Preview.config.json per STYLE_RIMWORLD.md Preview, then re-render and re-check. Also waiting: gallery-13 (scenes 3 and 4) result, see lines above."
   - "unverified: Run-Functional-Tests.ps1 check 36 (teardown hook guard) fails on this machine since 2026-10-11 with FileNotFoundException for RimWorks.Pickle 4.9.1.0 while reading Tests/Pickle/Mod/Pickle/Assemblies/EntityGazing.PickleSteps.dll (SAME as a fresh build). Environment, not the mod: the checker cannot resolve the installed Pickle. Other 35 functional, 25 form and 18 settings checks pass. Needs the checker pointed at Pickle 4.9.1.0 before it is trusted again."
   - "done 2026-10-12: plural replay green in EN (20261011-210631-678-f107) and FR (20261011-210632-668-e3a7), 08-language, tree 85ec8b6, exitReason passed, 3 of 3, both settings captures read (2 cells / 2 cases). Count 1 is covered by the keys-resolve scenario, not shown on screen."
   - "done (defect closed by the replays above), fixed in 85ec8b6 (EG_Cells.One/.Many, EN+FR). Was awaiting replay: tickets 20261002-201530-351-9376 (EN) and 20261002-201531-154-9a23 (FR) at 145b343. Was: plural keys missing (TRANSLATIONS.md, Counts and plurals, 2026-09-25). EG_MinimumDistance and EG_MaximumDistance display a count ({0}, 1 to 20) through a single key in Keyed/Settings.xml, EN and FR: 1 shows as '1 cells' / '1 cases'. Need .One/.Many forms in both languages and Translate calls choosing by count in Source/EntityGazingMod.cs:73,75. Audit 2026-10-02 did not fix it, by rule. Mod/ then changes, so the DLL, Pickle 08-language and the tested bar need a re-run."
@@ -40,7 +41,7 @@ publication_changelog_review_sha: bbe5af21606d3db0b5ce075310b7a70898fcef82
 echo_review_sha: 99fb29405b55c583d44987fd7f9472869953635c
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
 updated:      2026-10-25, shootGallery session
-protocols_read_sha: e840eb6613e0993b602ec887bf79161f55883753
+protocols_read_sha: 41d262941096aae0bf063c8599109ddf0165c55d
 ---
 # Entity Gazing — status
 
