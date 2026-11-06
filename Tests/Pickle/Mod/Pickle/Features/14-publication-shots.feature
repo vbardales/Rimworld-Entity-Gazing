@@ -147,6 +147,8 @@ Feature: shots for the Workshop page
 
   Scenario: the holding spot is watched too
     Given I set the hour to 18
+    # gallery-16: a stray sanctuary dog walked through the frame next to Shogun; keep every animal but Shogun out of the view.
+    And Nelim's Pickle Tools: the animals except "Shogun" are kept out of the area from (136, 206) to (160, 222)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
