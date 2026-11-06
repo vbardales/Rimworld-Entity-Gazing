@@ -175,8 +175,8 @@ Feature: shots for the Workshop page
     # gallery-15 probe: the camera step runs ~11 s of ticks and her haul job walked her out of the shot; hold her in place first.
     And Nelim's Pickle Tools: "Nelim" waits in place
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" near (148, 218) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" near (153, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (148, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 218) fully grown
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (145, 212) to (153, 217) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
