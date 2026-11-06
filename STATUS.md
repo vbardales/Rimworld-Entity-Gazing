@@ -60,7 +60,7 @@ Places read: 2026-11-06. Tribe read: 2026-11-06.
 
 | Colonist | Shots | Outfit per shot | Last read of profile | Exceptions |
 |---|---|---|---|---|
-| Nelim | 1 to 4 | wine CollarShirt, charcoal Pants, ink Corset (all four); slate Jacket added in 4 (cold evening). Outfits free. | 2026-11-06 | PENDING owner validation: hairstyle `Ponytails` (canon `Roo_HD_Hair_Highpony`, the capture shows pigtails), hair colour rgb (90, 58, 32) (canon: dark brown, no rgb recorded), mouth `MouthSmile` in 1 to 3 and `MouthSad` + `LidUnimpressed` in 4 (canon `MouthLipsSmirk`, `LidCheerful`). GALLERY.md 2026-10-25 allows mouth and expression overrides with the scenario justifying them; the sync-nsb rule lists the mouth default as a property. Owner said 2026-10-25 (chat): clothes and expressions are suggestions, smile default. No quoted validation for the hair. |
+| Nelim | 1 to 4 | wine CollarShirt, charcoal Pants, ink Corset (all four); slate Jacket added in 4 (cold evening). Outfits free. | 2026-11-06 | none. Owner answered "non" on 2026-11-06 to hairstyle `Ponytails`, colour (90, 58, 32) and the expression change: scenes play canon `Roo_HD_Hair_Highpony`, hair rgb (56, 36, 18) (`#382412`, roster), mouth `MouthLipsSmirk`, no mouth or lid override (no `MouthSad` in 4). Replay needed. |
 
 | Animal | Shots | Outfit | Last read of sheet | Exceptions |
 |---|---|---|---|---|
@@ -174,10 +174,10 @@ Story: Nelim alone with the creature she keeps chained in `enclosure-south`, one
 
 | # | zoom | a time | b decor | c living | d Nelim | e action and instant | f composition | g says | j at 268 px | Score | Risk |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 gaze | 6 medium | 17h Clear, 600 ticks | 2 stick lanterns unlit, lit campfire, 2 daylilies | daylilies | wine CollarShirt, charcoal Pants, ink Corset, Ponytails, smile | watching; just sat down, fingerspike about to strain | decentred platform, flowers in foreground | she settles down to watch | platform + wine shirt as two shapes | 4.5 | watching reads static |
-| 2 watch area | 7 wide | 18h Clear | lit stick lantern, 3 tall grass | grass | same outfit, smile | carries 3 Steel, mid-haul into the cross; designator held | ghost at centre, Nelim at cross edge, grass foreground | the game shows where people will stand | four outlined rects | 4.5 | ghost draws only at pointer; UI subject |
-| 3 holding spot | 4 close | 18h Clear, 600 ticks | lit stick lantern, daylily | Shogun (front), daylily | same outfit, smile | watching, Shogun just arrived; Nelim turns | dog lower-left foreground, Nelim right | even a dog comes to look | dog face + marker | 4.5 | dog drifts; posed facing South |
-| 4 pain field | 3 tight | 19h dusk, 1200 ticks | torch, lit campfire, 2 tall grass | tall grass | same outfit + slate Jacket (cold), MouthSad, LidUnimpressed | PainField, pain just reached her | face right of centre, grass foreground, platform left | the price, on her face | face + platform (doubtful) | 4 | pain unreadable at thumbnail; jacket vs corset layer |
+| 1 gaze | 6 medium | 17h Clear, 600 ticks | 2 stick lanterns unlit, lit campfire, 2 daylilies | daylilies | wine CollarShirt, charcoal Pants, ink Corset, Highpony, canon mouth | watching; just sat down, fingerspike about to strain | decentred platform, flowers in foreground | she settles down to watch | platform + wine shirt as two shapes | 4.5 | watching reads static |
+| 2 watch area | 7 wide | 18h Clear | lit stick lantern, 3 tall grass | grass | same outfit, canon mouth | carries 3 Steel, mid-haul into the cross; designator held | ghost at centre, Nelim at cross edge, grass foreground | the game shows where people will stand | four outlined rects | 4.5 | ghost draws only at pointer; UI subject |
+| 3 holding spot | 4 close | 18h Clear, 600 ticks | lit stick lantern, daylily | Shogun (front), daylily | same outfit, canon mouth | watching, Shogun just arrived; Nelim turns | dog lower-left foreground, Nelim right | even a dog comes to look | dog face + marker | 4.5 | dog drifts; posed facing South |
+| 4 pain field | 3 tight | 19h dusk, 1200 ticks | torch, lit campfire, 2 tall grass | tall grass | same outfit + slate Jacket (cold), canon mouth | PainField, pain just reached her | face right of centre, grass foreground, platform left | the price, on her face | face + platform (doubtful) | 4 | pain unreadable at thumbnail; jacket vs corset layer |
 
 k (series): one written story, variety medium / wide / close / tight, opening 1, closing 4, rhythm 17h to 19h: ok. Series mean 4.4.
 

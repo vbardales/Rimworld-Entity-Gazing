@@ -10,8 +10,8 @@
 #
 # CAST (owner, 2026-10-25): Nelim is the only colonist, the only one of the save. Other colonists need the owner's special
 # authorization; Iris and Basil were refused the same day, so no guest colonist is spawned. The only other living things are
-# Nelim's dog Shogun (scene 3) and plants. Outfits and expressions are suggestions: Nelim smiles by default (MouthSmile),
-# another mouth only where the scene says why (scene 4, pain).
+# Nelim's dog Shogun (scene 3) and plants. Outfits and expressions are suggestions: Nelim keeps her canon mouth MouthLipsSmirk and lids (owner said no to a change, 2026-11-06),
+# no expression change in any scene.
 #
 # THE STORY IN FOUR LINES (criterion k): WHO Nelim, alone with the creature she keeps chained and, once, her dog Shogun;
 # WHERE the walled enclosure `enclosure-south` of the Sanctuary, always the same corner; WHICH DAY one clear late afternoon;
@@ -33,7 +33,7 @@
 # medium (1), wide (2), close (3), tight (4). Opening image 1 sets the place; closing image 4 is the night.
 #   1. gaze          17h, daylight, lanterns unlit, game time passing 600 ticks. Subject: Nelim watching a held fingerspike
 #                    on a platform. Nelim: Apparel_CollarShirt wine (122, 40, 58), Apparel_Pants charcoal (48, 44, 52),
-#                    Apparel_Corset ink (30, 28, 34), hairstyle Ponytails, mouth MouthSmile. Action: watching (the mod's
+#                    Apparel_Corset ink (30, 28, 34), hairstyle Roo_HD_Hair_Highpony, canon mouth MouthLipsSmirk. Action: watching (the mod's
 #                    job), her head turned to the platform. Instant: she has just sat down in front of the creature, the
 #                    next second the fingerspike strains at its chain. Obtained: the giver offers the job, Nelim starts it,
 #                    600 ticks pass, the camera is centred and the capture follows at once. Decor: two stick lanterns
@@ -42,7 +42,7 @@
 #                    and flowers in the foreground-south, campfire behind. Says: she settles down to watch.
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
 #   2. watch area    18h, game time 600 ticks of setup. Subject: the watch area drawn under the build designator (cross of
-#                    four outlined rects). Nelim, same outfit as 1 but MouthSmile again, carries 3 of the item Steel for the
+#                    four outlined rects). Nelim, same outfit as 1 but canon mouth, carries 3 of the item Steel for the
 #                    platform, standing at (154, 214) inside the cross. Instant: she is mid-haul, steel in her arms, walking
 #                    into the cross; the next second she lays the first platform blueprint. Obtained: the carry step, the
 #                    designator held, the ghost asserted before the capture. Decor: stick lantern (156, 217) lit, three
@@ -52,7 +52,7 @@
 #                    RISK: the designator ghost draws only at the pointer. PLAN: Nelim is placed last, just before the
 #                    capture, and the cross is asserted first.
 #   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
-#                    Nelim: same outfit, MouthSmile; Action: watching, Nelim's labrador Shogun (kind LabradorRetriever)
+#                    Nelim: same outfit, canon mouth; Action: watching, Nelim's labrador Shogun (kind LabradorRetriever)
 #                    standing at (146, 216), seen from the front (facing South). Instant: Shogun has just trotted over
 #                    and stopped, Nelim turns to him. Obtained: the dog is spawned after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
@@ -63,8 +63,8 @@
 #                    PLAN: the kept-out step is left out of this scene, the dog is placed just before the capture; a
 #                    wrong kind name fails with the list of valid ones.
 #   4. pain field    19h, dusk, game time 1200 ticks. Subject: a nociosphere on a platform and the price of watching.
-#                    Nelim: the same outfit plus Apparel_Jacket slate (52, 68, 98) (it is cold at 19h), hairstyle Ponytails,
-#                    mouth MouthSad and lids LidUnimpressed (the pain, the only expression that is not a smile). State:
+#                    Nelim: the same outfit plus Apparel_Jacket slate (52, 68, 98) (it is cold at 19h), hairstyle Roo_HD_Hair_Highpony,
+#                    canon mouth and lids (owner refused a change, 2026-11-06). State:
 #                    carries the PainField hediff. Instant: the pain has just reached her, her gaze stays on the creature.
 #                    Obtained: the hediff after 1200 ticks beside the nociosphere, asserted before the capture. Decor: a torch
 #                    (145, 217) and a campfire (153, 211) lit, two Plant_YellowTallGrass (147, 219) (151, 219). Composition:
@@ -93,9 +93,9 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
-    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
-    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSmile"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (144, 218)
@@ -126,9 +126,9 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
-    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
-    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSmile"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (156, 217) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (146, 218) fully grown
@@ -152,9 +152,9 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
-    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
-    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSmile"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
+    And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
     And Entity Gazing spawns a "HoldingSpot" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
@@ -184,10 +184,8 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Jacket" dyed rgb (52, 68, 98)
-    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytails"
-    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (90, 58, 32)
-    And Nelim's Pickle Tools: "Nelim" mouth is "MouthSad"
-    And Nelim's Pickle Tools: "Nelim" lids are "LidUnimpressed"
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Nociosphere" to it
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (145, 217)
