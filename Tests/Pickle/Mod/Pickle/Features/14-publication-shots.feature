@@ -169,6 +169,9 @@ Feature: shots for the Workshop page
     # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (145, 212) to (153, 217) filling 80 percent of the screen
+    # Probe (NPT, 2026-11-06): Nelim is not drawn at (152, 215) in gallery-14. Log her cell and face; remove once found.
+    And Nelim's Pickle Tools: the movement of the colonist "Nelim" is logged for 5 seconds
+    And Nelim's Pickle Tools: "Nelim" face state is logged
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
     And Nelim's Pickle Tools: the decor is removed
