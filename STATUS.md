@@ -48,6 +48,28 @@ protocols_read_sha: 90e3acfe2a2a19486adf26296a0d088d8e82d1f6
 ---
 # Entity Gazing — status
 
+## NSB (sync-nsb, 2026-11-06)
+
+NSB Docs unchanged since 2026-10-25 (no commit in `SanctuaryBacklot/Docs` since then). Owner rules 2026-11-05 applied: NSB places, colonists and animals free; outside NSB needs express validation; colonist properties change only with validation; every outfit free; every included animal shown (rule 5). Nothing in the scenarios changed by this sync. Not read this run: NSB-ROSTER.md in full, SHOGUN-PROFIL.md (catalogue row and APPARENCES-CANON line only).
+
+Places read: 2026-11-06. Tribe read: 2026-11-06.
+
+| Place | Shots | Changes for the gallery | Last read |
+|---|---|---|---|
+| enclosure-south (149, 214), 12 cells, listed free for a photo | 1 to 4 (platform or holding spot at (149, 214)) | decor added per shot (lanterns, torch, campfire, daylilies, tall grass, removed at the end); animals kept out in scene 4; scene 3 keeps all animals but Shogun out of (136,206)-(160,222) | 2026-11-06 |
+
+| Colonist | Shots | Outfit per shot | Last read of profile | Exceptions |
+|---|---|---|---|---|
+| Nelim | 1 to 4 | wine CollarShirt, charcoal Pants, ink Corset (all four); slate Jacket added in 4 (cold evening). Outfits free. | 2026-11-06 | PENDING owner validation: hairstyle `Ponytails` (canon `Roo_HD_Hair_Highpony`, the capture shows pigtails), hair colour rgb (90, 58, 32) (canon: dark brown, no rgb recorded), mouth `MouthSmile` in 1 to 3 and `MouthSad` + `LidUnimpressed` in 4 (canon `MouthLipsSmirk`, `LidCheerful`). GALLERY.md 2026-10-25 allows mouth and expression overrides with the scenario justifying them; the sync-nsb rule lists the mouth default as a property. Owner said 2026-10-25 (chat): clothes and expressions are suggestions, smile default. No quoted validation for the hair. |
+
+| Animal | Shots | Outfit | Last read of sheet | Exceptions |
+|---|---|---|---|---|
+| Shogun (Labrador, linked to Nelim) | 3 | none (canon default `Apparel_leatherdogcollar`; the scene spawns a fresh `LabradorRetriever` named Shogun without it, outfit free, to be justified in the shotlist or the collar added) | catalogue row 2026-11-06 | none; spawned by the NPT step, not NSB's own pawn `LabradorRetriever59410` |
+
+| Included animal (rule 5) | Shot(s) | |
+|---|---|---|
+| none: the mod defines no PawnKindDef or race (Defs: EntityGazing.xml, SettingsButton.xml) | n/a | no gap |
+
 ## Workflow audit — 2026-10-02
 
 **tested → showcase** (`workflow_stage: options`). Audited at `affc5e2`; working tree has only untracked
