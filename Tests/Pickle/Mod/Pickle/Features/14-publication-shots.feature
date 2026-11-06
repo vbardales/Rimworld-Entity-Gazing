@@ -168,10 +168,9 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: the animal "Shogun" stands at (146, 216) facing South
     # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
+    # gallery-15 probe: the camera step runs ~11 s of ticks and her haul job walked her out of the shot; hold her in place first.
+    And Nelim's Pickle Tools: "Nelim" waits in place
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (145, 212) to (153, 217) filling 80 percent of the screen
-    # Probe (NPT, 2026-11-06): Nelim is not drawn at (152, 215) in gallery-14. Log her cell and face; remove once found.
-    And Nelim's Pickle Tools: the movement of the colonist "Nelim" is logged for 5 seconds
-    And Nelim's Pickle Tools: "Nelim" face state is logged
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
     And Nelim's Pickle Tools: the decor is removed
@@ -203,6 +202,7 @@ Feature: shots for the Workshop page
     Then Entity Gazing "Nelim" carries the hediff "PainField"
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: hold her facing the camera, frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
+    And Nelim's Pickle Tools: "Nelim" waits in place
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (148, 213) to (153, 216) filling 65 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
