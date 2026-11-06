@@ -154,10 +154,10 @@ One English line per scene, set under the image from the clean original (GALLERY
 
 | index | file | line |
 |---|---|---|
-| 1 | `1-gaze.png` | Nelim and her friends gather to watch what she keeps chained up. |
-| 2 | `2-watch-area.png` | Earlier that day, the game showed where everyone would stand. |
-| 3 | `3-holding-spot.png` | A floor marker holds a guest too, and even the dog comes to look. |
-| 4 | `4-pain-field.png` | Standing close has a price, written on their faces. |
+| 1 | `1-gaze.png` | Nelim settles down to watch what she keeps chained up. |
+| 2 | `2-watch-area.png` | Earlier that day, the game showed where she would stand. |
+| 3 | `3-holding-spot.png` | A floor marker holds her place too, and even her dog comes to look. |
+| 4 | `4-pain-field.png` | Standing close has a price, written on her face. |
 
 ## Dependencies and DLC
 
