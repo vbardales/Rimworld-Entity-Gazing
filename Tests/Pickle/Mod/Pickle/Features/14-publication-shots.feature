@@ -53,7 +53,7 @@
 #                    capture, and the cross is asserted first.
 #   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
 #                    Nelim: same outfit, canon mouth; Action: watching, Nelim's labrador Shogun (kind LabradorRetriever)
-#                    standing at (146, 216), seen from the front (facing South). Instant: Shogun has just trotted over
+#                    standing at (150, 216), next to Nelim, wearing the canon collar (brown #3B2F2F), seen from the front (facing South). Instant: Shogun has just trotted over
 #                    and stopped, Nelim turns to him. Obtained: the dog is spawned after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
 #                    (146, 217) lit, a fully grown daylily (152, 211). Composition: zoom 4 (close), dog in the lower-left
@@ -166,12 +166,17 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" starts the offered job
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
-    And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Shogun" is spawned at (146, 216)
-    And Nelim's Pickle Tools: the animal "Shogun" stands at (146, 216) facing South
+    And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Shogun" is spawned at (150, 216)
+    And Nelim's Pickle Tools: the animal "Shogun" is dressed in "Apparel_leatherdogcollar" dyed "#3B2F2F"
+    # gallery-19 ideas: beside her, front to the camera, canon collar (SHOGUN-PROFIL, validated 2026-11-06).
+    And Nelim's Pickle Tools: the animal "Shogun" stands at (150, 216) facing South
     # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
     # gallery-15 probe: the camera step runs ~11 s of ticks and her haul job walked her out of the shot; hold her in place first.
     And Nelim's Pickle Tools: "Nelim" waits in place
+    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" near (148, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" near (153, 218) fully grown
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (145, 212) to (153, 217) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
@@ -200,10 +205,11 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" starts the offered job
     And I wait 1200 ticks
     Then Entity Gazing "Nelim" carries the hediff "PainField"
-    # Zoom 3 on the holder left Nelim out of frame in gallery-12: hold her facing the camera, frame her with the platform.
-    And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
+    # gallery-16: she faced the camera; the platform is west of her, so face West, and widen the frame to keep the lit campfire (153, 211) in.
+    # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
+    And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (148, 213) to (153, 216) filling 65 percent of the screen
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (148, 211) to (153, 216) filling 70 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed
