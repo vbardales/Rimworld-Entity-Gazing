@@ -147,6 +147,8 @@ Feature: shots for the Workshop page
 
   Scenario: the holding spot is watched too
     Given I set the hour to 18
+    # gallery-16: a sanctuary dog stood by the lantern next to Shogun; scene 4 already keeps the animals out.
+    And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Corset" dyed rgb (30, 28, 34)
