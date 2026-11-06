@@ -56,7 +56,7 @@
 #                    standing at (150, 216), next to Nelim, wearing the canon collar (brown #3B2F2F), seen from the front (facing South). Instant: Shogun has just trotted over
 #                    and stopped, Nelim turns to him. Obtained: the dog is spawned after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
-#                    (146, 217) lit, a fully grown daylily (152, 211). Composition: zoom 4 (close), dog in the lower-left
+#                    (146, 217) lit, a fully grown daylily (152, 211). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
 #                    foreground, Nelim right of centre. Says: it works for the cheaper holder, and even a dog comes to look.
 #                    THUMBNAIL (268 px): the dog's face, Nelim and the marker under the fingerspike.
 #                    RISK: the dog may walk off, its kind name may be wrong, and the kept-out step would send it away.
@@ -67,8 +67,8 @@
 #                    canon mouth and lids (owner refused a change, 2026-11-06). State:
 #                    carries the PainField hediff. Instant: the pain has just reached her, her gaze stays on the creature.
 #                    Obtained: the hediff after 1200 ticks beside the nociosphere, asserted before the capture. Decor: a torch
-#                    (145, 217) and a campfire (153, 211) lit, two Plant_YellowTallGrass (147, 219) (151, 219). Composition:
-#                    zoom 3 (tight), Nelim's face right of centre in warm firelight, tall grass in the foreground, platform
+#                    (145, 217) and a campfire (153, 213) lit, two Plant_YellowTallGrass (147, 219) (151, 219). Composition:
+#                    head frame of Nelim at root size 3.5 (tight), her face turned West in the warm light of the campfire moved to (153, 213), tall grass in the foreground, platform
 #                    behind her on the left. Says: the price, on her face. THUMBNAIL (268 px): her face and the platform.
 #                    RISK: the pain may not show on her face, and the jacket may clash with the corset layer.
 #                    PLAN: the hediff is asserted, mouth and lids are set by hand, and the capture is read; if the jacket
@@ -166,18 +166,16 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" starts the offered job
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
-    And Nelim's Pickle Tools: an adult animal of kind "LabradorRetriever" named "Shogun" is spawned at (150, 216)
-    And Nelim's Pickle Tools: the animal "Shogun" is dressed in "Apparel_leatherdogcollar" dyed "#3B2F2F"
-    # gallery-19 ideas: beside her, front to the camera, canon collar (SHOGUN-PROFIL, validated 2026-11-06).
+    # 2026-11-06 director pass: the real Shogun of the save (LabradorRetriever59410, canon collar already worn, SHOGUN-PROFIL) is placed beside her, front to the camera; no spawned double.
     And Nelim's Pickle Tools: the animal "Shogun" stands at (150, 216) facing South
     # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
-    And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing South
+    And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     # gallery-15 probe: the camera step runs ~11 s of ticks and her haul job walked her out of the shot; hold her in place first.
     And Nelim's Pickle Tools: "Nelim" waits in place
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (148, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 218) fully grown
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (145, 212) to (153, 217) filling 80 percent of the screen
+    When Nelim's Pickle Tools: the camera frames the head of "Nelim" and "Shogun" at root size 3.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
     And Nelim's Pickle Tools: the decor is removed
@@ -195,8 +193,8 @@ Feature: shots for the Workshop page
     And Entity Gazing tethers a downed "Nociosphere" to it
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (145, 217)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (145, 217) is lit
-    And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 211)
-    And Nelim's Pickle Tools: the decor "Campfire" at (153, 211) is lit
+    And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 213)
+    And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (147, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (151, 219) fully grown
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
@@ -209,7 +207,7 @@ Feature: shots for the Workshop page
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (148, 211) to (153, 216) filling 70 percent of the screen
+    When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 3.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed
