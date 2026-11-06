@@ -54,7 +54,7 @@
 #   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
 #                    Nelim: same outfit, canon mouth; Action: watching, Nelim's labrador Shogun (kind LabradorRetriever)
 #                    standing at (150, 216), next to Nelim, wearing the canon collar (brown #3B2F2F), seen from the front (facing South). Instant: Shogun has just trotted over
-#                    and stopped, Nelim turns to him. Obtained: the dog is spawned after the 600 ticks Nelim spends
+#                    and stopped, Nelim turns to him. Obtained: the save's own Shogun (no spawn) is placed after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
 #                    (146, 217) lit, a fully grown daylily (152, 211). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
 #                    foreground, Nelim right of centre. Says: it works for the cheaper holder, and even a dog comes to look.
