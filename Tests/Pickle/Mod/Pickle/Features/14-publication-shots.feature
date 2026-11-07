@@ -37,7 +37,7 @@
 #                    job), her head turned to the platform. Instant: she has just sat down in front of the creature, the
 #                    next second the fingerspike strains at its chain. Obtained: the giver offers the job, Nelim starts it,
 #                    600 ticks pass, the camera is centred and the capture follows at once. Decor: a stick lantern
-#                    (144, 218), a lit campfire (152, 212), a lit Brazier (144, 213), a Stool (154, 217), daylilies fully grown (146, 218) (143, 217).
+#                    (146, 217), a lit campfire (152, 212), a lit Brazier (146, 211), a Stool (153, 216), daylilies fully grown (147, 217) (145, 212), tall grass (146, 215) (155, 212), all within three cells of the platform (2026-11-07 redo 3).
 #                    Composition: zoom 6 (medium), platform decentred into the middle third, Nelim right of centre, lantern
 #                    and flowers in the foreground-south, campfire behind. Says: she settles down to watch.
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
@@ -106,19 +106,20 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (144, 218)
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (146, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (147, 217) fully grown
     And Nelim's Pickle Tools: I place the decor "Campfire" at (152, 212)
     And Nelim's Pickle Tools: the decor "Campfire" at (152, 212) is lit
     # 2026-11-07: the camp she set up to watch (a stool, a lit brazier, more flowers and grass), grouped around the platform.
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Stool" at (154, 217)
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (144, 213)
-    And Nelim's Pickle Tools: the decor "Brazier" at (144, 213) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (143, 217) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (148, 219) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 214) fully grown
-    And Nelim's Pickle Tools: "Nelim" stands at (153, 216)
+    And Nelim's Pickle Tools: I place the decor "Stool" at (153, 216)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (146, 211)
+    And Nelim's Pickle Tools: the decor "Brazier" at (146, 211) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (145, 212) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (146, 215) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (155, 212) fully grown
+    # gallery-33 read decoration 3.5: props sat far apart on bare ground; redo 3 keeps them within three cells of the platform and tightens the frame.
+    And Nelim's Pickle Tools: "Nelim" stands at (153, 217)
     And Entity Gazing "Nelim" has no recreation
     When Entity Gazing asks the giver for a job for "Nelim"
     And Entity Gazing "Nelim" starts the offered job
@@ -128,7 +129,7 @@ Feature: shots for the Workshop page
     # gallery-27: her watch job left her far south of the platform with her back to the camera; hold her beside it, in profile.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 214) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (144, 211) to (154, 218) filling 80 percent of the screen
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 211) to (153, 217) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - gaze"
     And Nelim's Pickle Tools: the decor is removed
@@ -152,11 +153,14 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (153, 218) fully grown
     # 2026-11-07: the evening camp around the cross (a lit brazier, flowers, a stool), so the ground is not bare.
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (143, 213)
-    And Nelim's Pickle Tools: the decor "Brazier" at (143, 213) is lit
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (144, 210)
+    And Nelim's Pickle Tools: the decor "Brazier" at (144, 210) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (143, 217) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (157, 212) fully grown
     And Nelim's Pickle Tools: I place the decor "Stool" at (157, 216)
+    # gallery-33 read decoration 3.0: the brazier sat on the west rect and the ground was bare; it moves to the south-west quadrant, outside every rect, with flowers and grass in the south-east.
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 210) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 210) fully grown
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
@@ -251,6 +255,8 @@ Feature: shots for the Workshop page
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
+    # 2026-11-08 probe (owner yes): her mouth pokes out of the profile; "has her own face" never sets the FA head shape, so pin HeadPointy (her canon head is Female_AveragePointy) and read whether the lips stay inside.
+    And Nelim's Pickle Tools: "Nelim" face head shape is "HeadPointy"
     When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 2.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
