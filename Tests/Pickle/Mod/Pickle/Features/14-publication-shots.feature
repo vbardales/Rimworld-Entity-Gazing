@@ -43,7 +43,7 @@
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
 #   2. watch area    18h, game time 600 ticks of setup. Subject: the watch area drawn under the build designator (cross of
 #                    four outlined rects). Nelim, same outfit as 1 but canon mouth, carries 3 of the item Steel for the
-#                    platform, standing at (154, 214) inside the cross. Instant: she is mid-haul, steel in her arms, walking
+#                    platform, standing at (153, 214) inside the east arm of the cross (2026-11-07 redo: zoom 5 so she and her load read larger). Instant: she is mid-haul, steel in her arms, walking
 #                    into the cross; the next second she lays the first platform blueprint. Obtained: the carry step, the
 #                    designator held, the ghost asserted before the capture. Decor: stick lantern (156, 217) lit, three
 #                    Plant_YellowTallGrass fully grown (146, 218) (150, 219) (153, 218). Composition: zoom 7 (wide), ghost at
@@ -53,7 +53,7 @@
 #                    capture, and the cross is asserted first.
 #   3. holding spot  18h. Subject: the other holder, a floor marker, with the fingerspike (proven harmless, feature 05).
 #                    Nelim: same outfit, canon mouth; Action: watching, Nelim's labrador Shogun (kind LabradorRetriever)
-#                    standing at (150, 216), next to Nelim, wearing the canon collar (brown #3B2F2F), seen from the front (facing South). Instant: Shogun has just trotted over
+#                    standing at (151, 216), next to Nelim, wearing a slate blue scarf #1F3A5F in place of the canon collar (cool evening, like Nelim's jacket; owner yes 2026-11-07), seen from the front (facing South). Instant: Shogun has just trotted over
 #                    and stopped, Nelim turns to him. Obtained: the save's own Shogun (no spawn) is placed after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
 #                    (146, 217) lit, a fully grown daylily (152, 211). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
