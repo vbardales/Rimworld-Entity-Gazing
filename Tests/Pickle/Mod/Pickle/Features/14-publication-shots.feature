@@ -158,9 +158,10 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (157, 212) fully grown
     And Nelim's Pickle Tools: I place the decor "Stool" at (157, 216)
     And Entity Gazing "Nelim" has no recreation
-    And Nelim's Pickle Tools: "Nelim" stands at (154, 214)
+    # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
+    And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
     And Nelim's Pickle Tools: "Nelim" carries 3 of the item "Steel"
-    And Entity Gazing zooms the camera to 7 cells
+    And Entity Gazing zooms the camera to 5 cells
     And Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
     And Nelim's Pickle Tools: the designator labels are hidden
@@ -198,6 +199,9 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
     # 2026-11-06 director pass: the real Shogun of the save (LabradorRetriever59410, canon collar already worn, SHOGUN-PROFIL) is placed beside her, front to the camera; no spawned double.
+    # 2026-11-07 owner yes to the scarf (cool evening, like Nelim's jacket; the canon collar was unreadable): slate blue scarf in place of the collar.
+    And Nelim's Pickle Tools: the animal "Shogun" is undressed
+    And Nelim's Pickle Tools: the animal "Shogun" is dressed in "Apparel_SmallAnimalScarf" dyed "#1F3A5F"
     And Nelim's Pickle Tools: the animal "Shogun" stands at (151, 216) facing South
     # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
