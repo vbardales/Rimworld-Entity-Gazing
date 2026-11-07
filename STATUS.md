@@ -54,23 +54,23 @@ protocols_read_sha: f7592aa80bf9af62b5743df4685935b6ff26d48c
 ---
 # Entity Gazing — status
 
-## NSB (sync-nsb, 2026-11-06)
+## NSB (sync-nsb, 2026-11-07)
 
-NSB Docs unchanged since 2026-10-25 (no commit in `SanctuaryBacklot/Docs` since then). Owner rules 2026-11-05 applied: NSB places, colonists and animals free; outside NSB needs express validation; colonist properties change only with validation; every outfit free; every included animal shown (rule 5). Nothing in the scenarios changed by this sync. Not read this run: NSB-ROSTER.md in full, SHOGUN-PROFIL.md (catalogue row and APPARENCES-CANON line only).
+Redone after Audit found the 2026-11-06 sync wrong (it queried `-- Docs`, NSB tracks lowercase `docs/`; "unchanged" was false, about 40 commits since 2026-11-06, read with `-- ':(icase)docs'`). Changes that touch this mod: (1) `enclosure-south` was refused as bare on 2026-11-06 ("refusé, à embellir") and sits at n° 16 of the owner's third decor order (2026-11-07: troughs, bamboo bundles, pen markers, shade trees, "animals keep room"); once decorated the scenes 1 to 4 frame a different place and must be replayed (decor of the scenes is mine, NSB decor stays). (2) Shogun's whole wardrobe validated 2026-11-06, including the cold scarf `Apparel_SmallAnimalScarf` deep blue `#1F3A5F`, same neck slot as the collar (no collar with it): option for scene 3 if the brown collar stays unreadable. (3) Nelim 1.7 body hair validated 2026-11-07 (ticket 69b4), her profile outfits unchanged; no mouth or lid change. Owner rules 2026-11-05 applied: NSB places, colonists and animals free; outside NSB needs express validation; colonist properties change only with validation; every outfit free; every included animal shown (rule 5). Nothing in the scenarios changed by this sync. Not read this run: NSB-ROSTER.md in full, APPARENCES-CANON.md, CATALOGUE-ANIMAUX.md (no commit on them since 2026-11-06 except b4198c9/28c2e0d/c87f0aa wardrobe docs, only the Shogun diff read).
 
-Places read: 2026-11-06. Tribe read: 2026-11-06.
+Places read: 2026-11-07. Tribe read: 2026-11-07 (Nelim and Shogun diffs only).
 
 | Place | Shots | Changes for the gallery | Last read |
 |---|---|---|---|
-| enclosure-south (149, 214), 12 cells, listed free for a photo | 1 to 4 (platform or holding spot at (149, 214)) | decor added per shot (lanterns, torch, campfire, daylilies, tall grass, removed at the end); animals kept out in scene 4; scene 3 keeps all animals but Shogun out of (136,206)-(160,222) | 2026-11-06 |
+| enclosure-south (149, 214), 12 cells, listed free for a photo | 1 to 4 (platform or holding spot at (149, 214)) | decor added per shot (lanterns, torch, campfire, daylilies, tall grass, removed at the end); animals kept out in scene 4; scene 3 keeps all animals but Shogun out of (136,206)-(160,222); NSB decor pass pending (n° 16, owner 2026-11-07), replay after it | 2026-11-07 |
 
 | Colonist | Shots | Outfit per shot | Last read of profile | Exceptions |
 |---|---|---|---|---|
-| Nelim | 1 to 4 | wine CollarShirt, charcoal Pants, ink Corset (all four); slate Jacket added in 4 (cold evening). Outfits free. | 2026-11-06 | none. Owner answered "non" on 2026-11-06 to hairstyle `Ponytails`, colour (90, 58, 32) and the expression change: scenes play canon `Roo_HD_Hair_Highpony`, hair rgb (56, 36, 18) (`#382412`, roster), mouth `MouthLipsSmirk`, no mouth or lid override (no `MouthSad` in 4). Replay needed. |
+| Nelim | 1 to 4 | wine CollarShirt, charcoal Pants, ink Corset (all four); slate Jacket added in 4 (cold evening). Outfits free. | 2026-11-07 (diff only: 1.7 body hair validated) | none. Owner answered "non" on 2026-11-06 to hairstyle `Ponytails`, colour (90, 58, 32) and the expression change: scenes play canon `Roo_HD_Hair_Highpony`, hair rgb (56, 36, 18) (`#382412`, roster), mouth `MouthLipsSmirk`, no mouth or lid override (no `MouthSad` in 4). Replay needed. |
 
 | Animal | Shots | Outfit | Last read of sheet | Exceptions |
 |---|---|---|---|---|
-| Shogun (Labrador, linked to Nelim) | 3 | none (canon default `Apparel_leatherdogcollar`; the scene spawns a fresh `LabradorRetriever` named Shogun without it, outfit free, to be justified in the shotlist or the collar added) | catalogue row 2026-11-06 | none; spawned by the NPT step, not NSB's own pawn `LabradorRetriever59410` |
+| Shogun (Labrador, linked to Nelim) | 3 | canon `Apparel_leatherdogcollar` `#3B2F2F` worn by the save's own pawn (illegible in gallery-26 capture); option: validated cold scarf `Apparel_SmallAnimalScarf` `#1F3A5F` (replaces the collar, outfit free, to justify in the plan) | profile diff 2026-11-07 | none; NSB's own pawn `LabradorRetriever59410` since 2026-11-06 (no spawn) |
 
 | Included animal (rule 5) | Shot(s) | |
 |---|---|---|
