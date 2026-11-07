@@ -100,10 +100,10 @@ Feature: shots for the Workshop page
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (144, 218)
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (154, 218)
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (146, 219) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 219) fully grown
-    And Nelim's Pickle Tools: I place the decor "Campfire" at (149, 210)
-    And Nelim's Pickle Tools: the decor "Campfire" at (149, 210) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (146, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Campfire" at (149, 211)
+    And Nelim's Pickle Tools: the decor "Campfire" at (149, 211) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (153, 216)
     And Entity Gazing "Nelim" has no recreation
     When Entity Gazing asks the giver for a job for "Nelim"
@@ -111,7 +111,7 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     And Nelim's Sanctuary: the appearance of "Nelim" is logged
     Then Entity Gazing "Nelim" is watching the holder
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 212) to (152, 216) filling 80 percent of the screen
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (144, 211) to (154, 218) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - gaze"
     And Nelim's Pickle Tools: the decor is removed
