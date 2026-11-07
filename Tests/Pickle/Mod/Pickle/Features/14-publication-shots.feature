@@ -111,8 +111,7 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     And Nelim's Sanctuary: the appearance of "Nelim" is logged
     Then Entity Gazing "Nelim" is watching the holder
-    When Entity Gazing centres the camera on the holder
-    And Entity Gazing zooms the camera to 6 cells
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 212) to (152, 216) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - gaze"
     And Nelim's Pickle Tools: the decor is removed
@@ -140,6 +139,7 @@ Feature: shots for the Workshop page
     And Entity Gazing zooms the camera to 7 cells
     And Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
+    And Nelim's Pickle Tools: the designator labels are hidden
     Then Entity Gazing the game is about to draw a watch area at the pointer
     When Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - watch area"
