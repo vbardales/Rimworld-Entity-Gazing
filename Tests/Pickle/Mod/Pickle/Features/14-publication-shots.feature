@@ -99,11 +99,9 @@ Feature: shots for the Workshop page
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (144, 218)
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (154, 218)
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (146, 218) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 218) fully grown
-    And Nelim's Pickle Tools: I place the decor "Campfire" at (149, 211)
-    And Nelim's Pickle Tools: the decor "Campfire" at (149, 211) is lit
+    And Nelim's Pickle Tools: I place the decor "Campfire" at (152, 212)
+    And Nelim's Pickle Tools: the decor "Campfire" at (152, 212) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (153, 216)
     And Entity Gazing "Nelim" has no recreation
     When Entity Gazing asks the giver for a job for "Nelim"
