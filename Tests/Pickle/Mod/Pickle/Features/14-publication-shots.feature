@@ -33,19 +33,19 @@
 # medium (1), wide (2), close (3), tight (4). Opening image 1 sets the place; closing image 4 is the night.
 #   1. gaze          17h, daylight, lanterns unlit, game time passing 600 ticks. Subject: Nelim watching a held fingerspike
 #                    on a platform. Nelim: Apparel_CollarShirt wine (122, 40, 58), Apparel_Pants charcoal (48, 44, 52),
-#                    Apparel_Corset ink (30, 28, 34), hairstyle Roo_HD_Hair_Highpony, canon mouth MouthLipsSmirk. Action: watching (the mod's
+#                    Apparel_Corset ink (30, 28, 34), hairstyle Roo_HD_Hair_Highpony, canon mouth MouthLipsSmirk, standing at (152, 214) east of the platform facing West (2026-11-07 redo). Action: watching (the mod's
 #                    job), her head turned to the platform. Instant: she has just sat down in front of the creature, the
 #                    next second the fingerspike strains at its chain. Obtained: the giver offers the job, Nelim starts it,
-#                    600 ticks pass, the camera is centred and the capture follows at once. Decor: two stick lanterns
-#                    (144, 218) (154, 218), a lit campfire (149, 210), two daylilies fully grown (146, 219) (152, 219).
+#                    600 ticks pass, the camera is centred and the capture follows at once. Decor: a stick lantern
+#                    (144, 218), a lit campfire (152, 212), a lit Brazier (144, 213), a Stool (154, 217), daylilies fully grown (146, 218) (143, 217).
 #                    Composition: zoom 6 (medium), platform decentred into the middle third, Nelim right of centre, lantern
 #                    and flowers in the foreground-south, campfire behind. Says: she settles down to watch.
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
 #   2. watch area    18h, game time 600 ticks of setup. Subject: the watch area drawn under the build designator (cross of
-#                    four outlined rects). Nelim, same outfit as 1 but canon mouth, carries 3 of the item Steel for the
-#                    platform, standing at (153, 214) inside the east arm of the cross (2026-11-07 redo: zoom 5 so she and her load read larger). Instant: she is mid-haul, steel in her arms, walking
-#                    into the cross; the next second she lays the first platform blueprint. Obtained: the carry step, the
-#                    designator held, the ghost asserted before the capture. Decor: stick lantern (156, 217) lit, three
+#                    four outlined rects). Nelim, same outfit as 1 but canon mouth, standing at (153, 214) inside the east arm
+#                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
+#                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
+#                    the ghost asserted before the capture. Decor: stick lantern (156, 217) lit, three
 #                    Plant_YellowTallGrass fully grown (146, 218) (150, 219) (153, 218). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
 #                    stand before you build. THUMBNAIL (268 px): the four outlined rects of the cross, with Nelim at its edge.
@@ -56,7 +56,7 @@
 #                    standing at (151, 216), next to Nelim, wearing a slate blue scarf #1F3A5F in place of the canon collar (cool evening, like Nelim's jacket; owner yes 2026-11-07), seen from the front (facing South). Instant: Shogun has just trotted over
 #                    and stopped, Nelim turns to him. Obtained: the save's own Shogun (no spawn) is placed after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
-#                    (146, 217) lit, a fully grown daylily (152, 211). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
+#                    (146, 217) lit, a stick lantern (150, 219) lit, a Brazier (155, 214) lit, a fully grown daylily (152, 211). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
 #                    foreground, Nelim right of centre. Says: it works for the cheaper holder, and even a dog comes to look.
 #                    THUMBNAIL (268 px): the dog's face, Nelim and the marker under the fingerspike.
 #                    RISK: the dog may walk off, its kind name may be wrong, and the kept-out step would send it away.
@@ -126,7 +126,7 @@ Feature: shots for the Workshop page
     And Nelim's Sanctuary: the appearance of "Nelim" is logged
     Then Entity Gazing "Nelim" is watching the holder
     # gallery-27: her watch job left her far south of the platform with her back to the camera; hold her beside it, in profile.
-    And Nelim's Pickle Tools: "Nelim" stands at (152, 216) facing West
+    And Nelim's Pickle Tools: "Nelim" stands at (152, 214) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (144, 211) to (154, 218) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
@@ -160,7 +160,6 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
-    And Nelim's Pickle Tools: "Nelim" carries 3 of the item "Steel"
     And Entity Gazing zooms the camera to 5 cells
     And Entity Gazing has steel stocked near the placement
     When Entity Gazing holds the build designator for "HoldingPlatform"
@@ -210,7 +209,11 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (148, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 218) fully grown
-    When Nelim's Pickle Tools: the camera frames the head of "Nelim" and "Shogun" at root size 3.0
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 214)
+    And Nelim's Pickle Tools: the decor "Brazier" at (155, 214) is lit
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (150, 219)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (150, 219) is lit
+    When Nelim's Pickle Tools: the camera frames the head of "Nelim" and "Shogun" at root size 3.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
     And Nelim's Pickle Tools: the decor is removed
