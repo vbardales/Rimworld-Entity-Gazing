@@ -125,6 +125,9 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     And Nelim's Sanctuary: the appearance of "Nelim" is logged
     Then Entity Gazing "Nelim" is watching the holder
+    # gallery-27: her watch job left her far south of the platform with her back to the camera; hold her beside it, in profile.
+    And Nelim's Pickle Tools: "Nelim" stands at (152, 216) facing West
+    And Nelim's Pickle Tools: "Nelim" waits in place
     When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (144, 211) to (154, 218) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - gaze"
@@ -195,7 +198,7 @@ Feature: shots for the Workshop page
     And I wait 600 ticks
     Then Entity Gazing "Nelim" is watching the holder
     # 2026-11-06 director pass: the real Shogun of the save (LabradorRetriever59410, canon collar already worn, SHOGUN-PROFIL) is placed beside her, front to the camera; no spawned double.
-    And Nelim's Pickle Tools: the animal "Shogun" stands at (150, 216) facing South
+    And Nelim's Pickle Tools: the animal "Shogun" stands at (151, 216) facing South
     # Her job walked her off the frame in gallery-12: hold her where the shot wants her, then frame dog, holder and her.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     # gallery-15 probe: the camera step runs ~11 s of ticks and her haul job walked her out of the shot; hold her in place first.
