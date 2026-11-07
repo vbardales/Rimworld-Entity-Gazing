@@ -24,7 +24,7 @@
 # She brings the steel for the platform that will hold it and sees where the game will let people stand (2), tries the
 # cheaper holder, and her labrador Shogun comes to look too (3); at nightfall the nociosphere that hurts has its say (4).
 # The dial the player turns is the last picture (5, interface, set aside from the scoring). Nelim keeps ONE outfit all
-# day (wine collar shirt, charcoal trousers, ink corset, ponytail); at 19h it gets cold and she pulls on a slate jacket
+# day (wine collar shirt, charcoal trousers, ink corset, hairstyle Roo_HD_Hair_Highpony); at 19h it gets cold and she pulls on a slate jacket
 # (scene 4), the only change, justified by the hour. Dusk is lit by what a camp would hold: stick lanterns, a torch, a campfire.
 #
 # SHOOTING PLAN, gallery order after 0- (the Preview). Place: the enclosure, holder on cell (149, 214), camera centred
@@ -73,6 +73,14 @@
 #                    RISK: the pain may not show on her face, and the jacket may clash with the corset layer.
 #                    PLAN: the hediff is asserted, mouth and lids are set by hand, and the capture is read; if the jacket
 #                    step fails, the corset is dropped from this scene only.
+#   2026-11-07 director pass (owner rule: image coherent with the plan, decor rich enough, story readable IN the picture, redo under 4/5):
+#   gallery-26 read 3.0 / 4.0 / 4.5 / 2.5 on the picture. Reworked below: a camp around the platform in 1, 3 and 4 (a stool she brought,
+#   a lit brazier, the campfire, lanterns, daylilies, tall grass, grouped near the subject, ground not left bare); scene 2 gets a brazier,
+#   flowers and a stool; scene 4 frames her face closer (root size 2.5, the game bounds the camera near 2, crop afterwards if needed); scene 3
+#   frames Shogun closer (root size 3.0). The story reads without this header: a camp set up to watch (stool, fire, lamps), the platform and
+#   its creature, her turned toward it (1); steel and the watch area on the ground (2); the dog at her side, both looking at the holder (3);
+#   the creature that hurts, lit by the fire, her face turned to it in a jacket (4). Header lines above that still say "set by hand" or
+#   "two lanterns" are superseded by the scenario text.
 #   Guests across the series: none. Nelim in all; Shogun in 3.
 #   5. settings      the Mod options window alone, on the backdrop for a tall window, cropped sideways (interface).
 @review @requires:nelim.sanctuarybacklot @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.stagedecor @requires:nelim.pickletools.clearscreen @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.colonistrace @requires:Mlie.StickLantern @requires:nelim.pickletools.camerazoom
@@ -102,6 +110,14 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (146, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Campfire" at (152, 212)
     And Nelim's Pickle Tools: the decor "Campfire" at (152, 212) is lit
+    # 2026-11-07: the camp she set up to watch (a stool, a lit brazier, more flowers and grass), grouped around the platform.
+    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
+    And Nelim's Pickle Tools: I place the decor "Stool" at (154, 217)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (144, 213)
+    And Nelim's Pickle Tools: the decor "Brazier" at (144, 213) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (143, 217) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (148, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 214) fully grown
     And Nelim's Pickle Tools: "Nelim" stands at (153, 216)
     And Entity Gazing "Nelim" has no recreation
     When Entity Gazing asks the giver for a job for "Nelim"
@@ -131,6 +147,13 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (146, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (150, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (153, 218) fully grown
+    # 2026-11-07: the evening camp around the cross (a lit brazier, flowers, a stool), so the ground is not bare.
+    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (143, 213)
+    And Nelim's Pickle Tools: the decor "Brazier" at (143, 213) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (143, 217) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (157, 212) fully grown
+    And Nelim's Pickle Tools: I place the decor "Stool" at (157, 216)
     And Entity Gazing "Nelim" has no recreation
     And Nelim's Pickle Tools: "Nelim" stands at (154, 214)
     And Nelim's Pickle Tools: "Nelim" carries 3 of the item "Steel"
@@ -158,6 +181,13 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (146, 217) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 211) fully grown
+    # 2026-11-07: the camp (stool, lit brazier, campfire) so she and the dog stand in a lived-in corner.
+    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
+    And Nelim's Pickle Tools: I place the decor "Stool" at (154, 217)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (144, 213)
+    And Nelim's Pickle Tools: the decor "Brazier" at (144, 213) is lit
+    And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 213)
+    And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
     And Entity Gazing "Nelim" has no recreation
     When Entity Gazing asks the giver for a job for "Nelim"
@@ -173,7 +203,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (148, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 218) fully grown
-    When Nelim's Pickle Tools: the camera frames the head of "Nelim" and "Shogun" at root size 3.5
+    When Nelim's Pickle Tools: the camera frames the head of "Nelim" and "Shogun" at root size 3.0
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
     And Nelim's Pickle Tools: the decor is removed
@@ -195,6 +225,12 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (147, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (151, 219) fully grown
+    # 2026-11-07: the camp at nightfall (a stool she left, a lit brazier, flowers), the fire lighting her face.
+    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
+    And Nelim's Pickle Tools: I place the decor "Stool" at (151, 217)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 215)
+    And Nelim's Pickle Tools: the decor "Brazier" at (155, 215) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 218) fully grown
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
     And Entity Gazing "Nelim" has no recreation
     When Entity Gazing asks the giver for a job for "Nelim"
@@ -205,7 +241,7 @@ Feature: shots for the Workshop page
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 3.5
+    When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 2.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed
