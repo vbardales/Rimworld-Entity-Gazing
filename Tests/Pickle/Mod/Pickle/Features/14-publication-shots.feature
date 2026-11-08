@@ -92,6 +92,8 @@ Feature: shots for the Workshop page
     And Nelim's Sanctuary: the animals are removed from the sanctuary "enclosure-south"
     And Nelim's Sanctuary: the sanctuary "enclosure-south" is emptied
     And Nelim's Sanctuary: I am at the sanctuary "enclosure-south"
+    # 2026-11-08 NSB rule: nothing stands on the flowers of the Nelim logo (growing zones of enclosure-south). NPT step, same rectangle as NSB batch 5f, placed before every prop.
+    And Nelim's Pickle Tools: the cells of the growing zones in the area from (130, 204) to (168, 223) are kept free of decor
     And I set the weather to "Clear"
     And Nelim's Sanctuary: Nelim has her own face
 
