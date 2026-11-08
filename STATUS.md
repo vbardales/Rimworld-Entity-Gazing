@@ -72,7 +72,9 @@ Rerun 2026-11-07 afternoon (TM `nsb-sync` warn): new NSB commits ac34b0a and c40
 
 Sync 2026-11-08 (evening, diffs only): NSB owner validated `enclosure-south` on 2026-11-08 (NPT lot 5g, ticket 2901, fixture `Nelims-tribe-decor-mods-u`, "c'est validable"): the place now carries the Nelim logo in flowers (growing zones 3 to 15). **Owner rule 2026-11-07 (SANCTUAIRE-LIEUX.md): nothing on the logo flowers, no brazier, awning, trough or rock.** The scenes put brazier, campfire, torch, stool and lantern around (149, 214): replay must keep every prop off the logo cells (ask NPT/NSB for the logo cell list; NPT step "the cells of the growing zones in the area from (x, z) to (x, z) are kept free of decor" serves it). Colonists, Shogun, catalogue: no NSB doc change since 2026-11-07, rules unchanged. NPT new steps that serve the gallery: "the light of the map is dimmed to at most N" and "refreshed" (dusk capture of scene 4 at 19h, COMPILED NOT PLAYED, ask NPT before relying on it), "the building X at (x, z) is put out" (torches), "puts down what it carries". Not read in full: places other than `enclosure-south`. Nothing in the scenarios changed by this sync. Mouth diagnostic: NPT batch "nelim mouth diagnostic" exists (f885f9d), not read.
 
-Places read: 2026-11-08. Tribe read: 2026-11-07. Steps read: 2026-11-08.
+Sync 2026-11-08 (night, diffs only, NSB 564f12b..23c4f55, NPT none since 2026-11-08): NSB owner validated `enclosure-south` (efc2141) and the `enclosure` overview (b5e64e8, tickets 5136/d534); logo rule unchanged (nothing on the flowers, SANCTUAIRE-LIEUX.md). Other commits touch workshops, right-bank, gravel-yard, left-bank telescope, batches 5k/5l: no effect on scenes 1 to 4. No colonist, animal or catalogue doc changed (Nelim, Shogun, rules 1 to 5 as above). Nothing in the scenarios changed by this sync.
+
+Places read: 2026-11-08. Tribe read: 2026-11-08 (commit list of docs, VALIDE.md lines, no colonist or animal doc touched). Steps read: 2026-11-08.
 
 | Place | Shots | Changes for the gallery | Last read |
 |---|---|---|---|
