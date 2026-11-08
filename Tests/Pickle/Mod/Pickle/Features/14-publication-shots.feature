@@ -226,6 +226,7 @@ Feature: shots for the Workshop page
 
   Scenario: Nelim inside a nociosphere's reach
     Given I set the hour to 19
+    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
     And Nelim's Sanctuary: the animals are kept out of the sanctuary "enclosure-south"
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_CollarShirt" dyed rgb (122, 40, 58)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants" dyed rgb (48, 44, 52)
@@ -242,7 +243,6 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (147, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (151, 219) fully grown
     # 2026-11-07: the camp at nightfall (a stool she left, a lit brazier, flowers), the fire lighting her face.
-    And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
     And Nelim's Pickle Tools: I place the decor "Stool" at (151, 217)
     And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 215)
     And Nelim's Pickle Tools: the decor "Brazier" at (155, 215) is lit
