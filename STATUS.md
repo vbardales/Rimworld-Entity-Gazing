@@ -20,6 +20,7 @@ tested_on:    "85ec8b6 (Mod/ tree unchanged since; replays f107 EN and e3a7 FR g
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
+  - "RED 2026-11-09 (resume): f9e9 (gallery-39) failed 0 of 1: 'no TorchLamp stands at (156, 217)', log '[decor-skipped] TorchLamp asked (156, 217): the cell is kept free of decor' (guard 243 cells): (156, 217) is on the logo, NPT's 'free east of x 153' was wrong there. Scene 1 lantern also at (156, 217). Asked NPT via TM for the exact free cells; then move torch, stool (156, 219 unchecked), lantern, replay 1, 3, 4. Inbox/gallery-39 deleted after study (red, no capture opened). protocols_read_sha now 239c9196."
   - "NPT answer 2026-11-09 (resume): NPT holds NO result of ticket 3345 (cancelled, never read; TM relayed an old STATUS point), nothing open at NPT for EnG, no HeadPointy or mouth-offset step written. If f9e9 shows a step problem, go back to NPT with the exact error. Tree 65fe03e carries the f9e9 feature edit (committed, not pushed). Uncommitted files not from this session: BUGS.md and scripts/Run-*.ps1 deleted, Docs/BUGS.md new, Mod/About/ModIcon.png (owner to decide)."
   - "waiting 2026-11-09 01:16: ticket 20261109-011551-150-f9e9 (gallery-39, scene 4 alone, same HeadPointy probe, DepMap wsl-deps.sanctuary.map, tree = dd340aa + uncommitted feature edit, frozen until RUN_DONE). f0fd (gallery-38) was RED, 0 of 1: no 'TorchLamp' stands at (145, 217) (logo cell; evidence deleted). Fix: torch (156, 217), stool (156, 219), both east of x 153. At RUN_DONE: read summary.json, junit, log of skipped props, open capture; lip still outside: tell NPT mouth def MouthLipsSmirk and direction; else move scenes 1 and 3 props off logo cells ((146, 217) etc. not yet checked) and replay 1, 3, 4."
   - "waiting 2026-11-08 (NSB, NPT): Nelim mouth pokes out of the profile (MouthLipsSmirk on FA head Pointy east, lower lip past the outline; VE FA 2816938779 LipsSmirk/Female/normal_east.png vs FA 1635901197 Heads_Blank/Pointy/Female/normal_east.png; LipsTinySmile stays inside). Virginie refused changing the mouth. NSB: step Nelim has her own face never sets the FA head shape; NSB asks NPT a diagnostic (east and west, FA head as today vs HeadPointy); if Pointy fixes it NSB adds the line to the step, else NPT is asked for a mouth offset step. Do NOT replay scenes 1, 3, 4 until NSB gives the step. The four images in Art/Gallery stay finalised but uncommitted (flaw known). VTW and ACG not involved."
@@ -62,7 +63,7 @@ publication_changelog_review_sha: bbe5af21606d3db0b5ce075310b7a70898fcef82
 echo_review_sha: c993b5086c85424c846e488bce7ace8f65c65d97
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
 updated:      2026-10-25, shootGallery session
-protocols_read_sha: ae6bc8a0f43a31e22df7e41cc17c26a1a5300dac
+protocols_read_sha: 239c919636c8198d41382e67de2b112138b844e7
 ---
 # Entity Gazing — status
 
