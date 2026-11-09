@@ -236,14 +236,15 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Nociosphere" to it
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (145, 217)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (145, 217) is lit
+    # 2026-11-09 (gallery-38 red: no TorchLamp at (145, 217)): that cell and (151, 217) are on the logo flowers (NPT cell list), so torch and stool move east of x 153, where the cells are free.
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (156, 217)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (156, 217) is lit
     And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 213)
     And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (147, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (151, 219) fully grown
     # 2026-11-07: the camp at nightfall (a stool she left, a lit brazier, flowers), the fire lighting her face.
-    And Nelim's Pickle Tools: I place the decor "Stool" at (151, 217)
+    And Nelim's Pickle Tools: I place the decor "Stool" at (156, 219)
     And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 215)
     And Nelim's Pickle Tools: the decor "Brazier" at (155, 215) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 218) fully grown
