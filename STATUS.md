@@ -77,7 +77,9 @@ Sync 2026-11-08 (evening, diffs only): NSB owner validated `enclosure-south` on 
 
 Sync 2026-11-08 (night, diffs only, NSB 564f12b..23c4f55, NPT none since 2026-11-08): NSB owner validated `enclosure-south` (efc2141) and the `enclosure` overview (b5e64e8, tickets 5136/d534); logo rule unchanged (nothing on the flowers, SANCTUAIRE-LIEUX.md). Other commits touch workshops, right-bank, gravel-yard, left-bank telescope, batches 5k/5l: no effect on scenes 1 to 4. No colonist, animal or catalogue doc changed (Nelim, Shogun, rules 1 to 5 as above). Nothing in the scenarios changed by this sync.
 
-Places read: 2026-11-08. Tribe read: 2026-11-08 (commit list of docs, VALIDE.md lines, no colonist or animal doc touched). Steps read: 2026-11-08.
+Sync 2026-11-09 (night, diffs only, NSB since 2026-11-08 20:00, NPT same): NSB cc61d17 touches NSB-ROSTER only for Quill eyes (not Nelim, not Shogun); 1677380 copied the final decor save `Nelims-tribe-decor-mods-z3.rws` to Fixtures, `Nelims-tribe.rws` stays the old Sanctuary until NSB repoints the scenarios (DepMap wsl-deps.sanctuary.map unchanged here, replay on the old save as before; re-sync when NSB repoints). NPT: new step `the Beauty2 mouth offset is {float}` (D 0.03, NOT PLAYED, hosted in the NSB Beauty2Mouth patch, fails when not loaded: candidate for the mouth flaw, not used until NPT says it plays), `carries the item X made of Y`, screenshot-studio skip steps (none needed). Logo guard list from PiT 2026-11-09: rightmost guarded x per row z 206-222 is 148 to 157; every prop moved to x above the row limit (header and scenario agree, Check-ShotlistVsScenario OK). Rules 1 to 5 unchanged, no colonist or animal outside NSB, no property change.
+
+Places read: 2026-11-08. Tribe read: 2026-11-09 (diff of NSB-ROSTER only). Steps read: 2026-11-09.
 
 | Place | Shots | Changes for the gallery | Last read |
 |---|---|---|---|

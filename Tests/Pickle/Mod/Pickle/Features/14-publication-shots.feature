@@ -37,7 +37,7 @@
 #                    job), her head turned to the platform. Instant: she has just sat down in front of the creature, the
 #                    next second the fingerspike strains at its chain. Obtained: the giver offers the job, Nelim starts it,
 #                    600 ticks pass, the camera is centred and the capture follows at once. Decor: a stick lantern
-#                    (146, 217), a lit campfire (152, 212), a lit Brazier (146, 211), a Stool (153, 216), daylilies fully grown (147, 217) (145, 212), tall grass (146, 215) (155, 212), all within three cells of the platform (2026-11-07 redo 3).
+#                    (157, 217), a lit campfire (155, 212), a lit Brazier (154, 210), a Stool (157, 215), daylilies fully grown (154, 213) (156, 211), tall grass (158, 213) (155, 209), all east of the logo flowers (2026-11-09, NPT guard list: x above the logo limit of the row).
 #                    Composition: zoom 6 (medium), platform decentred into the middle third, Nelim right of centre, lantern
 #                    and flowers in the foreground-south, campfire behind. Says: she settles down to watch.
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
@@ -45,8 +45,8 @@
 #                    four outlined rects). Nelim, same outfit as 1 but canon mouth, standing at (153, 214) inside the east arm
 #                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
 #                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
-#                    the ghost asserted before the capture. Decor: stick lantern (156, 217) lit, three
-#                    Plant_YellowTallGrass fully grown (146, 218) (150, 219) (153, 218). Composition: zoom 7 (wide), ghost at
+#                    the ghost asserted before the capture. Decor: stick lantern (158, 217) lit, three
+#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
 #                    stand before you build. THUMBNAIL (268 px): the four outlined rects of the cross, with Nelim at its edge.
 #                    RISK: the designator ghost draws only at the pointer. PLAN: Nelim is placed last, just before the
@@ -56,7 +56,7 @@
 #                    standing at (151, 216), next to Nelim, wearing a slate blue scarf #1F3A5F in place of the canon collar (cool evening, like Nelim's jacket; owner yes 2026-11-07), seen from the front (facing South). Instant: Shogun has just trotted over
 #                    and stopped, Nelim turns to him. Obtained: the save's own Shogun (no spawn) is placed after the 600 ticks Nelim spends
 #                    watching, then placed standing, facing South, just before the capture. Decor: stick lantern
-#                    (146, 217) lit, a stick lantern (150, 219) lit, a Brazier (155, 214) lit, a fully grown daylily (152, 211). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
+#                    (157, 217) lit, a stick lantern (156, 219) lit, a Brazier (154, 210) lit, a fully grown daylily (154, 212). Composition: head frame of Nelim and Shogun at root size 3.5 (close), Nelim turned West toward the dog, dog facing the camera in the
 #                    foreground, Nelim right of centre. Says: it works for the cheaper holder, and even a dog comes to look.
 #                    THUMBNAIL (268 px): the dog's face, Nelim and the marker under the fingerspike.
 #                    RISK: the dog may walk off, its kind name may be wrong, and the kept-out step would send it away.
@@ -67,7 +67,7 @@
 #                    canon mouth and lids (owner refused a change, 2026-11-06). State:
 #                    carries the PainField hediff. Instant: the pain has just reached her, her gaze stays on the creature.
 #                    Obtained: the hediff after 1200 ticks beside the nociosphere, asserted before the capture. Decor: a torch
-#                    (145, 217) and a campfire (153, 213) lit, two Plant_YellowTallGrass (147, 219) (151, 219). Composition:
+#                    (157, 217) and a campfire (153, 213) lit, two Plant_YellowTallGrass (156, 219) (157, 220). Composition:
 #                    head frame of Nelim at root size 3.5 (tight), her face turned West in the warm light of the campfire moved to (153, 213), tall grass in the foreground, platform
 #                    behind her on the left. Says: the price, on her face. THUMBNAIL (268 px): her face and the platform.
 #                    RISK: the pain may not show on her face, and the jacket may clash with the corset layer.
@@ -108,18 +108,18 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (147, 217) fully grown
-    And Nelim's Pickle Tools: I place the decor "Campfire" at (152, 212)
-    And Nelim's Pickle Tools: the decor "Campfire" at (152, 212) is lit
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (157, 217)
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 213) fully grown
+    And Nelim's Pickle Tools: I place the decor "Campfire" at (155, 212)
+    And Nelim's Pickle Tools: the decor "Campfire" at (155, 212) is lit
     # 2026-11-07: the camp she set up to watch (a stool, a lit brazier, more flowers and grass), grouped around the platform.
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Stool" at (153, 216)
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (146, 211)
-    And Nelim's Pickle Tools: the decor "Brazier" at (146, 211) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (145, 212) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (146, 215) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (155, 212) fully grown
+    And Nelim's Pickle Tools: I place the decor "Stool" at (157, 215)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (154, 210)
+    And Nelim's Pickle Tools: the decor "Brazier" at (154, 210) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (156, 211) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (158, 213) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (155, 209) fully grown
     # gallery-33 read decoration 3.5: props sat far apart on bare ground; redo 3 keeps them within three cells of the platform and tightens the frame.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 217)
     And Entity Gazing "Nelim" has no recreation
@@ -131,7 +131,7 @@ Feature: shots for the Workshop page
     # gallery-27: her watch job left her far south of the platform with her back to the camera; hold her beside it, in profile.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 214) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 211) to (153, 217) filling 80 percent of the screen
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (147, 210) to (158, 217) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - gaze"
     And Nelim's Pickle Tools: the decor is removed
@@ -148,21 +148,21 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
     And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 217)
-    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (156, 217) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (146, 218) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (150, 219) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (153, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (158, 217)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (158, 217) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (157, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (157, 220) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (153, 208) fully grown
     # 2026-11-07: the evening camp around the cross (a lit brazier, flowers, a stool), so the ground is not bare.
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (144, 210)
-    And Nelim's Pickle Tools: the decor "Brazier" at (144, 210) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (143, 217) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (157, 212) fully grown
-    And Nelim's Pickle Tools: I place the decor "Stool" at (157, 216)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 210)
+    And Nelim's Pickle Tools: the decor "Brazier" at (155, 210) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 209) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (158, 212) fully grown
+    And Nelim's Pickle Tools: I place the decor "Stool" at (157, 215)
     # gallery-33 read decoration 3.0: the brazier sat on the west rect and the ground was bare; it moves to the south-west quadrant, outside every rect, with flowers and grass in the south-east.
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 210) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 210) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 211) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 208) fully grown
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
@@ -187,14 +187,14 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" mouth is "MouthLipsSmirk"
     And Entity Gazing spawns a "HoldingSpot" at x=149 z=214
     And Entity Gazing tethers a downed "Fingerspike" to it
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (146, 217)
-    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (146, 217) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 211) fully grown
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (157, 217)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (157, 217) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 212) fully grown
     # 2026-11-07: the camp (stool, lit brazier, campfire) so she and the dog stand in a lived-in corner.
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Stool" at (154, 217)
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (144, 213)
-    And Nelim's Pickle Tools: the decor "Brazier" at (144, 213) is lit
+    And Nelim's Pickle Tools: I place the decor "Stool" at (158, 216)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (154, 210)
+    And Nelim's Pickle Tools: the decor "Brazier" at (154, 210) is lit
     And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 213)
     And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
@@ -213,12 +213,12 @@ Feature: shots for the Workshop page
     # gallery-15 probe: the camera step runs ~11 s of ticks and her haul job walked her out of the shot; hold her in place first.
     And Nelim's Pickle Tools: "Nelim" waits in place
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (148, 218) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (152, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (153, 218) fully grown
     And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 214)
     And Nelim's Pickle Tools: the decor "Brazier" at (155, 214) is lit
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (150, 219)
-    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (150, 219) is lit
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (156, 219)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (156, 219) is lit
     When Nelim's Pickle Tools: the camera frames the head of "Nelim" and "Shogun" at root size 3.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - holding spot"
@@ -236,17 +236,17 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: "Nelim" hair colour is rgb (56, 36, 18)
     And Entity Gazing spawns a "HoldingPlatform" at x=149 z=214
     And Entity Gazing tethers a downed "Nociosphere" to it
-    # 2026-11-09 (gallery-38 red: no TorchLamp at (145, 217)): that cell and (151, 217) are on the logo flowers (NPT cell list), so torch and stool move east of x 153, where the cells are free.
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (156, 217)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (156, 217) is lit
+    # 2026-11-09 (gallery-38, gallery-39 red: TorchLamp on logo cells): NPT guard list, rightmost guarded x per row z 207-222 is 150 to 157, so every prop sits at x >= row limit + 1 (mostly x >= 153, z 215-217 and 219-220 x >= 156 to 158).
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (157, 217)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (157, 217) is lit
     And Nelim's Pickle Tools: I place the decor "Campfire" at (153, 213)
     And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (147, 219) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (151, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (157, 220) fully grown
     # 2026-11-07: the camp at nightfall (a stool she left, a lit brazier, flowers), the fire lighting her face.
-    And Nelim's Pickle Tools: I place the decor "Stool" at (156, 219)
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (155, 215)
-    And Nelim's Pickle Tools: the decor "Brazier" at (155, 215) is lit
+    And Nelim's Pickle Tools: I place the decor "Stool" at (158, 218)
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (157, 215)
+    And Nelim's Pickle Tools: the decor "Brazier" at (157, 215) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 218) fully grown
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215)
     And Entity Gazing "Nelim" has no recreation
@@ -254,7 +254,7 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" starts the offered job
     And I wait 1200 ticks
     Then Entity Gazing "Nelim" carries the hediff "PainField"
-    # gallery-16: she faced the camera; the platform is west of her, so face West, and widen the frame to keep the lit campfire (153, 211) in.
+    # gallery-16: she faced the camera; the platform is west of her, so face West, and widen the frame to keep the lit campfire (153, 213) in.
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
