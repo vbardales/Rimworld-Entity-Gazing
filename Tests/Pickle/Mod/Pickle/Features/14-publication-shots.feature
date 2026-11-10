@@ -46,7 +46,7 @@
 #                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
 #                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
 #                    the ghost asserted before the capture. Decor: stick lantern (158, 217) lit, three
-#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208). Composition: zoom 7 (wide), ghost at
+#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
 #                    stand before you build. THUMBNAIL (268 px): the four outlined rects of the cross, with Nelim at its edge.
 #                    RISK: the designator ghost draws only at the pointer. PLAN: Nelim is placed last, just before the
@@ -67,7 +67,7 @@
 #                    canon mouth and lids (owner refused a change, 2026-11-06). State:
 #                    carries the PainField hediff. Instant: the pain has just reached her, her gaze stays on the creature.
 #                    Obtained: the hediff after 1200 ticks beside the nociosphere, asserted before the capture. Decor: a torch
-#                    (157, 217) and a campfire (153, 213) lit, two Plant_YellowTallGrass (156, 219) (157, 220). Composition:
+#                    (157, 217) and a campfire (153, 213) lit, two Plant_YellowTallGrass (156, 219) (157, 220) (159, 216) (159, 219), daylily (158, 214) (2026-11-10, frame widened from 2.5 to 3.5 so the camp is in frame; no head-shape pin, the HeadPointy probe changed her face shape). Composition:
 #                    head frame of Nelim at root size 3.5 (tight), her face turned West in the warm light of the campfire moved to (153, 213), tall grass in the foreground, platform
 #                    behind her on the left. Says: the price, on her face. THUMBNAIL (268 px): her face and the platform.
 #                    RISK: the pain may not show on her face, and the jacket may clash with the corset layer.
@@ -152,6 +152,10 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: the decor "DR_StickLantern" at (158, 217) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (157, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (157, 220) fully grown
+    # 2026-11-10 director pass (gallery-40): decoration read 3.5 (bare west half), more camp east of the cross, x 159, beyond the logo guard.    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (159, 213) fully grown    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (159, 216) fully grown    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (159, 210) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (159, 213) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (159, 216) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (159, 210) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (153, 208) fully grown
     # 2026-11-07: the evening camp around the cross (a lit brazier, flowers, a stool), so the ground is not bare.
     And Nelim's Pickle Tools: a decor that finds no cell is skipped and logged
@@ -243,6 +247,10 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: the decor "Campfire" at (153, 213) is lit
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 219) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (157, 220) fully grown
+    # 2026-11-10 director pass (gallery-40): props sat outside the tight frame and the ground was bare, so the frame widens to root size 3.5 and more of the camp stands east of Nelim, all at x 158 or more (beyond the logo guard).    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (158, 214) fully grown    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (159, 216) fully grown    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (159, 219) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (158, 214) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (159, 216) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (159, 219) fully grown
     # 2026-11-07: the camp at nightfall (a stool she left, a lit brazier, flowers), the fire lighting her face.
     And Nelim's Pickle Tools: I place the decor "Stool" at (158, 218)
     And Nelim's Pickle Tools: I place the decor "Brazier" at (157, 215)
@@ -258,9 +266,7 @@ Feature: shots for the Workshop page
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    # 2026-11-08 probe (owner yes): her mouth pokes out of the profile; "has her own face" never sets the FA head shape, so pin HeadPointy (her canon head is Female_AveragePointy) and read whether the lips stay inside.
-    And Nelim's Pickle Tools: "Nelim" face head shape is "HeadPointy"
-    When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 2.5
+    When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 3.5
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed
