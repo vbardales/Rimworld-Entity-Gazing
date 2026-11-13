@@ -46,7 +46,7 @@
 #                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
 #                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
 #                    the ghost asserted before the capture. Decor: stick lantern (158, 217) lit, three
-#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10). Composition: zoom 7 (wide), ghost at
+#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10); west half dressed on the rows outside the logo guard (2026-11-13): stick lantern (142, 223) lit, daylilies (139, 205) (145, 223), tall grass (143, 205) (138, 223); no steel stocked (it read as a stone). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
 #                    stand before you build. THUMBNAIL (268 px): the four outlined rects of the cross, with Nelim at its edge.
 #                    RISK: the designator ghost draws only at the pointer. PLAN: Nelim is placed last, just before the
@@ -167,11 +167,18 @@ Feature: shots for the Workshop page
     # gallery-33 read decoration 3.0: the brazier sat on the west rect and the ground was bare; it moves to the south-west quadrant, outside every rect, with flowers and grass in the south-east.
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 211) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 208) fully grown
+    # 2026-11-13: the west half is the Nelim logo ground (no prop on its rows z 206 to 222, owner rule 2026-11-07), so it is dressed on the rows outside the guard, z 205 and z 223, across the west: a lit lantern, daylilies, tall grass.
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (142, 223)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (142, 223) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (139, 205) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (145, 223) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (143, 205) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (138, 223) fully grown
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
     And Entity Gazing zooms the camera to 5 cells
-    And Entity Gazing has steel stocked near the placement
+    # 2026-11-13 (gallery-41 read): the stocked steel stack read as a stone next to Nelim, the designator labels are hidden anyway, so no steel is stocked.
     When Entity Gazing holds the build designator for "HoldingPlatform"
     And Nelim's Pickle Tools: the designator labels are hidden
     Then Entity Gazing the game is about to draw a watch area at the pointer
