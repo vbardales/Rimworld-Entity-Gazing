@@ -3,7 +3,7 @@
   <MainButtonDef>
     <defName>EG_Settings</defName>
     <label>Entity Gazing</label>
-    <description>Configure entity gazing distances.</description>
+    <description>Configure viewing distances for entity gazing.</description>
     <workerClass>EntityGazing.MainButtonWorker_EntityGazingSettings</workerClass>
     <buttonVisible>false</buttonVisible>
     <validWithoutMap>true</validWithoutMap>
