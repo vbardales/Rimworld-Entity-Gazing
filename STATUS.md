@@ -90,6 +90,10 @@ Supersedes stage in older sections; their results stay.
 
 Older dated audits (2026-09) live in `docs/runs/status-archive-2026-09.md`.
 
+## Ecosystem (PiI, 2026-11-13, source: 8 Steam searches by Chrome, corpus scan of 3 defNames and 1 label; full table `docs/inventory/ecosystem-steam/EntityGazing.md` in the protocols repo)
+
+Verdict: no duplicate, fork or replacement of the idea; the mod goes on. No mod gives recreation from entities or holding platforms. Neighbours work on the same entities without recreation: Name Your Entities 3229905841, Abuse Held Entities 3281694053, Tameable Entities 3781878408 (nothing to merge). No mod links, patches, retextures or translates Entity Gazing by title. To check by Pickle later (holders our patch may not cover): Small Holding Platform 3528001923 (2x2 platform and spot) and HoldingPlatform Retexture 3553624791. Nothing subscribed by PiI.
+
 ## Repository and publication
 
 - Git root and Git directory local to `C:\Users\nelim\Documents\rimworld\EntityGazing`.
