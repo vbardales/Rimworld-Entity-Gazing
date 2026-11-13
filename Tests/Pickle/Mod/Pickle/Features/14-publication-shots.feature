@@ -46,7 +46,7 @@
 #                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
 #                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
 #                    the ghost asserted before the capture. Decor: stick lantern (158, 217) lit, three
-#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10); west half dressed on the rows outside the logo guard (2026-11-13): stick lantern (142, 223) lit, daylilies (139, 205) (145, 223), tall grass (143, 205) (138, 223); no steel stocked (it read as a stone). Composition: zoom 7 (wide), ghost at
+#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10); west half dressed above and below the west rect (2026-11-13, guard narrowed to x 149 to 168 so the zone cells west of the logo are free): stick lantern (141, 221) lit, daylilies (138, 207) (145, 221), tall grass (142, 207) (137, 221); no steel stocked (it read as a stone). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
 #                    stand before you build. THUMBNAIL (268 px): the four outlined rects of the cross, with Nelim at its edge.
 #                    RISK: the designator ghost draws only at the pointer. PLAN: Nelim is placed last, just before the
@@ -93,7 +93,7 @@ Feature: shots for the Workshop page
     And Nelim's Sanctuary: the sanctuary "enclosure-south" is emptied
     And Nelim's Sanctuary: I am at the sanctuary "enclosure-south"
     # 2026-11-08 NSB rule: nothing stands on the flowers of the Nelim logo (growing zones of enclosure-south). NPT step, same rectangle as NSB batch 5f, placed before every prop.
-    And Nelim's Pickle Tools: the cells of the growing zones in the area from (130, 204) to (168, 223) are kept free of decor
+    And Nelim's Pickle Tools: the cells of the growing zones inside the area from (149, 204) to (168, 223) are kept free of decor
     And I set the weather to "Clear"
     And Nelim's Sanctuary: Nelim has her own face
 
@@ -168,12 +168,12 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (154, 211) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (156, 208) fully grown
     # 2026-11-13: the west half is the Nelim logo ground (no prop on its rows z 206 to 222, owner rule 2026-11-07), so it is dressed on the rows outside the guard, z 205 and z 223, across the west: a lit lantern, daylilies, tall grass.
-    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (142, 223)
-    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (142, 223) is lit
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (139, 205) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (145, 223) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (143, 205) fully grown
-    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (138, 223) fully grown
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (141, 221)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (141, 221) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (138, 207) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (145, 221) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (142, 207) fully grown
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (137, 221) fully grown
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
