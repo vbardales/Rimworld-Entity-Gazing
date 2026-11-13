@@ -177,7 +177,8 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
-    And Entity Gazing zooms the camera to 5 cells
+    # 2026-11-13 (gallery-44 read): the west rect is the logo ground, no prop allowed, so it reads bare at 5 cells. Tighter zoom: the ghost, Nelim and the dressed east arm fill the frame, the west rect is cropped to a sliver.
+    And Entity Gazing zooms the camera to 3.5 cells
     # 2026-11-13 (gallery-41 read): the stocked steel stack read as a stone next to Nelim, the designator labels are hidden anyway, so no steel is stocked.
     When Entity Gazing holds the build designator for "HoldingPlatform"
     And Nelim's Pickle Tools: the designator labels are hidden
