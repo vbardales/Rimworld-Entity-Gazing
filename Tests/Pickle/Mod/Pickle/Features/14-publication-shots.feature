@@ -97,7 +97,7 @@ Feature: shots for the Workshop page
     And I set the weather to "Clear"
     And Nelim's Sanctuary: Nelim has her own face
     # 2026-11-14: mouth flaw fix without changing her mouth (owner refused, 2026-11-08): the NSB Beauty2Mouth patch pulls the mouth back from the east profile edge (D 0.03, NOT PLAYED before this run).
-    And Nelim's Pickle Tools: the Beauty2 mouth offset is 0.03
+    And Nelim's Pickle Tools: the Beauty2 mouth offset is 0.08
 
   Scenario: Nelim gazing at a held entity
     Given I set the hour to 17
