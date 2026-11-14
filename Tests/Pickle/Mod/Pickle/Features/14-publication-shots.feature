@@ -46,7 +46,7 @@
 #                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
 #                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
 #                    the ghost asserted before the capture. Decor: stick lantern (158, 217) lit, three
-#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10); west half dressed above and below the west rect (2026-11-13, guard narrowed to x 149 to 168 so the zone cells west of the logo are free): stick lantern (141, 221) lit, daylilies (138, 207) (145, 221), tall grass (142, 207) (137, 221); no steel stocked (it read as a stone). Composition: zoom 7 (wide), ghost at
+#                    Plant_YellowTallGrass fully grown (157, 219) (157, 220) (153, 208), daylilies (159, 213) (159, 216), tall grass (159, 210) (2026-11-10); west half dressed above and below the west rect (2026-11-13, guard narrowed to x 149 to 168 so the zone cells west of the logo are free): stick lantern (141, 221) lit, daylilies (138, 207) (145, 221), tall grass (142, 207) (137, 221); east arm dressed inside the zoom 3.5 frame (2026-11-14): Brazier (154, 212) lit, daylily (155, 213), Stool (155, 215), stick lantern (154, 216) lit, tall grass (155, 211); no steel stocked (it read as a stone). Composition: zoom 7 (wide), ghost at
 #                    the centre, Nelim at the cross edge, grass in the foreground. Says: the game shows where people will
 #                    stand before you build. THUMBNAIL (268 px): the four outlined rects of the cross, with Nelim at its edge.
 #                    RISK: the designator ghost draws only at the pointer. PLAN: Nelim is placed last, just before the
@@ -174,6 +174,14 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (145, 221) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (142, 207) fully grown
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (137, 221) fully grown
+    # 2026-11-14 (gallery-45 read): zoom 3.5 frames only x 143 to 155, z 211 to 217 (165 px per cell), every prop above sat outside it and the frame read bare. East arm dressed inside the frame, on cells outside the logo guard (gallery-45 guard rows: z 211 to 214 up to x 152, z 215 and 217 x 156, z 216 x 155 to 157).
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (154, 212)
+    And Nelim's Pickle Tools: the decor "Brazier" at (154, 212) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_Daylily" at (155, 213) fully grown
+    And Nelim's Pickle Tools: I place the decor "Stool" at (155, 215)
+    And Nelim's Pickle Tools: I place the decor "DR_StickLantern" at (154, 216)
+    And Nelim's Pickle Tools: the decor "DR_StickLantern" at (154, 216) is lit
+    And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (155, 211) fully grown
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
     And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
