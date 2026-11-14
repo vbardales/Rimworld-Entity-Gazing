@@ -42,7 +42,7 @@
 #                    and flowers in the foreground-south, campfire behind. Says: she settles down to watch.
 #                    THUMBNAIL (268 px): the platform with its creature and Nelim's wine shirt read as two shapes.
 #   2. watch area    18h, game time 600 ticks of setup. Subject: the watch area drawn under the build designator (cross of
-#                    four outlined rects). Nelim, same outfit as 1 but canon mouth, standing at (153, 214) inside the east arm
+#                    four outlined rects). Nelim, same outfit as 1 but canon mouth, standing at (153, 214) facing West toward the ghost (2026-11-14, gallery-48 read: she faced east, away from it) inside the east arm
 #                    of the cross, empty-handed (2026-11-07 redo 2: the carried Steel read as a stone chunk twice, so she carries nothing; zoom 5 so she reads larger). Instant: she has stopped at the edge of the
 #                    cross to plan, the next second she lays the first platform blueprint. Obtained: the designator held,
 #                    the ghost asserted before the capture. Decor: stick lantern (158, 217) lit, three
@@ -191,7 +191,7 @@ Feature: shots for the Workshop page
     And Nelim's Pickle Tools: I place the decor "Plant_YellowTallGrass" at (155, 211) fully grown
     And Entity Gazing "Nelim" has no recreation
     # 2026-11-07 owner refused candidate 2: Nelim was small at the edge and the load read as a stone. Closer zoom, Nelim moved into the east arm of the cross.
-    And Nelim's Pickle Tools: "Nelim" stands at (153, 214)
+    And Nelim's Pickle Tools: "Nelim" stands at (153, 214) facing West
     # 2026-11-13 (gallery-44 read): the west rect is the logo ground, no prop allowed, so it reads bare at 5 cells. Tighter zoom: the ghost, Nelim and the dressed east arm fill the frame, the west rect is cropped to a sliver.
     And Entity Gazing zooms the camera to 3.5 cells
     # 2026-11-13 (gallery-41 read): the stocked steel stack read as a stone next to Nelim, the designator labels are hidden anyway, so no steel is stocked.
