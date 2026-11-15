@@ -73,7 +73,9 @@ Sync 2026-11-13 (diffs only, NSB since 2026-11-09 20:00, NPT since 2026-11-09): 
 
 Sync 2026-11-14 (diffs only): NSB no commit since 2026-11-13; NPT new commits 2026-11-14 (SloppyMods Entertaining Ideas catalogue, render node hide uses debugEnabled), none serves scenes 1 to 4. Rules 1 to 5 unchanged, no colonist or animal outside NSB, no property change. Nothing in the scenarios changed by this sync.
 
-Places read: 2026-11-08. Tribe read: 2026-11-13 (renames only, diff of the seven docs above). Steps read: 2026-11-14.
+Sync 2026-11-15 (diffs only): NSB `Docs/` no commit since 2026-11-13 (git log icase, 0 docs), so places, roster, profiles, looks and animals are unchanged; NSB code moved: Beauty2Mouth.dll rebuilt 2026-11-15 (root cause: Beauty2 is a FacialAnimation head type, default D 0.06, logs "Beauty2 mouth patch applied"), which fixed the east/west profile lip in images 1 to 4 (owner kept her canon mouth MouthLipsSmirk, no property change, rule 3 untouched). NPT `docs/steps.md` and `ColonistRace/docs/catalogues` no commit since 2026-11-14 (code commits only: StageDecor colonist builds a blueprint, HoverSteps tag, two catalogues Simple Ivory and SZ_StonesAndTerrains), none serves scenes 1 to 4. Nothing changed in the shotlist for this sync. Rules 1 to 5 unchanged. Included animals: none, no gap.
+
+Places read: 2026-11-08. Tribe read: 2026-11-13 (renames only, diff of the seven docs above). Steps read: 2026-11-15.
 
 | Place | Shots | Changes for the gallery | Last read |
 |---|---|---|---|
