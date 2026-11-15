@@ -289,7 +289,7 @@ Feature: shots for the Workshop page
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 210) to (158, 218) filling 80 percent
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 210) to (158, 218) filling 80 percent of the screen
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed
