@@ -68,8 +68,8 @@
 #                    carries the PainField hediff. Instant: the pain has just reached her, her gaze stays on the creature.
 #                    Obtained: the hediff after 1200 ticks beside the nociosphere, asserted before the capture. Decor: a torch
 #                    (157, 217) and a campfire (153, 213) lit, two Plant_YellowTallGrass (156, 219) (157, 220) (159, 216) (159, 219), daylily (158, 214) (2026-11-10, frame widened from 2.5 to 3.5 so the camp is in frame; no head-shape pin, the HeadPointy probe changed her face shape). Composition:
-#                    head frame of Nelim at root size 3.5 (tight), her face turned West in the warm light of the campfire moved to (153, 213), tall grass in the foreground, platform
-#                    behind her on the left. Says: the price, on her face. THUMBNAIL (268 px): her face and the platform.
+#                    frame of the cells (146, 210) to (158, 218) filling 80 percent (2026-11-15, gallery-56/59 read: the head frame at root size 3.5 moved the platform between runs and cut its base; the cells frame is stable as in scene 1), Nelim turned West in the warm light of the campfire (153, 213), tall grass in the foreground, platform
+#                    behind her on the left. Says: the closer she stands to the nociosphere, the more it costs her (2026-11-15: no pain on her face, the owner refused a change of mouth and lids on 2026-11-06, so the price is told by the subtitle and by how close she stands, the pain-field hediff asserted). THUMBNAIL (268 px): Nelim and the platform with its dark sphere.
 #                    RISK: the pain may not show on her face, and the jacket may clash with the corset layer.
 #                    PLAN: the hediff is asserted, mouth and lids are set by hand, and the capture is read; if the jacket
 #                    step fails, the corset is dropped from this scene only.
@@ -289,7 +289,7 @@ Feature: shots for the Workshop page
     # Zoom 3 on the holder left Nelim out of frame in gallery-12: frame her with the platform.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 215) facing West
     And Nelim's Pickle Tools: "Nelim" waits in place
-    When Nelim's Pickle Tools: the camera frames the head of "Nelim" at root size 3.5
+    When Nelim's Pickle Tools: the camera frames "Nelim" together with the cells (146, 210) to (158, 218) filling 80 percent
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I take a screenshot "publication - pain field"
     And Nelim's Pickle Tools: the decor is removed

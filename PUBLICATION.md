@@ -157,7 +157,7 @@ One English line per scene, set under the image from the clean original (GALLERY
 | 1 | `1-gaze.png` | Nelim settles down to watch what she keeps chained up. |
 | 2 | `2-watch-area.png` | Earlier that day, the game showed where she would stand. |
 | 3 | `3-holding-spot.png` | A floor marker holds it too, and even her dog comes to look. |
-| 4 | `4-pain-field.png` | Standing close has a price, written on her face. |
+| 4 | `4-pain-field.png` | The closer she stands, the more it costs her. |
 
 ## Dependencies and DLC
 
