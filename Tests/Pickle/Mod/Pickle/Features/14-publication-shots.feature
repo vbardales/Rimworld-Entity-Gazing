@@ -129,6 +129,7 @@ Feature: shots for the Workshop page
     And Entity Gazing "Nelim" starts the offered job
     And I wait 600 ticks
     And Nelim's Sanctuary: the appearance of "Nelim" is logged
+    And Nelim's Pickle Tools: the render nodes and layers of "Nelim" are logged
     Then Entity Gazing "Nelim" is watching the holder
     # gallery-27: her watch job left her far south of the platform with her back to the camera; hold her beside it, in profile.
     And Nelim's Pickle Tools: "Nelim" stands at (152, 214) facing West
