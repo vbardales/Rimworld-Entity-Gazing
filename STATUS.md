@@ -9,17 +9,19 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-workflow_stage: declareDependencies[1.0.0]
+workflow_stage: settings[1.0.0]
 settings_audit: passed
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
 upstream_mod_remotes: N/A
 dependencies: declared
+workshop_required_items: n/a, no Workshop dependency (Anomaly is a DLC)
 showcase:     complete
 tested_on:    "85ec8b6 (Mod/ tree unchanged since; replays f107 EN and e3a7 FR green, 3 of 3 each; earlier green passes at 9352e70 and 574dce1 kept in docs/runs/pickle.md)"
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
+- "REPLAY 2026-11-19 (ledger .replays/EntityGazing-20261119.tsv, user corrected: stage is declareDependencies then settings, not localize): 4.e and 4.g fixed (Mod/About/OptionalCompat.xml declares the three holder mods, dependencies recorded with date and revision in the Repository section, workshop_required_items n/a), .gitattributes added (1.f). First open now 5.a, stage settings[1.0.0]. To do at settings: write the Settings audit section in STATUS.md (5.a inventory, 5.g moments of application, versions, commands, results, proofs), 5.f rerun the settings Pickle features (06-settings, 07-shortcut) on the current build with the six holder defNames, then 5.h transition to localize. Seen beyond the replay: localize still owes Virginie French review (translation_fr unchecked, localization and translation_en unchecked since 2026-11-18, /review-translation page 1 last round applied 1: run again at localize); sync-nsb-npt before the scene 4 refile (gallery-62 green, needs full-size PNG), which waits for shootGallery."
 - "REPLAY 2026-11-19 (full chain, ledger .replays/EntityGazing-20261119.tsv): first open 4.e, stage moved back from shootGallery to declareDependencies. 4.e open: declare the optional holder mods in Mod/About/OptionalCompat.xml (Small Holding Platform 3528001923 SaltBabe.SmallHoldingPlatform, 3531086974 LDFifty.SmallHoldingPlatform, Mini Holding Platform 3837821353 HM.MiniHoldingPlatform, kind patch), rerun Check-OptionalCompat. 4.g open: record dependencies, optional integrations and DLC in STATUS.md with date and revision (Anomaly hard dependency, the three optional holder mods), workshop_required_items n/a (no Workshop dependency). Fixed in place: .gitattributes added (1.f). Seen beyond the replay, not read in full: 5.g no Settings audit section in STATUS.md body (settings_audit passed only); 6.g/6.i French review by Virginie pending (translation_fr unchecked), localization and translation_en unchecked since 2026-11-18 text change; Check-Status warns nsb-sync, npt-sync (run sync-nsb-npt before scene 4 refile). Scene 4 refile (gallery-62 green, needs full-size PNG) waits for the stage to come back to shootGallery."
   - "unverified (owner chose optional patch 2026-11-18, PiI report): holder mods Small Holding Platform (3528001923, 3531086974) and Mini Holding Platform (3837821353) add their own holder defs. Written: `Mod/Patches/OptionalCompat.xml` (gated on each def existing, adds the def to `EG_WatchEntity` thingDefs, same operations as HoldingPlatforms.xml, node presence checked in each mod's XML), `Source/EntityGazingMod.cs` applies the distance settings to the six holder defNames, DLL rebuilt. Check-PatchTargets and Check-PatchGuards pass; NOT played in game. To do: a Pickle scenario on the sanctuary-style map with Small and Mini staged (ask NPT for the dep map lines), then tell PiI the five study mods are free; About description and Steam text still say 'both holders' (update at the next text pass); Mod/ changed, so replay 08-language and the code review stamps go stale."
   - "mouth flaw (open): MouthLipsSmirk pokes out of the east profile on the FA head; Virginie refused changing the mouth (2026-11-08). Scene 4 probes HeadPointy in 95f1; if the lip stays outside, NPT has the step `the Beauty2 mouth offset is {float}` (NSB Beauty2Mouth patch, D 0.03, NOT PLAYED): ask NPT if it plays under our DepMap. Images 1, 3, 4 in Art/Gallery carry the flaw until replayed (git rm with the replay). Journal of older entries: docs/runs/status-journal-2026-11-09.md."
@@ -132,7 +134,7 @@ Refresh 2026-11-18 (PiI, report de770cd, with the `ecosystem-links` block): stil
   continuation or private extraction. Existing name test enforces convention.
 - Both `url` field and description in `Mod/About/About.xml` link to
   https://github.com/vbardales/Rimworld-Entity-Gazing.
-- Dependency: Anomaly, explicitly declared in `modDependencies`.
+- Dependencies (4.g, 2026-11-19, revision fb688fa): hard dependency Anomaly (`Ludeon.RimWorld.Anomaly`, DLC, `modDependencies` and `loadAfter` in `About.xml`, `MayRequire` on the three Defs); no Workshop mod required; no `incompatibleWith`; `supportedVersions` 1.6. Optional integrations, as in `Mod/About/OptionalCompat.xml`: Small Holding Platform `SaltBabe.SmallHoldingPlatform` 3528001923 and `LDFifty.SmallHoldingPlatform` 3531086974 (same defNames, cannot both be loaded), Mini Holding Platform `HM.MiniHoldingPlatform` 3837821353, all kind patch, gated on each def in `Patches/OptionalCompat.xml`; not played in game yet (see remaining). Animal mods (ANIMALS.md): n/a, the mod adds no animal.
 
 ## Licence and provenance
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OptionalCompat>
+  <!-- Holders of other mods made watchable by Patches/OptionalCompat.xml (gated on each def). packageIds read in the About.xml of each mod, 2026-11-19. The two Small Holding Platform mods share their defNames and cannot both be loaded. -->
+  <li><packageId>SaltBabe.SmallHoldingPlatform</packageId><workshopId>3528001923</workshopId><kind>patch</kind></li>
+  <li><packageId>LDFifty.SmallHoldingPlatform</packageId><workshopId>3531086974</workshopId><kind>patch</kind></li>
+  <li><packageId>HM.MiniHoldingPlatform</packageId><workshopId>3837821353</workshopId><kind>patch</kind></li>
+</OptionalCompat>
