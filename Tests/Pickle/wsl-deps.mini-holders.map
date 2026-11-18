@@ -1,0 +1,6 @@
+# The pass that stages Mini Holding Platform (HM), for 16-mini-holders.feature.
+#
+# Its holders (HM_Mini_HoldingPlatform, HM_Mini_HoldingSpot) are patched by Mod/Patches/OptionalCompat.xml,
+# gated on each def. Anomaly stays ON (the mod depends on it, the DLL is the game's own, no line).
+# Lines from PickleTools (NPT), 2026-11-19, read in the About.xml of the mod.
+HM.MiniHoldingPlatform 3837821353

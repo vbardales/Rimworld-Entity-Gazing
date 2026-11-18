@@ -1,0 +1,7 @@
+# The pass that stages Small Holding Platform (SaltBabe), for 15-small-holders.feature.
+#
+# Its holders (SmallHoldingPlatform, SmallHoldingSpot) are patched by Mod/Patches/OptionalCompat.xml, gated
+# on each def. Never stage it together with Small Holding Platform by LDFifty (3531086974): same defNames.
+# Anomaly stays ON (the game's own DLC, no line). Load order: the staging sorts by loadAfter and dependencies.
+# Lines from PickleTools (NPT), 2026-11-19, read in the About.xml of the mod.
+SaltBabe.SmallHoldingPlatform 3528001923
