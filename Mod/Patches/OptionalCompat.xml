@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- Optional compatibility: the holders added by other mods.
+
+       Three Workshop mods add their own Anomaly holders, with their own defNames, that
+       `HoldingPlatforms.xml` does not touch, so a colonist could not watch an entity held on them:
+
+         Small Holding Platform  3528001923 (SaltBabe) and 3531086974 (LDFifty): `SmallHoldingPlatform`,
+                                 `SmallHoldingSpot` (the two mods share these defNames and cannot both
+                                 be loaded; the structure is the same in both)
+         Mini Holding Platform   3837821353 (HM): `HM_Mini_HoldingPlatform`, `HM_Mini_HoldingSpot`
+
+       Every operation is gated on the def itself existing (`PatchOperationConditional`), the same
+       way as `HoldingPlatforms.xml`: without the holder mod nothing is touched, no mod is a
+       dependency. The holders carry `CompProperties_EntityHolderPlatform` and the vanilla
+       `Building_HoldingPlatform` class, so the vanilla watching logic applies unchanged. The values
+       are the vanilla holders' own (JoyGainFactor 1 for a platform, 0.8 for a spot).
+
+       Same trap as in `HoldingPlatforms.xml`: add a node only where it is absent, inside it where it
+       exists. Checked in the XML of each mod (not in the game):
+
+         def                        statBases   building   placeWorkers
+         SmallHoldingPlatform       exists      ABSENT     absent     (parent SmallHoldingPlatformBase
+         SmallHoldingSpot           exists      EXISTS     absent      declares building, the child does not)
+         HM_Mini_HoldingPlatform    exists      EXISTS     absent
+         HM_Mini_HoldingSpot        exists      EXISTS     absent
+
+       Each patched def is also added to `thingDefs` of our giver `EG_WatchEntity`, in the same
+       gated sequence (naming a def that does not exist in a `thingDefs` list is an error).
+
+       STATUS: written from the XML of the three mods, not yet played in game. -->
+
+  <!-- Small Holding Platform: the platform (`building` absent). -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SmallHoldingPlatform"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="SmallHoldingPlatform"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>1</JoyGainFactor>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="SmallHoldingPlatform"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <building>
+              <joyKind>EG_EntityGazing</joyKind>
+              <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+              <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+              <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+            </building>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/JoyGiverDef[defName="EG_WatchEntity"]/thingDefs</xpath>
+          <value>
+            <li>SmallHoldingPlatform</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- Small Holding Platform: the spot (`building` exists). -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SmallHoldingSpot"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="SmallHoldingSpot"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>0.8</JoyGainFactor>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="SmallHoldingSpot"]/building</xpath>
+          <value>
+            <joyKind>EG_EntityGazing</joyKind>
+            <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+            <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+            <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="SmallHoldingSpot"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/JoyGiverDef[defName="EG_WatchEntity"]/thingDefs</xpath>
+          <value>
+            <li>SmallHoldingSpot</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- Mini Holding Platform: the platform (`building` exists, it holds the tags). -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="HM_Mini_HoldingPlatform"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HM_Mini_HoldingPlatform"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>1</JoyGainFactor>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HM_Mini_HoldingPlatform"]/building</xpath>
+          <value>
+            <joyKind>EG_EntityGazing</joyKind>
+            <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+            <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+            <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HM_Mini_HoldingPlatform"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/JoyGiverDef[defName="EG_WatchEntity"]/thingDefs</xpath>
+          <value>
+            <li>HM_Mini_HoldingPlatform</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- Mini Holding Platform: the spot (`building` exists). -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="HM_Mini_HoldingSpot"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HM_Mini_HoldingSpot"]/statBases</xpath>
+          <value>
+            <JoyGainFactor>0.8</JoyGainFactor>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HM_Mini_HoldingSpot"]/building</xpath>
+          <value>
+            <joyKind>EG_EntityGazing</joyKind>
+            <watchBuildingStandDistanceRange>2~6</watchBuildingStandDistanceRange>
+            <watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+            <watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="HM_Mini_HoldingSpot"]</xpath>
+          <value>
+            <socialPropernessMatters>true</socialPropernessMatters>
+            <placeWorkers>
+              <li>PlaceWorker_WatchArea</li>
+            </placeWorkers>
+            <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/JoyGiverDef[defName="EG_WatchEntity"]/thingDefs</xpath>
+          <value>
+            <li>HM_Mini_HoldingSpot</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

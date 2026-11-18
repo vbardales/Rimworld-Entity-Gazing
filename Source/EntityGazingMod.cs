@@ -54,9 +54,17 @@ namespace EntityGazing
 
         public void ApplySettings()
         {
-            Settings.ApplyTo(DefDatabase<ThingDef>.GetNamedSilentFail("HoldingPlatform"));
-            Settings.ApplyTo(DefDatabase<ThingDef>.GetNamedSilentFail("HoldingSpot"));
+            foreach (var defName in HolderDefNames)
+                Settings.ApplyTo(DefDatabase<ThingDef>.GetNamedSilentFail(defName));
         }
+
+        // Vanilla holders, then the ones of other mods patched by OptionalCompat.xml (absent: null, skipped).
+        private static readonly string[] HolderDefNames =
+        {
+            "HoldingPlatform", "HoldingSpot",
+            "SmallHoldingPlatform", "SmallHoldingSpot",
+            "HM_Mini_HoldingPlatform", "HM_Mini_HoldingSpot",
+        };
 
         public override void WriteSettings()
         {
