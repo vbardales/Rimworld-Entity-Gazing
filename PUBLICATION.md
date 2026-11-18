@@ -52,7 +52,7 @@ The base game has ten recreation types and only five of them come from a buildin
 
 ## THE VIEWING DISTANCE IS THE REAL SETTING
 
-Watchers stand two to six cells away, which is deliberately close. A nociosphere projects a pain field out to 5.9 cells, so a good share of the audience will be standing inside it. That is the price of the show, and it comes out of an existing vanilla mechanic rather than a line of code - it varies by entity, and a fleshbeast hurts nobody. Change the viewing distance in Mod options → Entity Gazing. The default is 2 to 6 cells; allowed distances are 1 to 20 cells. Settings are global and saved when the window closes. Changes affect new viewing positions on both holders; current watchers may finish where they are.
+Watchers stand two to six cells away, which is deliberately close. A nociosphere projects a pain field out to 5.9 cells, so a good share of the audience will be standing inside it. That is the price of the show, and it comes out of an existing vanilla mechanic rather than a line of code - it varies by entity, and a fleshbeast hurts nobody. Change the viewing distance in Mod options → Entity Gazing. The default is 2 to 6 cells; allowed distances are 1 to 20 cells. Settings are global and saved when the window closes. Changes affect new viewing positions on all holders; current watchers may finish where they are.
 
 An empty platform is never watched. The gameplay giver adds that occupancy check; the viewing distance is configurable. Movement - walking there, facing it, accumulating recreation - is the base game's own television logic.
 

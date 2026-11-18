@@ -1,6 +1,6 @@
 ---
-localization: complete
-translation_en: complete
+localization: unchecked
+translation_en: unchecked
 translation_fr: unchecked
 mod:          Entity Gazing
 packageId:    nelim.entitygazing

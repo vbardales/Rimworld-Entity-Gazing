@@ -156,7 +156,7 @@ MIT. See [LICENSE](LICENSE).
 
 Open **Mod options -> Entity Gazing**. Set minimum and maximum viewing distances with
 integer sliders (1 to 20 cells; maximum cannot be below minimum). Restore defaults returns
-both holders to 2 to 6 cells. Changes apply immediately to new viewing positions on both
+all holders to 2 to 6 cells. Changes apply immediately to new viewing positions on all
 holders; current watchers may finish where they stand. Values are global across saves,
 loaded at startup and saved when the settings window closes. The activity needs Anomaly.
 
