@@ -108,8 +108,8 @@ The second is about behaviour, because this mod owns almost none of its own. It 
 override still takes the base class's vtable slot rather than a new one, which is the difference
 between the mod working and colonists gazing at empty platforms with no error anywhere. It runs the
 game's own patch engine on the shipped patch file against the real Anomaly defs, and reads the
-result. And it scans every method body in the game to find who reads each setting these defs write
-: the fault nothing else catches, a setting no code on its path ever reads.
+result. And it scans every method body in the game to find who reads each setting written by these defs:
+the fault nothing else catches, a setting no code on its path ever reads.
 
 The numbers in this file are recomputed at every run: Anomaly shipping no recreation content, ten
 recreation types in Core with five from a building, the nociosphere's pain field at 5.9 cells. A

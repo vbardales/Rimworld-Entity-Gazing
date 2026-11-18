@@ -7,7 +7,7 @@ creates a second item.
 
 The mod reached `tested` on 2026-09-26. This file was written early, at `done`, because the release
 plugin refuses a publication without it and because the change note has a shape that is easy to get
-wrong; it now carries the queued edits `tested` freed.
+wrong; it now carries the queued edits freed by `tested`.
 
 ## The description, and the trap that used to wait in it
 
