@@ -5,6 +5,10 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 
 ## [Unreleased]
 
+### Added
+
+- Optional compatibility: the holders of Small Holding Platform (Workshop 3528001923 and 3531086974) and Mini Holding Platform (3837821353) become recreation sources too, through patches that apply only when those mods are loaded. The viewing-distance settings apply to them as to the vanilla holders.
+
 ## [1.0.0] - 2026-09-27
 
 The version that arrives with publication is 1.0.0.

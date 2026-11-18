@@ -117,7 +117,7 @@ First release.
 
 [b]Entity gazing[/b], a recreation type of its own. The Anomaly DLC ships no recreation content at all, and since tolerance is counted per type rather than per building, an eleventh type is worth more than another building of a type the colony already had.
 
-[b]Both entity holders[/b] become recreation sources, by patch: the steel holding platform and the holding spot. Watchers stand 2 to 6 cells away, in the same room, and the distance is configurable from 1 to 20 in Mod options. It costs nothing to build: the platform was already there for study.
+[b]All supported entity holders[/b] become recreation sources, by patch: the steel holding platform, the holding spot, and the holders of Small Holding Platform and Mini Holding Platform through optional compatibility patches. Watchers stand 2 to 6 cells away, in the same room, and the distance is configurable from 1 to 20 in Mod options. It costs nothing to build: the platform was already there for study.
 
 [b]An empty platform is never watched.[/b] The one gameplay class this mod owns adds that condition to the base game's television logic and changes nothing else.
 
