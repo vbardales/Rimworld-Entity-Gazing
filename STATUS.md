@@ -9,7 +9,7 @@ remote:       https://github.com/vbardales/Rimworld-Entity-Gazing.git
 local_path:   C:\Users\nelim\Documents\rimworld\EntityGazing
 visibility:   public
 detached:     yes
-workflow_stage: shootGallery[1.0.0]
+workflow_stage: declareDependencies[1.0.0]
 settings_audit: passed
 licence:      original
 licence_at:   MIT in root LICENSE; original mod, no third-party mod source or assets identified
@@ -20,6 +20,7 @@ tested_on:    "85ec8b6 (Mod/ tree unchanged since; replays f107 EN and e3a7 FR g
 workshop:     3806760893
 dry_run:      "green: run 36332659615 of publish-tag.yml, SHA 66cc74acffd8f82b556cac2c784d27a1f76193a4, version 1.0.0, options preview+description+tags. Build reproduced Mod/ byte for byte, change note and description both read and matched the documents, DRY RUN: nothing was sent to Steam. Not yet followed by a publish - see remaining."
 remaining:
+- "REPLAY 2026-11-19 (full chain, ledger .replays/EntityGazing-20261119.tsv): first open 4.e, stage moved back from shootGallery to declareDependencies. 4.e open: declare the optional holder mods in Mod/About/OptionalCompat.xml (Small Holding Platform 3528001923 SaltBabe.SmallHoldingPlatform, 3531086974 LDFifty.SmallHoldingPlatform, Mini Holding Platform 3837821353 HM.MiniHoldingPlatform, kind patch), rerun Check-OptionalCompat. 4.g open: record dependencies, optional integrations and DLC in STATUS.md with date and revision (Anomaly hard dependency, the three optional holder mods), workshop_required_items n/a (no Workshop dependency). Fixed in place: .gitattributes added (1.f). Seen beyond the replay, not read in full: 5.g no Settings audit section in STATUS.md body (settings_audit passed only); 6.g/6.i French review by Virginie pending (translation_fr unchecked), localization and translation_en unchecked since 2026-11-18 text change; Check-Status warns nsb-sync, npt-sync (run sync-nsb-npt before scene 4 refile). Scene 4 refile (gallery-62 green, needs full-size PNG) waits for the stage to come back to shootGallery."
   - "unverified (owner chose optional patch 2026-11-18, PiI report): holder mods Small Holding Platform (3528001923, 3531086974) and Mini Holding Platform (3837821353) add their own holder defs. Written: `Mod/Patches/OptionalCompat.xml` (gated on each def existing, adds the def to `EG_WatchEntity` thingDefs, same operations as HoldingPlatforms.xml, node presence checked in each mod's XML), `Source/EntityGazingMod.cs` applies the distance settings to the six holder defNames, DLL rebuilt. Check-PatchTargets and Check-PatchGuards pass; NOT played in game. To do: a Pickle scenario on the sanctuary-style map with Small and Mini staged (ask NPT for the dep map lines), then tell PiI the five study mods are free; About description and Steam text still say 'both holders' (update at the next text pass); Mod/ changed, so replay 08-language and the code review stamps go stale."
   - "mouth flaw (open): MouthLipsSmirk pokes out of the east profile on the FA head; Virginie refused changing the mouth (2026-11-08). Scene 4 probes HeadPointy in 95f1; if the lip stays outside, NPT has the step `the Beauty2 mouth offset is {float}` (NSB Beauty2Mouth patch, D 0.03, NOT PLAYED): ask NPT if it plays under our DepMap. Images 1, 3, 4 in Art/Gallery carry the flaw until replayed (git rm with the replay). Journal of older entries: docs/runs/status-journal-2026-11-09.md."
   - "defect 2026-11-14 (TM, DLC names rule, owner 2026-11-14): French `EG_SettingsHelp` said `Anomalie est nécessaire`, now `Anomaly est nécessaire` (the text names the DLC; no common noun elsewhere); Docs/review-names.md updated. translation_fr reset to unchecked: Virginie must review the French again (FRENCH review not filed yet), then replay 08-language FR. Translations of the original: N/A (original mod, no upstream)."
@@ -54,8 +55,8 @@ code_review_sha: 64ca3de280fc2c29018f50dd456653aa527f02d7
 publication_changelog_review_sha: bbe5af21606d3db0b5ce075310b7a70898fcef82
 echo_review_sha: c993b5086c85424c846e488bce7ace8f65c65d97
 social_preview_sha256: bf815321504874e93aef419a64a1e79b0358bf52478de244b8f403c146a0e636
-updated:      2026-11-09, shootGallery session (EnG)
-protocols_read_sha: b346379f25fb196ea0552f0a15d1f38d6bc38f97
+updated:      2026-11-19, replay-audit session (EnG)
+protocols_read_sha: 311c5f5b79fbad366bad173033fecc7011131b5c
 ---
 # Entity Gazing — status
 
